@@ -2,7 +2,8 @@
     width: 200px;
     background-color: #896CFE;
     color: #fff;
-    height: 100vh;
+    overflow-y: auto; 
+    height: 100vh;   
     position: fixed;
     padding: 1rem;
   }
@@ -32,5 +33,9 @@
   
   .sidebar i {
     margin-right: 10px;
+  }
+  .fa {
+    font-size: 20px; 
+    margin-right: 10px; 
   }
   
