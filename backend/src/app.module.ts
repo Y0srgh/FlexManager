@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Test } from './test/entities/test.entity';
 import * as dotenv from 'dotenv';
 import { TestModule } from './test/test.module';
+import { UserModule } from './user/user.module';
 
 dotenv.config();
 
@@ -19,7 +20,8 @@ dotenv.config();
       synchronize: true
     }),
     TypeOrmModule.forFeature([Test]),
-    TestModule
+    TestModule,
+    UserModule
   ],
   controllers: [AppController],
   providers: [AppService],
