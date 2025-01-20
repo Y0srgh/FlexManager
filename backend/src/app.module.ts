@@ -1,21 +1,22 @@
-import { Module } from '@nestjs/common';
+import { ConfigurableModuleBuilder, Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { CoursesModule } from './courses/courses.module';
+import { CourseModule } from './courses/courses.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Course } from './courses/entities/course.entity';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [CoursesModule ,   TypeOrmModule.forRoot({
-    type: 'mysql',
-    host: 'localhost',
-    port: 3306,
-    username: 'root',
-    password: 'root',
-    database: 'gym',
-    entities: [Course],
-    synchronize: true,
-  }),],
+  imports: [CourseModule ,  
+    ConfigModule.forRoot(), // Load .env variables
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      url: process.env.DATABASE_URL, // Use the DATABASE_URL from .env
+      autoLoadEntities: true, // Automatically load entities
+      synchronize: true, // Set to false in production
+    }),
+
+],
   controllers: [AppController],
   providers: [AppService],
 })

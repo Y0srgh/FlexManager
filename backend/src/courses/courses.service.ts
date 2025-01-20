@@ -2,14 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Course } from './entities/course.entity';
-import { CreateCourseDto } from './dto/create-course.dto';
-import { UpdateCourseDto } from './dto/update-course.dto';
-
 @Injectable()
 export class CourseService {
   constructor(
     @InjectRepository(Course)
-    private courseRepository: Repository<Course>,
+    private readonly courseRepository: Repository<Course>, // Inject the repository
   ) {}
 
   async findAll(): Promise<Course[]> {
@@ -17,24 +14,20 @@ export class CourseService {
   }
 
   async findOne(id: number): Promise<Course> {
-    return this.courseRepository.findOne({
-      where: { id },
-    });
+    return this.courseRepository.findOne({ where: { id } });
   }
 
-  async create(createCourseDto: CreateCourseDto): Promise<Course> {
-    const course = this.courseRepository.create(createCourseDto);
+  async create(courseData: Partial<Course>): Promise<Course> {
+    const course = this.courseRepository.create(courseData);
     return this.courseRepository.save(course);
   }
 
-  async update(id: number, updateCourseDto: UpdateCourseDto): Promise<Course> {
-    const course = await this.findOne(id);
-    Object.assign(course, updateCourseDto);
-    return this.courseRepository.save(course);
+  async update(id: number, courseData: Partial<Course>): Promise<Course> {
+    await this.courseRepository.update(id, courseData);
+    return this.findOne(id);
   }
 
-  async remove(id: number): Promise<void> {
-    const course = await this.findOne(id);
-    await this.courseRepository.remove(course);
+  async delete(id: number): Promise<void> {
+    await this.courseRepository.delete(id);
   }
 }

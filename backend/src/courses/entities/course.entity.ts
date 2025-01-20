@@ -1,22 +1,16 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
+@Entity('courses') // The table name will be 'courses'
 export class Course {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  name: string;
+  title: string;
 
   @Column()
   description: string;
 
   @Column()
-  date: string;
-
-  @Column()
-  time: string;
-
-  @Column()
-  duration: number;
+  duration: number; // Duration in weeks
 }
