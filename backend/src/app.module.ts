@@ -14,12 +14,12 @@ import { CoachModule } from './coach/coach.module';
 
 @Module({
   imports: [CourseModule ,  
-    ConfigModule.forRoot(), // Load .env variables
+    ConfigModule.forRoot(), 
     TypeOrmModule.forRoot({
       type: 'postgres',
-      url: process.env.DATABASE_URL, // Use the DATABASE_URL from .env
-      autoLoadEntities: true, // Automatically load entities
-      synchronize: true, // Set to false in production
+      url: process.env.DATABASE_URL, 
+      autoLoadEntities: true, 
+      synchronize: true, 
 
     }),
     TypeOrmModule.forFeature([Test]),

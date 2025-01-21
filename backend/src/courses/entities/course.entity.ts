@@ -15,13 +15,13 @@ export class Course {
   @Column()
   duration: number;
 
-  @Column({ type: 'time', nullable: false })
+  @Column({ type: 'time', nullable: true })
   startTime: string; 
 
-  @Column({ type: 'time', nullable: false })
+  @Column({ type: 'time', nullable: true })
   endTime: string;
 
-  @Column('simple-array')
+  @Column('simple-array' , {nullable : true})
   daysOfWeek: string[]; 
 
   @ManyToOne(() => CoachEntity, (coach) => coach.courses, { onDelete: 'SET NULL' })

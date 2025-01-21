@@ -5,7 +5,7 @@ import { CourseService } from './courses.service';
 import { CourseController } from './courses.controller';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Course])], // Register the entity here
+  imports: [TypeOrmModule.forFeature([Course])], 
   controllers: [CourseController],
   providers: [CourseService],
 })
