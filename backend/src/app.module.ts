@@ -9,7 +9,7 @@ import { TestModule } from './test/test.module';
 import { UserModule } from './user/user.module';
 
 dotenv.config();
-import { CourseModule } from './courses/entities/strategy/courses.module';
+import { CourseModule } from './classes/entities/strategy/courses.module';
 import { CoachModule } from './coach/coach.module';
 
 @Module({
