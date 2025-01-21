@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { ConfigurableModuleBuilder, Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -9,20 +9,25 @@ import { TestModule } from './test/test.module';
 import { UserModule } from './user/user.module';
 
 dotenv.config();
+import { CourseModule } from './classes/entities/strategy/courses.module';
+import { CoachModule } from './coach/coach.module';
 
 @Module({
-  imports: [
-    ConfigModule.forRoot(),
+  imports: [CourseModule ,  
+    ConfigModule.forRoot(), 
     TypeOrmModule.forRoot({
       type: 'postgres',
-      url: process.env.DATABASE_URL,
-      entities: ['dist/**/*.entity{.ts,.js}'],
-      synchronize: true
+      url: process.env.DATABASE_URL, 
+      autoLoadEntities: true, 
+      synchronize: true, 
+
     }),
     TypeOrmModule.forFeature([Test]),
     TestModule,
-    UserModule
-  ],
+    UserModule,
+    CoachModule,
+
+],
   controllers: [AppController],
   providers: [AppService],
 })

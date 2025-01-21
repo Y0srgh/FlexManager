@@ -1,0 +1,19 @@
+<form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" required />
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description" required></textarea>
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Duration (weeks)</mat-label>
+      <input type="number" matInput formControlName="duration" required />
+    </mat-form-field>
+  
+    <button mat-raised-button color="primary" type="submit">Save</button>
+  </form>
+  
