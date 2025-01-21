@@ -1,22 +1,12 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
 import { Course } from '../../models/course.model';
 
 @Component({
   selector: 'app-course-form',
-  standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-  ],
   templateUrl: './course-form.component.html',
+  styleUrls: ['./course-form.component.css'], // Add style file if needed
 })
 export class CourseFormComponent {
   @Output() create = new EventEmitter<Course>();

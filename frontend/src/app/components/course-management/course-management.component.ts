@@ -1,16 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MatTableModule } from '@angular/material/table';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
 import { CourseService } from '../../course.service';
 import { Course } from '../../models/course.model';
-import { CourseFormComponent } from '../course-form/course-form.component';
 
 @Component({
   selector: 'app-course-management',
-  standalone: true,
-  imports: [CommonModule, MatTableModule, MatCardModule, MatButtonModule, CourseFormComponent],
   templateUrl: './course-management.component.html',
   styleUrls: ['./course-management.component.css'],
 })
