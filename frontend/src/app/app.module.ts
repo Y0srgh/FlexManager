@@ -14,12 +14,15 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 @NgModule({
   declarations: [
     AppComponent,
-    CourseManagementComponent, // Declare the CourseManagementComponent
-    CourseFormComponent,       // Declare the CourseFormComponent
-    SidebarComponent,          // Declare SidebarComponent
+    CourseManagementComponent, 
+    CourseFormComponent,       
+    SidebarComponent,          
   ],
   imports: [
     BrowserModule,
@@ -28,9 +31,11 @@ import { AppComponent } from './app.component';
     MatTableModule,
     MatCardModule,
     MatButtonModule,
-    HttpClientModule, // Required for API calls in the service
-    RouterModule, // Remove .forRoot([]) if there are no routes to configure yet
-    AppRoutingModule
+    HttpClientModule, 
+    RouterModule, 
+    AppRoutingModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent],
