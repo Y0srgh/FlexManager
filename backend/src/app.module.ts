@@ -10,9 +10,6 @@ import { UserModule } from './user/user.module';
 
 dotenv.config();
 import { CourseModule } from './courses/courses.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { Course } from './courses/entities/course.entity';
-import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [CourseModule ,  
@@ -22,7 +19,11 @@ import { ConfigModule } from '@nestjs/config';
       url: process.env.DATABASE_URL, // Use the DATABASE_URL from .env
       autoLoadEntities: true, // Automatically load entities
       synchronize: true, // Set to false in production
+
     }),
+    TypeOrmModule.forFeature([Test]),
+    TestModule,
+    UserModule,
 
 ],
   controllers: [AppController],
