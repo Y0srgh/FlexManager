@@ -8,6 +8,8 @@ export class CoachEntity extends UserEntity {
   expertise: string; 
   @Column({ nullable: true })
   certifications: string; 
+  @Column({ default: false }) 
+  isPrivate: boolean;
 
   @OneToMany(() => Course, (course) => course.coach, { cascade: true })
   courses: Course[]; 
