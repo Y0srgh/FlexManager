@@ -9,7 +9,8 @@ import { TestModule } from './test/test.module';
 import { UserModule } from './user/user.module';
 
 dotenv.config();
-import { CourseModule } from './courses/courses.module';
+import { CourseModule } from './courses/entities/strategy/courses.module';
+import { CoachModule } from './coach/coach.module';
 
 @Module({
   imports: [CourseModule ,  
@@ -24,6 +25,7 @@ import { CourseModule } from './courses/courses.module';
     TypeOrmModule.forFeature([Test]),
     TestModule,
     UserModule,
+    CoachModule,
 
 ],
   controllers: [AppController],
