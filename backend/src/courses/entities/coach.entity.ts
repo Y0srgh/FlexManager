@@ -1,0 +1,14 @@
+import { Entity, Column, OneToMany } from 'typeorm';
+import { UserEntity } from 'src/user/entities/user.entity';
+import { Course } from './course.entity';
+
+@Entity('coaches') 
+export class CoachEntity extends UserEntity {
+  @Column({ nullable: true })
+  expertise: string; 
+  @Column({ nullable: true })
+  certifications: string; 
+
+  @OneToMany(() => Course, (course) => course.coach, { cascade: true })
+  courses: Course[]; 
+}
