@@ -1,6 +1,14 @@
 import { ConfigurableModuleBuilder, Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Test } from './test/entities/test.entity';
+import * as dotenv from 'dotenv';
+import { TestModule } from './test/test.module';
+import { UserModule } from './user/user.module';
+
+dotenv.config();
 import { CourseModule } from './courses/courses.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Course } from './courses/entities/course.entity';
