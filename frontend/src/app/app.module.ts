@@ -5,19 +5,21 @@ import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 
-import { AppComponent } from './app.component';
 import { CourseManagementComponent } from './components/course-management/course-management.component';
 import { CourseFormComponent } from './components/course-form/course-form.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
 
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     CourseManagementComponent, // Declare the CourseManagementComponent
     CourseFormComponent,       // Declare the CourseFormComponent
-    SidebarComponent,     // Declare SidebarComponent
+    SidebarComponent,          // Declare SidebarComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +29,8 @@ import { RouterModule } from '@angular/router';
     MatCardModule,
     MatButtonModule,
     HttpClientModule, // Required for API calls in the service
-    RouterModule.forRoot([]),
+    RouterModule, // Remove .forRoot([]) if there are no routes to configure yet
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent],
