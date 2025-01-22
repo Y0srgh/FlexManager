@@ -11,34 +11,29 @@ import { UserEntity } from './entities/user.entity';
 import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
 import { UserSingInDto } from './dto/user-sign-in.dto';
+import { CoachEntity } from './entities/coach.entity';
+import { Roles } from 'src/enums/user-role.enum';
+import { CreateCoachDto } from './dto/create-coach.dto';
+import { PasswordService } from 'src/common/utils/password.service';
 
 @Injectable()
 export class UserService {
-  create(UserSingUpDto: UserSingUpDto) {
-    return 'This action adds a new user';
-  }
-
-  findAll() {
-    return `This action returns all user`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
-  }
-
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} user`;
-  }
-
   constructor(
     @InjectRepository(UserEntity)
     private userRepository: Repository<UserEntity>,
+    
+    @InjectRepository(CoachEntity)
+    private coachRepository: Repository<CoachEntity>,
+
     private jwtService: JwtService,
+
+    private passwordService: PasswordService,
   ) {}
+
+
+
+
+
 
   async signUp(data: UserSingUpDto): Promise<UserEntity> {
     const user = this.userRepository.create({
@@ -60,6 +55,8 @@ export class UserService {
   async signIn(credientials: UserSingInDto) {
     // recuperer login et mot de passe
     const { username, email, password } = credientials;
+    console.log(credientials);
+    
     // on peut se logger via username ou email
     // verifier si user existe
     const user = await this.userRepository
@@ -90,4 +87,36 @@ export class UserService {
     }
     // si non on retourne une erreur
   }
+
+
+  async createCoach(createCoachDto: CreateCoachDto): Promise<CoachEntity> {
+    const defaultPassword = this.passwordService.generateDefaultPassword();
+    const signupCoach: UserSingUpDto = {username: createCoachDto.username, email: createCoachDto.email, role : createCoachDto.role, password: defaultPassword} as UserSingUpDto;
+
+    const user = await this.signUp(signupCoach);
+    
+
+    const coach = this.coachRepository.create({
+      expertise: createCoachDto.expertise,
+      certifications: createCoachDto.certifications,
+      isPrivate: createCoachDto.isPrivate,
+      id: user.id,
+      user: user,
+      courses: []
+    });
+
+    return this.coachRepository.save(coach);
+  }
+
+
+  async findAllCoaches(): Promise<CoachEntity[]> {
+    return this.coachRepository.find();
+  }
+
+  // async findOneCoach(id: string): Promise<CoachEntity> {
+  //   return this.coachRepository.findOne({ where: { id } });
+  // }
+
+ 
+
 }

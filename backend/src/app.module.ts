@@ -10,7 +10,7 @@ import { UserModule } from './user/user.module';
 
 dotenv.config();
 import { CourseModule } from './classes/entities/strategy/courses.module';
-import { CoachModule } from './coach/coach.module';
+import { CommonModule } from './common/common.module';
 
 @Module({
   imports: [CourseModule ,  
@@ -20,12 +20,12 @@ import { CoachModule } from './coach/coach.module';
       url: process.env.DATABASE_URL, 
       autoLoadEntities: true, 
       synchronize: true, 
-
+      entities: ["dist/**/*.entity{.ts,.js}"],
     }),
     TypeOrmModule.forFeature([Test]),
     TestModule,
     UserModule,
-    CoachModule,
+    CommonModule
 
 ],
   controllers: [AppController],
