@@ -108,6 +108,16 @@ export class UserService {
 
     return this.coachRepository.save(coach);
   }
+
+
+  async findAllCoaches(): Promise<CoachEntity[]> {
+    return this.coachRepository.find();
+  }
+
+  async findOneCoach(id: string): Promise<CoachEntity> {
+    return this.coachRepository.findOne({ where: { id } });
+  }
+
  
 
 }

@@ -45,15 +45,15 @@ export class UserController {
     return this.userService.createCoach(createCoachDto);
   }
 
-  // @Get()
-  // findAll() {
-  //   return this.userService.findAll();
-  // }
+  @Get()
+  findAllCoaches() {
+    return this.userService.findAllCoaches();
+  }
 
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.userService.findOne(id);
-  // }
+  @Get(':id')
+  findOneCoach(@Param('id') id: string) {
+    return this.userService.findOneCoach(id);
+  }
 
   // @Patch(':id')
   // update(@Param('id') id: string, @Body() updateCoachDto: UpdateCoachDto) {
