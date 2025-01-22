@@ -12,7 +12,7 @@ import { ClientEntity } from './client.entity';
 
 @Entity('users')
 export class UserEntity extends TimestampEntity {
-  @PrimaryColumn('uuid')
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column({ length: 100 })
