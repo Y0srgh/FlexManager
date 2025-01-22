@@ -11,34 +11,26 @@ import { UserEntity } from './entities/user.entity';
 import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
 import { UserSingInDto } from './dto/user-sign-in.dto';
+import { CoachEntity } from './entities/coach.entity';
+import { Roles } from 'src/enums/user-role.enum';
+import { CreateCoachDto } from './dto/create-coach.dto';
 
 @Injectable()
 export class UserService {
-  create(UserSingUpDto: UserSingUpDto) {
-    return 'This action adds a new user';
-  }
-
-  findAll() {
-    return `This action returns all user`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
-  }
-
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} user`;
-  }
-
   constructor(
     @InjectRepository(UserEntity)
     private userRepository: Repository<UserEntity>,
+    
+    @InjectRepository(CoachEntity)
+    private coachRepository: Repository<CoachEntity>,
+
     private jwtService: JwtService,
   ) {}
+
+
+
+
+
 
   async signUp(data: UserSingUpDto): Promise<UserEntity> {
     const user = this.userRepository.create({
@@ -92,5 +84,30 @@ export class UserService {
   }
 
 
+  async createCoach(createCoachDto: CreateCoachDto): Promise<CoachEntity> {
+    // const user = this.userRepository.create({
+    //   username: createCoachDto.username,
+    //   email: createCoachDto.email,
+    //   password: createCoachDto.password,
+    //   role: Roles.COACH,
+    // });
+    
+    // await this.userRepository.save(user);
+    
+    //i will change this to call the signup method instead
+    const user = await this.signUp({username: createCoachDto.username, email: createCoachDto.email, password: createCoachDto.password});
+    
+
+    const coach = this.coachRepository.create({
+      expertise: createCoachDto.expertise,
+      certifications: createCoachDto.certifications,
+      isPrivate: createCoachDto.isPrivate,
+      courses: [],
+      user,  
+    });
+
+    return this.coachRepository.save(coach);
+  }
+ 
 
 }

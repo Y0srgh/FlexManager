@@ -1,4 +1,4 @@
-import { IsString, IsOptional } from 'class-validator';
+import { IsString, IsOptional, IsBoolean } from 'class-validator';
 
 export class CreateCoachDto {
   @IsString()
@@ -17,4 +17,8 @@ export class CreateCoachDto {
   @IsOptional()
   @IsString()
   certifications?: string;
+
+  @IsOptional()
+  @IsBoolean()
+  isPrivate?: boolean;
 }

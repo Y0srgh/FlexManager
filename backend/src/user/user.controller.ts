@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserSingUpDto } from './dto/user-sign-up.dto';
@@ -13,35 +14,12 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { UserEntity } from './entities/user.entity';
 import { UserSingInDto } from './dto/user-sign-in.dto';
 import { UserSignInValidationPipe } from 'src/pipes/signin/user-sing-in.pipe';
+import { CreateCoachDto } from './dto/create-coach.dto';
+import { JwtAuthGuard } from './guards/jwt-auth.guards';
 
 @Controller('auth')
 export class UserController {
   constructor(private readonly userService: UserService) {}
-
-  @Post()
-  create(@Body() UserSingUpDto: UserSingUpDto) {
-    return this.userService.create(UserSingUpDto);
-  }
-
-  @Get()
-  findAll() {
-    return this.userService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.userService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.update(+id, updateUserDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.userService.remove(+id);
-  }
 
   @Post('signup')
   async signUp(@Body() userData: UserSingUpDto): Promise<UserEntity> {
@@ -61,6 +39,30 @@ export class UserController {
   // async admin(@User({ roles: [Roles.MANAGER] }) user: UserEntity) {....}
  
 
+  @Post('create-coach')
+  @UseGuards(JwtAuthGuard)
+  createCoach(@Body() createCoachDto: CreateCoachDto) {
+    return this.userService.createCoach(createCoachDto);
+  }
 
+  // @Get()
+  // findAll() {
+  //   return this.userService.findAll();
+  // }
+
+  // @Get(':id')
+  // findOne(@Param('id') id: string) {
+  //   return this.userService.findOne(id);
+  // }
+
+  // @Patch(':id')
+  // update(@Param('id') id: string, @Body() updateCoachDto: UpdateCoachDto) {
+  //   return this.userService.update(id, updateCoachDto);
+  // }
+
+  // @Delete(':id')
+  // remove(@Param('id') id: string) {
+  //   return this.userService.remove(id);
+  // }
 
 }
