@@ -52,4 +52,15 @@ export class UserController {
   async signIn(@Body(UserSignInValidationPipe) userData: UserSingInDto) {
     return this.userService.signIn(userData);
   }
+
+
+  //principe : definir les "fonctionnalités" de tous les utilisateur ici et restreindre l'accès en fonction du role de l'utilisateur (RBAC)
+  //exemple :
+  // @Post('manager')
+  // @UseGuards(JwtAuthGuard)
+  // async admin(@User({ roles: [Roles.MANAGER] }) user: UserEntity) {....}
+ 
+
+
+
 }
