@@ -3,8 +3,10 @@ import { TimestampEntity } from 'src/Generics/timestamp.entities';
 import {
   Entity,
   PrimaryGeneratedColumn,
-  Column
+  Column,
+  OneToOne
 } from 'typeorm';
+import { CoachEntity } from './coach.entity';
 
 @Entity('users')
 export class UserEntity extends TimestampEntity {
@@ -28,5 +30,11 @@ export class UserEntity extends TimestampEntity {
 
   @Column()
   salt: string;
+
+  @OneToOne(() => CoachEntity, (coach) => coach.user, {
+    nullable: true,
+    cascade: true,
+  })
+  coach: CoachEntity;
 
 }
