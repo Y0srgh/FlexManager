@@ -31,3 +31,6 @@
   --line-height-title: 26px;
   --line-height-lg: 1.8;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
