@@ -8,11 +8,12 @@ import { JwtModule } from '@nestjs/jwt';
 import * as dotenv from 'dotenv';
 import { JwtStrategy } from './strategy/passport-jwt.stategy';
 import { CoachEntity } from './entities/coach.entity';
+import { ClientEntity } from './entities/client.entity';
 dotenv.config()
 
 @Module({
    imports: [
-    TypeOrmModule.forFeature([UserEntity, CoachEntity]),
+    TypeOrmModule.forFeature([UserEntity, CoachEntity, ClientEntity]),
     PassportModule.register({defaultStrategy: 'jwt'}),
     JwtModule.register({
       secret: process.env.SECRET,

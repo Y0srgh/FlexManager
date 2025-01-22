@@ -15,6 +15,8 @@ import { CoachEntity } from './entities/coach.entity';
 import { Roles } from 'src/enums/user-role.enum';
 import { CreateCoachDto } from './dto/create-coach.dto';
 import { PasswordService } from 'src/common/utils/password.service';
+import { CreateClientDto } from './dto/create-client.dto';
+import { ClientEntity } from './entities/client.entity';
 
 @Injectable()
 export class UserService {
@@ -25,15 +27,13 @@ export class UserService {
     @InjectRepository(CoachEntity)
     private coachRepository: Repository<CoachEntity>,
 
+    @InjectRepository(ClientEntity)
+    private clientRepository: Repository<ClientEntity>,
+
     private jwtService: JwtService,
 
     private passwordService: PasswordService,
   ) {}
-
-
-
-
-
 
   async signUp(data: UserSingUpDto): Promise<UserEntity> {
     const user = this.userRepository.create({
@@ -90,7 +90,6 @@ export class UserService {
     // si non on retourne une erreur
   }
 
-
   async createCoach(createCoachDto: CreateCoachDto): Promise<CoachEntity> {
     const defaultPassword = this.passwordService.generateDefaultPassword();
     const signupCoach: UserSingUpDto = {username: createCoachDto.username, email: createCoachDto.email, role : createCoachDto.role, password: defaultPassword} as UserSingUpDto;
@@ -109,7 +108,6 @@ export class UserService {
     return this.coachRepository.save(coach);
   }
 
-
   async findAllCoaches(): Promise<CoachEntity[]> {
     return this.coachRepository.find();
   }
@@ -118,6 +116,20 @@ export class UserService {
   //   return this.coachRepository.findOne({ where: { id } });
   // }
 
- 
+
+  async createClient(createClientDto: CreateClientDto): Promise<ClientEntity> {
+    console.log("createClientDto",createClientDto);
+    
+    const defaultPassword = this.passwordService.generateDefaultPassword();
+    const signupClient: UserSingUpDto = {username: createClientDto.username, email: createClientDto.email, role : createClientDto.role, password: defaultPassword} as UserSingUpDto;
+    const user = await this.signUp(signupClient);
+    const client = this.clientRepository.create({
+      physicalDetails: createClientDto.physicalDetails,
+      nutritionAssistanceType: createClientDto.nutritionAssistanceType,
+      id: user.id,
+    });
+
+    return this.clientRepository.save(client);
+  }
 
 }
