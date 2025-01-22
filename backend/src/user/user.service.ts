@@ -101,7 +101,6 @@ export class UserService {
       certifications: createCoachDto.certifications,
       isPrivate: createCoachDto.isPrivate,
       id: user.id,
-      user: user,
       courses: []
     });
 

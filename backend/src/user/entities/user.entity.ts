@@ -4,13 +4,15 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  OneToOne
+  OneToOne,
+  PrimaryColumn
 } from 'typeorm';
 import { CoachEntity } from './coach.entity';
+import { ClientEntity } from './client.entity';
 
 @Entity('users')
 export class UserEntity extends TimestampEntity {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryColumn('uuid')
   id: string;
 
   @Column({ length: 100 })
@@ -36,5 +38,11 @@ export class UserEntity extends TimestampEntity {
     cascade: true,
   })
   coach: CoachEntity;
+
+  @OneToOne(() => ClientEntity, (client) => client.user, {
+    nullable: true,
+    cascade: true,
+  })
+  client: ClientEntity;
 
 }

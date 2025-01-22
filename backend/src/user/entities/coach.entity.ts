@@ -2,10 +2,8 @@ import {
   Entity,
   Column,
   OneToMany,
-  ManyToOne,
   JoinColumn,
   OneToOne,
-  PrimaryGeneratedColumn,
   PrimaryColumn,
 } from 'typeorm';
 import { UserEntity } from 'src/user/entities/user.entity';
