@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #f5f5f5;
+    background-color: #f8f7fd;
     padding: 10px 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-bottom: 2px solid #ddd;
@@ -10,12 +10,13 @@
     .navbar-left {
       display: flex;
       align-items: center;
-      gap: 10px; /* Space between logo and title */
+      gap: 10px; 
   
       .logo {
-        width: 40px; /* Adjust size of logo */
-        height: 40px;
-        object-fit: contain; /* Ensure logo scales properly */
+        width: 70px; 
+        height: 70px;
+        object-fit: contain;
+        border-radius: 100%;
       }
   
       h3 {
@@ -32,13 +33,13 @@
       gap: 15px;
   
       .icon {
-        font-size: 24px;
+        font-size: 26px;
         color: #555;
         cursor: pointer;
         transition: color 0.3s;
   
         &:hover {
-          color: #007bff;
+          color: #896CFE;
         }
       }
     }

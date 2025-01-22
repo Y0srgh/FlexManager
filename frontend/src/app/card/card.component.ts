@@ -9,4 +9,6 @@ export class CardComponent {
   @Input() title: string = '';
   @Input() icon: string = '';
   @Input() route: string = '';
+  @Input() image: string = ''; 
+
 }

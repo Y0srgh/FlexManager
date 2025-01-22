@@ -7,16 +7,19 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
   cards = [
-    { title: 'Dashboard', icon: 'dashboard', route: '/dashboard' }, 
-    { title: 'Classes', icon: 'class', route: '/classes' }, 
-    { title: 'Plannings', icon: 'event', route: '/plannings' },
-    { title: 'Subscriptions', icon: 'subscriptions', route: '/subscriptions' }, 
-    { title: 'Payments', icon: 'credit_card', route: '/payments' }, 
-    { title: 'Private Sessions', icon: 'fitness_center', route: '/private-sessions' }, 
-    { title: 'Nutrition', icon: 'restaurant', route: '/nutrition' }, 
-    { title: 'Contact Us', icon: 'contact_mail', route: '/contact-us' }, 
-    { title: 'Performance', icon: 'trending_up', route: '/performance' },
-    { title: 'Help & Support', icon: 'help', route: '/help-support' },
+    { title: 'Dashboard', icon: 'dashboard', route: '/dashboard', image: 'assets/dashboard.png' }, 
+    { title: 'Classes', icon: 'class', route: '/classes', image: 'assets/classes.png' }, 
+    { title: 'Nutrition', icon: 'restaurant', route: '/nutrition', image: 'assets/nutrition.png' }, 
+
+    { title: 'Performance', icon: 'trending_up', route: '/performance', image: 'assets/performance.png' },
+    { title: 'Private Sessions', icon: 'fitness_center', route: '/private-sessions', image: 'assets/private.png' }, 
+
+
+    { title: 'Plannings', icon: 'event', route: '/plannings', image: 'assets/planning.png' },
+    { title: 'Subscriptions', icon: 'subscriptions', route: '/subscriptions', image: 'assets/subscriptions.png' }, 
+    { title: 'Payments', icon: 'credit_card', route: '/payments', image: 'assets/payment.png' }, 
+    { title: 'Contact Us', icon: 'contact_mail', route: '/contact-us' , image: 'assets/contact.png'}, 
+    { title: 'Help & Support', icon: 'help', route: '/help-support', image: 'assets/support.png' },
  
 
   ];
