@@ -48,6 +48,8 @@ export class UserService {
       delete user.password;
       return user;
     } catch (error) {
+      console.log(error);
+      
       throw new ConflictException('username or email already exist');
     }
   }
