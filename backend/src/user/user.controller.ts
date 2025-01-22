@@ -53,7 +53,7 @@ export class UserController {
     return this.userService.createCoach(createCoachDto);
   }
 
-  @Get()
+  @Get('coach')
   findAllCoaches() {
     return this.userService.findAllCoaches();
   }
@@ -78,9 +78,13 @@ export class UserController {
   @Role(Roles.MANAGER)
   @UseGuards(JwtAuthGuard, RolesGuard)
   createClient(@Body() CreateClientDto: CreateClientDto) {
-    console.log('i am in the controller');
 
     return this.userService.createClient(CreateClientDto);
+  }
+
+  @Get('client')
+  findAllClients() {
+    return this.userService.findAllClients();
   }
 
 }

@@ -102,7 +102,8 @@ export class UserService {
       certifications: createCoachDto.certifications,
       isPrivate: createCoachDto.isPrivate,
       id: user.id,
-      courses: []
+      courses: [],
+      user: user,
     });
 
     return this.coachRepository.save(coach);
@@ -127,9 +128,14 @@ export class UserService {
       physicalDetails: createClientDto.physicalDetails,
       nutritionAssistanceType: createClientDto.nutritionAssistanceType,
       id: user.id,
+      user:user
     });
 
     return this.clientRepository.save(client);
+  }
+
+  async findAllClients(): Promise<ClientEntity[]> {
+    return this.clientRepository.find();
   }
 
 }
