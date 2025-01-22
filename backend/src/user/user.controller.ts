@@ -16,6 +16,10 @@ import { UserSingInDto } from './dto/user-sign-in.dto';
 import { UserSignInValidationPipe } from 'src/pipes/signin/user-sing-in.pipe';
 import { CreateCoachDto } from './dto/create-coach.dto';
 import { JwtAuthGuard } from './guards/jwt-auth.guards';
+import { User } from 'src/decorators/user.decorator';
+import { Roles } from 'src/enums/user-role.enum';
+import { Role } from 'src/decorators/role.decorator';
+import { RolesGuard } from './guards/role.guards';
 
 @Controller('auth')
 export class UserController {
@@ -28,6 +32,8 @@ export class UserController {
 
   @Post('signin')
   async signIn(@Body(UserSignInValidationPipe) userData: UserSingInDto) {
+  console.log("i am heree");
+  
     return this.userService.signIn(userData);
   }
 
@@ -40,8 +46,11 @@ export class UserController {
  
 
   @Post('create-coach')
-  @UseGuards(JwtAuthGuard)
+  @Role(Roles.MANAGER)
+  @UseGuards(JwtAuthGuard, RolesGuard)
   createCoach(@Body() createCoachDto: CreateCoachDto) {
+    console.log("i am in the controller");
+    
     return this.userService.createCoach(createCoachDto);
   }
 
@@ -50,10 +59,10 @@ export class UserController {
     return this.userService.findAllCoaches();
   }
 
-  @Get(':id')
-  findOneCoach(@Param('id') id: string) {
-    return this.userService.findOneCoach(id);
-  }
+  // @Get(':id')
+  // findOneCoach(@Param('id') id: string) {
+  //   return this.userService.findOneCoach(id);
+  // }
 
   // @Patch(':id')
   // update(@Param('id') id: string, @Body() updateCoachDto: UpdateCoachDto) {

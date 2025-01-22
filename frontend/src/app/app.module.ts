@@ -35,7 +35,7 @@ import { MatInputModule } from '@angular/material/input';
     RouterModule, 
     AppRoutingModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

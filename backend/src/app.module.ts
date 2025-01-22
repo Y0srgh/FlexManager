@@ -10,6 +10,7 @@ import { UserModule } from './user/user.module';
 
 dotenv.config();
 import { CourseModule } from './classes/entities/strategy/courses.module';
+import { CommonModule } from './common/common.module';
 
 @Module({
   imports: [CourseModule ,  
@@ -24,6 +25,7 @@ import { CourseModule } from './classes/entities/strategy/courses.module';
     TypeOrmModule.forFeature([Test]),
     TestModule,
     UserModule,
+    CommonModule
 
 ],
   controllers: [AppController],

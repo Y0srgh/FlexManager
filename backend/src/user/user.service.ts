@@ -14,6 +14,7 @@ import { UserSingInDto } from './dto/user-sign-in.dto';
 import { CoachEntity } from './entities/coach.entity';
 import { Roles } from 'src/enums/user-role.enum';
 import { CreateCoachDto } from './dto/create-coach.dto';
+import { PasswordService } from 'src/common/utils/password.service';
 
 @Injectable()
 export class UserService {
@@ -25,6 +26,8 @@ export class UserService {
     private coachRepository: Repository<CoachEntity>,
 
     private jwtService: JwtService,
+
+    private passwordService: PasswordService,
   ) {}
 
 
@@ -52,6 +55,8 @@ export class UserService {
   async signIn(credientials: UserSingInDto) {
     // recuperer login et mot de passe
     const { username, email, password } = credientials;
+    console.log(credientials);
+    
     // on peut se logger via username ou email
     // verifier si user existe
     const user = await this.userRepository
@@ -85,25 +90,17 @@ export class UserService {
 
 
   async createCoach(createCoachDto: CreateCoachDto): Promise<CoachEntity> {
-    // const user = this.userRepository.create({
-    //   username: createCoachDto.username,
-    //   email: createCoachDto.email,
-    //   password: createCoachDto.password,
-    //   role: Roles.COACH,
-    // });
-    
-    // await this.userRepository.save(user);
-    
-    //i will change this to call the signup method instead
-    const user = await this.signUp({username: createCoachDto.username, email: createCoachDto.email, password: createCoachDto.password});
+    const defaultPassword = this.passwordService.generateDefaultPassword();
+    const signupCoach: UserSingUpDto = {username: createCoachDto.username, email: createCoachDto.email, role : createCoachDto.role, password: defaultPassword} as UserSingUpDto;
+
+    const user = await this.signUp(signupCoach);
     
 
     const coach = this.coachRepository.create({
       expertise: createCoachDto.expertise,
       certifications: createCoachDto.certifications,
       isPrivate: createCoachDto.isPrivate,
-      courses: [],
-      user,  
+      courses: []
     });
 
     return this.coachRepository.save(coach);
@@ -114,9 +111,9 @@ export class UserService {
     return this.coachRepository.find();
   }
 
-  async findOneCoach(id: string): Promise<CoachEntity> {
-    return this.coachRepository.findOne({ where: { id } });
-  }
+  // async findOneCoach(id: string): Promise<CoachEntity> {
+  //   return this.coachRepository.findOne({ where: { id } });
+  // }
 
  
 

@@ -4,7 +4,7 @@ import { Assistant } from 'src/enums/assistant_type.enum';
 
 @Entity('clients')
 export class ClientEntity extends UserEntity {
-  @Column({ nullable: true })
+  @Column({type:'json', nullable: true })
   physicalDetails: { weight: number; height: number };
 
   @ManyToOne(() => UserEntity, { nullable: true })
@@ -16,10 +16,10 @@ export class ClientEntity extends UserEntity {
   @Column({ type: 'enum', default: Assistant.ONE, enum: Assistant })
   nutritionAssistanceType: string;
 
-  @Column({ nullable: true })
+  @Column({type:'json', nullable: true })
   mealTracking: { meals: string[]; calories: number };
 
-  @Column({ nullable: true })
+  @Column({type:'json', nullable: true })
   progressTracking: {
     caloriesBurned: number;
     weightLoss: number;
@@ -30,6 +30,6 @@ export class ClientEntity extends UserEntity {
   @Column({ nullable: true })
   subscriptionStatus: string;
 
-  @Column({ nullable: true })
+  @Column({type:'json', nullable: true })
   paymentInfo: any;
 }

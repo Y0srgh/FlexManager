@@ -21,6 +21,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: PayloadInterface) : Promise<UserEntity> {
+    console.log("i am in strategy");
     const user = await this.userRepositor.findOne({where:{username:payload.username}})
     if(user){
         delete user.password
@@ -28,6 +29,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         delete user.createdAt
         delete user.updatedAt
         delete user.deletedAt
+        console.log('the user is', user);
         return user
     }else{
         throw new UnauthorizedException('Unauthorized')

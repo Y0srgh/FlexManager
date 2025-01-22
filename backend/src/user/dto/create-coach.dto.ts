@@ -1,4 +1,5 @@
-import { IsString, IsOptional, IsBoolean } from 'class-validator';
+import { IsString, IsOptional, IsBoolean, IsEnum } from 'class-validator';
+import { Roles } from 'src/enums/user-role.enum';
 
 export class CreateCoachDto {
   @IsString()
@@ -9,6 +10,10 @@ export class CreateCoachDto {
 
   @IsString()
   password: string;
+
+  @IsOptional()
+  @IsEnum(Roles)
+  role: Roles = Roles.USER;
 
   @IsOptional()
   @IsString()
