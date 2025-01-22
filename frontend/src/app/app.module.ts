@@ -20,13 +20,14 @@ import { CardComponent } from './card/card.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { NavbarComponent } from './navbar/navbar.component';
 @NgModule({
   declarations: [
     AppComponent,
       
     SidebarComponent,   
     HomeComponent,   
-    CardComponent,    
+    CardComponent, NavbarComponent,    
   ],
   imports: [
     BrowserModule,
