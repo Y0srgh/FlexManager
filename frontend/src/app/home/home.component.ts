@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
   cards = [
-    { title: 'Dashboard', icon: 'dashboard', route: '/dashboard', image: 'assets/dashboard.png' }, 
+    { title: 'Dashboard', icon: 'dashboard', route: '/dashboard', image: 'assets/dashboard3.png' }, 
     { title: 'Classes', icon: 'class', route: '/classes', image: 'assets/classes.png' }, 
     { title: 'Nutrition', icon: 'restaurant', route: '/nutrition', image: 'assets/nutrition.png' }, 
 
@@ -15,7 +15,7 @@ export class HomeComponent {
     { title: 'Private Sessions', icon: 'fitness_center', route: '/private-sessions', image: 'assets/private.png' }, 
 
 
-    { title: 'Plannings', icon: 'event', route: '/plannings', image: 'assets/planning.png' },
+    { title: 'Plannings', icon: 'event', route: '/plannings', image: 'assets/planning2.png' },
     { title: 'Subscriptions', icon: 'subscriptions', route: '/subscriptions', image: 'assets/subscriptions.png' }, 
     { title: 'Payments', icon: 'credit_card', route: '/payments', image: 'assets/payment.png' }, 
     { title: 'Contact Us', icon: 'contact_mail', route: '/contact-us' , image: 'assets/contact.png'}, 

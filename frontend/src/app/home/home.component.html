@@ -1,6 +1,30 @@
-<div class="home-container">
+<!-- <div class="home-container">
     <div class="cards-grid">
       <app-card *ngFor="let card of cards" [title]="card.title" [icon]="card.icon" [route]="card.route" [image]="card.image"></app-card>
+    </div>
+  </div>
+   -->
+   <div class="home-container">
+    <div class="top-section">
+      <div class="image-container">
+        <img src="assets/home.jpg" alt="Homepage" class="homepage-image" />
+        <div class="overlay-text">
+          <h1>FlexManager</h1>
+          <p>Your Ultimate Gym Management System</p>
+        </div>
+      </div>
+    </div>
+  
+    <div class="separator"></div>
+  
+    <div class="cards-grid">
+      <app-card
+        *ngFor="let card of cards"
+        [title]="card.title"
+        [icon]="card.icon"
+        [route]="card.route"
+        [image]="card.image"
+      ></app-card>
     </div>
   </div>
   
