@@ -23,6 +23,8 @@ import { RolesGuard } from './guards/role.guards';
 import { CreateClientDto } from './dto/create-client.dto';
 import { CoachService } from './coach.service';
 import { ClientService } from './client.service';
+import { CreateManagerDto } from './dto/create-manager.dto';
+import { ManagerService } from './manager.service';
 
 @Controller('auth')
 export class UserController {
@@ -30,6 +32,7 @@ export class UserController {
     private readonly userService: UserService,
     private readonly coachService: CoachService,
     private readonly clientService: ClientService,
+    private readonly managerService: ManagerService,
   ) {}
 
   @Post('signup')
@@ -97,5 +100,13 @@ export class UserController {
   @Get('client/:id')
   findOneClient(@Param('id') id: string) {
     return this.clientService.findOne(id);
+  }
+
+  //-------------manager
+  @Post('create-manager')
+  @Role(Roles.MANAGER)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  createManager(@Body() CreateManagerDto: CreateManagerDto) {
+    return this.managerService.createManager(CreateManagerDto);
   }
 }

@@ -1,21 +1,11 @@
-import { Entity, Column } from 'typeorm';
+import { Entity, Column, PrimaryColumn, OneToOne, JoinColumn } from 'typeorm';
 import { UserEntity } from './user.entity';
+import { TimestampEntity } from 'src/Generics/timestamp.entities';
 
 @Entity('managers')
-export class ManagerEntity extends UserEntity {
-  // @Column({ nullable: true })
-  // dashboardAccess: {
-  //   revenueStats: any;
-  //   courseStats: any;
-  //   facilityStats: any;
-  //   trainerStats: any;
-  //   sportStats: any;
-  // };
-
-
-  //to be deleted when the new schema is implemented
-  // @Column({ nullable: true })
-  // equipmentInventory: { item: string; quantity: number }[];
+export class ManagerEntity extends TimestampEntity {
+  @PrimaryColumn('uuid')
+  id: string;
 
   @Column({ default: true })
   facilityManagementAccess: boolean;
@@ -23,6 +13,9 @@ export class ManagerEntity extends UserEntity {
   @Column({ default: true })
   financialManagementAccess: boolean;
 
-  // @Column({type:'', nullable: true })
-  // advertisingCampaigns: any[];
+   @OneToOne(() => UserEntity, (user) => user.coach, {
+      eager: true,
+    })
+    @JoinColumn()
+    user: UserEntity;
 }

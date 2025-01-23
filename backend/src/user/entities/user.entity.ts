@@ -9,6 +9,7 @@ import {
 } from 'typeorm';
 import { CoachEntity } from './coach.entity';
 import { ClientEntity } from './client.entity';
+import { ManagerEntity } from './manager.entity';
 
 @Entity('users')
 export class UserEntity extends TimestampEntity {
@@ -44,5 +45,11 @@ export class UserEntity extends TimestampEntity {
     cascade: true,
   })
   client: ClientEntity;
+
+  @OneToOne(() => ManagerEntity, (manager) => manager.user, {
+    nullable: true,
+    cascade: true,
+  })
+  manager: ManagerEntity;
 
 }
