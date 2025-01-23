@@ -11,6 +11,7 @@ import { CoachEntity } from './entities/coach.entity';
 import { ClientEntity } from './entities/client.entity';
 import { CoachService } from './coach.service';
 import { BaseService } from 'src/base/base.service';
+import { ClientService } from './client.service';
 dotenv.config()
 
 @Module({
@@ -25,6 +26,6 @@ dotenv.config()
     }),
 ],
   controllers: [UserController],
-  providers: [UserService, JwtStrategy, CoachService],
+  providers: [UserService, JwtStrategy, CoachService, ClientService],
 })
 export class UserModule {}

@@ -2,14 +2,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-// import { BaseService } from 'src/common/base.service';
 import { CoachEntity } from './entities/coach.entity';
 import { BaseService } from 'src/base/base.service';
 import { CreateCoachDto } from './dto/create-coach.dto';
 import { PasswordService } from 'src/common/utils/password.service';
 import { UserService } from './user.service';
-import { UserSingUpDto } from './dto/user-sign-up.dto';
-
 
 @Injectable()
 export class CoachService extends BaseService<CoachEntity>{
@@ -22,6 +19,18 @@ export class CoachService extends BaseService<CoachEntity>{
     protected userService: UserService,
   ) {
     super(coachRepository, userService, passwordService);
+  }
+
+  async createCoach(createCoachDto: CreateCoachDto): Promise<CoachEntity> {
+    return this.createWithUser(
+      createCoachDto,
+      (user) => ({
+        expertise: createCoachDto.expertise,
+        certifications: createCoachDto.certifications,
+        isPrivate: createCoachDto.isPrivate,
+        courses: [],
+      }),
+    );
   }
 
 /*async createCoach(createCoachDto: CreateCoachDto): Promise<CoachEntity> {
@@ -42,18 +51,6 @@ export class CoachService extends BaseService<CoachEntity>{
 
     return this.coachRepository.save(coach);
   }*/
-
-  async createCoach(createCoachDto: CreateCoachDto): Promise<CoachEntity> {
-    return this.createWithUser(
-      createCoachDto,
-      (user) => ({
-        expertise: createCoachDto.expertise,
-        certifications: createCoachDto.certifications,
-        isPrivate: createCoachDto.isPrivate,
-        courses: [],
-      }),
-    );
-  }
 
   /*async findAllCoaches(): Promise<CoachEntity[]> {
     return this.coachRepository.find();

@@ -93,24 +93,24 @@ export class UserService {
   
 
 
-  async createClient(createClientDto: CreateClientDto): Promise<ClientEntity> {
-    console.log("createClientDto",createClientDto);
+  // async createClient(createClientDto: CreateClientDto): Promise<ClientEntity> {
+  //   console.log("createClientDto",createClientDto);
     
-    const defaultPassword = this.passwordService.generateDefaultPassword();
-    const signupClient: UserSingUpDto = {username: createClientDto.username, email: createClientDto.email, role : createClientDto.role, password: defaultPassword} as UserSingUpDto;
-    const user = await this.signUp(signupClient);
-    const client = this.clientRepository.create({
-      physicalDetails: createClientDto.physicalDetails,
-      nutritionAssistanceType: createClientDto.nutritionAssistanceType,
-      id: user.id,
-      user:user
-    });
+  //   const defaultPassword = this.passwordService.generateDefaultPassword();
+  //   const signupClient: UserSingUpDto = {username: createClientDto.username, email: createClientDto.email, role : createClientDto.role, password: defaultPassword} as UserSingUpDto;
+  //   const user = await this.signUp(signupClient);
+  //   const client = this.clientRepository.create({
+  //     physicalDetails: createClientDto.physicalDetails,
+  //     nutritionAssistanceType: createClientDto.nutritionAssistanceType,
+  //     id: user.id,
+  //     user:user
+  //   });
 
-    return this.clientRepository.save(client);
-  }
+  //   return this.clientRepository.save(client);
+  // }
 
-  async findAllClients(): Promise<ClientEntity[]> {
-    return this.clientRepository.find();
-  }
+  // async findAllClients(): Promise<ClientEntity[]> {
+  //   return this.clientRepository.find();
+  // }
 
 }

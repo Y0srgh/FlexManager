@@ -22,10 +22,15 @@ import { Role } from 'src/decorators/role.decorator';
 import { RolesGuard } from './guards/role.guards';
 import { CreateClientDto } from './dto/create-client.dto';
 import { CoachService } from './coach.service';
+import { ClientService } from './client.service';
 
 @Controller('auth')
 export class UserController {
-  constructor(private readonly userService: UserService, private readonly coachService: CoachService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly coachService: CoachService,
+    private readonly clientService: ClientService,
+  ) {}
 
   @Post('signup')
   async signUp(@Body() userData: UserSingUpDto): Promise<UserEntity> {
@@ -79,13 +84,11 @@ export class UserController {
   @Role(Roles.MANAGER)
   @UseGuards(JwtAuthGuard, RolesGuard)
   createClient(@Body() CreateClientDto: CreateClientDto) {
-
-    return this.userService.createClient(CreateClientDto);
+    return this.clientService.createClient(CreateClientDto);
   }
 
   @Get('client')
   findAllClients() {
-    return this.userService.findAllClients();
+    return this.clientService.findAll();
   }
-
 }
