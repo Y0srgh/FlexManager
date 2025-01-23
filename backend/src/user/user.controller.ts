@@ -56,12 +56,12 @@ export class UserController {
 
   @Get('coach')
   findAllCoaches() {
-    return this.coachService.findAllCoaches();
+    return this.coachService.findAll();
   }
 
   @Get('coach/:id')
   findOneCoach(@Param('id') id: string) {
-    return this.coachService.findOneCoach(id);
+    return this.coachService.findOne(id);
   }
 
   // @Patch(':id')

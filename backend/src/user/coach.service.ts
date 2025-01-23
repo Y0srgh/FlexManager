@@ -12,18 +12,19 @@ import { UserSingUpDto } from './dto/user-sign-up.dto';
 
 
 @Injectable()
-export class CoachService{
+export class CoachService extends BaseService<CoachEntity>{
   constructor(
     @InjectRepository(CoachEntity)
     private readonly coachRepository: Repository<CoachEntity>,
 
-    private passwordService: PasswordService,
+    protected passwordService: PasswordService,
 
-    private userService: UserService,
+    protected userService: UserService,
   ) {
-   
+    super(coachRepository, userService, passwordService);
   }
-async createCoach(createCoachDto: CreateCoachDto): Promise<CoachEntity> {
+
+/*async createCoach(createCoachDto: CreateCoachDto): Promise<CoachEntity> {
     const defaultPassword = this.passwordService.generateDefaultPassword();
     const signupCoach: UserSingUpDto = {username: createCoachDto.username, email: createCoachDto.email, role : createCoachDto.role, password: defaultPassword} as UserSingUpDto;
 
@@ -40,13 +41,25 @@ async createCoach(createCoachDto: CreateCoachDto): Promise<CoachEntity> {
     });
 
     return this.coachRepository.save(coach);
+  }*/
+
+  async createCoach(createCoachDto: CreateCoachDto): Promise<CoachEntity> {
+    return this.createWithUser(
+      createCoachDto,
+      (user) => ({
+        expertise: createCoachDto.expertise,
+        certifications: createCoachDto.certifications,
+        isPrivate: createCoachDto.isPrivate,
+        courses: [],
+      }),
+    );
   }
 
-  async findAllCoaches(): Promise<CoachEntity[]> {
+  /*async findAllCoaches(): Promise<CoachEntity[]> {
     return this.coachRepository.find();
-  }
+  }*/
 
-  async findOneCoach(id: string): Promise<CoachEntity> {
+  /*async findOneCoach(id: string): Promise<CoachEntity> {
     return this.coachRepository.findOne({ where: { id } });
-  }
+  }*/
 }
