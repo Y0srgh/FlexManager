@@ -14,11 +14,13 @@ import { BaseService } from 'src/base/base.service';
 import { ClientService } from './client.service';
 import { ManagerService } from './manager.service';
 import { ManagerEntity } from './entities/manager.entity';
+import { ParentService } from './parent.service';
+import { ParentEntity } from './entities/parents.entity';
 dotenv.config()
 
 @Module({
    imports: [
-    TypeOrmModule.forFeature([UserEntity, CoachEntity, ClientEntity,ManagerEntity]),
+    TypeOrmModule.forFeature([UserEntity, CoachEntity, ClientEntity, ManagerEntity, ParentEntity]),
     PassportModule.register({defaultStrategy: 'jwt'}),
     JwtModule.register({
       secret: process.env.SECRET,
@@ -28,6 +30,6 @@ dotenv.config()
     }),
 ],
   controllers: [UserController],
-  providers: [UserService, JwtStrategy, CoachService, ClientService, ManagerService],
+  providers: [UserService, JwtStrategy, CoachService, ClientService, ManagerService, ParentService],
 })
 export class UserModule {}

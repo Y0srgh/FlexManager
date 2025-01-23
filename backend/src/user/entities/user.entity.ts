@@ -5,11 +5,13 @@ import {
   PrimaryGeneratedColumn,
   Column,
   OneToOne,
-  PrimaryColumn
+  PrimaryColumn,
+  JoinColumn
 } from 'typeorm';
 import { CoachEntity } from './coach.entity';
 import { ClientEntity } from './client.entity';
 import { ManagerEntity } from './manager.entity';
+import { ParentEntity } from './parents.entity';
 
 @Entity('users')
 export class UserEntity extends TimestampEntity {
@@ -51,5 +53,12 @@ export class UserEntity extends TimestampEntity {
     cascade: true,
   })
   manager: ManagerEntity;
+
+  @OneToOne(() => ParentEntity, (parent) => parent.user, {
+    nullable: true,
+    cascade: true,
+  })
+  @JoinColumn()
+  parent: ParentEntity;
 
 }

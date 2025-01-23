@@ -24,7 +24,7 @@ export class ParentService extends BaseService<ParentEntity> {
   async createParent(createParentDto: CreateParentDto, child: ClientEntity): Promise<ParentEntity> {
     return this.createWithUser(createParentDto, (user) => ({
         children: [child],
-        associatedAccountsCount: child ? 1 : 0,
+        associatedAccountsCount: 1,
     }));
   }
 }

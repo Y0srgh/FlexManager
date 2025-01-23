@@ -2,6 +2,7 @@ import { Entity, Column, ManyToOne, OneToOne, JoinColumn, PrimaryColumn } from '
 import { UserEntity } from './user.entity';
 import { Assistant } from 'src/enums/assistant_type.enum';
 import { TimestampEntity } from 'src/Generics/timestamp.entities';
+import { ParentEntity } from './parents.entity';
 
 @Entity('clients')
 export class ClientEntity extends TimestampEntity {
@@ -12,8 +13,8 @@ export class ClientEntity extends TimestampEntity {
   @Column({ type: 'json', nullable: true })
   physicalDetails: { weight: number; height: number };
 
-  @ManyToOne(() => UserEntity, { nullable: true })
-  parentAccount: UserEntity;
+  @ManyToOne(() => ParentEntity, (client) => client.children,{ nullable: true, eager: true })
+  parentAccount: ParentEntity;
 
   @Column({ type: 'uuid', nullable: true })
   preferredCoachId: string;

@@ -25,6 +25,8 @@ import { CoachService } from './coach.service';
 import { ClientService } from './client.service';
 import { CreateManagerDto } from './dto/create-manager.dto';
 import { ManagerService } from './manager.service';
+import { ParentService } from './parent.service';
+import { CreateParentDto } from './dto/create-parent.dto';
 
 @Controller('auth')
 export class UserController {
@@ -33,6 +35,7 @@ export class UserController {
     private readonly coachService: CoachService,
     private readonly clientService: ClientService,
     private readonly managerService: ManagerService,
+    private readonly parentService: ParentService,
   ) {}
 
   @Post('signup')
@@ -122,5 +125,12 @@ export class UserController {
     return this.managerService.findOne(id);
   }
 
+  //-----------parent
+  @Post('parent')
+  @Role(Roles.CLIENT)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  createParent(@Body() createParentDto: CreateParentDto,@User() user) {
+    return this.parentService.createParent(createParentDto, user);
+  }
 
 }
