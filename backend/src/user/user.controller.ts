@@ -88,7 +88,14 @@ export class UserController {
   }
 
   @Get('client')
+  @Role(Roles.MANAGER)
+  @UseGuards(JwtAuthGuard, RolesGuard)
   findAllClients() {
     return this.clientService.findAll();
+  }
+
+  @Get('client/:id')
+  findOneClient(@Param('id') id: string) {
+    return this.clientService.findOne(id);
   }
 }

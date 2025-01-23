@@ -11,28 +11,15 @@ import { UserEntity } from './entities/user.entity';
 import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
 import { UserSingInDto } from './dto/user-sign-in.dto';
-import { CoachEntity } from './entities/coach.entity';
-import { Roles } from 'src/enums/user-role.enum';
-import { CreateCoachDto } from './dto/create-coach.dto';
-import { PasswordService } from 'src/common/utils/password.service';
-import { CreateClientDto } from './dto/create-client.dto';
-import { ClientEntity } from './entities/client.entity';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(UserEntity)
     private userRepository: Repository<UserEntity>,
-    
-    @InjectRepository(CoachEntity)
-    private coachRepository: Repository<CoachEntity>,
-
-    @InjectRepository(ClientEntity)
-    private clientRepository: Repository<ClientEntity>,
 
     private jwtService: JwtService,
 
-    private passwordService: PasswordService,
   ) {}
 
   async signUp(data: UserSingUpDto): Promise<UserEntity> {
@@ -89,28 +76,5 @@ export class UserService {
     }
     // si non on retourne une erreur
   }
-
-  
-
-
-  // async createClient(createClientDto: CreateClientDto): Promise<ClientEntity> {
-  //   console.log("createClientDto",createClientDto);
-    
-  //   const defaultPassword = this.passwordService.generateDefaultPassword();
-  //   const signupClient: UserSingUpDto = {username: createClientDto.username, email: createClientDto.email, role : createClientDto.role, password: defaultPassword} as UserSingUpDto;
-  //   const user = await this.signUp(signupClient);
-  //   const client = this.clientRepository.create({
-  //     physicalDetails: createClientDto.physicalDetails,
-  //     nutritionAssistanceType: createClientDto.nutritionAssistanceType,
-  //     id: user.id,
-  //     user:user
-  //   });
-
-  //   return this.clientRepository.save(client);
-  // }
-
-  // async findAllClients(): Promise<ClientEntity[]> {
-  //   return this.clientRepository.find();
-  // }
 
 }
