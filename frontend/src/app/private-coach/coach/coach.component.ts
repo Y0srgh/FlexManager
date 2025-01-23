@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-coach',
@@ -6,13 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./coach.component.css']
 })
 export class CoachComponent {
-  coach = {
-    name: 'Fawzi Benzarti',
-    specialty: 'Fitness Coach',
-    image: 'https://thumbs.dreamstime.com/b/m-coach-20854003.jpg' 
-  };
+  @Input() coach!: { name: string, specialty: string, image: string };  
+  @Output() select = new EventEmitter<string>();
 
   selectCoach() {
+    this.select.emit(this.coach.name);  
     console.log(`${this.coach.name} has been selected!`);
   }
 }
