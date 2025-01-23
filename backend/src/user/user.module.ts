@@ -9,6 +9,8 @@ import * as dotenv from 'dotenv';
 import { JwtStrategy } from './strategy/passport-jwt.stategy';
 import { CoachEntity } from './entities/coach.entity';
 import { ClientEntity } from './entities/client.entity';
+import { CoachService } from './coach.service';
+import { BaseService } from 'src/base/base.service';
 dotenv.config()
 
 @Module({
@@ -23,6 +25,6 @@ dotenv.config()
     }),
 ],
   controllers: [UserController],
-  providers: [UserService, JwtStrategy]
+  providers: [UserService, JwtStrategy, CoachService],
 })
 export class UserModule {}

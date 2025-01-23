@@ -90,32 +90,7 @@ export class UserService {
     // si non on retourne une erreur
   }
 
-  async createCoach(createCoachDto: CreateCoachDto): Promise<CoachEntity> {
-    const defaultPassword = this.passwordService.generateDefaultPassword();
-    const signupCoach: UserSingUpDto = {username: createCoachDto.username, email: createCoachDto.email, role : createCoachDto.role, password: defaultPassword} as UserSingUpDto;
-
-    const user = await this.signUp(signupCoach);
-    
-
-    const coach = this.coachRepository.create({
-      expertise: createCoachDto.expertise,
-      certifications: createCoachDto.certifications,
-      isPrivate: createCoachDto.isPrivate,
-      id: user.id,
-      courses: [],
-      user: user,
-    });
-
-    return this.coachRepository.save(coach);
-  }
-
-  async findAllCoaches(): Promise<CoachEntity[]> {
-    return this.coachRepository.find();
-  }
-
-  async findOneCoach(id: string): Promise<CoachEntity> {
-    return this.coachRepository.findOne({ where: { id } });
-  }
+  
 
 
   async createClient(createClientDto: CreateClientDto): Promise<ClientEntity> {

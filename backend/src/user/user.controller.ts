@@ -21,10 +21,11 @@ import { Roles } from 'src/enums/user-role.enum';
 import { Role } from 'src/decorators/role.decorator';
 import { RolesGuard } from './guards/role.guards';
 import { CreateClientDto } from './dto/create-client.dto';
+import { CoachService } from './coach.service';
 
 @Controller('auth')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly userService: UserService, private readonly coachService: CoachService) {}
 
   @Post('signup')
   async signUp(@Body() userData: UserSingUpDto): Promise<UserEntity> {
@@ -50,17 +51,17 @@ export class UserController {
   createCoach(@Body() createCoachDto: CreateCoachDto) {
     console.log('i am in the controller');
 
-    return this.userService.createCoach(createCoachDto);
+    return this.coachService.createCoach(createCoachDto);
   }
 
   @Get('coach')
   findAllCoaches() {
-    return this.userService.findAllCoaches();
+    return this.coachService.findAllCoaches();
   }
 
   @Get('coach/:id')
   findOneCoach(@Param('id') id: string) {
-    return this.userService.findOneCoach(id);
+    return this.coachService.findOneCoach(id);
   }
 
   // @Patch(':id')

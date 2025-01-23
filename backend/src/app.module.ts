@@ -11,6 +11,7 @@ import { UserModule } from './user/user.module';
 dotenv.config();
 import { CourseModule } from './classes/entities/strategy/courses.module';
 import { CommonModule } from './common/common.module';
+import { BaseService } from './base/base.service';
 
 @Module({
   imports: [CourseModule ,  
@@ -28,7 +29,7 @@ import { CommonModule } from './common/common.module';
     CommonModule
 
 ],
-  controllers: [AppController],
-  providers: [AppService],
+controllers: [AppController],
+providers: [AppService],
 })
 export class AppModule {}
