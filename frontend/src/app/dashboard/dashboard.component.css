@@ -2,7 +2,6 @@
     padding: 20px;
     background: linear-gradient(120deg, #F5EFFF, #FBF5DD);
     font-family: 'Poppins', sans-serif;
-   
 }
 
 .dashboard-header {
@@ -30,15 +29,13 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
-    row-gap: 10px;
-
     flex: 1;
 }
 
 .dashboard-charts {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    row-gap: 10px; 
+    row-gap: 10px !important; 
     column-gap: 20px;
     
     flex: 2;
@@ -73,14 +70,7 @@
     color: #16404D; 
 }
 
-.dashboard-chart {
-    background: linear-gradient(135deg, #F5EFFF, #ddd8e2); 
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    height: 450px;
-}
+
 
 .dashboard-chart:hover {
     transform: translateY(-5px);
@@ -91,7 +81,25 @@
     font-size: 22px; 
     font-weight: bold;
     color: #16404D; 
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+
+
+.dashboard-chart {
+    background: linear-gradient(135deg, #F5EFFF, #ddd8e2); 
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 550px;
+
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; 
 }
 
 .dashboard-container canvas {
@@ -100,6 +108,7 @@
     border-radius: 8px;
     box-shadow: inset 0 -1px 5px rgba(255, 255, 255, 0.2); 
 }
+
 
 
 body {

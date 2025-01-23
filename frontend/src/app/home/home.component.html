@@ -20,11 +20,12 @@
     <div class="cards-grid">
       <app-card
         *ngFor="let card of cards"
-        (click)="navigateTo(card.route)"
+       
         [title]="card.title"
         [icon]="card.icon"
         
         [image]="card.image"
+        [route]="card.route"
       ></app-card>
     </div>
   </div>
