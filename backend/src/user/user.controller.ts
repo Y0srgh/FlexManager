@@ -53,7 +53,7 @@ export class UserController {
   // @UseGuards(JwtAuthGuard)
   // async admin(@User({ roles: [Roles.MANAGER] }) user: UserEntity) {....}
 
-  @Post('create-coach')
+  @Post('coach')
   @Role(Roles.MANAGER)
   @UseGuards(JwtAuthGuard, RolesGuard)
   createCoach(@Body() createCoachDto: CreateCoachDto) {
@@ -83,7 +83,7 @@ export class UserController {
   // }
 
   //---------client
-  @Post('create-client')
+  @Post('client')
   @Role(Roles.MANAGER)
   @UseGuards(JwtAuthGuard, RolesGuard)
   createClient(@Body() CreateClientDto: CreateClientDto) {
@@ -103,10 +103,24 @@ export class UserController {
   }
 
   //-------------manager
-  @Post('create-manager')
+  @Post('manager')
   @Role(Roles.MANAGER)
   @UseGuards(JwtAuthGuard, RolesGuard)
   createManager(@Body() CreateManagerDto: CreateManagerDto) {
     return this.managerService.createManager(CreateManagerDto);
   }
+
+  @Get('manager')
+  @Role(Roles.MANAGER)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  findAllManagers() {
+    return this.managerService.findAll();
+  }
+
+  @Get('manager/:id')
+  findOneManager(@Param('id') id: string) {
+    return this.managerService.findOne(id);
+  }
+
+
 }
