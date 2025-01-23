@@ -113,9 +113,9 @@ export class UserService {
     return this.coachRepository.find();
   }
 
-  // async findOneCoach(id: string): Promise<CoachEntity> {
-  //   return this.coachRepository.findOne({ where: { id } });
-  // }
+  async findOneCoach(id: string): Promise<CoachEntity> {
+    return this.coachRepository.findOne({ where: { id } });
+  }
 
 
   async createClient(createClientDto: CreateClientDto): Promise<ClientEntity> {

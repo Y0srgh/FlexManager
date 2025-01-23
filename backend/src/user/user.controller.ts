@@ -58,10 +58,10 @@ export class UserController {
     return this.userService.findAllCoaches();
   }
 
-  // @Get(':id')
-  // findOneCoach(@Param('id') id: string) {
-  //   return this.userService.findOneCoach(id);
-  // }
+  @Get('coach/:id')
+  findOneCoach(@Param('id') id: string) {
+    return this.userService.findOneCoach(id);
+  }
 
   // @Patch(':id')
   // update(@Param('id') id: string, @Body() updateCoachDto: UpdateCoachDto) {
