@@ -21,16 +21,16 @@
 
       h3 {
           font-family: 'Poppins', sans-serif;
-          color: #4A47A3; /* Vibrant purple */
+          color: #4A47A3; 
           margin: 0;
-          font-size: 26px; /* Slightly larger size */
-          font-weight: 700; /* Bold for emphasis */
-          letter-spacing: 1px; /* Add some spacing for a premium look */
-          text-transform: uppercase; /* Makes the title stand out more */
-          background: linear-gradient(to right, #896CFE, #4A47A3); /* Gradient text effect */
+          font-size: 26px; 
+          font-weight: 700; 
+          letter-spacing: 1px; 
+          text-transform: uppercase; 
+          background: linear-gradient(to right, #896CFE, #4A47A3); 
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
-          animation: fadeIn 1s ease-in-out; /* Subtle entrance animation */
+          animation: fadeIn 1s ease-in-out; 
       }
   }
 
