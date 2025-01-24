@@ -27,6 +27,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LayoutComponent } from './components/layout/layout.component';
 import { ButtonComponent } from './shared/button/button.component';
+import { SignupComponent } from './signup/signup.component';
 
 // const routes: Routes = [
 //   { path: '', component: HeroComponent }, 
@@ -45,7 +46,7 @@ import { ButtonComponent } from './shared/button/button.component';
     AppComponent,
     CourseManagementComponent, 
     CourseFormComponent,       
-    SidebarComponent, HeaderComponent, HeroComponent, StatsComponent, WhyChooseUsComponent, CoachesComponent, NutritionistsComponent, PricingComponent, TestimonialsComponent, FooterComponent, LayoutComponent, ButtonComponent,          
+    SidebarComponent, HeaderComponent, HeroComponent, StatsComponent, WhyChooseUsComponent, CoachesComponent, NutritionistsComponent, PricingComponent, TestimonialsComponent, FooterComponent, LayoutComponent, ButtonComponent, SignupComponent,          
   ],
   imports: [
     BrowserModule,
