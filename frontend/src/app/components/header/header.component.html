@@ -1,17 +1,22 @@
 <header class="header">
   <div class="container">
-    <div class="logo">FlexManager</div>
+    <div class="logo">Flexy</div>
     <nav>
-        <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#stats">Stats</a></li>
-            <li><a href="#why-choose-us">Why Choose Us</a></li>
-            <li><a href="#coach">Coaches</a></li>
-            <li><a href="#nutritionists">Nutritionists</a></li>
-            <li><a href="#pricing">Pricing</a></li>
-            <li><a href="#testimonials">Testimonials</a></li>
-          </ul>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#stats">Stats</a></li>
+        <li><a href="#why-choose-us">Why Choose Us</a></li>
+        <li><a href="#coach">Coaches</a></li>
+        <li><a href="#nutritionists">Nutritionists</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+      </ul>
     </nav>
-    <button class="btn-primary">Join Now</button>
+    <app-button
+      [backgroundColor]="'#fff'"
+      [textColor]="'#000'"
+      [buttonText]="'Join Now'"
+      (buttonClick)="onJoinNowClick()"
+    ></app-button>
   </div>
 </header>

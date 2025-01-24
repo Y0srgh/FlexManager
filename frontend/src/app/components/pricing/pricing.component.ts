@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrl: './pricing.component.css'
 })
 export class PricingComponent {
-
+  onChoosePlan(){
+    console.log("hello from choose plan");
+  }
 }

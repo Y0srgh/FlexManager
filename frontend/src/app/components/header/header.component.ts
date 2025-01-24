@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-
+  onJoinNowClick(): void {
+    console.log('Join Now button clicked!');
+    // Add your logic here
+  }
 }

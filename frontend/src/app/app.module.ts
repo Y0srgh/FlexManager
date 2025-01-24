@@ -26,6 +26,7 @@ import { TestimonialsComponent } from './components/testimonials/testimonials.co
 import { FooterComponent } from './components/footer/footer.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LayoutComponent } from './components/layout/layout.component';
+import { ButtonComponent } from './shared/button/button.component';
 
 // const routes: Routes = [
 //   { path: '', component: HeroComponent }, 
@@ -44,7 +45,7 @@ import { LayoutComponent } from './components/layout/layout.component';
     AppComponent,
     CourseManagementComponent, 
     CourseFormComponent,       
-    SidebarComponent, HeaderComponent, HeroComponent, StatsComponent, WhyChooseUsComponent, CoachesComponent, NutritionistsComponent, PricingComponent, TestimonialsComponent, FooterComponent, LayoutComponent,          
+    SidebarComponent, HeaderComponent, HeroComponent, StatsComponent, WhyChooseUsComponent, CoachesComponent, NutritionistsComponent, PricingComponent, TestimonialsComponent, FooterComponent, LayoutComponent, ButtonComponent,          
   ],
   imports: [
     BrowserModule,
