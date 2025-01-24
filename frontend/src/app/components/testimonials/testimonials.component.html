@@ -1,13 +1,9 @@
 <section class="testimonials">
   <h2>What Our Clients Say</h2>
   <div class="testimonial-slider">
-    <div class="testimonial" data-aos="fade-left">
-      <p>"Best gym experience ever!"</p>
-      <h4>- Alex Johnson</h4>
-    </div>
-    <div class="testimonial" data-aos="fade-left">
-      <p>"Amazing nutritionists and facilities."</p>
-      <h4>- Maria Lopez</h4>
+    <div class="testimonial" *ngFor="let testimonial of testimonials" data-aos="fade-left">
+      <p>"{{ testimonial.text }}"</p>
+      <h4>- {{ testimonial.author }}</h4>
     </div>
   </div>
 </section>

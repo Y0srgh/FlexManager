@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrl: './testimonials.component.css'
 })
 export class TestimonialsComponent {
-
+  testimonials = [
+    { text: 'Best gym experience ever!', author: 'Alex Johnson' },
+    { text: 'Amazing nutritionists and facilities.', author: 'Maria Lopez' }
+  ];
 }
