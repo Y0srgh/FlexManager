@@ -5,18 +5,21 @@ import { AppComponent } from './app.component';
 import { CoachComponent } from './private-coach/coach/coach.component';
 import { CoachListComponent } from './private-coach/coach-list/coach-list.component';
 import { RequestCardComponent } from './private-coach/request-card/request-card.component';
-
+import {ReservationCardComponent} from './private-coach/reservation-card/reservation-card.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     CoachComponent,
     CoachListComponent,
-    RequestCardComponent
+    RequestCardComponent,
+    ReservationCardComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

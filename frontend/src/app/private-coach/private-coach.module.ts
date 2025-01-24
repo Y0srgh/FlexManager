@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CoachComponent } from './coach/coach.component';
 import { CoachListComponent } from './coach-list/coach-list.component';
 import { RequestCardComponent } from './request-card/request-card.component';
+import { ReservationCardComponent } from './reservation-card/reservation-card.component';
 
 
 
@@ -10,7 +11,8 @@ import { RequestCardComponent } from './request-card/request-card.component';
   declarations: [
     CoachComponent,
     CoachListComponent,
-    RequestCardComponent
+    RequestCardComponent,
+    ReservationCardComponent
   ],
   imports: [
     CommonModule
