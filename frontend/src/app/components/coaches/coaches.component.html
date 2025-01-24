@@ -1,26 +1,10 @@
 <section class="coaches">
-    <h2>Our Coaches</h2>
-    <div class="coach-cards">
-      <div class="card" data-aos="zoom-in-up">
-        <img src="coach1.png" alt="Coach 1">
-        <h3>John Doe</h3>
-        <p>Expert Nutritionist</p>
-      </div>
-      <div class="card" data-aos="zoom-in-up" data-aos-delay="300">
-        <img src="coach2.png" alt="Coach 2">
-        <h3>Jane Smith</h3>
-        <p>Fitness Guru</p>
-      </div>
-      <div class="card" data-aos="zoom-in-up" data-aos-delay="400">
-        <img src="coach2.png" alt="Coach 2">
-        <h3>Jane Smith</h3>
-        <p>Fitness Guru</p>
-      </div>
-      <div class="card" data-aos="zoom-in-up" data-aos-delay="500">
-        <img src="coach2.png" alt="Coach 2">
-        <h3>Jane Smith</h3>
-        <p>Fitness Guru</p>
-      </div>
+  <h2>Our Coaches</h2>
+  <div class="coach-cards">
+    <div class="card" *ngFor="let coach of coaches" data-aos="zoom-in-up" [attr.data-aos-delay]="coach.delay">
+      <img [src]="coach.image" [alt]="coach.name">
+      <h3>{{ coach.name }}</h3>
+      <p>{{ coach.title }}</p>
     </div>
-  </section>
-  
+  </div>
+</section>
