@@ -1,13 +1,9 @@
 <section class="nutritionists">
   <h2>Meet Our Nutritionists</h2>
   <div class="nutritionist-cards">
-    <div class="card" data-aos="zoom-out-down" >
-      <img src="nutritionnist1.png" alt="Nutritionist 1" />
-      <h3>Mike Tyson</h3>
-    </div>
-    <div class="card" data-aos="zoom-out-down" data-aos-delay="300">
-      <img src="nutritionnist2.png" alt="Nutritionist 2" />
-      <h3>Ronda Rousey</h3>
+    <div class="card" *ngFor="let nutritionist of nutritionists" [attr.data-aos-delay]="nutritionist.delay" data-aos="zoom-out-down">
+      <img [src]="nutritionist.image" [alt]="nutritionist.name" />
+      <h3>{{ nutritionist.name }}</h3>
     </div>
   </div>
 </section>
