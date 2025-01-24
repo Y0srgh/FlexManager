@@ -1,0 +1,19 @@
+.footer {
+    background: #000;
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+  }
+  
+  .social-links {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .social-links li a {
+    color: #fff;
+    font-size: 1.2rem;
+  }
+  

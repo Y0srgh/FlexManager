@@ -17,12 +17,21 @@ import { AppComponent } from './app.component';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { HeaderComponent } from './components/header/header.component';
+import { HeroComponent } from './components/hero/hero.component';
+import { StatsComponent } from './components/stats/stats.component';
+import { WhyChooseUsComponent } from './components/why-choose-us/why-choose-us.component';
+import { CoachesComponent } from './components/coaches/coaches.component';
+import { NutritionistsComponent } from './components/nutritionist/nutritionist.component';
+import { PricingComponent } from './components/pricing/pricing.component';
+import { TestimonialsComponent } from './components/testimonials/testimonials.component';
+import { FooterComponent } from './components/footer/footer.component';
 @NgModule({
   declarations: [
     AppComponent,
     CourseManagementComponent, 
     CourseFormComponent,       
-    SidebarComponent,          
+    SidebarComponent, HeaderComponent, HeroComponent, StatsComponent, WhyChooseUsComponent, CoachesComponent, NutritionistsComponent, PricingComponent, TestimonialsComponent, FooterComponent,          
   ],
   imports: [
     BrowserModule,

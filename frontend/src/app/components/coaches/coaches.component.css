@@ -1,0 +1,21 @@
+.coaches {
+    padding: 3rem 1rem;
+    text-align: center;
+  }
+  
+  .coach-cards {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+  }
+  
+  .card img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+  }
+  
+  .card h3 {
+    margin: 1rem 0;
+  }
+  
