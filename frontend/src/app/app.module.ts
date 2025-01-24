@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Routes, RouterModule } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -9,9 +10,6 @@ import { CourseManagementComponent } from './components/course-management/course
 import { CourseFormComponent } from './components/course-form/course-form.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { RouterModule } from '@angular/router';
-
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 
@@ -26,12 +24,27 @@ import { NutritionistsComponent } from './components/nutritionist/nutritionist.c
 import { PricingComponent } from './components/pricing/pricing.component';
 import { TestimonialsComponent } from './components/testimonials/testimonials.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { AppRoutingModule } from './app-routing.module';
+import { LayoutComponent } from './components/layout/layout.component';
+
+// const routes: Routes = [
+//   { path: '', component: HeroComponent }, 
+//   { path: 'stats', component: StatsComponent },
+//   { path: 'why-choose-us', component: WhyChooseUsComponent },
+//   { path: 'coaches', component: CoachesComponent },
+//   { path: 'nutritionnist', component: NutritionistsComponent },
+//   { path: 'pricing', component: PricingComponent },
+//   { path: 'testimonials', component: TestimonialsComponent },
+//   { path: '**', redirectTo: '' } 
+// ];
+
+
 @NgModule({
   declarations: [
     AppComponent,
     CourseManagementComponent, 
     CourseFormComponent,       
-    SidebarComponent, HeaderComponent, HeroComponent, StatsComponent, WhyChooseUsComponent, CoachesComponent, NutritionistsComponent, PricingComponent, TestimonialsComponent, FooterComponent,          
+    SidebarComponent, HeaderComponent, HeroComponent, StatsComponent, WhyChooseUsComponent, CoachesComponent, NutritionistsComponent, PricingComponent, TestimonialsComponent, FooterComponent, LayoutComponent,          
   ],
   imports: [
     BrowserModule,
@@ -41,10 +54,10 @@ import { FooterComponent } from './components/footer/footer.component';
     MatCardModule,
     MatButtonModule,
     HttpClientModule, 
-    RouterModule, 
-    AppRoutingModule,
     MatFormFieldModule,
     MatInputModule,
+    AppRoutingModule
+    // RouterModule.forRoot(routes),
   ],
   providers: [],
   bootstrap: [AppComponent],
