@@ -1,23 +1,10 @@
 <section class="why-choose-us">
   <h2>Why Choose Us</h2>
   <div class="features">
-    <div class="feature-item" data-aos="flip-left" data-aos-easing="ease-out-cubic"
-    data-aos-duration="1000" >
-      <i class="fas fa-dumbbell"></i>
-      <h3>Top-notch Equipment</h3>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-    </div>
-    <div class="feature-item" data-aos="flip-left" data-aos-easing="ease-out-cubic"
-    data-aos-duration="1500">
-      <i class="fas fa-heartbeat"></i>
-      <h3>Personalized Programs</h3>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-    </div>
-    <div class="feature-item" data-aos="flip-left" data-aos-easing="ease-out-cubic"
-    data-aos-duration="2000">
-      <i class="fas fa-users"></i>
-      <h3>Expert Coaches</h3>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+    <div class="feature-item" *ngFor="let feature of features" data-aos="flip-left" data-aos-easing="ease-out-cubic" [attr.data-aos-duration]="feature.duration">
+      <i [class]="feature.icon"></i>
+      <h3>{{ feature.title }}</h3>
+      <p>{{ feature.description }}</p>
     </div>
   </div>
 </section>

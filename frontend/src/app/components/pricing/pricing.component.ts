@@ -6,7 +6,31 @@ import { Component } from '@angular/core';
   styleUrl: './pricing.component.css'
 })
 export class PricingComponent {
-  onChoosePlan(){
-    console.log("hello from choose plan");
+  pricingPlans = [
+    {
+      name: 'Beginner Plan',
+      price: '$10 / Month',
+      features: ['Lorem ipsum dolor sit amet.', 'Lorem ipsum dolor sit amet.'],
+      delay: 100,
+      featured: false
+    },
+    {
+      name: 'Premium Plan',
+      price: '$15 / Month',
+      features: ['Lorem ipsum dolor sit amet.', 'Lorem ipsum dolor sit amet.'],
+      delay: 200,
+      featured: true
+    },
+    {
+      name: 'Advanced Plan',
+      price: '$20 / Month',
+      features: ['Lorem ipsum dolor sit amet.', 'Lorem ipsum dolor sit amet.'],
+      delay: 200,
+      featured: false
+    }
+  ];
+
+  onChoosePlan() {
+    // Handle plan selection
   }
 }

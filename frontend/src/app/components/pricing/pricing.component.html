@@ -1,4 +1,4 @@
-<section class="pricing">
+<!-- <section class="pricing">
   <h2>JOIN TODAY</h2>
   <div class="pricing-cards">
     <div class="card" data-aos="fade-down"
@@ -48,6 +48,26 @@
       [buttonText]="'Choose Plan'"
       (buttonClick)="onChoosePlan()"
     ></app-button>
+    </div>
+  </div>
+</section> -->
+<section class="pricing">
+  <h2>JOIN TODAY</h2>
+  <div class="pricing-cards">
+    <div class="card" *ngFor="let plan of pricingPlans" [class.featured]="plan.featured" data-aos="fade-down"
+    data-aos-easing="linear"
+    [attr.data-aos-delay]="plan.delay">
+      <h3>{{ plan.name }}</h3>
+      <p>{{ plan.price }}</p>
+      <ul>
+        <li *ngFor="let feature of plan.features">{{ feature }}</li>
+      </ul>
+      <app-button
+        [backgroundColor]="plan.featured && '#fff' ||'#000'"
+        [textColor]="plan.featured && '#000' ||'#fff'"
+        [buttonText]="'Choose Plan'"
+        (buttonClick)="onChoosePlan()"
+      ></app-button>
     </div>
   </div>
 </section>
