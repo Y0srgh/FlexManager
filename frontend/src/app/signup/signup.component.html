@@ -53,6 +53,31 @@
                 <span *ngIf="basicDetails.get('email')?.errors?.['email']">Please enter a valid email</span>
               </div>
             </div>
+
+            <div class="form-group">
+              <label>Password</label>
+              <div class="input-container">
+                <i class="fas fa-lock input-icon"></i>
+                <input [type]="showPassword ? 'text' : 'password'" 
+                       formControlName="password" 
+                       class="form-control"
+                       [class.is-invalid]="isFieldInvalid(basicDetails, 'password')"
+                       placeholder="Enter your password">
+                <i class="fas password-toggle" 
+                   [class.fa-eye]="!showPassword" 
+                   [class.fa-eye-slash]="showPassword"
+                   (click)="togglePasswordVisibility()"
+                   ></i>
+              </div>
+              <div class="error" *ngIf="isFieldInvalid(basicDetails, 'password')">
+                <span *ngIf="basicDetails.get('password')?.errors?.['required']">Password is required</span>
+                <span *ngIf="basicDetails.get('password')?.errors?.['pattern']">Please enter a valid password : <ul><li>At least 6 characters.</li><li>Contains at least one lowercase letter.</li>
+                  <li>Contains at least one uppercase letter.</li>
+                
+                  <li>Contains at least one digit.</li>
+                </ul></span>
+              </div>
+            </div>
   
             <div class="form-group">
               <label>Phone</label>

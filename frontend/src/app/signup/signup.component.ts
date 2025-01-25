@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.scss'],
+  styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent implements OnInit {
   signupForm!: FormGroup;
@@ -19,6 +19,9 @@ export class SignupComponent implements OnInit {
     'Flexibility',
   ];
 
+  showPassword: boolean = false;
+
+
   constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
@@ -26,6 +29,7 @@ export class SignupComponent implements OnInit {
       basicDetails: this.fb.group({
         username: ['', [Validators.required, Validators.minLength(3)]],
         email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required, Validators.minLength(6), Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,}$')]],
         phone: ['', [Validators.required, Validators.pattern('^[0-9]{8}$')]],
         gender: ['', Validators.required],
         age: [
@@ -132,5 +136,9 @@ export class SignupComponent implements OnInit {
 
   selectGoal(goal: string) {
     this.membershipDetails.get('goal')?.setValue(goal);
+  }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
 }
