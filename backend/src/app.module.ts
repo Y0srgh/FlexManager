@@ -12,6 +12,7 @@ dotenv.config();
 import { CourseModule } from './classes/entities/strategy/courses.module';
 import { CommonModule } from './common/common.module';
 import { BaseService } from './base/base.service';
+import { ReservationModule } from './reservation/reservation.module';
 
 @Module({
   imports: [CourseModule ,  
@@ -26,7 +27,8 @@ import { BaseService } from './base/base.service';
     TypeOrmModule.forFeature([Test]),
     TestModule,
     UserModule,
-    CommonModule
+    CommonModule,
+    ReservationModule
 
 ],
 controllers: [AppController],

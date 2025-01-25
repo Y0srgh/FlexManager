@@ -1,10 +1,11 @@
-import { Entity, Column, ManyToOne, OneToOne, JoinColumn, PrimaryColumn } from 'typeorm';
+import { Entity, Column, ManyToOne, OneToOne, JoinColumn, PrimaryColumn, OneToMany } from 'typeorm';
 import { UserEntity } from './user.entity';
 import { Assistant } from 'src/enums/assistant_type.enum';
 import { TimestampEntity } from 'src/Generics/timestamp.entities';
 import { ParentEntity } from './parents.entity';
 import { Gender } from 'src/enums/gender.enum';
 import { Goal } from 'src/enums/goal.enum';
+import { Reservation } from 'src/reservation/entities/reservation.entity';
 
 @Entity('clients')
 export class ClientEntity extends TimestampEntity {
@@ -53,4 +54,6 @@ export class ClientEntity extends TimestampEntity {
   })
   @JoinColumn()
   user: UserEntity;
+  @OneToMany(() => Reservation, (reservation) => reservation.clientEntity)
+  reservations: Reservation[];
 }

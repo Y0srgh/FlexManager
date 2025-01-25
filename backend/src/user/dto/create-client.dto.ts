@@ -18,7 +18,7 @@ export class CreateClientDto {
 
   @IsOptional()
   @IsJSON()
-  physicalDetails?: { weight: number; height: number };
+  physicalDetails?: { weight: number; height: number ;age:number};
 
   // @IsOptional()
   // @IsUUID()
