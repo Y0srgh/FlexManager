@@ -64,7 +64,7 @@
               </div>
               <div class="error" *ngIf="isFieldInvalid(basicDetails, 'phone')">
                 <span *ngIf="basicDetails.get('phone')?.errors?.['required']">Phone number is required</span>
-                <span *ngIf="basicDetails.get('phone')?.errors?.['pattern']">Please enter a valid 10-digit phone number</span>
+                <span *ngIf="basicDetails.get('phone')?.errors?.['pattern']">Please enter a valid 8-digit phone number</span>
               </div>
             </div>
   
