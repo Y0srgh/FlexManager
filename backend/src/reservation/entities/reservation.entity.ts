@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
 import { CoachEntity } from 'src/user/entities/coach.entity';
 import { ClientEntity } from 'src/user/entities/client.entity';
-
+//we can add a startdate and days of the week attributes to make the reservation for multiple sessions , the duration becomes in weeks
 @Entity('reservations')
 export class Reservation {
   @PrimaryGeneratedColumn('uuid')
@@ -17,7 +17,7 @@ export class Reservation {
   endTime: string;
 
   @Column({ type: 'int' })
-  duration: number; // in weeks
+  duration: number; // in minutes
 
    // Relation to CoachEntity
    @ManyToOne(() => CoachEntity, (coach) => coach.reservations, { eager: true })
