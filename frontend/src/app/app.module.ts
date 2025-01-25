@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {  ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
@@ -11,6 +11,11 @@ import { CourseFormComponent } from './components/course-form/course-form.compon
 import { HttpClientModule } from '@angular/common/http';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { AppComponent } from './app.component';
+import { CoachComponent } from './private-coach/coach/coach.component';
+import { CoachListComponent } from './private-coach/coach-list/coach-list.component';
+import { RequestCardComponent } from './private-coach/request-card/request-card.component';
+import {ReservationCardComponent} from './private-coach/reservation-card/reservation-card.component';
+import { FormsModule } from '@angular/forms';
 
 
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -58,9 +63,17 @@ import { SignupComponent } from './signup/signup.component';
     HttpClientModule, 
     MatFormFieldModule,
     MatInputModule,
-    AppRoutingModule
+    AppRoutingModule,
     // RouterModule.forRoot(routes),
+    CoachComponent,
+    CoachListComponent,
+    RequestCardComponent,
+    ReservationCardComponent,
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule
   ],
+
   providers: [],
   bootstrap: [AppComponent],
 })

@@ -1,0 +1,14 @@
+<div class="request-card">
+    <div class="user-info">
+      <img class="user-image" [src]="imageUrl" alt="User" />
+      <div class="details">
+        <p class="name">{{ name }}</p>
+        <p class="time">{{ time }}</p>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="accept-button" (click)="onAccept()">Accept</button>
+      <button class="refuse-button" (click)="onRefuse()">Refuse</button>
+    </div>
+  </div>
+  
