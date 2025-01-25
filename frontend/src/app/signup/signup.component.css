@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
 .signup-container {
   min-height: 100vh;
@@ -6,7 +6,9 @@
   align-items: center;
   justify-content: center;
   padding: 2rem;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  /* background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); */
+  background: url("/hero-bg4.png") center / cover no-repeat;
+
 }
 .input-container {
   position: relative;
@@ -14,7 +16,7 @@
 .signup-card {
   width: 100%;
   max-width: 800px;
-  background: white;
+  background: rgba(255, 255, 255, 0.923);
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   padding: 2rem;
@@ -34,7 +36,7 @@
     .progress {
       position: absolute;
       height: 100%;
-      background: #4CAF50;
+      background: #f9a825;
       transition: width 0.3s ease;
     }
   }
@@ -71,21 +73,21 @@
 
       &.active {
         .step-icon {
-          background: #4CAF50;
+          background: #f9a825;
           color: white;
         }
         .step-label {
-          color: #4CAF50;
+          color: #f9a825;
           font-weight: 500;
         }
       }
 
       &.completed {
         .step-icon {
-          background: #4CAF50;
+          background: #f9a825;
           color: white;
           &::after {
-            content: '✓';
+            content: "✓";
           }
         }
       }
@@ -126,57 +128,10 @@
   }
 }
 
-/* .input-container {
-  position: relative;
-    max-width: 11rem;
-  .input-icon {
-    position: absolute;
-    left: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #6c757d;
-  }
-
-  .password-toggle {
-    position: absolute;
-    right: 0.75rem;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #6c757d;
-    cursor: pointer;
-    z-index: 2;
-    
-    &:hover {
-      color: #4CAF50;
-    }
-  }
-
-  .form-control {
-    width: 100%;
-    padding: 0.75rem 0.5rem 0.75rem 2.5rem;
-    border: 1px solid #ced4da;
-    border-radius: 8px;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-
-    &:focus {
-      border-color: #4CAF50;
-      box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25);
-    }
-
-    &.is-invalid {
-      border-color: #dc3545;
-      &:focus {
-        box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
-      }
-    }
-  }
-} */
-
 .input-container {
   position: relative;
-  max-width: 11rem;
-  
+  max-width: 70%;
+
   .input-icon {
     position: absolute;
     left: 1rem;
@@ -193,22 +148,22 @@
     color: #6c757d;
     cursor: pointer;
     z-index: 2;
-    
+
     &:hover {
-      color: #4CAF50;
+      color: #f9a825;
     }
   }
 
   .form-control {
     width: 100%;
-    padding: 0.75rem 2.5rem;  /* Updated padding to accommodate both icons */
+    padding: 0.75rem 2.5rem;
     border: 1px solid #ced4da;
     border-radius: 8px;
     font-size: 1rem;
     transition: all 0.3s ease;
 
     &:focus {
-      border-color: #4CAF50;
+      border-color: #f9a825;
       box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25);
     }
 
@@ -220,7 +175,6 @@
     }
   }
 }
-
 
 .error {
   color: #dc3545;
@@ -247,10 +201,10 @@
   transition: all 0.3s ease;
 
   &.btn-primary {
-    background: #4CAF50;
+    background: #f9a825;
     color: white;
     &:hover {
-      background: #43a047;
+      background: #ffa514;
     }
   }
 
@@ -283,17 +237,17 @@
   transition: all 0.3s ease;
 
   &:hover {
-    border-color: #4CAF50;
+    border-color: #f9a825;
   }
 
   &.selected {
-    border-color: #4CAF50;
+    border-color: #f9a825;
     background: rgba(76, 175, 80, 0.1);
   }
 
   .goal-icon {
     font-size: 2rem;
-    color: #4CAF50;
+    color: #f9a825;
     margin-bottom: 1rem;
   }
 
@@ -315,7 +269,7 @@
 
   .success-animation {
     font-size: 5rem;
-    color: #4CAF50;
+    color: #f9a825;
     margin-bottom: 2rem;
     animation: scaleIn 0.5s ease;
   }
@@ -367,7 +321,7 @@
 
   .form-actions {
     flex-direction: column;
-    
+
     .btn {
       width: 100%;
     }

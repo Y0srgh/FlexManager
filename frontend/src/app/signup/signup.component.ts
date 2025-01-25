@@ -21,7 +21,6 @@ export class SignupComponent implements OnInit {
 
   showPassword: boolean = false;
 
-
   constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
@@ -29,7 +28,14 @@ export class SignupComponent implements OnInit {
       basicDetails: this.fb.group({
         username: ['', [Validators.required, Validators.minLength(3)]],
         email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, Validators.minLength(6), Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,}$')]],
+        password: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(6),
+            Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,}$'),
+          ],
+        ],
         phone: ['', [Validators.required, Validators.pattern('^[0-9]{8}$')]],
         gender: ['', Validators.required],
         age: [
