@@ -7,8 +7,7 @@
   justify-content: center;
   padding: 2rem;
   /* background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); */
-  background: url("/hero-bg4.png") center / cover no-repeat;
-
+  background: url("/hero-bg4.png") no-repeat center center/cover;
 }
 .input-container {
   position: relative;
@@ -28,6 +27,7 @@
   .progress-bar {
     height: 4px;
     background: #e9ecef;
+    background: var(--gray-200);
     border-radius: 4px;
     margin-bottom: 1.5rem;
     position: relative;
@@ -36,7 +36,7 @@
     .progress {
       position: absolute;
       height: 100%;
-      background: #f9a825;
+      background: var(--color-2);
       transition: width 0.3s ease;
     }
   }
@@ -56,7 +56,7 @@
         width: 35px;
         height: 35px;
         border-radius: 50%;
-        background: #e9ecef;
+        background: var(--gray-200);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -67,24 +67,24 @@
 
       .step-label {
         font-size: 0.875rem;
-        color: #6c757d;
+        color: var(--blue-gray);
         transition: color 0.3s ease;
       }
 
       &.active {
         .step-icon {
-          background: #f9a825;
+          background: var(--color-2);
           color: white;
         }
         .step-label {
-          color: #f9a825;
+          color: var(--color-2);
           font-weight: 500;
         }
       }
 
       &.completed {
         .step-icon {
-          background: #f9a825;
+          background: var(--color-2);
           color: white;
           &::after {
             content: "✓";
@@ -102,12 +102,12 @@
 .form-title {
   font-size: 1.75rem;
   font-weight: 600;
-  color: #2c3e50;
+  color: var(--dark-blue-gray);
   margin-bottom: 0.5rem;
 }
 
 .form-subtitle {
-  color: #6c757d;
+  color: var(--blue-gray);
   margin-bottom: 2rem;
 }
 
@@ -124,7 +124,7 @@
     display: block;
     margin-bottom: 0.5rem;
     font-weight: 500;
-    color: #2c3e50;
+    color: var(--dark-blue-gray);
   }
 }
 
@@ -137,7 +137,7 @@
     left: 1rem;
     top: 50%;
     transform: translateY(-50%);
-    color: #6c757d;
+    color: var(--blue-gray);
   }
 
   .password-toggle {
@@ -145,12 +145,12 @@
     right: -4rem;
     top: 50%;
     transform: translateY(-50%);
-    color: #6c757d;
+    color: var(--blue-gray);
     cursor: pointer;
     z-index: 2;
 
     &:hover {
-      color: #f9a825;
+      color: var(--color-2);
     }
   }
 
@@ -163,21 +163,21 @@
     transition: all 0.3s ease;
 
     &:focus {
-      border-color: #f9a825;
-      box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25);
+      border-color: var(--color-2);
+      box-shadow: 0 0 0 0.2rem var(--field-border-color-valid);
     }
 
     &.is-invalid {
-      border-color: #dc3545;
+      border-color: var(--field-border-color-error);
       &:focus {
-        box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+        box-shadow: 0 0 0 0.2rem var(--field-border-color-invalid);
       }
     }
   }
 }
 
 .error {
-  color: #dc3545;
+  color: var(--field-border-color-error);
   font-size: 0.875rem;
   margin-top: 0.5rem;
 }
@@ -201,15 +201,15 @@
   transition: all 0.3s ease;
 
   &.btn-primary {
-    background: #f9a825;
+    background: var(--color-2);
     color: white;
     &:hover {
-      background: #ffa514;
+      background: var(--color-3);
     }
   }
 
   &.btn-secondary {
-    background: #6c757d;
+    background: var(--blue-gray);
     color: white;
     &:hover {
       background: #5a6268;
@@ -237,17 +237,18 @@
   transition: all 0.3s ease;
 
   &:hover {
-    border-color: #f9a825;
+    border-color: var(--color-2);
   }
 
   &.selected {
-    border-color: #f9a825;
+    border-color: var(--color-2);
     background: rgba(76, 175, 80, 0.1);
+    background: rgba(175, 76, 157, 0.1);
   }
 
   .goal-icon {
     font-size: 2rem;
-    color: #f9a825;
+    color: var(--color-2);
     margin-bottom: 1rem;
   }
 
@@ -258,7 +259,7 @@
   }
 
   p {
-    color: #6c757d;
+    color: var(--blue-gray);
     font-size: 0.875rem;
   }
 }
@@ -269,19 +270,19 @@
 
   .success-animation {
     font-size: 5rem;
-    color: #f9a825;
+    color: var(--color-2);
     margin-bottom: 2rem;
     animation: scaleIn 0.5s ease;
   }
 
   .success-message {
     font-size: 1.25rem;
-    color: #2c3e50;
+    color: var(--dark-blue-gray);
     margin-bottom: 1rem;
   }
 
   .welcome-message {
-    color: #6c757d;
+    color: var(--blue-gray);
     margin-bottom: 2rem;
   }
 }
