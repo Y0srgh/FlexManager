@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -21,7 +22,7 @@ export class SignupComponent implements OnInit {
 
   showPassword: boolean = false;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private httpClient: HttpClient) {}
 
   ngOnInit() {
     this.signupForm = this.fb.group({
@@ -98,9 +99,66 @@ export class SignupComponent implements OnInit {
       });
     }
 
-    if (this.signupForm.valid) {
-      console.log('Form submitted:', this.signupForm.value);
-      this.currentStep++;
+    console.log('Form value:', this.signupForm.value);
+    /*
+    basicDetails: 
+      age:22
+      email: "aya4@gmail.com"
+      gender:"female"
+      height:165
+      password:"Hello123"
+      phone: "27082088"
+      username: "aya4"
+      weight: 70
+
+    membershipDetails: 
+      goal: "Muscle Gain"
+    */
+
+    /*
+    {
+  "username": "client13",
+  "email": "clien13@example.com",
+  "phone": "+21698765432",
+  "role": "client",
+  "physicalDetails": {
+    "weight": 70,
+    "height": 175,
+    "age": 30
+  },
+  "nutritionAssistanceType": "AI",
+  "goal": ["Weight Loss","Flexibility"]
+}
+
+    */
+
+    const clientDetails = {
+      username: this.signupForm.value.basicDetails.username,
+      email: this.signupForm.value.basicDetails.email,
+      phone: this.signupForm.value.basicDetails.phone,
+      gender: this.signupForm.value.basicDetails.gender,
+      role: 'client',
+      physicalDetails: {
+        weight: this.signupForm.value.basicDetails.weight,
+        height: this.signupForm.value.basicDetails.height,
+        age: this.signupForm.value.basicDetails.age,
+      },
+      nutritionAssistanceType: 'AI',
+      goal: [this.signupForm.value.membershipDetails.goal],
+    }
+
+    if (this.signupForm.valid && this.currentStep === 2) {
+      this.httpClient
+        .post('http://localhost:3000/auth/client', clientDetails)
+        .subscribe({
+          next: (response) => {
+            console.log('Signup successful:', response);
+            this.currentStep++;
+          },
+          error: (error) => {
+            console.error('Signup failed:', error);
+          },
+        });
     }
   }
 

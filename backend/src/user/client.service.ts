@@ -25,6 +25,7 @@ export class ClientService extends BaseService<ClientEntity> {
       physicalDetails: createClientDto.physicalDetails,
       nutritionAssistanceType: createClientDto.nutritionAssistanceType,
       goal: createClientDto.goal,
+      gender: createClientDto.gender,
     }));
   }
 }

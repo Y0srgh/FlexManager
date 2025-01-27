@@ -55,7 +55,7 @@ import { SignupComponent } from './signup/signup.component';
     MatTableModule,
     MatCardModule,
     MatButtonModule,
-    HttpClientModule, 
+    HttpClientModule,
     MatFormFieldModule,
     MatInputModule,
     AppRoutingModule

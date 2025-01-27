@@ -16,6 +16,8 @@ import { BaseService } from './base/base.service';
 @Module({
   imports: [CourseModule ,  
     ConfigModule.forRoot(), 
+    //cors
+    
     TypeOrmModule.forRoot({
       type: 'postgres',
       url: process.env.DATABASE_URL, 

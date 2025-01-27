@@ -2,9 +2,10 @@ import { IsString, IsOptional, IsBoolean, IsEnum, IsJSON, IsUUID, IsMobilePhone,
 import { Assistant } from 'src/enums/assistant_type.enum';
 import { Roles } from 'src/enums/user-role.enum';
 import { UserSingUpDto } from './user-sign-up.dto';
+import { Gender } from 'src/enums/gender.enum';
 
 export class CreateClientDto extends UserSingUpDto {
-  /*@IsString()
+  @IsString()
   @Length(3, 50)
   username: string;
 
@@ -16,11 +17,15 @@ export class CreateClientDto extends UserSingUpDto {
   password: string;
 
   @IsMobilePhone('ar-TN')
-  phone?: string;*/
+  phone?: string;
 
   @IsOptional()
   @IsEnum(Roles)
   role: Roles = Roles.CLIENT;
+
+  @IsOptional()
+  @IsEnum(Gender)
+  gender: Gender;
 
   @IsOptional()
   @IsJSON({ each: true })

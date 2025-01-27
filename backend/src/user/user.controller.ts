@@ -86,9 +86,9 @@ export class UserController {
   // }
 
   //---------client
+  // @Role(Roles.MANAGER)
+  // @UseGuards(JwtAuthGuard, RolesGuard)
   @Post('client')
-  @Role(Roles.MANAGER)
-  @UseGuards(JwtAuthGuard, RolesGuard)
   createClient(@Body() createClientDto: CreateClientDto) {
     console.log("createClientDto",createClientDto);
     
