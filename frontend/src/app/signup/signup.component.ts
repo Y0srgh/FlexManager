@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BaseService } from '../base/base.service';
@@ -26,7 +25,6 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private httpClient: HttpClient,
     private baseService: BaseService
   ) {}
 

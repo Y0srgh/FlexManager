@@ -21,11 +21,6 @@ export class ClientService extends BaseService<ClientEntity> {
   }
 
   async createClient(createClientDto: CreateClientDto): Promise<ClientEntity> {
-    return this.createWithUser(createClientDto, () => ({
-      physicalDetails: createClientDto.physicalDetails,
-      nutritionAssistanceType: createClientDto.nutritionAssistanceType,
-      goal: createClientDto.goal,
-      gender: createClientDto.gender,
-    }));
+    return this.createWithUser(createClientDto);
   }
 }

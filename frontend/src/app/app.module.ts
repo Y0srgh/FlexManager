@@ -28,7 +28,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { LayoutComponent } from './components/layout/layout.component';
 import { ButtonComponent } from './shared/button/button.component';
 import { SignupComponent } from './signup/signup.component';
-import { BaseService } from './base/base.service';
 
 // const routes: Routes = [
 //   { path: '', component: HeroComponent }, 
@@ -62,7 +61,7 @@ import { BaseService } from './base/base.service';
     AppRoutingModule
     // RouterModule.forRoot(routes),
   ],
-  providers: [BaseService],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

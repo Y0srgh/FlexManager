@@ -1,4 +1,3 @@
-
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -9,7 +8,7 @@ import { PasswordService } from 'src/common/utils/password.service';
 import { UserService } from './user.service';
 
 @Injectable()
-export class CoachService extends BaseService<CoachEntity>{
+export class CoachService extends BaseService<CoachEntity> {
   constructor(
     @InjectRepository(CoachEntity)
     private readonly coachRepository: Repository<CoachEntity>,
@@ -22,18 +21,10 @@ export class CoachService extends BaseService<CoachEntity>{
   }
 
   async createCoach(createCoachDto: CreateCoachDto): Promise<CoachEntity> {
-    return this.createWithUser(
-      createCoachDto,
-      (user) => ({
-        expertise: createCoachDto.expertise,
-        certifications: createCoachDto.certifications,
-        isPrivate: createCoachDto.isPrivate,
-        courses: [],
-      }),
-    );
+    return this.createWithUser(createCoachDto);
   }
 
-/*async createCoach(createCoachDto: CreateCoachDto): Promise<CoachEntity> {
+  /*async createCoach(createCoachDto: CreateCoachDto): Promise<CoachEntity> {
     const defaultPassword = this.passwordService.generateDefaultPassword();
     const signupCoach: UserSingUpDto = {username: createCoachDto.username, email: createCoachDto.email, role : createCoachDto.role, password: defaultPassword} as UserSingUpDto;
 

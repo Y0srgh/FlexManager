@@ -1,20 +1,8 @@
 import { IsString, IsOptional, IsBoolean, IsEnum } from 'class-validator';
 import { Roles } from 'src/enums/user-role.enum';
+import { UserSingUpDto } from './user-sign-up.dto';
 
-export class CreateCoachDto {
-  @IsString()
-  username: string;
-
-  @IsString()
-  email: string;
-
-  @IsString()
-  password: string;
-
-  @IsOptional()
-  @IsEnum(Roles)
-  role: Roles = Roles.USER;
-
+export class CreateCoachDto extends UserSingUpDto {
   @IsOptional()
   @IsString()
   expertise?: string;
