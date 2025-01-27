@@ -20,9 +20,12 @@ export class BaseService<T> {
   async createWithUser(createDto: any,extraData: (user: any) => Partial<T>): Promise<T> {
       try {
         const defaultPassword = this.passwordService.generateDefaultPassword();
-        const signupCoach: UserSingUpDto = {username: createDto.username, email: createDto.email, role : createDto.role, password: defaultPassword} as UserSingUpDto;
+        const signupCoach: UserSingUpDto = {username: createDto.username, email: createDto.email, role : createDto.role, password:createDto.password || defaultPassword} as UserSingUpDto;
     
         const user = await this.userService.signUp(signupCoach);
+    
+        console.log("extract user",extraData(user));
+        
         
     
         const newUser = this.repository.create({

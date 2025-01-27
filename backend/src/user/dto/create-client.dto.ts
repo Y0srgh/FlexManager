@@ -1,9 +1,10 @@
-import { IsString, IsOptional, IsBoolean, IsEnum, IsJSON, IsUUID, IsMobilePhone, IsEmail, Length, IS_STRONG_PASSWORD, IsStrongPassword } from 'class-validator';
+import { IsString, IsOptional, IsBoolean, IsEnum, IsJSON, IsUUID, IsMobilePhone, IsEmail, Length, IS_STRONG_PASSWORD, IsStrongPassword, IsArray } from 'class-validator';
 import { Assistant } from 'src/enums/assistant_type.enum';
 import { Roles } from 'src/enums/user-role.enum';
+import { UserSingUpDto } from './user-sign-up.dto';
 
-export class CreateClientDto {
-  @IsString()
+export class CreateClientDto extends UserSingUpDto {
+  /*@IsString()
   @Length(3, 50)
   username: string;
 
@@ -15,7 +16,7 @@ export class CreateClientDto {
   password: string;
 
   @IsMobilePhone('ar-TN')
-  phone?: string;
+  phone?: string;*/
 
   @IsOptional()
   @IsEnum(Roles)
@@ -35,7 +36,7 @@ export class CreateClientDto {
 
   //goal
   @IsOptional()
-  @IsString()
+  @IsArray()
   goal?: string[];
 
   // @IsOptional()
