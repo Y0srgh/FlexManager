@@ -1,6 +1,6 @@
 <div class="signup-container">
   <div class="signup-card">
-    <div class="progress-indicator">
+    <!-- <div class="progress-indicator">
       <div class="progress-bar">
         <div
           class="progress"
@@ -29,8 +29,13 @@
           <span class="step-label">Complete</span>
         </div>
       </div>
-    </div>
+    </div> -->
 
+    <app-progress-indicator
+      [currentStep]="currentStep"
+      [totalSteps]="3"
+    ></app-progress-indicator>
+    
     <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
       <div
         *ngIf="currentStep === 1"

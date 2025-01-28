@@ -28,6 +28,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { LayoutComponent } from './components/layout/layout.component';
 import { ButtonComponent } from './shared/button/button.component';
 import { SignupComponent } from './signup/signup.component';
+import { ProgressIndicatorComponent } from './components/progress-indicator/progress-indicator.component';
 
 // const routes: Routes = [
 //   { path: '', component: HeroComponent }, 
@@ -46,7 +47,7 @@ import { SignupComponent } from './signup/signup.component';
     AppComponent,
     CourseManagementComponent, 
     CourseFormComponent,       
-    SidebarComponent, HeaderComponent, HeroComponent, StatsComponent, WhyChooseUsComponent, CoachesComponent, NutritionistsComponent, PricingComponent, TestimonialsComponent, FooterComponent, LayoutComponent, ButtonComponent, SignupComponent,          
+    SidebarComponent, HeaderComponent, HeroComponent, StatsComponent, WhyChooseUsComponent, CoachesComponent, NutritionistsComponent, PricingComponent, TestimonialsComponent, FooterComponent, LayoutComponent, ButtonComponent, SignupComponent, ProgressIndicatorComponent,          
   ],
   imports: [
     BrowserModule,
