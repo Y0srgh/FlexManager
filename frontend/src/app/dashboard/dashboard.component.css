@@ -40,11 +40,16 @@
   /* New layout for 2 charts per row */
   .chart-row {
     display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 30px;
+  }
+  .chart-rows {
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
     margin-top: 30px;
   }
-  
   /* Updated canvas styles */
   .chart-container canvas {
     width: 100% !important;
@@ -74,13 +79,13 @@
   }
 #trainerChart {
     width: 60% !important; 
-    height: 450px !important; 
+    height: 400px !important; 
     max-width: 100%;
     border-radius: 8px;
   }
  #demographicsChart{
     width: 60% !important; 
-    height: 450px !important; 
+    height: 400px !important; 
     max-width: 100%;
     border-radius: 8px;
   }

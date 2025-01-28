@@ -78,7 +78,7 @@ export class DashboardComponent {
           {
             label: 'Expense',
             data: this.revenueAnalytics.map(d => d.expense),
-            backgroundColor: '#ffa600' // Purple color for expense
+            backgroundColor: '#ffa600' 
           }
         ]
       }
@@ -109,7 +109,7 @@ export class DashboardComponent {
         datasets: [
           {
             data: Object.values(this.trainerDistribution),
-            backgroundColor: ['#FF6F61', '#6B5B93', '#88B04B'] // Updated colors for pie chart
+            backgroundColor: ['#363062', '#435585', '#818FB4'] 
           }
         ]
       }
@@ -123,7 +123,7 @@ export class DashboardComponent {
         datasets: [
           {
             data: Object.values(this.memberDemographics),
-            backgroundColor: ['#FF6F61', '#6B5B93', '#88B04B', '#F7CAC9'] // Updated colors for pie chart
+            backgroundColor: ['#363062', '#435585', '#818FB4', '#F5E8C7'] 
           }
         ]
       }
@@ -138,7 +138,7 @@ export class DashboardComponent {
           {
             label: 'Revenue',
             data: Object.values(this.revenueByMembership),
-            backgroundColor: '#FF6F61' // Updated color
+            backgroundColor: '#818FB4' 
           }
         ]
       }
@@ -153,8 +153,8 @@ export class DashboardComponent {
           {
             label: 'Visits',
             data: this.visitFrequency,
-            borderColor: '#6B5B93', // Updated color
-            backgroundColor: 'rgba(107, 91, 147, 0.2)', // Maintain background color
+            borderColor: '#6B5B93', 
+            backgroundColor: 'rgba(107, 91, 147, 0.2)', 
             fill: true
           }
         ]
@@ -170,7 +170,7 @@ export class DashboardComponent {
           {
             label: 'Sessions Conducted',
             data: Object.values(this.trainerPerformance),
-            backgroundColor: ['#FF6F61', '#6B5B93', '#88B04B'] // Updated colors for bar chart
+            backgroundColor: ['#003f5c', '#ffa600', '#F5E8C7'] 
           }
         ]
       }
