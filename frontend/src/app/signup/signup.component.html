@@ -260,7 +260,7 @@
           <div
             class="goal-card"
             *ngFor="let goal of goals"
-            [class.selected]="membershipDetails.get('goal')?.value === goal"
+            [class.selected]="membershipDetails.get('goal')?.value.includes(goal)"
             (click)="selectGoal(goal)"
           >
             <div class="goal-icon">

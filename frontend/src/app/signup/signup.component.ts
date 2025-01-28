@@ -23,10 +23,7 @@ export class SignupComponent implements OnInit {
 
   showPassword: boolean = false;
 
-  constructor(
-    private fb: FormBuilder,
-    private baseService: BaseService
-  ) {}
+  constructor(private fb: FormBuilder, private baseService: BaseService) {}
 
   ngOnInit() {
     this.signupForm = this.fb.group({
@@ -57,7 +54,7 @@ export class SignupComponent implements OnInit {
         ],
       }),
       membershipDetails: this.fb.group({
-        goal: ['', Validators.required],
+        goal: [[''], Validators.required],
       }),
     });
   }
@@ -117,7 +114,7 @@ export class SignupComponent implements OnInit {
         age: this.signupForm.value.basicDetails.age,
       },
       nutritionAssistanceType: 'AI',
-      goal: [this.signupForm.value.membershipDetails.goal],
+      goal: this.signupForm.value.membershipDetails.goal,
     };
 
     if (this.signupForm.valid && this.currentStep === 2) {
@@ -182,7 +179,18 @@ export class SignupComponent implements OnInit {
   }
 
   selectGoal(goal: string) {
-    this.membershipDetails.get('goal')?.setValue(goal);
+    if (this.membershipDetails.get('goal')?.value.includes('')) {
+      this.membershipDetails.get('goal')?.setValue([goal]);
+      console.log(
+        'membershipDetails',
+        this.membershipDetails.get('goal')?.value
+      );
+    } else {
+      const goalList = this.membershipDetails.get('goal')?.value || [];
+      goalList.push(goal);
+      this.membershipDetails.get('goal')?.setValue(goalList);
+      console.log('goalList', goalList);
+    }
   }
 
   togglePasswordVisibility() {
