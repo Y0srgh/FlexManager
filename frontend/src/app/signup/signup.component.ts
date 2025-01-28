@@ -11,7 +11,7 @@ import { SignupService } from './signup.service';
 export class SignupComponent implements OnInit {
   private readonly endpoint = 'auth/client';
   signupForm!: FormGroup;
-  currentStep = 1;
+  currentStep = 2;
   submitted = false;
 
   goals = [
@@ -24,7 +24,11 @@ export class SignupComponent implements OnInit {
 
   showPassword: boolean = false;
 
-  constructor(private fb: FormBuilder, private baseService: BaseService, private signupService : SignupService) {}
+  constructor(
+    private fb: FormBuilder,
+    private baseService: BaseService,
+    private signupService: SignupService
+  ) {}
 
   ngOnInit() {
     this.signupForm = this.fb.group({
@@ -117,7 +121,6 @@ export class SignupComponent implements OnInit {
     };
 
     if (this.signupForm.valid && this.currentStep === 2) {
-
       this.baseService.post(`${this.endpoint}`, clientDetails).subscribe({
         next: (response) => {
           console.log('Signup successful:', response);
@@ -144,7 +147,7 @@ export class SignupComponent implements OnInit {
       'Muscle Gain': 'fas fa-dumbbell',
       'General Fitness': 'fas fa-heart',
       'Strength Training': 'fas fa-fist-raised',
-      'Flexibility': 'fas fa-child',
+      Flexibility: 'fas fa-child',
     };
     return icons[goal] || 'fas fa-target';
   }
@@ -159,7 +162,7 @@ export class SignupComponent implements OnInit {
         'Improve overall health and maintain an active lifestyle',
       'Strength Training':
         'Enhance power and endurance through specialized training',
-      'Flexibility':
+      Flexibility:
         'Increase mobility and reduce injury risk through stretching routines',
     };
     return descriptions[goal] || '';
@@ -174,13 +177,20 @@ export class SignupComponent implements OnInit {
       );
     } else {
       const goalList = this.membershipDetails.get('goal')?.value || [];
-      goalList.push(goal);
-      this.membershipDetails.get('goal')?.setValue(goalList);
-      console.log('goalList', goalList);
+
+      if (!this.membershipDetails.get('goal')?.value.includes(goal)) {
+        goalList.push(goal);
+        this.membershipDetails.get('goal')?.setValue(goalList);
+      } else {
+        goalList.splice(goalList.indexOf(goal), 1);
+        this.membershipDetails.get('goal')?.setValue(goalList);
+      }
     }
   }
 
   togglePasswordVisibility() {
-    this.showPassword = this.signupService.togglePasswordVisibility(this.showPassword);
+    this.showPassword = this.signupService.togglePasswordVisibility(
+      this.showPassword
+    );
   }
 }
