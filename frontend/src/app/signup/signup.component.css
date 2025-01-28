@@ -194,13 +194,13 @@
 }
 
 .form-actions {
-  display: flex;
-  justify-content: flex-end;
+  display: flex !important;
+  justify-content: flex-end !important;
   gap: 1rem;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
-.btn {
+/*.btn {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -230,7 +230,7 @@
   i {
     font-size: 1rem;
   }
-}
+}*/
 
 .goals-grid {
   display: grid;

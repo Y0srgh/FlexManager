@@ -93,12 +93,16 @@
             type="number"
           ></app-input-field>
         </div>
-
         <div class="form-actions">
-          <button type="button" (click)="nextStep()" class="btn btn-primary">
-            <span>Next Step</span>
-            <i class="fas fa-arrow-right"></i>
-          </button>
+          <div class="btn">
+            <app-button
+              type="button"
+              (click)="nextStep()"
+              buttonText="Next Step"
+              buttonType="primary"
+              icon="fa-arrow-right"
+            ></app-button>
+          </div>
         </div>
       </div>
 
@@ -135,18 +139,23 @@
         </div>
 
         <div class="form-actions">
-          <button
-            type="button"
-            (click)="previousStep()"
-            class="btn btn-secondary"
-          >
-            <i class="fas fa-arrow-left"></i>
-            <span>Previous</span>
-          </button>
-          <button type="submit" class="btn btn-primary">
-            <span>Submit Info</span>
-            <i class="fas fa-check"></i>
-          </button>
+          <div class="btn">
+            <app-button
+              type="button"
+              (click)="previousStep()"
+              buttonText="Previous"
+              buttonType="secondary"
+              icon="fa-arrow-left"
+            ></app-button>
+          </div>
+          <div class="btn">
+            <app-button
+              type="submit"
+              buttonText="Submit Info"
+              buttonType="primary"
+              icon="fa-check"
+            ></app-button>
+          </div>
         </div>
       </div>
 
@@ -159,10 +168,15 @@
           Your registration has been completed successfully.
         </p>
         <p class="welcome-message">Welcome to our fitness family!</p>
-        <button type="button" (click)="exit()" class="btn btn-primary">
-          <span>Get Started</span>
-          <i class="fas fa-arrow-right"></i>
-        </button>
+        <div class="btn">
+          <app-button
+            type="button"
+            (click)="exit()"
+            buttonText="Get Started"
+            buttonType="primary"
+            icon="fa-arrow-right"
+          ></app-button>
+        </div>
       </div>
     </form>
   </div>

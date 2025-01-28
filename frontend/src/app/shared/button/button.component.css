@@ -1,12 +1,43 @@
 .btn-shared {
-  padding: 0.7rem 1rem;
+  /* padding: 0.7rem 1rem;
   border: none;
   border-radius: 4px;
   font-size: 1rem;
+  cursor: pointer;*/
+  transition: background-color 0.3s ease; 
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+
+  &.btn-primary {
+    background: var(--color-2);
+    color: white;
+    &:hover {
+      background: var(--color-3);
+    }
+  }
+
+  &.btn-secondary {
+    background: var(--blue-gray);
+    color: white;
+    &:hover {
+      background: #5a6268;
+    }
+  }
+
+  i {
+    font-size: 1rem;
+  }
 }
 
 .btn-shared:hover {
   opacity: 0.7;
 }
+
+

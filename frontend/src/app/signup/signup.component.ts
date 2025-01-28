@@ -76,22 +76,8 @@ export class SignupComponent implements OnInit {
   }
 
   nextStep() {
-    // if (this.currentStep === 1) {
-    //   Object.keys(this.basicDetails.controls).forEach((key) => {
-    //     const control = this.basicDetails.get(key);
-    //     control?.markAsTouched();
-    //   });
-
-    //   if (this.basicDetails.valid) {
-    //     this.currentStep++;
-    //   } else {
-    //     console.log('Form errors:', this.basicDetails.errors);
-    //   }
-    // }
     this.currentStep = this.signupService.nextStep(this.currentStep, this.basicDetails);
   }
-
-
 
   previousStep() {
     this.currentStep = this.signupService.previousStep(this.currentStep);

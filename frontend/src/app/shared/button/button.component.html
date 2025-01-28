@@ -1,10 +1,8 @@
 <button
   (click)="handleClick()"
-  [ngStyle]="{
-    'background-color': backgroundColor,
-    'color': textColor
-  }"
-  class="btn-shared"
+  [class]="'btn-shared btn-'+buttonType"
+  [type]="type"
 >
-  {{ buttonText }}
+  <span> {{ buttonText }} </span>
+  <i [class]="'fas '+icon"></i>
 </button>
