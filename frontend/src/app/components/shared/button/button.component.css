@@ -31,6 +31,21 @@
     }
   }
 
+  &.btn-home {
+    background: var(--gray-100);
+    color: var(--color-1);
+  }
+
+  &.btn-pricing {
+    color: var(--gray-100);
+    background: var(--black);
+  }
+
+  &.btn-pricing-featured {
+    color: var(--dark-blue-gray);
+    background: var(--gray-100);
+  }
+
   i {
     font-size: 1rem;
   }
