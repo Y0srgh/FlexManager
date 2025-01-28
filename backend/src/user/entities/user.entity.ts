@@ -44,7 +44,7 @@ export class UserEntity extends TimestampEntity {
 
   @OneToOne(() => ClientEntity, (client) => client.user, {
     nullable: true,
-    cascade: true,
+    // cascade: true,
   })
   client: ClientEntity;
 

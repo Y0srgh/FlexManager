@@ -58,7 +58,7 @@ export class ClientEntity extends TimestampEntity {
   paymentInfo: any;
 
   @OneToOne(() => UserEntity, (user) => user.client, {
-    eager: true,
+    eager: true, onDelete: 'CASCADE', onUpdate: 'CASCADE', cascade: true
   })
   @JoinColumn()
   user: UserEntity;
