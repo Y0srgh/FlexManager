@@ -109,7 +109,7 @@ export class DashboardComponent {
         datasets: [
           {
             data: Object.values(this.trainerDistribution),
-            backgroundColor: ['#363062', '#435585', '#818FB4'] 
+            backgroundColor: ['#003f5c', '#818FB4', '#F5E8C7'] 
           }
         ]
       }
@@ -123,7 +123,7 @@ export class DashboardComponent {
         datasets: [
           {
             data: Object.values(this.memberDemographics),
-            backgroundColor: ['#363062', '#435585', '#818FB4', '#F5E8C7'] 
+            backgroundColor: ['#003f5c', '#818FB4', '#F5E8C7' , '#435585'] 
           }
         ]
       }
@@ -185,8 +185,8 @@ export class DashboardComponent {
           {
             label: 'Retention Rate',
             data: this.memberRetentionRate,
-            borderColor: '#F7CAC9', // Updated color for line
-            backgroundColor: 'rgba(247, 202, 201, 0.2)', // Maintain background color
+            borderColor: '#818FB4',
+            backgroundColor: 'rgba(247, 202, 201, 0.2)', 
             fill: true
           }
         ]
