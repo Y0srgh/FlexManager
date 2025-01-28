@@ -21,7 +21,15 @@ export class CoachService extends BaseService<CoachEntity> {
   }
 
   async createCoach(createCoachDto: CreateCoachDto): Promise<CoachEntity> {
-    return this.createWithUser(createCoachDto);
+    return this.createWithUser(
+      createCoachDto,
+      (user) => ({
+        expertise: createCoachDto.expertise,
+        certifications: createCoachDto.certifications,
+        isPrivate: createCoachDto.isPrivate,
+        courses: [],
+      }),
+    );
   }
 
   /*async createCoach(createCoachDto: CreateCoachDto): Promise<CoachEntity> {

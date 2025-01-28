@@ -20,9 +20,10 @@ export class ManagerService extends BaseService<ManagerEntity> {
     super(managerRepository, userService, passwordService);
   }
 
-  async createManager(
-    createManagerDto: CreateManagerDto,
-  ): Promise<ManagerEntity> {
-    return this.createWithUser(createManagerDto);
+  async createManager(createManagerDto: CreateManagerDto): Promise<ManagerEntity> {
+    return this.createWithUser(createManagerDto, (user) => ({
+      facilityManagementAccess: createManagerDto.facilityManagementAccess,
+      financialManagementAccess: createManagerDto.financialManagementAccess,
+    }));
   }
 }
