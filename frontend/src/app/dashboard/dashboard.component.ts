@@ -19,12 +19,20 @@ export class DashboardComponent implements OnInit {
     new Chart('barChart', {
       type: 'bar',
       data: {
-        labels: ['John Doe', 'Jane Smith', 'Tom Brown', 'Lucy Green', 'Mark Lee'],
+        labels: ['mohamed', 'heni', 'maha', 'imen', 'wael'],
         datasets: [
           {
             label: 'Requests',
             data: [45, 30, 25, 20, 15],
-            backgroundColor: ['#896CFE', '#A48EF5', '#B0A6FE', '#C7BEF5', '#D8D4FE'],
+            backgroundColor: [
+              '#421A3F', // Dark purple
+              '#5F2B4F', // Deep purple
+              '#693B5D', // Medium purple
+              '#723680', // Medium purple
+              '#864A94', // Medium purple
+              // '#E5924E', // Warm orange
+              // '#181818'  // Dark grey
+            ],
           },
         ],
       },
@@ -39,7 +47,11 @@ export class DashboardComponent implements OnInit {
         datasets: [
           {
             data: [40, 30, 30],
-            backgroundColor: ['#896CFE', '#A48EF5', '#B0A6FE'],
+            backgroundColor: [
+              '#421A3F', // Dark purple
+              '#723680', // Deep purple
+              '#693B5D'  // Medium purple
+            ],
           },
         ],
       },
@@ -55,8 +67,9 @@ export class DashboardComponent implements OnInit {
           {
             label: 'Revenue',
             data: [5000, 7000, 8000, 6000, 11000, 15000, 14000, 13000, 12000, 14000, 16000, 18000],
-            borderColor: '#896CFE',
-            backgroundColor: 'rgba(137, 108, 254, 0.2)',
+            borderColor:   '#693B5D', // Warm orange
+
+            backgroundColor: 'rgba(66, 26, 63, 0.2)', // Lightened dark purple for area fill
           },
         ],
       },
@@ -71,7 +84,12 @@ export class DashboardComponent implements OnInit {
         datasets: [
           {
             data: [50, 30, 20],
-            backgroundColor: ['#4A47A3', '#B0A6FE', '#896CFE'],
+            backgroundColor: [
+              '#421A3F', // Dark purple
+
+              '#723680', // Medium purple
+              '#5F2B4F' // Deep purple
+            ],
           },
         ],
       },
@@ -82,12 +100,23 @@ export class DashboardComponent implements OnInit {
     new Chart('barChartSubscription', {
       type: 'bar',
       data: {
-        labels: ['John Doe', 'Jane Smith', 'Tom Brown', 'Lucy Green', 'Mark Lee'],
+        labels: ['mohamed', 'heni', 'maha', 'imen', 'wael'],
         datasets: [
           {
             label: 'Subscriptions',
             data: [15, 25, 18, 30, 10],
-            backgroundColor: ['#4A47A3', '#A48EF5', '#B0A6FE', '#C7BEF5', '#D8D4FE'],
+            backgroundColor: [
+              '#421A3F', // Dark purple
+              '#693B5D', // Medium purple
+              '#5F2B4F', // Deep purple
+              '#723680', // Deep purple
+              '#864A94', // Deep purple
+              // '#E5924E', // Warm orange
+             
+              
+              
+              // '#181818' // Dark grey
+            ],
           },
         ],
       },
