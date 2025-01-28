@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BaseService } from '../base/base.service';
+import { SignupService } from './signup.service';
 
 @Component({
   selector: 'app-signup',
@@ -23,7 +24,7 @@ export class SignupComponent implements OnInit {
 
   showPassword: boolean = false;
 
-  constructor(private fb: FormBuilder, private baseService: BaseService) {}
+  constructor(private fb: FormBuilder, private baseService: BaseService, private signupService : SignupService) {}
 
   ngOnInit() {
     this.signupForm = this.fb.group({
@@ -85,9 +86,7 @@ export class SignupComponent implements OnInit {
   }
 
   previousStep() {
-    if (this.currentStep > 1) {
-      this.currentStep--;
-    }
+    this.currentStep = this.signupService.previousStep(this.currentStep);
   }
 
   onSubmit() {
@@ -118,17 +117,6 @@ export class SignupComponent implements OnInit {
     };
 
     if (this.signupForm.valid && this.currentStep === 2) {
-      /*this.httpClient
-        .post('http://localhost:3000/auth/client', clientDetails)
-        .subscribe({
-          next: (response) => {
-            console.log('Signup successful:', response);
-            this.currentStep++;
-          },
-          error: (error) => {
-            console.error('Signup failed:', error);
-          },
-        });*/
 
       this.baseService.post(`${this.endpoint}`, clientDetails).subscribe({
         next: (response) => {
@@ -147,8 +135,7 @@ export class SignupComponent implements OnInit {
   }
 
   isFieldInvalid(formGroup: FormGroup, fieldName: string): boolean {
-    const field = formGroup.get(fieldName);
-    return field ? field.invalid && (field.dirty || field.touched) : false;
+    return this.signupService.isFieldInvalid(formGroup, fieldName);
   }
 
   getGoalIcon(goal: string): string {
@@ -157,7 +144,7 @@ export class SignupComponent implements OnInit {
       'Muscle Gain': 'fas fa-dumbbell',
       'General Fitness': 'fas fa-heart',
       'Strength Training': 'fas fa-fist-raised',
-      Flexibility: 'fas fa-child',
+      'Flexibility': 'fas fa-child',
     };
     return icons[goal] || 'fas fa-target';
   }
@@ -172,7 +159,7 @@ export class SignupComponent implements OnInit {
         'Improve overall health and maintain an active lifestyle',
       'Strength Training':
         'Enhance power and endurance through specialized training',
-      Flexibility:
+      'Flexibility':
         'Increase mobility and reduce injury risk through stretching routines',
     };
     return descriptions[goal] || '';
@@ -194,6 +181,6 @@ export class SignupComponent implements OnInit {
   }
 
   togglePasswordVisibility() {
-    this.showPassword = !this.showPassword;
+    this.showPassword = this.signupService.togglePasswordVisibility(this.showPassword);
   }
 }

@@ -1,41 +1,10 @@
 <div class="signup-container">
   <div class="signup-card">
-    <!-- <div class="progress-indicator">
-      <div class="progress-bar">
-        <div
-          class="progress"
-          [style.width]="(currentStep / 3) * 100 + '%'"
-        ></div>
-      </div>
-      <div class="steps">
-        <div
-          class="step"
-          [class.active]="currentStep >= 1"
-          [class.completed]="currentStep > 1"
-        >
-          <div class="step-icon">1</div>
-          <span class="step-label">Basic Details</span>
-        </div>
-        <div
-          class="step"
-          [class.active]="currentStep >= 2"
-          [class.completed]="currentStep > 2"
-        >
-          <div class="step-icon">2</div>
-          <span class="step-label">Membership</span>
-        </div>
-        <div class="step" [class.active]="currentStep >= 3">
-          <div class="step-icon">3</div>
-          <span class="step-label">Complete</span>
-        </div>
-      </div>
-    </div> -->
-
     <app-progress-indicator
       [currentStep]="currentStep"
       [totalSteps]="3"
     ></app-progress-indicator>
-    
+
     <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
       <div
         *ngIf="currentStep === 1"
@@ -46,106 +15,45 @@
         <p class="form-subtitle">Please fill in your personal information</p>
 
         <div class="form-grid">
-          <div class="form-group">
-            <label>Username</label>
-            <div class="input-container">
-              <i class="fas fa-user input-icon"></i>
-              <input
-                type="text"
-                formControlName="username"
-                class="form-control"
-                [class.is-invalid]="isFieldInvalid(basicDetails, 'username')"
-                placeholder="Enter username"
-              />
-            </div>
-            <div class="error" *ngIf="isFieldInvalid(basicDetails, 'username')">
-              <span *ngIf="basicDetails.get('username')?.errors?.['required']"
-                >Username is required</span
-              >
-              <span *ngIf="basicDetails.get('username')?.errors?.['minlength']"
-                >Username must be at least 3 characters</span
-              >
-            </div>
-          </div>
+          <app-input-field
+            [basicDetails]="basicDetails"
+            label="Username"
+            iconClass="fa-user"
+            controlName="username"
+            type="text"
+          ></app-input-field>
 
-          <div class="form-group">
-            <label>Email</label>
-            <div class="input-container">
-              <i class="fas fa-envelope input-icon"></i>
-              <input
-                type="email"
-                formControlName="email"
-                class="form-control"
-                [class.is-invalid]="isFieldInvalid(basicDetails, 'email')"
-                placeholder="Enter email"
-              />
-            </div>
-            <div class="error" *ngIf="isFieldInvalid(basicDetails, 'email')">
-              <span *ngIf="basicDetails.get('email')?.errors?.['required']"
-                >Email is required</span
-              >
-              <span *ngIf="basicDetails.get('email')?.errors?.['email']"
-                >Please enter a valid email</span
-              >
-            </div>
-          </div>
+          <app-input-field
+            [basicDetails]="basicDetails"
+            label="Email"
+            iconClass="fa-envelope"
+            controlName="email"
+            type="email"
+          ></app-input-field>
 
-          <div class="form-group">
-            <label>Password</label>
-            <div class="input-container">
-              <i class="fas fa-lock input-icon"></i>
-              <input
-                [type]="showPassword ? 'text' : 'password'"
-                formControlName="password"
-                class="form-control"
-                [class.is-invalid]="isFieldInvalid(basicDetails, 'password')"
-                placeholder="Enter your password"
-              />
-              <i
-                class="fas password-toggle"
-                [class.fa-eye]="!showPassword"
-                [class.fa-eye-slash]="showPassword"
-                (click)="togglePasswordVisibility()"
-              ></i>
-            </div>
-            <div class="error" *ngIf="isFieldInvalid(basicDetails, 'password')">
-              <span *ngIf="basicDetails.get('password')?.errors?.['required']"
-                >Password is required</span
-              >
-              <span *ngIf="basicDetails.get('password')?.errors?.['pattern']"
-                >Please enter a valid password :
-                <ul>
-                  <li>At least 6 characters.</li>
-                  <li>Contains at least one lowercase letter.</li>
-                  <li>Contains at least one uppercase letter.</li>
+          <app-input-field
+            [basicDetails]="basicDetails"
+            label="Password"
+            iconClass="fa-lock"
+            controlName="password"
+            [showPassword]="showPassword"
+            type="password"
+          >
+            <i
+              class="fas password-toggle"
+              [class.fa-eye]="!showPassword"
+              [class.fa-eye-slash]="showPassword"
+              (click)="togglePasswordVisibility()"
+            ></i>
+          </app-input-field>
 
-                  <li>Contains at least one digit.</li>
-                </ul></span
-              >
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label>Phone</label>
-            <div class="input-container">
-              <i class="fas fa-phone input-icon"></i>
-              <input
-                type="tel"
-                formControlName="phone"
-                class="form-control"
-                [class.is-invalid]="isFieldInvalid(basicDetails, 'phone')"
-                placeholder="Enter phone number"
-              />
-            </div>
-            <div class="error" *ngIf="isFieldInvalid(basicDetails, 'phone')">
-              <span *ngIf="basicDetails.get('phone')?.errors?.['required']"
-                >Phone number is required</span
-              >
-              <span *ngIf="basicDetails.get('phone')?.errors?.['pattern']"
-                >Please enter a valid 8-digit phone number</span
-              >
-            </div>
-          </div>
+          <app-input-field
+            [basicDetails]="basicDetails"
+            label="Phone"
+            iconClass="fa-phone"
+            controlName="phone"
+            type="tel"
+          ></app-input-field>
 
           <div class="form-group">
             <label>Gender</label>
@@ -167,77 +75,29 @@
             </div>
           </div>
 
-          <div class="form-group">
-            <label>Age</label>
-            <div class="input-container">
-              <i class="fas fa-birthday-cake input-icon"></i>
-              <input
-                type="number"
-                formControlName="age"
-                class="form-control"
-                [class.is-invalid]="isFieldInvalid(basicDetails, 'age')"
-                placeholder="Enter age"
-              />
-            </div>
-            <div class="error" *ngIf="isFieldInvalid(basicDetails, 'age')">
-              <span *ngIf="basicDetails.get('age')?.errors?.['required']"
-                >Age is required</span
-              >
-              <span
-                *ngIf="basicDetails.get('age')?.errors?.['min'] || basicDetails.get('age')?.errors?.['max']"
-              >
-                Age must be between 16 and 100
-              </span>
-            </div>
-          </div>
+          <app-input-field
+            [basicDetails]="basicDetails"
+            label="Age"
+            iconClass="fa-birthday-cake"
+            controlName="age"
+            type="number"
+          ></app-input-field>
 
-          <div class="form-group">
-            <label>Height (cm)</label>
-            <div class="input-container">
-              <i class="fas fa-ruler-vertical input-icon"></i>
-              <input
-                type="number"
-                formControlName="height"
-                class="form-control"
-                [class.is-invalid]="isFieldInvalid(basicDetails, 'height')"
-                placeholder="Enter height"
-              />
-            </div>
-            <div class="error" *ngIf="isFieldInvalid(basicDetails, 'height')">
-              <span *ngIf="basicDetails.get('height')?.errors?.['required']"
-                >Height is required</span
-              >
-              <span
-                *ngIf="basicDetails.get('height')?.errors?.['min'] || basicDetails.get('height')?.errors?.['max']"
-              >
-                Height must be between 100 and 250 cm
-              </span>
-            </div>
-          </div>
+          <app-input-field
+            [basicDetails]="basicDetails"
+            label="Height (cm)"
+            iconClass="fa-ruler-vertical"
+            controlName="height"
+            type="number"
+          ></app-input-field>
 
-          <div class="form-group">
-            <label>Weight (kg)</label>
-            <div class="input-container">
-              <i class="fas fa-weight input-icon"></i>
-              <input
-                type="number"
-                formControlName="weight"
-                class="form-control"
-                [class.is-invalid]="isFieldInvalid(basicDetails, 'weight')"
-                placeholder="Enter weight"
-              />
-            </div>
-            <div class="error" *ngIf="isFieldInvalid(basicDetails, 'weight')">
-              <span *ngIf="basicDetails.get('weight')?.errors?.['required']"
-                >Weight is required</span
-              >
-              <span
-                *ngIf="basicDetails.get('weight')?.errors?.['min'] || basicDetails.get('weight')?.errors?.['max']"
-              >
-                Weight must be between 30 and 300 kg
-              </span>
-            </div>
-          </div>
+          <app-input-field
+            [basicDetails]="basicDetails"
+            label="Weight (kg)"
+            iconClass="fa-weight"
+            controlName="weight"
+            type="number"
+          ></app-input-field>
         </div>
 
         <div class="form-actions">
@@ -260,7 +120,9 @@
           <div
             class="goal-card"
             *ngFor="let goal of goals"
-            [class.selected]="membershipDetails.get('goal')?.value.includes(goal)"
+            [class.selected]="
+              membershipDetails.get('goal')?.value.includes(goal)
+            "
             (click)="selectGoal(goal)"
           >
             <div class="goal-icon">
