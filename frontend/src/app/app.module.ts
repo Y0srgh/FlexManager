@@ -30,6 +30,7 @@ import { ButtonComponent } from './components/shared/button/button.component';
 import { SignupComponent } from './signup/signup.component';
 import { ProgressIndicatorComponent } from './components/progress-indicator/progress-indicator.component';
 import { InputFieldComponent } from './components/input-field/input-field.component';
+import { SigninComponent } from './signin/signin.component';
 
 // const routes: Routes = [
 //   { path: '', component: HeroComponent }, 
@@ -48,7 +49,7 @@ import { InputFieldComponent } from './components/input-field/input-field.compon
     AppComponent,
     CourseManagementComponent, 
     CourseFormComponent,       
-    SidebarComponent, HeaderComponent, HeroComponent, StatsComponent, WhyChooseUsComponent, CoachesComponent, NutritionistsComponent, PricingComponent, TestimonialsComponent, FooterComponent, LayoutComponent, ButtonComponent, SignupComponent, ProgressIndicatorComponent, InputFieldComponent,          
+    SidebarComponent, HeaderComponent, HeroComponent, StatsComponent, WhyChooseUsComponent, CoachesComponent, NutritionistsComponent, PricingComponent, TestimonialsComponent, FooterComponent, LayoutComponent, ButtonComponent, SignupComponent, ProgressIndicatorComponent, InputFieldComponent, SigninComponent,          
   ],
   imports: [
     BrowserModule,

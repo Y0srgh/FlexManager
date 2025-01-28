@@ -12,7 +12,7 @@ export class SignupComponent implements OnInit {
   private readonly endpoint = 'auth/client';
 
   signupForm!: FormGroup;
-  currentStep = 2;
+  currentStep = 1;
   submitted = false;
 
   goals = [
