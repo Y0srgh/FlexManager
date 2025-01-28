@@ -6,6 +6,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Test } from './test/entities/test.entity';
 import * as dotenv from 'dotenv';
 import { TestModule } from './test/test.module';
+import { SitePaymentModule } from './site-payment/site-payment.module';
+import { MessengerModule } from './messenger/messenger.module';
 
 dotenv.config();
 
@@ -19,7 +21,9 @@ dotenv.config();
       synchronize: true
     }),
     TypeOrmModule.forFeature([Test]),
-    TestModule
+    TestModule,
+    SitePaymentModule,
+    MessengerModule
   ],
   controllers: [AppController],
   providers: [AppService],
