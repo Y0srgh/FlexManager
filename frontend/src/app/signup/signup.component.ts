@@ -10,8 +10,9 @@ import { SignupService } from './signup.service';
 })
 export class SignupComponent implements OnInit {
   private readonly endpoint = 'auth/client';
+
   signupForm!: FormGroup;
-  currentStep = 2;
+  currentStep = 1;
   submitted = false;
 
   goals = [
@@ -75,19 +76,22 @@ export class SignupComponent implements OnInit {
   }
 
   nextStep() {
-    if (this.currentStep === 1) {
-      Object.keys(this.basicDetails.controls).forEach((key) => {
-        const control = this.basicDetails.get(key);
-        control?.markAsTouched();
-      });
+    // if (this.currentStep === 1) {
+    //   Object.keys(this.basicDetails.controls).forEach((key) => {
+    //     const control = this.basicDetails.get(key);
+    //     control?.markAsTouched();
+    //   });
 
-      if (this.basicDetails.valid) {
-        this.currentStep++;
-      } else {
-        console.log('Form errors:', this.basicDetails.errors);
-      }
-    }
+    //   if (this.basicDetails.valid) {
+    //     this.currentStep++;
+    //   } else {
+    //     console.log('Form errors:', this.basicDetails.errors);
+    //   }
+    // }
+    this.currentStep = this.signupService.nextStep(this.currentStep, this.basicDetails);
   }
+
+
 
   previousStep() {
     this.currentStep = this.signupService.previousStep(this.currentStep);
@@ -177,7 +181,6 @@ export class SignupComponent implements OnInit {
       );
     } else {
       const goalList = this.membershipDetails.get('goal')?.value || [];
-
       if (!this.membershipDetails.get('goal')?.value.includes(goal)) {
         goalList.push(goal);
         this.membershipDetails.get('goal')?.setValue(goalList);
@@ -188,9 +191,5 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  togglePasswordVisibility() {
-    this.showPassword = this.signupService.togglePasswordVisibility(
-      this.showPassword
-    );
-  }
+  
 }

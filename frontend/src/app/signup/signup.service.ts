@@ -18,6 +18,26 @@ export class SignupService {
   }
 
   previousStep(currentStep: number): number {
-    return currentStep > 1 ? currentStep-- : currentStep;
+    if (currentStep > 1) {
+      return currentStep -1;
+    }else{
+      return currentStep;
+    }
+  }
+
+  nextStep(currentStep: number, basicDetails: FormGroup): number {
+    if (currentStep === 1) {
+      Object.keys(basicDetails.controls).forEach((key) => {
+        const control = basicDetails.get(key);
+        control?.markAsTouched();
+      });
+
+      if (basicDetails.valid) {
+        currentStep++;
+      } else {
+        console.log('Form errors:', basicDetails.errors);
+      }
+    }
+    return currentStep;
   }
 }
