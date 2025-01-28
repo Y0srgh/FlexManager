@@ -26,7 +26,7 @@ import { TestimonialsComponent } from './components/testimonials/testimonials.co
 import { FooterComponent } from './components/footer/footer.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LayoutComponent } from './components/layout/layout.component';
-import { ButtonComponent } from './shared/button/button.component';
+import { ButtonComponent } from './components/shared/button/button.component';
 import { SignupComponent } from './signup/signup.component';
 import { ProgressIndicatorComponent } from './components/progress-indicator/progress-indicator.component';
 import { InputFieldComponent } from './components/input-field/input-field.component';
