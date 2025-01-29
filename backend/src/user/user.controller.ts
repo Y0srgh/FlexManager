@@ -30,6 +30,7 @@ import { ManagerService } from './manager.service';
 import { ParentService } from './parent.service';
 import { CreateParentDto } from './dto/create-parent.dto';
 import { Response, Request } from 'express';
+import { RefreshTokenGuard } from './guards/refresh-token.guard';
 @Controller('auth')
 export class UserController {
   constructor(
@@ -55,6 +56,7 @@ export class UserController {
     return this.userService.signIn(userData, response);
   }
 
+  @UseGuards(RefreshTokenGuard)
   @Get('refresh')
   async refreshToken(
     @Req() request: Request,
