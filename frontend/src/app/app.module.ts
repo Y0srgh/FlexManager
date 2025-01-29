@@ -16,6 +16,7 @@ import { CoachListComponent } from './private-coach/coach-list/coach-list.compon
 import { RequestCardComponent } from './private-coach/request-card/request-card.component';
 import {ReservationCardComponent} from './private-coach/reservation-card/reservation-card.component';
 import { FormsModule } from '@angular/forms';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -33,6 +34,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { LayoutComponent } from './components/layout/layout.component';
 import { ButtonComponent } from './shared/button/button.component';
 import { SignupComponent } from './signup/signup.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 // const routes: Routes = [
 //   { path: '', component: HeroComponent }, 
@@ -51,7 +53,11 @@ import { SignupComponent } from './signup/signup.component';
     AppComponent,
     CourseManagementComponent, 
     CourseFormComponent,       
-    SidebarComponent, HeaderComponent, HeroComponent, StatsComponent, WhyChooseUsComponent, CoachesComponent, NutritionistsComponent, PricingComponent, TestimonialsComponent, FooterComponent, LayoutComponent, ButtonComponent, SignupComponent,          
+    SidebarComponent, HeaderComponent, HeroComponent, StatsComponent, WhyChooseUsComponent, CoachesComponent, NutritionistsComponent, PricingComponent, TestimonialsComponent, FooterComponent, LayoutComponent, ButtonComponent, SignupComponent,     CoachComponent,
+    CoachListComponent,
+    RequestCardComponent,
+    ReservationCardComponent,
+    CalendarComponent,       
   ],
   imports: [
     BrowserModule,
@@ -65,13 +71,11 @@ import { SignupComponent } from './signup/signup.component';
     MatInputModule,
     AppRoutingModule,
     // RouterModule.forRoot(routes),
-    CoachComponent,
-    CoachListComponent,
-    RequestCardComponent,
-    ReservationCardComponent,
+ 
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    FullCalendarModule
   ],
 
   providers: [],

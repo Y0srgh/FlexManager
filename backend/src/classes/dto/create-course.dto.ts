@@ -1,8 +1,9 @@
 export class CreateCourseDto {
-    name: string;
+    title: string;
     description: string;
     date: string;
-    time: string;
+    startTime: string;
+    endTime:string;
     duration: number;
   }
   

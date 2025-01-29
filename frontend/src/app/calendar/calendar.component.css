@@ -1,0 +1,205 @@
+/* ==========================
+   🌑 Dark Mode Calendar
+   ========================== */
+   /* :host ::ng-deep .fc {
+    background-color: #121212 !important;  
+    color: #ffffff !important;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+
+:host ::ng-deep .fc-daygrid-day {
+    border-color: #333 !important;  
+}
+
+
+:host ::ng-deep .fc-event {
+    border-radius: 8px !important;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: transform 0.2s ease-in-out;
+    display: block !important;
+    width: 100% !important;
+    text-align: center;
+    background-color: rgba(169, 169, 169, 0.2) !important;  
+    border-color: rgba(169, 169, 169, 0.8) !important; 
+    color: white !important;
+}
+
+.fc-timegrid-event {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+}
+
+
+.fc-event.pending {
+    background-color: rgba(255, 152, 0, 0.2) !important;
+    border-color: #ff9800 !important;
+    color: #ff9800 !important;
+}
+
+.fc-event.approved {
+    background-color: rgba(76, 175, 80, 0.2) !important;
+    border-color: #4caf50 !important;
+    color: #4caf50 !important;
+}
+
+.fc-event.canceled {
+    background-color: rgba(244, 67, 54, 0.2) !important;
+    border-color: #f44336 !important;
+    color: #f44336 !important;
+}
+
+.fc-event.default {
+    background-color: rgba(169, 169, 169, 0.2) !important;  
+    border-color: rgba(169, 169, 169, 0.8) !important;  
+    color: #a9a9a9 !important; 
+}
+
+
+.fc-event:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2);
+}
+
+
+.custom-event {
+    display: block;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 6px;
+    padding: 5px;
+    opacity: 0.9;
+}
+
+:host ::ng-deep .fc-toolbar {
+    background: #1e1e1e !important;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+:host ::ng-deep .fc-button {
+    background-color: #333 !important;
+    color: white !important;
+    border-radius: 5px;
+    padding: 6px 12px;
+    transition: background 0.3s ease-in-out;
+}
+
+:host ::ng-deep .fc-button:hover {
+    background-color: #555 !important;
+} */
+/* ==========================
+   🌞 Light Mode Calendar
+   ========================== */
+   :host ::ng-deep .fc {
+    background-color: #ffffff !important;  /* Light background */
+    color: #000000 !important;  /* Dark text for readability */
+    border-radius: 8px;
+    padding: 10px;
+}
+
+/* Calendar grid styling */
+:host ::ng-deep .fc-daygrid-day {
+    border-color: #ccc !important;  /* Lighter borders */
+}
+
+/* Make sure event containers are properly shaped */
+:host ::ng-deep .fc-event {
+    border-radius: 8px !important;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: transform 0.2s ease-in-out;
+    display: block !important;
+    width: 100% !important;
+    text-align: center;
+    background-color: rgba(169, 169, 169, 0.2) !important;  /* Light transparent grey */
+    border-color: rgba(169, 169, 169, 0.8) !important;  /* Slightly more opaque grey border */
+    color: #000000 !important;  /* Dark text for events */
+}
+
+/* Ensure reservation events have a proper shape */
+.fc-timegrid-event {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+}
+
+/* ==========================
+   🎨 Dynamic Event Colors
+   ========================== */
+.fc-event.pending {
+    background-color: rgba(255, 152, 0, 0.2) !important;
+    border-color: #ff9800 !important;
+    color: #ff9800 !important;
+}
+
+.fc-event.approved {
+    background-color: rgba(76, 175, 80, 0.2) !important;
+    border-color: #4caf50 !important;
+    color: #4caf50 !important;
+}
+
+.fc-event.canceled {
+    background-color: rgba(244, 67, 54, 0.2) !important;
+    border-color: #f44336 !important;
+    color: #f44336 !important;
+}
+
+/* Change the blue to transparent grey */
+.fc-event.default {
+    background-color: rgba(169, 169, 169, 0.2) !important;  /* Transparent grey */
+    border-color: rgba(169, 169, 169, 0.8) !important;  /* Slightly more opaque grey border */
+    color: #a9a9a9 !important;  /* Grey text */
+}
+
+/* ==========================
+   🔥 Hover & Interactive Effects
+   ========================== */
+.fc-event:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);  /* Darker shadow for light theme */
+}
+
+/* Custom event styling */
+.custom-event {
+    display: block;
+    width: 100%;
+    text-align: center;
+    color: #000000;  /* Dark text */
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 6px;
+    padding: 5px;
+    opacity: 0.9;
+}
+
+/* ==========================
+   📅 Header & Buttons
+   ========================== */
+:host ::ng-deep .fc-toolbar {
+    background: #f4f4f4 !important;  /* Light background for toolbar */
+    border-radius: 8px;
+    padding: 8px;
+}
+
+:host ::ng-deep .fc-button {
+    background-color: #f0f0f0 !important;  /* Light button background */
+    color: #000000 !important;  /* Dark text */
+    border-radius: 5px;
+    padding: 6px 12px;
+    transition: background 0.3s ease-in-out;
+}
+
+:host ::ng-deep .fc-button:hover {
+    background-color: #e0e0e0 !important;  /* Slightly darker on hover */
+}
