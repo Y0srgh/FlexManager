@@ -1,5 +1,6 @@
 import {
   ConflictException,
+  ForbiddenException,
   Injectable,
   NotFoundException,
   UnauthorizedException,
@@ -159,11 +160,11 @@ export class UserService extends BaseService<UserEntity> {
 
       response.cookie('refreshToken', tokens.refreshToken, {
         httpOnly: true,
-        secure: false, 
-        sameSite: 'lax', 
-        maxAge: 7 * 24 * 60 * 60 * 1000, 
+        secure: false,
+        sameSite: 'lax',
+        maxAge: 7 * 24 * 60 * 60 * 1000,
       });
-  
+
       return { accessToken: tokens.accessToken };
     } else {
       throw new UnauthorizedException('Incorrect credentials');
@@ -206,37 +207,51 @@ export class UserService extends BaseService<UserEntity> {
     };
   }
 
-  async refreshToken(request: Request, response: Response) {
-    try {
-      const refreshToken = request.cookies['refresh_token'];
+  // async refreshToken(request: Request, response: Response) {
+  //   try {
+  //     const refreshToken = request.cookies['refresh_token'];
 
-      if (!refreshToken) {
-        throw new UnauthorizedException('Refresh token not found');
-      }
+  //     if (!refreshToken) {
+  //       throw new UnauthorizedException('Refresh token not found');
+  //     }
 
-      const payload = await this.jwtService.verifyAsync(refreshToken);
+  //     const payload = await this.jwtService.verifyAsync(refreshToken);
 
-      if (payload.tokenType !== 'refresh') {
-        throw new UnauthorizedException('Invalid refresh token');
-      }
+  //     if (payload.tokenType !== 'refresh') {
+  //       throw new UnauthorizedException('Invalid refresh token');
+  //     }
 
-      const newAccessToken = await this.jwtService.signAsync(
-        {
-          username: payload.username,
-          email: payload.email,
-          role: payload.role,
-        },
-        {
-          expiresIn: '15m',
-        },
-      );
+  //     const newAccessToken = await this.jwtService.signAsync(
+  //       {
+  //         username: payload.username,
+  //         email: payload.email,
+  //         role: payload.role,
+  //       },
+  //       {
+  //         expiresIn: '15m',
+  //       },
+  //     );
 
-      return {
-        access_token: newAccessToken,
-      };
-    } catch (error) {
-      response.clearCookie('refresh_token');
-      throw new UnauthorizedException('Invalid refresh token');
-    }
+  //     return {
+  //       access_token: newAccessToken,
+  //     };
+  //   } catch (error) {
+  //     response.clearCookie('refresh_token');
+  //     throw new UnauthorizedException('Invalid refresh token');
+  //   }
+  // }
+  async refreshTokens(userId: string, refreshToken: string) {
+    const user = await this.findOne(userId);
+    if (!user || !user.refreshToken)
+      throw new ForbiddenException('Access Denied');
+    const refreshTokenMatches = await bcrypt.compare(
+      refreshToken,
+      user.refreshToken,
+    );
+
+    if (!refreshTokenMatches) throw new ForbiddenException('Access Denied');
+    const tokens = await this.getTokens(user.username, user.email, user.role);
+    await this.updateRefreshToken(user.id, tokens.refreshToken);
+    return tokens.accessToken;
   }
 }

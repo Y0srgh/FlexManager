@@ -17,11 +17,11 @@ import { UserEntity } from './entities/user.entity';
 import { UserSingInDto } from './dto/user-sign-in.dto';
 import { UserSignInValidationPipe } from 'src/pipes/signin/user-sing-in.pipe';
 import { CreateCoachDto } from './dto/create-coach.dto';
-import { JwtAuthGuard } from './guards/jwt-auth.guards';
+import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { User } from 'src/decorators/user.decorator';
 import { Roles } from 'src/enums/user-role.enum';
 import { Role } from 'src/decorators/role.decorator';
-import { RolesGuard } from './guards/role.guards';
+import { RolesGuard } from './guards/role.guard';
 import { CreateClientDto } from './dto/create-client.dto';
 import { CoachService } from './coach.service';
 import { ClientService } from './client.service';
@@ -59,8 +59,10 @@ export class UserController {
   async refreshToken(
     @Req() request: Request,
     @Res({ passthrough: true }) response: Response,
+    @User() user: UserEntity,
   ) {
-    return this.userService.refreshToken(request, response);
+    const refreshToken = request.user['refreshToken'];
+    return this.userService.refreshTokens(user.id, refreshToken);
   }
   //principe : definir les "fonctionnalités" de tous les utilisateur ici et restreindre l'accès en fonction du role de l'utilisateur (RBAC)
   //exemple :
