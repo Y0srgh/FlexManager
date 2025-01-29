@@ -12,6 +12,7 @@ import { UserEntity } from './entities/user.entity';
 import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
 import { UserSingInDto } from './dto/user-sign-in.dto';
+import { Response } from 'express';
 
 @Injectable()
 export class UserService {
@@ -43,14 +44,13 @@ export class UserService {
     }
   }
 
-  async signIn(credientials: UserSingInDto) {
+  /*async signIn(credientials: UserSingInDto) {
     const { username, email, password } = credientials;
     console.log(credientials);
 
     const user = await this.userRepository
       .createQueryBuilder('user')
-      .where('user.username = :username OR user.email = :email', {
-        username,
+      .where('user.username = :email OR user.email = :email', {
         email,
       })
       .getOne();
@@ -75,4 +75,56 @@ export class UserService {
     }
     // si non on retourne une erreur
   }
+}*/
+
+  async signIn(credientials: UserSingInDto, response: Response) {
+    const { email, password } = credientials;
+
+    const user = await this.userRepository
+      .createQueryBuilder('user')
+      .where('user.username = :email OR user.email = :email', {
+        email,
+      })
+      .getOne();
+
+    if (!user) throw new UnauthorizedException('Incorrect credentials');
+
+    if (await bcrypt.compare(password, user.password)) {
+      const payload = {
+        username: user.username,
+        email: user.email,
+        role: user.role,
+      };
+
+      const accessToken = await this.jwtService.signAsync(payload, {
+        expiresIn: '15m',
+      });
+
+      const refreshToken = await this.jwtService.signAsync(
+        { ...payload, tokenType: 'refresh' },
+        {
+          expiresIn: '7d',
+        },
+      );
+
+      console.log("refresh token", refreshToken);
+      
+
+      response.cookie('refresh_token', refreshToken, {
+        httpOnly: true,
+        // secure: false,
+        sameSite: 'strict',
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+        path: '/api/refresh',
+      });
+
+      return {
+        access_token: accessToken,
+      };
+    } else {
+      throw new UnauthorizedException('Incorrect credentials');
+    }
+  }
 }
+
+

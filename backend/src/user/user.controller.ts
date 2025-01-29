@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  Res,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserSingUpDto } from './dto/user-sign-up.dto';
@@ -27,7 +28,7 @@ import { CreateManagerDto } from './dto/create-manager.dto';
 import { ManagerService } from './manager.service';
 import { ParentService } from './parent.service';
 import { CreateParentDto } from './dto/create-parent.dto';
-
+import { Response, Request } from 'express';
 @Controller('auth')
 export class UserController {
   constructor(
@@ -44,10 +45,13 @@ export class UserController {
   }
 
   @Post('signin')
-  async signIn(@Body(UserSignInValidationPipe) userData: UserSingInDto) {
+  async signIn(
+    @Body(UserSignInValidationPipe) userData: UserSingInDto,
+    @Res({ passthrough: true }) response: Response,
+  ) {
     console.log('i am heree');
 
-    return this.userService.signIn(userData);
+    return this.userService.signIn(userData, response);
   }
 
   //principe : definir les "fonctionnalités" de tous les utilisateur ici et restreindre l'accès en fonction du role de l'utilisateur (RBAC)
@@ -90,8 +94,8 @@ export class UserController {
   // @UseGuards(JwtAuthGuard, RolesGuard)
   @Post('client')
   createClient(@Body() createClientDto: CreateClientDto) {
-    console.log("createClientDto",createClientDto);
-    
+    console.log('createClientDto', createClientDto);
+
     return this.clientService.createClient(createClientDto);
   }
 
@@ -131,8 +135,7 @@ export class UserController {
   @Post('parent')
   @Role(Roles.CLIENT)
   @UseGuards(JwtAuthGuard, RolesGuard)
-  createParent(@Body() createParentDto: CreateParentDto,@User() user) {
+  createParent(@Body() createParentDto: CreateParentDto, @User() user) {
     return this.parentService.createParent(createParentDto, user);
   }
-
 }
