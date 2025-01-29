@@ -1,7 +1,10 @@
-
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { PassportStrategy } from '@nestjs/passport';
-import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { PayloadInterface } from '../interface/payload.interface';
 import { Repository } from 'typeorm';
 import { UserEntity } from '../entities/user.entity';
@@ -11,7 +14,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(
     @InjectRepository(UserEntity)
-    private userRepositor: Repository<UserEntity>
+    private userRepositor: Repository<UserEntity>,
   ) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -20,19 +23,21 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  async validate(payload: PayloadInterface) : Promise<UserEntity> {
-    console.log("i am in strategy");
-    const user = await this.userRepositor.findOne({where:{username:payload.username}})
-    if(user){
-        delete user.password
-        delete user.salt
-        delete user.createdAt
-        delete user.updatedAt
-        delete user.deletedAt
-        console.log('the user is', user);
-        return user
-    }else{
-        throw new UnauthorizedException('Unauthorized')
+  async validate(payload: PayloadInterface): Promise<UserEntity> {
+    console.log('i am in strategy');
+    const user = await this.userRepositor.findOne({
+      where: { username: payload.username },
+    });
+    if (!user) {
+      throw new UnauthorizedException('Unauthorized');
     }
+
+    delete user.password;
+    delete user.salt;
+    delete user.createdAt;
+    delete user.updatedAt;
+    delete user.deletedAt;
+    console.log('the user is', user);
+    return user;
   }
 }

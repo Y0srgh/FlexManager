@@ -12,7 +12,7 @@ import { UserEntity } from './entities/user.entity';
 import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
 import { UserSingInDto } from './dto/user-sign-in.dto';
-import { Response } from 'express';
+import { Request, Response } from 'express';
 
 @Injectable()
 export class UserService {
@@ -107,15 +107,14 @@ export class UserService {
         },
       );
 
-      console.log("refresh token", refreshToken);
-      
+      console.log('refresh token', refreshToken);
 
       response.cookie('refresh_token', refreshToken, {
         httpOnly: true,
         // secure: false,
         sameSite: 'strict',
         maxAge: 7 * 24 * 60 * 60 * 1000,
-        path: '/api/refresh',
+        path: '/refresh',
       });
 
       return {
@@ -125,6 +124,38 @@ export class UserService {
       throw new UnauthorizedException('Incorrect credentials');
     }
   }
+
+  async refreshToken(request: Request, response: Response) {
+    try {
+      const refreshToken = request.cookies['refresh_token'];
+
+      if (!refreshToken) {
+        throw new UnauthorizedException('Refresh token not found');
+      }
+
+      const payload = await this.jwtService.verifyAsync(refreshToken);
+
+      if (payload.tokenType !== 'refresh') {
+        throw new UnauthorizedException('Invalid refresh token');
+      }
+
+      const newAccessToken = await this.jwtService.signAsync(
+        {
+          username: payload.username,
+          email: payload.email,
+          role: payload.role,
+        },
+        {
+          expiresIn: '15m',
+        },
+      );
+
+      return {
+        access_token: newAccessToken,
+      };
+    } catch (error) {
+      response.clearCookie('refresh_token');
+      throw new UnauthorizedException('Invalid refresh token');
+    }
+  }
 }
-
-
