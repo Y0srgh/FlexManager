@@ -24,12 +24,12 @@ export class BaseService<T> {
     try {
       console.log('the dto', createDto);
 
-      // const defaultPassword = this.passwordService.generateDefaultPassword();
+      const defaultPassword = this.passwordService.generateDefaultPassword();
       const signupCoach: UserSingUpDto = {
         username: createDto.username,
         email: createDto.email,
         role: createDto.role,
-        password: createDto.password,
+        password: createDto.password || defaultPassword,
       } as UserSingUpDto;
 
       const user = await this.userService.signUp(signupCoach);
