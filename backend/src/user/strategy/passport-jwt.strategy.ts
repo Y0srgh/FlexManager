@@ -11,7 +11,7 @@ import { UserEntity } from '../entities/user.entity';
 import * as dotenv from 'dotenv';
 import { InjectRepository } from '@nestjs/typeorm';
 @Injectable()
-export class JwtStrategy extends PassportStrategy(Strategy) {
+export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
   constructor(
     @InjectRepository(UserEntity)
     private userRepositor: Repository<UserEntity>,

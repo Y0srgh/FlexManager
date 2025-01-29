@@ -33,4 +33,8 @@ export class UserSingUpDto {
   @IsOptional()
   @IsEnum(Roles)
   role: Roles = Roles.USER;
+
+  //refresh token
+  @IsString()
+  refreshToken: string;
 }

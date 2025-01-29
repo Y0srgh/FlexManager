@@ -13,32 +13,48 @@ import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
 import { UserSingInDto } from './dto/user-sign-in.dto';
 import { Request, Response } from 'express';
+import { BaseService } from 'src/base/base.service';
+import { PasswordService } from 'src/common/utils/password.service';
 
 @Injectable()
-export class UserService {
+export class UserService extends BaseService<UserEntity> {
   constructor(
     @InjectRepository(UserEntity)
     private userRepository: Repository<UserEntity>,
 
+    protected passwordService: PasswordService,
+
     private jwtService: JwtService,
-  ) {}
+  ) {
+    super(userRepository, null, passwordService);
+  }
 
   async signUp(data: UserSingUpDto): Promise<UserEntity> {
     console.log('datas ', data);
 
+    const userExist = await this.userRepository.findOne({
+      where: [{ username: data.username }, { email: data.email }],
+    });
+
+    if (userExist) {
+      throw new ConflictException('username or email already exist');
+    }
+
     const user = this.userRepository.create({
       ...data,
     });
-
-    console.log('user from signup', user);
-
     user.salt = await bcrypt.genSalt();
     user.password = await bcrypt.hash(user.password, user.salt);
+    console.log('user from signup', user);
+
     try {
       await this.userRepository.save(user);
       delete user.salt;
       delete user.password;
-      return user;
+
+      const tokens = await this.getTokens(user.username, user.email, user.role);
+      await this.updateRefreshToken(user.id, tokens.refreshToken);
+      return user; //tokens.access
     } catch (error) {
       throw new ConflictException('username or email already exist');
     }
@@ -77,6 +93,54 @@ export class UserService {
   }
 }*/
 
+  // async signIn(credientials: UserSingInDto, response: Response) {
+  //   const { email, password } = credientials;
+
+  //   const user = await this.userRepository
+  //     .createQueryBuilder('user')
+  //     .where('user.username = :email OR user.email = :email', {
+  //       email,
+  //     })
+  //     .getOne();
+
+  //   if (!user) throw new UnauthorizedException('Incorrect credentials');
+
+  //   if (await bcrypt.compare(password, user.password)) {
+  //     const payload = {
+  //       username: user.username,
+  //       email: user.email,
+  //       role: user.role,
+  //     };
+
+  //     const accessToken = await this.jwtService.signAsync(payload, {
+  //       expiresIn: '15m',
+  //     });
+
+  //     const refreshToken = await this.jwtService.signAsync(
+  // { ...payload, tokenType: 'refresh' },
+  // {
+  //   expiresIn: '7d',
+  // },
+  //     );
+
+  //     console.log('refresh token', refreshToken);
+
+  //     response.cookie('refresh_token', refreshToken, {
+  //       httpOnly: true,
+  //       // secure: false,
+  //       sameSite: 'strict',
+  //       maxAge: 7 * 24 * 60 * 60 * 1000,
+  //       path: '/refresh',
+  //     });
+
+  //     return {
+  //       access_token: accessToken,
+  //     };
+  //   } else {
+  //     throw new UnauthorizedException('Incorrect credentials');
+  //   }
+  // }
+
   async signIn(credientials: UserSingInDto, response: Response) {
     const { email, password } = credientials;
 
@@ -90,39 +154,56 @@ export class UserService {
     if (!user) throw new UnauthorizedException('Incorrect credentials');
 
     if (await bcrypt.compare(password, user.password)) {
-      const payload = {
-        username: user.username,
-        email: user.email,
-        role: user.role,
-      };
+      const tokens = await this.getTokens(user.username, user.email, user.role);
+      await this.updateRefreshToken(user.id, tokens.refreshToken);
 
-      const accessToken = await this.jwtService.signAsync(payload, {
-        expiresIn: '15m',
-      });
-
-      const refreshToken = await this.jwtService.signAsync(
-        { ...payload, tokenType: 'refresh' },
-        {
-          expiresIn: '7d',
-        },
-      );
-
-      console.log('refresh token', refreshToken);
-
-      response.cookie('refresh_token', refreshToken, {
+      response.cookie('refreshToken', tokens.refreshToken, {
         httpOnly: true,
-        // secure: false,
-        sameSite: 'strict',
-        maxAge: 7 * 24 * 60 * 60 * 1000,
-        path: '/refresh',
+        secure: false, 
+        sameSite: 'lax', 
+        maxAge: 7 * 24 * 60 * 60 * 1000, 
       });
-
-      return {
-        access_token: accessToken,
-      };
+  
+      return { accessToken: tokens.accessToken };
     } else {
       throw new UnauthorizedException('Incorrect credentials');
     }
+  }
+  hashData(data: string) {
+    return bcrypt.hash(data, 10);
+  }
+
+  async updateRefreshToken(userId: string, refreshToken: string) {
+    const hashedRefreshToken = await this.hashData(refreshToken);
+    await this.update(userId, {
+      refreshToken: hashedRefreshToken,
+    });
+  }
+
+  async getTokens(username: string, email: string, role: string) {
+    const [accessToken, refreshToken] = await Promise.all([
+      this.jwtService.signAsync(
+        {
+          username,
+          email,
+          role,
+        },
+        {
+          expiresIn: '15m',
+        },
+      ),
+      this.jwtService.signAsync(
+        { username, email, role, tokenType: 'refresh' },
+        {
+          expiresIn: '7d',
+        },
+      ),
+    ]);
+
+    return {
+      accessToken,
+      refreshToken,
+    };
   }
 
   async refreshToken(request: Request, response: Response) {
