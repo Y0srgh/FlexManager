@@ -2,6 +2,7 @@ import {
   ConflictException,
   Injectable,
   NotFoundException,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { UserSingUpDto } from './dto/user-sign-up.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -19,14 +20,17 @@ export class UserService {
     private userRepository: Repository<UserEntity>,
 
     private jwtService: JwtService,
-
   ) {}
 
   async signUp(data: UserSingUpDto): Promise<UserEntity> {
+    console.log('datas ', data);
+
     const user = this.userRepository.create({
       ...data,
     });
-    
+
+    console.log('user from signup', user);
+
     user.salt = await bcrypt.genSalt();
     user.password = await bcrypt.hash(user.password, user.salt);
     try {
@@ -35,19 +39,14 @@ export class UserService {
       delete user.password;
       return user;
     } catch (error) {
-      console.log(error);
-      
       throw new ConflictException('username or email already exist');
     }
   }
 
   async signIn(credientials: UserSingInDto) {
-    // recuperer login et mot de passe
     const { username, email, password } = credientials;
     console.log(credientials);
-    
-    // on peut se logger via username ou email
-    // verifier si user existe
+
     const user = await this.userRepository
       .createQueryBuilder('user')
       .where('user.username = :username OR user.email = :email', {
@@ -55,13 +54,13 @@ export class UserService {
         email,
       })
       .getOne();
-    // si non on retourne une erreur
-    if (!user)
-      throw new NotFoundException('username or email or password is incorrect');
-    // si oui on verifie si le mot de passe est correcte
-    const hashedPassword = await bcrypt.hash(password, user.salt);
+    console.log('-------------------', user);
 
-    if (hashedPassword === user.password) {
+    // si non on retourne une erreur
+    if (!user) throw new UnauthorizedException('Incorrect credentials');
+    // si oui on verifie si le mot de passe est correcte
+
+    if (await bcrypt.compare(password, user.password)) {
       const payload = {
         username: user.username,
         email: user.email,
@@ -72,9 +71,8 @@ export class UserService {
         access_token: jwt,
       };
     } else {
-      throw new NotFoundException('username or email or password is incorrect');
+      throw new UnauthorizedException('Incorrect credentials');
     }
     // si non on retourne une erreur
   }
-
 }

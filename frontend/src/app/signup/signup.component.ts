@@ -101,6 +101,7 @@ export class SignupComponent implements OnInit {
       phone: this.signupForm.value.basicDetails.phone,
       gender: this.signupForm.value.basicDetails.gender,
       role: 'client',
+      password: this.signupForm.value.basicDetails.password,
       physicalDetails: {
         weight: this.signupForm.value.basicDetails.weight,
         height: this.signupForm.value.basicDetails.height,

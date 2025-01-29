@@ -17,27 +17,35 @@ export class BaseService<T> {
     return this.repository.save(entity);
   }
 
-  async createWithUser(createDto: any,extraData: (user: any) => Partial<T>): Promise<T> {
+  async createWithUser(
+    createDto: any,
+    extraData: (user: any) => Partial<T>,
+  ): Promise<T> {
     try {
-      const defaultPassword = this.passwordService.generateDefaultPassword();
-      const signupCoach: UserSingUpDto = {username: createDto.username, email: createDto.email, role : createDto.role, password:createDto.password || defaultPassword} as UserSingUpDto;
-  
+      console.log('the dto', createDto);
+
+      // const defaultPassword = this.passwordService.generateDefaultPassword();
+      const signupCoach: UserSingUpDto = {
+        username: createDto.username,
+        email: createDto.email,
+        role: createDto.role,
+        password: createDto.password,
+      } as UserSingUpDto;
+
       const user = await this.userService.signUp(signupCoach);
-  
-      console.log("extract user",extraData(user));
-      
-      
-  
+
+      console.log('extract user', extraData(user));
+
       const newUser = this.repository.create({
         ...extraData(user),
         id: user.id,
         user: user,
       } as DeepPartial<T>);
-  console.log("i am here",newUser);
-  
+      console.log('i am here', newUser);
+
       return this.repository.save(newUser);
     } catch (error) {
-      console.log("error-------------------------",error);
+      console.log('error-------------------------', error);
       throw error;
     }
   }

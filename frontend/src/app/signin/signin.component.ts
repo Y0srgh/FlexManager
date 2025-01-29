@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, NgForm } from '@angular/forms';
 import { FormGroup, Validators } from '@angular/forms';
+import { BaseService } from '../base/base.service';
 
 @Component({
   selector: 'app-signin',
@@ -8,7 +9,10 @@ import { FormGroup, Validators } from '@angular/forms';
   styleUrl: './signin.component.css',
 })
 export class SigninComponent {
-  private readonly endpoint = 'auth/sign-in';
+  constructor(
+      private baseService: BaseService
+    ) {}
+  private readonly endpoint = 'auth/signin';
 
   showPassword: boolean = false;
 
@@ -17,15 +21,8 @@ export class SigninComponent {
   ngOnInit() {
     this.signinForm = new FormGroup({
       signinDetails: new FormGroup({
-        username: new FormControl('', [
-          Validators.required,
-          Validators.minLength(3),
-        ]),
-        password: new FormControl('', [
-          Validators.required,
-          Validators.minLength(6),
-          Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,}$'),
-        ]),
+        email: new FormControl(''),
+        password: new FormControl(''),
       }),
     });
   }
@@ -38,5 +35,19 @@ export class SigninComponent {
       const control = this.signinDetails.get(key);
       control?.markAsTouched();
     });
+
+    console.log('Form value:', this.signinForm.value);
+
+    if (this.signinForm.valid) {
+      this.baseService.post(`${this.endpoint}`, this.signinDetails.value).subscribe({
+        next: (response) => {
+          console.log('Signin successful:', response);
+        },
+        error: (error) => {
+          console.error('Signin failed:', error);
+        },
+      });
+      
+    }
   }
 }
