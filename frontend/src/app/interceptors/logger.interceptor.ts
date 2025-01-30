@@ -9,9 +9,15 @@ export class LoggerInterceptor implements HttpInterceptor {
     console.log(`Outgoing Request: ${req.method} ${req.url}`, req.body);
 
     return next.handle(req).pipe(
-      tap((event) => {
+      tap(event => {
         if (event instanceof HttpResponse) {
-          console.log(`Response from ${req.url}:`, event.body);
+          // Retrieve the x-new-access-token header
+          const newAccessToken = event.headers.get('x-new-access-token');
+          
+        //   if (newAccessToken) {
+        //     console.log('New Access Token:', newAccessToken);
+        //     localStorage.setItem('accessToken', newAccessToken);
+        //   }
         }
       })
     );

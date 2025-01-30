@@ -24,7 +24,8 @@ async function bootstrap() {
     methods: ['GET','HEAD','PUT','PATCH','POST','DELETE'],
     preflightContinue: false,
     credentials: true,
-    allowedHeaders: ['Content-Type', 'Accept','Content-Type', 'Authorization'],
+    allowedHeaders: ['Content-Type', 'Accept','Content-Type', 'Authorization', 'x-new-access-token'],
+    exposedHeaders: ['x-new-access-token'],
   });
   // app.enableCors({
   //   origin: 'http://localhost:4200',

@@ -27,7 +27,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  async validate(req : Request ,payload: PayloadInterface) {
+  async validate(req: Request, payload: PayloadInterface) {
     console.log('i am in strategy', payload);
     const user = await this.userRepositor.findOne({
       where: { username: payload.username },
@@ -49,10 +49,24 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
           secret: process.env.SECRET,
         });
 
+        console.log('-----------------------------', refreshPayload.exp);
+        const expirationDate = refreshPayload.exp * 1000;
+        console.log("expiration", expirationDate);
+        
+
+        console.log('Token Expiration:', new Date(expirationDate).toLocaleString());
+        console.log(new Date(Date.now()).toLocaleString());
+        console.log(Date.now());
+        console.log(currentTime);
+
+        if (refreshPayload.exp < currentTime) {
+          throw new UnauthorizedException('Refresh token expired');
+        }
+
         // If refresh token is valid, generate a new access token
         const newAccessToken = this.jwtService.sign(
           { username: user.username, email: user.email, role: user.role },
-          { secret: process.env.SECRET, expiresIn: '30s' },
+          { secret: process.env.SECRET, expiresIn: '1m' },
         );
 
         console.log('New access token generated:', newAccessToken);
@@ -74,6 +88,8 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       delete user.createdAt;
       delete user.updatedAt;
       delete user.deletedAt;
+      console.log('user without expired', user);
+
       return user;
     }
   }

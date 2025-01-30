@@ -97,13 +97,13 @@ export class UserService {
       };
 
       const accessToken = await this.jwtService.signAsync(payload, {
-        expiresIn: '30s',
+        expiresIn: '1m',
       });
 
       const refreshToken = await this.jwtService.signAsync(
         { ...payload, tokenType: 'refresh' },
         {
-          expiresIn: '7d',
+          expiresIn: '2m',
         },
       );
 
@@ -112,7 +112,7 @@ export class UserService {
       // tokens.push(refreshToken);
       user.refreshToken =  refreshToken;
       await this.userRepository.save(user);
-
+      
       response.cookie('refreshToken', refreshToken, {
         httpOnly: true,
         // secure: false,
@@ -120,7 +120,8 @@ export class UserService {
         secure: process.env.NODE_ENV === 'production',
         maxAge: 7 * 24 * 60 * 60 * 1000,
       });
-
+      
+      console.log("access token---------------------------------------", accessToken);
       console.log("user", user);
       
 
