@@ -21,14 +21,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { NavbarComponent } from './navbar/navbar.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+
 @NgModule({
   declarations: [
     AppComponent,
       
     SidebarComponent,   
     HomeComponent,   
-    CardComponent, NavbarComponent, DashboardComponent,    
+    CardComponent, NavbarComponent, 
+    // DashboardComponent,    
   ],
   imports: [
     BrowserModule,

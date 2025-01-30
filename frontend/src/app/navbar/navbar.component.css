@@ -1,65 +1,65 @@
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #f8f7fd;
-  padding: 10px 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-bottom: 2px solid #ddd;
-
-  .navbar-left {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1a1a1a; /* Dark background */
+    padding: 20px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Darker shadow */
+    border-bottom: 2px solid #333; /* Subtle border */
+  
+    .navbar-left {
       display: flex;
       align-items: center;
       gap: 10px;
-
+  
       .logo {
-          width: 70px;
-          height: 70px;
-          object-fit: contain;
-          border-radius: 100%;
+        width: 70px;
+        height: 70px;
+        object-fit: contain;
+        border-radius: 100%;
       }
-
+  
       h3 {
-          font-family: 'Poppins', sans-serif;
-          color: #4A47A3; 
-          margin: 0;
-          font-size: 26px; 
-          font-weight: 700; 
-          letter-spacing: 1px; 
-          text-transform: uppercase; 
-          background: linear-gradient(to right, #896CFE, #4A47A3); 
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          animation: fadeIn 1s ease-in-out; 
+        font-family: 'Poppins', sans-serif;
+        color: #ffffff; /* White text */
+        margin: 0;
+        font-size: 26px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        background: linear-gradient(to right, #f7f6f7, #a2a1a2); /* Purple gradient */
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: fadeIn 1s ease-in-out;
       }
-  }
-
-  .navbar-right {
+    }
+  
+    .navbar-right {
       display: flex;
       align-items: center;
       gap: 15px;
-
+  
       .icon {
-          font-size: 26px;
-          color: #555;
-          cursor: pointer;
-          transition: color 0.3s;
-
-          &:hover {
-              color: #896CFE;
-          }
+        font-size: 26px;
+        color: #bbb; 
+        cursor: pointer;
+        transition: color 0.3s ease-in-out;
+  
+        &:hover {
+          color: #8b5cf6;
+        }
       }
+    }
   }
-}
-
-
-@keyframes fadeIn {
-  from {
+  
+  @keyframes fadeIn {
+    from {
       opacity: 0;
       transform: translateY(-10px);
-  }
-  to {
+    }
+    to {
       opacity: 1;
       transform: translateY(0);
+    }
   }
-}
+  
