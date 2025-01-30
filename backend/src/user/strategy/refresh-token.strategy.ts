@@ -26,7 +26,7 @@ export class RefreshTokenStrategy extends PassportStrategy(Strategy, 'jwt-refres
   }
 
   async validate(req: Request, payload: PayloadInterface): Promise<UserEntity> {
-    console.log('i am in strategy');
+    console.log('i am in refresh strategy-----------------------------');
     const user = await this.userRepositor.findOne({
       where: { username: payload.username },
     });
@@ -42,6 +42,8 @@ export class RefreshTokenStrategy extends PassportStrategy(Strategy, 'jwt-refres
     console.log('the user is', user);
 
     const refreshToken = req.get('Authorization').replace('Bearer', '').trim();
+    console.log(refreshToken);
+    
     return {...user, refreshToken};
   }
 }

@@ -8,7 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { CourseManagementComponent } from './components/course-management/course-management.component';
 import { CourseFormComponent } from './components/course-form/course-form.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { AppComponent } from './app.component';
 
@@ -31,6 +31,9 @@ import { SignupComponent } from './signup/signup.component';
 import { ProgressIndicatorComponent } from './components/progress-indicator/progress-indicator.component';
 import { InputFieldComponent } from './components/input-field/input-field.component';
 import { SigninComponent } from './signin/signin.component';
+import { AuthInterceptor } from './shared/auth.interceptor';
+import { ClientsComponent } from './client/clients.component';
+import { RefreshInterceptor } from './shared/refresh.interceptor';
 
 // const routes: Routes = [
 //   { path: '', component: HeroComponent }, 
@@ -48,7 +51,8 @@ import { SigninComponent } from './signin/signin.component';
   declarations: [
     AppComponent,
     CourseManagementComponent, 
-    CourseFormComponent,       
+    CourseFormComponent,   
+    ClientsComponent,    
     SidebarComponent, HeaderComponent, HeroComponent, StatsComponent, WhyChooseUsComponent, CoachesComponent, NutritionistsComponent, PricingComponent, TestimonialsComponent, FooterComponent, LayoutComponent, ButtonComponent, SignupComponent, ProgressIndicatorComponent, InputFieldComponent, SigninComponent,          
   ],
   imports: [
@@ -64,7 +68,7 @@ import { SigninComponent } from './signin/signin.component';
     AppRoutingModule
     // RouterModule.forRoot(routes),
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },{ provide: HTTP_INTERCEPTORS, useClass: RefreshInterceptor, multi: true }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

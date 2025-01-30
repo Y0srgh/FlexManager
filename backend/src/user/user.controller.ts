@@ -63,6 +63,8 @@ export class UserController {
     @Res({ passthrough: true }) response: Response,
     @User() user: UserEntity,
   ) {
+    console.log("i am in refresh controller", request);
+    
     const refreshToken = request.user['refreshToken'];
     return this.userService.refreshTokens(user.id, refreshToken);
   }
@@ -113,8 +115,10 @@ export class UserController {
 
   @Get('client')
   @Role(Roles.MANAGER)
-  @UseGuards(JwtAuthGuard, RolesGuard)
+  @UseGuards(RefreshTokenGuard)
   findAllClients() {
+    console.log("i am here in find all");
+    
     return this.clientService.findAll();
   }
 
@@ -126,7 +130,7 @@ export class UserController {
   //-------------manager
   @Post('manager')
   @Role(Roles.MANAGER)
-  @UseGuards(JwtAuthGuard, RolesGuard)
+  @UseGuards(JwtAuthGuard,RefreshTokenGuard)
   createManager(@Body() CreateManagerDto: CreateManagerDto) {
     return this.managerService.createManager(CreateManagerDto);
   }

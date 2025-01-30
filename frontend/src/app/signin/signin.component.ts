@@ -42,7 +42,7 @@ export class SigninComponent {
       this.baseService.post(`${this.endpoint}`, this.signinDetails.value).subscribe({
         next: (response: any) => {
           console.log('Signin successful:', response);
-          localStorage.setItem('access_token', response.access_token);
+          localStorage.setItem('accessToken', response.accessToken);
         },
         error: (error) => {
           console.error('Signin failed:', error);

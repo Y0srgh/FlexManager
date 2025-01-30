@@ -190,7 +190,7 @@ export class UserService extends BaseService<UserEntity> {
           role,
         },
         {
-          expiresIn: '15m',
+          expiresIn: '30s',
         },
       ),
       this.jwtService.signAsync(

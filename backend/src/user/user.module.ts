@@ -22,7 +22,7 @@ dotenv.config()
 @Module({
    imports: [
     TypeOrmModule.forFeature([UserEntity, CoachEntity, ClientEntity, ManagerEntity, ParentEntity]),
-    PassportModule.register({defaultStrategy: 'jwt'}),
+    PassportModule.register({defaultStrategy: 'jwt-refresh'}),
     JwtModule.register({
       secret: process.env.SECRET,
       // signOptions: {
