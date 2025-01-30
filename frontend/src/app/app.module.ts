@@ -32,6 +32,7 @@ import { InputFieldComponent } from './components/input-field/input-field.compon
 import { SigninComponent } from './signin/signin.component';
 import { ClientComponent } from './client/client.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { LoggerInterceptor } from './interceptors/logger.interceptor';
 
 // const routes: Routes = [
 //   { path: '', component: HeroComponent },
@@ -82,6 +83,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoggerInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

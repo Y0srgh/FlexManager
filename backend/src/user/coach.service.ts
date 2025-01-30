@@ -19,7 +19,7 @@ export class CoachService extends BaseService<CoachEntity> {
   ) {
     super(coachRepository, userService, passwordService);
   }
-
+//add first name last name
   async createCoach(createCoachDto: CreateCoachDto): Promise<CoachEntity> {
     return this.createWithUser(
       createCoachDto,
@@ -28,9 +28,12 @@ export class CoachService extends BaseService<CoachEntity> {
         certifications: createCoachDto.certifications,
         isPrivate: createCoachDto.isPrivate,
         courses: [],
+      
       }),
     );
   }
+
+  
 
   /*async createCoach(createCoachDto: CreateCoachDto): Promise<CoachEntity> {
     const defaultPassword = this.passwordService.generateDefaultPassword();

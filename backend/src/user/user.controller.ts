@@ -8,6 +8,7 @@ import {
   Delete,
   UseGuards,
   Res,
+  Req,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserSingUpDto } from './dto/user-sign-up.dto';
@@ -102,7 +103,9 @@ export class UserController {
   @Get('client')
   @Role(Roles.MANAGER)
   @UseGuards(JwtAuthGuard, RolesGuard)
-  findAllClients() {
+  findAllClients(@Req() req: Request) {
+    console.log("i am in find all clients");
+    console.log('Access Token from Header:', req.headers['x-new-access-token']);
     return this.clientService.findAll();
   }
 

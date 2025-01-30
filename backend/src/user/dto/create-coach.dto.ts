@@ -1,5 +1,4 @@
-import { IsString, IsOptional, IsBoolean, IsEnum } from 'class-validator';
-import { Roles } from 'src/enums/user-role.enum';
+import { IsString, IsOptional, IsBoolean } from 'class-validator';
 import { UserSingUpDto } from './user-sign-up.dto';
 
 export class CreateCoachDto extends UserSingUpDto {

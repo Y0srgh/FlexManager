@@ -97,7 +97,7 @@ export class UserService {
       };
 
       const accessToken = await this.jwtService.signAsync(payload, {
-        expiresIn: '15m',
+        expiresIn: '30s',
       });
 
       const refreshToken = await this.jwtService.signAsync(
@@ -108,14 +108,15 @@ export class UserService {
       );
 
       console.log("refresh token", refreshToken);
-      
-      user.refreshToken = refreshToken;
+      const tokens = user.refreshToken || [];
+      // tokens.push(refreshToken);
+      user.refreshToken =  refreshToken;
       await this.userRepository.save(user);
 
       response.cookie('refreshToken', refreshToken, {
         httpOnly: true,
         // secure: false,
-        sameSite: 'none',
+        sameSite: 'lax',
         secure: process.env.NODE_ENV === 'production',
         maxAge: 7 * 24 * 60 * 60 * 1000,
       });

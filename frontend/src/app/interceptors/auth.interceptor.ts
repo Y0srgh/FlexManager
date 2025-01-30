@@ -4,8 +4,9 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
+  HttpResponse,
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -27,12 +28,45 @@ export class AuthInterceptor implements HttpInterceptor {
       const cloned = req.clone({
         setHeaders: {
           Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
         },
-        withCredentials: true,
+        // withCredentials: true,
       });
-      return next.handle(cloned);
+
+      return next.handle(cloned).pipe(
+        tap({
+          next: (event) => {
+            if (event instanceof HttpResponse) {
+              console.log('event', event);
+              const newAccessToken = event.headers.get('x-new-access-token');
+              console.log("-------------------------------", newAccessToken);
+              
+              if (newAccessToken) {
+                console.log('New access token received:', newAccessToken);
+                localStorage.setItem('accessToken', newAccessToken);
+              }
+              if (event.status === 401) {
+                localStorage.removeItem('accessToken');
+              }
+            }
+          },
+          error: (error) => {
+            console.error('Error in request:', error);
+            localStorage.removeItem('accessToken');
+          },
+        })
+      );
     }
-    return next.handle(req);
+    return next.handle(req).pipe(
+      tap(
+        (response) => {
+          console.log('response', response);
+        },
+        (error) => {
+          console.log(error);
+        }
+      )
+    );
   }
 }
 

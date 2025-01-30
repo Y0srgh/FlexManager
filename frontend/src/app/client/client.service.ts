@@ -16,6 +16,6 @@ export class ClientService {
     const options = {
       withCredentials: true
     };
-    return this.baseService.get<Client[]>(this.apiUrl, options);
+    return this.baseService.get<Client[]>(this.apiUrl);
   }
 }
