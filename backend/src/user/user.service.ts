@@ -68,7 +68,7 @@ export class UserService {
       };
       const jwt = await this.jwtService.signAsync(payload);
       return {
-        access_token: jwt,
+        accessToken: jwt,
       };
     } else {
       throw new UnauthorizedException('Incorrect credentials');
@@ -109,17 +109,22 @@ export class UserService {
 
       console.log("refresh token", refreshToken);
       
+      user.refreshToken = refreshToken;
+      await this.userRepository.save(user);
 
-      response.cookie('refresh_token', refreshToken, {
+      response.cookie('refreshToken', refreshToken, {
         httpOnly: true,
         // secure: false,
-        sameSite: 'strict',
+        sameSite: 'none',
+        secure: process.env.NODE_ENV === 'production',
         maxAge: 7 * 24 * 60 * 60 * 1000,
-        path: '/api/refresh',
       });
 
+      console.log("user", user);
+      
+
       return {
-        access_token: accessToken,
+        accessToken: accessToken,
       };
     } else {
       throw new UnauthorizedException('Incorrect credentials');

@@ -40,8 +40,9 @@ export class SigninComponent {
 
     if (this.signinForm.valid) {
       this.baseService.post(`${this.endpoint}`, this.signinDetails.value).subscribe({
-        next: (response) => {
+        next: (response: any) => {
           console.log('Signin successful:', response);
+          localStorage.setItem('accessToken',response.accessToken);
         },
         error: (error) => {
           console.error('Signin failed:', error);

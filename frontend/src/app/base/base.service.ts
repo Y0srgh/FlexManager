@@ -10,7 +10,7 @@ export class BaseService {
 
   constructor(private http: HttpClient) {}
 
-  get<T>(endpoint: string, params?: HttpParams): Observable<T> {
+  get<T>(endpoint: string, params?: any): Observable<T> {
     return this.http.get<T>(`${this.baseUrl}/${endpoint}`, { params });
   }
 
