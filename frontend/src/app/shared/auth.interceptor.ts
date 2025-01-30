@@ -1,33 +1,72 @@
 import { Injectable } from '@angular/core';
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpErrorResponse } from '@angular/common/http';
-import { Observable, catchError, switchMap, throwError } from 'rxjs';
+import {
+  HttpInterceptor,
+  HttpRequest,
+  HttpHandler,
+  HttpEvent,
+  HttpErrorResponse,
+} from '@angular/common/http';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { catchError, switchMap, filter, take } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
+  private isRefreshing = false;
+  private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject(null);
+
   constructor(private authService: AuthService) {}
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    let authReq = req;
-    const token = this.authService.getAccessToken();
-    if (token) {
-      authReq = req.clone({ setHeaders: { Authorization: `Bearer ${token}` } });
-    }
-
-    return next.handle(authReq).pipe(
+  intercept(
+    request: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
+    return next.handle(this.addAuthToken(request)).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === 401) {
-          return this.authService.refreshAccessToken().pipe(
-            switchMap(newToken => {
-              authReq = req.clone({ setHeaders: { Authorization: `Bearer ${newToken}` } });
-              return next.handle(authReq);
-            })
-          );
+          return this.handle401Error(request, next);
         }
-        console.log("error from auth interceptor", error);
-        
         return throwError(() => error);
       })
     );
+  }
+
+  private addAuthToken(request: HttpRequest<any>) {
+    const accessToken = this.authService.getAccessToken();
+    if (accessToken) {
+      return request.clone({
+        setHeaders: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+        withCredentials: true, // Ensure credentials are sent
+      });
+    }
+    return request;
+  }
+
+  private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
+    if (!this.isRefreshing) {
+      this.isRefreshing = true;
+      this.refreshTokenSubject.next(null);
+
+      return this.authService.refreshToken().pipe(
+        switchMap((token: any) => {
+          this.isRefreshing = false;
+          this.refreshTokenSubject.next(token.accessToken);
+          return next.handle(this.addAuthToken(request));
+        }),
+        catchError((err) => {
+          this.isRefreshing = false;
+          this.authService.logout();
+          return throwError(() => err);
+        })
+      );
+    } else {
+      return this.refreshTokenSubject.pipe(
+        filter((token) => token !== null),
+        take(1),
+        switchMap(() => next.handle(this.addAuthToken(request)))
+      );
+    }
   }
 }

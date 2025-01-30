@@ -27,7 +27,7 @@ export class AuthService {
     if (this.refreshingToken) return this.accessTokenSubject.asObservable();
 
     this.refreshingToken = true;
-    return this.http.get<{ accessToken: string }>(`${this.API_URL}/refresh`, { withCredentials: true }).pipe(
+    return this.http.post<{ accessToken: string }>(`${this.API_URL}/refresh`, {},{ withCredentials: true}).pipe(
       map(response => {
         this.setAccessToken(response.accessToken);
         this.refreshingToken = false;
@@ -43,7 +43,7 @@ export class AuthService {
   }
 
   refreshToken(): Observable<any> {
-    return this.http.get(`${this.API_URL}/refresh`, { withCredentials: true }).pipe(
+    return this.http.post(`${this.API_URL}/refresh`, {},{ withCredentials: true }).pipe(
       tap((res: any) => {
         localStorage.setItem('accessToken', res.accessToken);
       })

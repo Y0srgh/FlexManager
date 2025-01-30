@@ -152,7 +152,7 @@ export class UserService extends BaseService<UserEntity> {
       })
       .getOne();
 
-    if (!user) throw new UnauthorizedException('Incorrect credentials');
+    if (!user) throw new NotFoundException('Incorrect credentials');
 
     if (await bcrypt.compare(password, user.password)) {
       const tokens = await this.getTokens(user.username, user.email, user.role);
@@ -167,7 +167,7 @@ export class UserService extends BaseService<UserEntity> {
 
       return { accessToken: tokens.accessToken };
     } else {
-      throw new UnauthorizedException('Incorrect credentials');
+      throw new NotFoundException('Incorrect credentials');
     }
   }
   hashData(data: string) {
