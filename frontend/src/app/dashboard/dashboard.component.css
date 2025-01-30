@@ -78,13 +78,13 @@
     font-size: 18px;
   }
 #trainerChart {
-    width: 50% !important; 
+    width: 40% !important; 
     height: 300px !important; 
     max-width: 100%;
     border-radius: 8px;
   }
  #demographicsChart{
-    width: 50% !important; 
+    width: 40% !important; 
     height: 300px !important; 
     max-width: 100%;
     border-radius: 8px;
