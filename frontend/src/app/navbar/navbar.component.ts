@@ -19,6 +19,6 @@ export class NavbarComponent {
    
   }
   navigateToHome() {
-    this.router.navigate(['']); 
+    this.router.navigate(['/home']); 
   }
 }

@@ -12,10 +12,17 @@ import { NutritionistsComponent } from './components/nutritionist/nutritionist.c
 import { PricingComponent } from './components/pricing/pricing.component';
 import { TestimonialsComponent } from './components/testimonials/testimonials.component';
 import { LayoutComponent } from './components/layout/layout.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 const routes: Routes = [
   { path: '', component: LayoutComponent },
-];
+
+    { path: 'home', component: HomeComponent }, 
+    { path: 'dashboard', component: DashboardComponent }, 
+    { path: 'calendar', component: CalendarComponent }, 
+
+  ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -8,7 +8,6 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { HttpClientModule } from '@angular/common/http';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon'; 
 
 
@@ -35,7 +34,6 @@ import { NutritionistsComponent } from './components/nutritionist/nutritionist.c
 import { PricingComponent } from './components/pricing/pricing.component';
 import { TestimonialsComponent } from './components/testimonials/testimonials.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { AppRoutingModule } from './app-routing.module';
 import { LayoutComponent } from './components/layout/layout.component';
 import { ButtonComponent } from './shared/button/button.component';
 import { SignupComponent } from './signup/signup.component';
@@ -56,6 +54,8 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { NavbarComponent } from './navbar/navbar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { CourseManagementComponent } from './components/course-management/course-management.component';
+import { CourseFormComponent } from './components/course-form/course-form.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +66,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     CoachListComponent,
     RequestCardComponent,
     ReservationCardComponent,
-    CalendarComponent,       
+    CalendarComponent,  NavbarComponent,DashboardComponent,CardComponent ,HomeComponent    
   ],
   imports: [
     BrowserModule,
@@ -84,7 +84,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    FullCalendarModule
+    FullCalendarModule,
     MatIconModule,
   ],
   providers: [
