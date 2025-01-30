@@ -30,7 +30,7 @@ export class AuthInterceptor implements HttpInterceptor {
           Authorization: `Bearer ${accessToken}`,
           'Content-Type': 'application/json',
         },
-        // withCredentials: true,
+        withCredentials: true,
       });
 
       return next.handle(cloned).pipe(

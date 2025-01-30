@@ -19,8 +19,8 @@ export class RequestLoggingInterceptor implements NestInterceptor {
     // console.log('Headers:', request.headers);
     // console.log('Body:', request.body);
     // console.log('Query Params:', request.query);
-    // const refreshToken = request.cookies['refreshToken'];
-    // console.log('Refresh Token:', refreshToken);
+    const refreshToken = request.cookies['refreshToken'];
+    console.log('Refresh Token----------------------------:', refreshToken);
     return next.handle().pipe(
       tap((response) => {
         // console.log(response);
@@ -30,6 +30,8 @@ export class RequestLoggingInterceptor implements NestInterceptor {
         // console.log('Request Details:', req['accessToken']);
         // res.set('x-new-access-token', req['accessToken']);
         // res.setHeader('x-new-access-token', req['accessToken']);
+        console.log(res.getHeaders());
+        res.setHeader('access-control-allow-origin','http://localhost:4200')
         const newAccessToken = req['accessToken'];
         if (newAccessToken) {
           res.setHeader('x-new-access-token', newAccessToken);
