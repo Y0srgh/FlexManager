@@ -2,13 +2,23 @@ import { Injectable } from '@angular/core';
 import { Socket } from 'socket.io-client';
 import { io } from 'socket.io-client';
 import { ChatMessageDTO } from '../../model/messageDTO';
+import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
 export class ChatserviceService {
 
   private socket: Socket;
+  private roomIdSource = new BehaviorSubject<string | null>(null);
+  currentRoomId = this.roomIdSource.asObservable();
 
+  setRoomId(roomId: string) {
+    this.roomIdSource.next(roomId);
+  }
+
+  clearRoomId() {
+    this.roomIdSource.next(null);
+  }
   constructor() {
     this.socket = io('http://localhost:3000/'); // Replace with your server URL
   }

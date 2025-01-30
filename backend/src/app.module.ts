@@ -16,7 +16,7 @@ dotenv.config();
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      url: process.env.DATABASE_URL,
+      url: 'postgresql://postgres:root@localhost:5433/flexmanager',
       entities: ['dist/**/*.entity{.ts,.js}'],
       synchronize: true
     }),
