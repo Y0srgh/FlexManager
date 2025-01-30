@@ -1,16 +1,10 @@
 <div class="navbar">
-    <div class="navbar-left">
-      <!-- <img src="assets/logo2.png" alt="FlexManager Logo" class="logo" /> -->
-      <h3>FlexManager</h3>
-    </div>
-    <div class="navbar-right">
-
-      <mat-icon class="icon" (click)="onNotificationsClick()">notifications</mat-icon>
-      <mat-icon class="icon" >settings</mat-icon>
-
-
-      <mat-icon class="icon" (click)="onProfileClick()">account_circle</mat-icon>
-
-    </div>
+  <div class="navbar-left">
+    <h3 (click)="navigateToHome()" class="clickable">FlexManager</h3>
   </div>
-  
+  <div class="navbar-right">
+    <mat-icon class="icon" (click)="onNotificationsClick()">notifications</mat-icon>
+    <mat-icon class="icon">settings</mat-icon>
+    <mat-icon class="icon" (click)="onProfileClick()">account_circle</mat-icon>
+  </div>
+</div>

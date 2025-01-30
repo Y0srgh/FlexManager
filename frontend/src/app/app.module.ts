@@ -31,7 +31,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     SidebarComponent,   
     HomeComponent,   
     CardComponent, NavbarComponent, 
-    // DashboardComponent,    
+     DashboardComponent,    
   ],
   imports: [
     BrowserModule,
