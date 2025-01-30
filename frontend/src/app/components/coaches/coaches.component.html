@@ -1,0 +1,10 @@
+<section class="coaches">
+  <h2>Our Coaches</h2>
+  <div class="coach-cards">
+    <div class="card" *ngFor="let coach of coaches" data-aos="zoom-in-up" [attr.data-aos-delay]="coach.delay">
+      <img [src]="coach.image" [alt]="coach.name">
+      <h3>{{ coach.name }}</h3>
+      <p>{{ coach.title }}</p>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,8 @@
+<div class="coach-list">
+    <app-coach
+      *ngFor="let coach of coaches"
+      [coach]="coach"
+      (select)="selectCoach(coach)"
+    ></app-coach>
+  </div>
+  

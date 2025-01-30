@@ -1,0 +1,10 @@
+<section class="why-choose-us">
+  <h2>Why Choose Us</h2>
+  <div class="features">
+    <div class="feature-item" *ngFor="let feature of features" data-aos="flip-left" data-aos-easing="ease-out-cubic" [attr.data-aos-duration]="feature.duration">
+      <i [class]="feature.icon"></i>
+      <h3>{{ feature.title }}</h3>
+      <p>{{ feature.description }}</p>
+    </div>
+  </div>
+</section>

@@ -2,15 +2,14 @@ import {
   Entity,
   Column,
   OneToMany,
-  ManyToOne,
   JoinColumn,
   OneToOne,
-  PrimaryGeneratedColumn,
   PrimaryColumn,
 } from 'typeorm';
 import { UserEntity } from 'src/user/entities/user.entity';
 import { Course } from 'src/classes/entities/course.entity';
 import { TimestampEntity } from 'src/Generics/timestamp.entities';
+import { Reservation } from 'src/reservation/entities/reservation.entity';
 
 @Entity('coaches')
 export class CoachEntity extends TimestampEntity {
@@ -37,4 +36,6 @@ export class CoachEntity extends TimestampEntity {
   })
   @JoinColumn()
   user: UserEntity;
+  @OneToMany(() => Reservation, (reservation) => reservation.coachEntity)
+  reservations: Reservation[];
 }

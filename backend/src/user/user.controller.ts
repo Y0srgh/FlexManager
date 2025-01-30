@@ -20,10 +20,23 @@ import { User } from 'src/decorators/user.decorator';
 import { Roles } from 'src/enums/user-role.enum';
 import { Role } from 'src/decorators/role.decorator';
 import { RolesGuard } from './guards/role.guards';
+import { CreateClientDto } from './dto/create-client.dto';
+import { CoachService } from './coach.service';
+import { ClientService } from './client.service';
+import { CreateManagerDto } from './dto/create-manager.dto';
+import { ManagerService } from './manager.service';
+import { ParentService } from './parent.service';
+import { CreateParentDto } from './dto/create-parent.dto';
 
 @Controller('auth')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly coachService: CoachService,
+    private readonly clientService: ClientService,
+    private readonly managerService: ManagerService,
+    private readonly parentService: ParentService,
+  ) {}
 
   @Post('signup')
   async signUp(@Body() userData: UserSingUpDto): Promise<UserEntity> {
@@ -32,37 +45,35 @@ export class UserController {
 
   @Post('signin')
   async signIn(@Body(UserSignInValidationPipe) userData: UserSingInDto) {
-  console.log("i am heree");
-  
+    console.log('i am heree');
+
     return this.userService.signIn(userData);
   }
-
 
   //principe : definir les "fonctionnalités" de tous les utilisateur ici et restreindre l'accès en fonction du role de l'utilisateur (RBAC)
   //exemple :
   // @Post('manager')
   // @UseGuards(JwtAuthGuard)
   // async admin(@User({ roles: [Roles.MANAGER] }) user: UserEntity) {....}
- 
 
-  @Post('create-coach')
+  @Post('coach')
   @Role(Roles.MANAGER)
   @UseGuards(JwtAuthGuard, RolesGuard)
   createCoach(@Body() createCoachDto: CreateCoachDto) {
-    console.log("i am in the controller");
-    
-    return this.userService.createCoach(createCoachDto);
+    console.log('i am in the controller');
+
+    return this.coachService.createCoach(createCoachDto);
   }
 
-  @Get()
+  @Get('coach')
   findAllCoaches() {
-    return this.userService.findAllCoaches();
+    return this.coachService.findAll();
   }
 
-  // @Get(':id')
-  // findOneCoach(@Param('id') id: string) {
-  //   return this.userService.findOneCoach(id);
-  // }
+  @Get('coach/:id')
+  findOneCoach(@Param('id') id: string) {
+    return this.coachService.findOne(id);
+  }
 
   // @Patch(':id')
   // update(@Param('id') id: string, @Body() updateCoachDto: UpdateCoachDto) {
@@ -73,5 +84,53 @@ export class UserController {
   // remove(@Param('id') id: string) {
   //   return this.userService.remove(id);
   // }
+
+  //---------client
+  @Post('client')
+  @Role(Roles.MANAGER)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  createClient(@Body() CreateClientDto: CreateClientDto) {
+    return this.clientService.createClient(CreateClientDto);
+  }
+
+  @Get('client')
+  @Role(Roles.MANAGER)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  findAllClients() {
+    return this.clientService.findAll();
+  }
+
+  @Get('client/:id')
+  findOneClient(@Param('id') id: string) {
+    return this.clientService.findOne(id);
+  }
+
+  //-------------manager
+  @Post('manager')
+  @Role(Roles.MANAGER)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  createManager(@Body() CreateManagerDto: CreateManagerDto) {
+    return this.managerService.createManager(CreateManagerDto);
+  }
+
+  @Get('manager')
+  @Role(Roles.MANAGER)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  findAllManagers() {
+    return this.managerService.findAll();
+  }
+
+  @Get('manager/:id')
+  findOneManager(@Param('id') id: string) {
+    return this.managerService.findOne(id);
+  }
+
+  //-----------parent
+  @Post('parent')
+  @Role(Roles.CLIENT)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  createParent(@Body() createParentDto: CreateParentDto,@User() user) {
+    return this.parentService.createParent(createParentDto, user);
+  }
 
 }
