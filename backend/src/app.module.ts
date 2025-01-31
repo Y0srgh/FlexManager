@@ -9,9 +9,10 @@ import { TestModule } from './test/test.module';
 import { UserModule } from './user/user.module';
 
 dotenv.config();
-import { CourseModule } from './classes/entities/strategy/courses.module';
+import { CourseModule } from './classes/strategy/courses.module';
 import { CommonModule } from './common/common.module';
 import { BaseService } from './base/base.service';
+import { PrivateSessionModule } from './private-session/private-session.module';
 
 @Module({
   imports: [CourseModule ,  
@@ -26,7 +27,8 @@ import { BaseService } from './base/base.service';
     TypeOrmModule.forFeature([Test]),
     TestModule,
     UserModule,
-    CommonModule
+    CommonModule,
+    PrivateSessionModule
 
 ],
 controllers: [AppController],
