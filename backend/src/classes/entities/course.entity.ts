@@ -4,7 +4,7 @@ import { CoachEntity } from 'src/user/entities/coach.entity';
 @Entity('courses') 
 export class Course {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: string;
 
   @Column()
   title: string;
