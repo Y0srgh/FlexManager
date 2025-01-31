@@ -1,0 +1,24 @@
+<div class="course-container">
+  <div class="course-photo">
+    <img [src]="course?.coachPhoto" alt="Coach Photo" class="coach-photo" />
+    <p class="coach-name">{{ course?.coachName }}</p> <!-- Nom du coach -->
+  </div>
+  <div class="course-details">
+    <h2 class="course-name">{{ course?.name }}</h2>
+    <div class="course-description-container">
+      <p class="course-description">{{ course?.description }}</p> <!-- Description du cours -->
+    </div>
+    <!-- Bouton pour afficher les détails -->
+    <button class="view-details-btn" (click)="onViewDetails()">View Details</button>
+  </div>
+</div>
+
+<!-- Fond semi-transparent et Popup pour afficher les détails -->
+<div *ngIf="showDetails" class="app-course-details-backdrop" (click)="toggleDetails()"></div>
+
+<app-course-details 
+  *ngIf="showDetails" 
+  [course]="course" 
+  (close)="toggleDetails()" 
+  class="app-course-details-popup">
+</app-course-details>

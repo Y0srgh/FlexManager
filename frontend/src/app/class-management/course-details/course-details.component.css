@@ -1,0 +1,145 @@
+/* Conteneur principal de la carte */
+.course-details-container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 0px;
+    gap: 30px;
+    position: relative;
+  }
+  
+  /* Informations du coach */
+  .coach-info {
+    text-align: center;
+    flex: 0 0 180px;
+  }
+  
+  /* Photo du coach */
+  .coach-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 2px solid #421A3F;
+  }
+  
+  /* Informations du cours */
+  .course-info {
+    flex-grow: 1;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding-bottom: 30px;
+  }
+  
+  /* Nom du cours */
+  .course-name {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333;
+    margin: 0 0 10px;
+    text-transform: uppercase;
+  }
+  
+  /* Description du cours */
+  .course-description {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 15px;
+  }
+  
+  /* Détails spécifiques du cours */
+  .course-details-item {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 10px;
+  }
+  
+  /* Conteneur pour les boutons */
+  .buttons-container {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Espacement entre les boutons */
+    justify-content: flex-end;
+    margin-top: 0;
+    width: auto;
+  }
+  
+  /* Bouton Réserver, Editer et Supprimer */
+  .reserve-btn,
+  .edit-btn,
+  .delete-btn {
+    background-color: #421A3F; /* Mauve */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 50px;
+    transition: background-color 0.3s ease;
+    width: auto;
+    width: 120px;
+    margin-right: 10px; /* Ajout d'un espacement explicite entre les boutons */
+  }
+  
+  .reserve-btn:hover,
+  .edit-btn:hover,
+  .delete-btn:hover {
+    background-color: #5A2A56; /* Hover mauve */
+  }
+  
+  .reserve-btn:focus,
+  .edit-btn:focus,
+  .delete-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(66, 26, 63, 0.5);
+  }
+  
+  /* Bouton Delete (Gris) */
+  .delete-btn {
+    background-color: #6c757d;
+  }
+  
+  .delete-btn:hover {
+    background-color: #5a636a;
+  }
+  
+  .delete-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(108, 117, 125, 0.5);
+  }
+  
+  /* Suppression de l'espace entre les boutons */
+  .buttons-container > button:last-child {
+    margin-right: 0; /* Retirer le margin-right du dernier bouton */
+  }
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 30px;
+    color: #333;
+    cursor: pointer;
+    z-index: 1000; /* Pour s'assurer qu'il est au-dessus du contenu */
+  }
+  
+  .close-btn:hover {
+    color: #ff4c4c; /* Changement de couleur au survol */
+  }

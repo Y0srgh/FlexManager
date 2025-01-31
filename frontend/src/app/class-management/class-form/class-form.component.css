@@ -1,0 +1,122 @@
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+
+.form-container {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 15px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 0;
+}
+
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: #333;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 0;
+    font-size: 14px;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+textarea {
+    resize: vertical;
+    height: 80px;
+}
+
+input:focus,
+textarea:focus {
+    border-color: #5f2b4f;
+    outline: none;
+    box-shadow: 0 0 4px rgba(95, 43, 79, 0.5);
+}
+
+/* Personnalisation de l'input de date */
+.custom-date-input {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.custom-date-input input {
+    padding-right: 40px;
+}
+
+mat-datepicker-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #5f2b4f;
+    cursor: pointer;
+}
+
+
+.button-container {
+    display: flex;
+    width: 100%;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.custom-button {
+    flex: 0 1 48%;
+    padding: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.save-button {
+    background-color: #5f2b4f;
+    color: white;
+}
+
+.save-button:hover {
+    background-color: #693b5d;
+    box-shadow: 0 4px 8px rgba(105, 59, 93, 0.4);
+}
+
+.save-button:disabled {
+    background-color: #cccccc; 
+    color: #666666; 
+    cursor: not-allowed; 
+    box-shadow: none; 
+}
+
+.save-button:disabled:hover {
+    background-color: #cccccc; 
+}
+
+
+.cancel-button {
+    background-color: #ccc;
+    color: #333;
+}
+
+.cancel-button:hover {
+    background-color: #ddd;
+    box-shadow: 0 4px 8px rgba(204, 204, 204, 0.4);
+}

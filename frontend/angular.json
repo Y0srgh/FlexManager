@@ -37,9 +37,10 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/flatpickr/dist/flatpickr.min.css"
             ],
-            "scripts": []
+            "scripts": ["node_modules/flatpickr/dist/flatpickr.min.js"]
           },
           "configurations": {
             "production": {
@@ -95,7 +96,9 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "@angular/material/prebuilt-themes/indigo-pink.css",
+              "node_modules/font-awesome/css/font-awesome.min.css"
             ],
             "scripts": []
           }

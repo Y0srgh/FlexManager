@@ -1,0 +1,59 @@
+<div class="form-container">
+  <form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+    <!-- Titre -->
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input id="title" type="text" formControlName="title" placeholder="Enter title" />
+    </div>
+
+    <!-- Description -->
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" formControlName="description" placeholder="Enter description"></textarea>
+    </div>
+
+    <!-- Nom du coach -->
+    <div class="form-group">
+      <label for="coachName">Coach name</label>
+      <input id="coachName" type="text" formControlName="coachName" placeholder="Enter coach name" />
+    </div>
+
+    <!-- Téléphone du coach -->
+    <div class="form-group">
+      <label for="coachPhone">Coach phone</label>
+      <input id="coachPhone" type="tel" formControlName="coachPhone" placeholder="Enter coach phone" />
+    </div>
+
+    <!-- Date -->
+    <div class="form-group">
+      <label for="date">Date</label>
+      <div class="custom-date-input">
+        <input id="date" matInput [matDatepicker]="picker" formControlName="date" placeholder="Pick a date" />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </div>
+    </div>
+
+    <!-- Heure de début -->
+    <div class="form-group">
+      <label for="startTime">Start Time</label>
+      <input id="startTime" type="time" formControlName="startTime" placeholder="HH:mm" />
+    </div>
+
+    <!-- Heure de fin -->
+    <div class="form-group">
+      <label for="endTime">End Time</label>
+      <input id="endTime" type="time" formControlName="endTime" placeholder="HH:mm" />
+      <!-- Message d'erreur -->
+      <div *ngIf="courseForm.get('endTime')?.hasError('invalidTime') && courseForm.get('endTime')?.touched">
+        <small style="color: red;">End time cannot be earlier than start time.</small>
+      </div>
+    </div>
+
+    <!-- Boutons -->
+    <div class="button-container">
+      <button type="submit" class="custom-button save-button" [disabled]="!isFormValid">Save</button>
+      <button type="button" class="custom-button cancel-button" (click)="onCancel()">Cancel</button>
+    </div>
+  </form>
+</div>
