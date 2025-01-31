@@ -85,7 +85,7 @@ export class UserService extends BaseService<UserEntity> {
       };
       const jwt = await this.jwtService.signAsync(payload);
       return {
-        access_token: jwt,
+        accessToken: jwt,
       };
     } else {
       throw new UnauthorizedException('Incorrect credentials');
@@ -155,17 +155,44 @@ export class UserService extends BaseService<UserEntity> {
     if (!user) throw new UnauthorizedException('Incorrect credentials');
 
     if (await bcrypt.compare(password, user.password)) {
-      const tokens = await this.getTokens(user.username, user.email, user.role);
-      await this.updateRefreshToken(user.id, tokens.refreshToken);
+      const payload = {
+        username: user.username,
+        email: user.email,
+        role: user.role,
+      };
 
-      response.cookie('refreshToken', tokens.refreshToken, {
-        httpOnly: true,
-        secure: false,
-        sameSite: 'lax',
-        maxAge: 7 * 24 * 60 * 60 * 1000,
+      const accessToken = await this.jwtService.signAsync(payload, {
+        expiresIn: '1m',
       });
 
-      return { accessToken: tokens.accessToken };
+      const refreshToken = await this.jwtService.signAsync(
+        { ...payload, tokenType: 'refresh' },
+        {
+          expiresIn: '2m',
+        },
+      );
+
+      console.log("refresh token", refreshToken);
+      const tokens = user.refreshToken || [];
+      // tokens.push(refreshToken);
+      user.refreshToken =  refreshToken;
+      await this.userRepository.save(user);
+      
+      response.cookie('refreshToken', refreshToken, {
+        httpOnly: true,
+        // secure: false,
+        sameSite: 'lax',
+        secure: process.env.NODE_ENV === 'production',
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+      });
+      
+      console.log("access token---------------------------------------", accessToken);
+      console.log("user", user);
+      
+
+      return {
+        accessToken: accessToken,
+      };
     } else {
       throw new UnauthorizedException('Incorrect credentials');
     }

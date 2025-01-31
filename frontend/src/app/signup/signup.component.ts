@@ -111,6 +111,8 @@ export class SignupComponent implements OnInit {
       goal: this.signupForm.value.membershipDetails.goal,
     };
 
+    console.log("client details", clientDetails);
+    
     if (this.signupForm.valid && this.currentStep === 2) {
       this.baseService.post(`${this.endpoint}`, clientDetails).subscribe({
         next: (response) => {

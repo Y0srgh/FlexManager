@@ -34,4 +34,6 @@ import { PrivateSessionModule } from './private-session/private-session.module';
 controllers: [AppController],
 providers: [AppService],
 })
-export class AppModule {}
+export class AppModule {
+  
+}

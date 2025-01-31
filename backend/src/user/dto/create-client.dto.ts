@@ -28,7 +28,6 @@ export class CreateClientDto extends UserSingUpDto {
   gender: Gender;
 
   @IsOptional()
-  @IsJSON({ each: true })
   physicalDetails?: { weight: number; height: number; age:number };
 
   // @IsOptional()

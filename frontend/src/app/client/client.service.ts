@@ -1,16 +1,21 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Client } from '../interfaces/client';
+import { BaseService } from '../base/base.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClientService {
-  private API_URL = 'http://localhost:3000/auth/client';
+  private apiUrl = `auth/client`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private baseService: BaseService) {}
 
-  getClients(): Observable<any[]> {
-    return this.http.get<any[]>(this.API_URL);
+  getClients(): Observable<Client[]> {
+    const options = {
+      withCredentials: true
+    };
+    return this.baseService.get<Client[]>(this.apiUrl);
   }
 }

@@ -115,10 +115,10 @@ export class UserController {
 
   @Get('client')
   @Role(Roles.MANAGER)
-  @UseGuards(RefreshTokenGuard)
-  findAllClients() {
-    console.log("i am here in find all");
-    
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  findAllClients(@Req() req: Request) {
+    console.log("i am in find all clients");
+    // console.log('Access Token from Header:', res.get('x-new-access-token'));
     return this.clientService.findAll();
   }
 

@@ -37,12 +37,16 @@ export class SigninComponent {
     });
 
     console.log('Form value:', this.signinForm.value);
-
     if (this.signinForm.valid) {
+      localStorage.removeItem('accessToken');
       this.baseService.post(`${this.endpoint}`, this.signinDetails.value).subscribe({
         next: (response: any) => {
           console.log('Signin successful:', response);
-          localStorage.setItem('accessToken', response.accessToken);
+          //after 1s
+          setTimeout(() => {
+            localStorage.setItem('accessToken',response.accessToken);
+            // window.location.href = '/dashboard';
+          }, 1000);
         },
         error: (error) => {
           console.error('Signin failed:', error);
