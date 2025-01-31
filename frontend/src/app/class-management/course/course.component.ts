@@ -8,15 +8,15 @@ import { Course } from '../../models/course.model';
 })
 export class CourseComponent {
   @Input() course: Course | null = null;
-  @Input() role: string = 'user'; // Ajouter l'input rôle
-  @Output() viewDetails = new EventEmitter<number>();  // Émettre l'ID du cours
+  @Input() role: string = 'user'; 
+  @Output() viewDetails = new EventEmitter<number>();  
 
   showDetails: boolean = false;
 
   onViewDetails() {
     if (this.course) {
-      this.viewDetails.emit(this.course.id);  // Envoyer l'ID du cours au parent
-      this.showDetails = true;  // Afficher les détails
+      this.viewDetails.emit(this.course.id);  
+      this.showDetails = true;  
     }
   }
 

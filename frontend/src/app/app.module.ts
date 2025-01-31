@@ -17,6 +17,8 @@ import {CourseDetailsComponent} from './class-management/course-details/course-d
 import { Course } from './models/course.model';
 import {CoursePageComponent} from './class-management/course-page/course-page.component'
 import { CourseService } from './services/course.service'; 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 
 
@@ -44,6 +46,8 @@ import { CourseService } from './services/course.service';
     MatInputModule,
     MatFormFieldModule,
     MatNativeDateModule,
+    BrowserAnimationsModule,
+  
     
   ],
   providers: [CourseService],

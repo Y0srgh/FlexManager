@@ -1,7 +1,7 @@
 export class Course {
   id: number;
   name: string;
-  coachId: number;  // Ajout de l'ID du coach
+  coachId: number; 
   coachName: string;
   coachPhoto: string; 
   description: string;
@@ -11,7 +11,7 @@ export class Course {
   constructor(
     id: number,
     name: string,
-    coachId: number,  // Ajout dans le constructeur
+    coachId: number,  
     coachName: string,
     coachPhoto: string,
     description: string,
@@ -20,7 +20,7 @@ export class Course {
   ) {
     this.id = id;
     this.name = name;
-    this.coachId = coachId;  // Affectation de l'ID du coach
+    this.coachId = coachId;  
     this.coachName = coachName;
     this.coachPhoto = coachPhoto;
     this.description = description;

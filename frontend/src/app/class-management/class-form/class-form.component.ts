@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-class-form',
@@ -14,23 +15,34 @@ export class ClassFormComponent {
       {
         title: ['', Validators.required],
         description: ['', Validators.required],
-        duration: [null, [Validators.required, Validators.min(1)]],
-        date: [null, Validators.required],
+        date: [null, [Validators.required, this.dateValidator.bind(this)]], 
         startTime: [null, Validators.required],
         endTime: [null, Validators.required],
-        coachName: ['', Validators.required],
-        coachPhone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
       },
       {
-        validators: this.timeValidator.bind(this) 
+        validators: this.timeValidator.bind(this)
       }
     );
+  }
+
+ 
+  dateValidator(control: any) {
+    const date = control.value;
+    console.log('Date:', date);
+    if (date) {
+      const isValid = !isNaN(Date.parse(date));
+      if (!isValid) {
+        return { matDatepicker: true }; 
+      }
+    }
+    return null;
   }
 
  
   timeValidator(group: FormGroup) {
     const startTime = group.get('startTime')?.value;
     const endTime = group.get('endTime')?.value;
+    console.log('Start Time:', startTime);
 
     if (startTime && endTime) {
       const start = this.timeToMinutes(startTime);
@@ -44,7 +56,6 @@ export class ClassFormComponent {
     return null;
   }
 
-  
   private timeToMinutes(time: string): number {
     const [hours, minutes] = time.split(':').map(num => parseInt(num, 10));
     return hours * 60 + minutes;
@@ -52,14 +63,10 @@ export class ClassFormComponent {
 
  
   onSubmit() {
-    if (this.courseForm.valid) {
-      console.log('Form Data:', this.courseForm.value);
-    } else {
-      console.error('Form is invalid');
-    }
+    this.courseForm.reset();
   }
 
- 
+  
   onCancel() {
     this.courseForm.reset();
   }

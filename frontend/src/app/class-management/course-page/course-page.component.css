@@ -1,16 +1,16 @@
-/* Conteneur du bouton "+ Add Class" qui s'affiche uniquement pour le rôle 'coach' */
+
 .add-class-btn-container {
-  margin-top: 30px; /* Espace en haut pour ne pas être collé au haut */
-  margin-bottom: 5px; /* Réduit l'espace sous le bouton */
+  margin-top: 30px; 
+  margin-bottom: 5px; 
   margin-right: 20px;
-  text-align: right; /* Aligne le bouton à droite */
+  text-align: right; 
 }
 
-/* Style pour le bouton */
+
 .add-class-btn {
   padding: 10px 20px;
   font-size: 16px;
-  background-color: #4CAF50; /* Couleur du bouton */
+  background-color: #4CAF50; 
   color: white;
   border: none;
   border-radius: 5px;
@@ -19,23 +19,23 @@
 }
 
 .add-class-btn:hover {
-  background-color: #45a049; /* Couleur plus foncée au survol */
+  background-color: #45a049; 
 }
 
-/* Style général pour la liste des cours */
+
 .course-list {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Deux colonnes de taille égale */
-  gap: 10px; /* Espace entre les cartes */
-  margin-top: 10px; /* Légère marge en haut */
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px; 
+  margin-top: 10px; 
 }
 
-/* Marge spécifique lorsque le rôle est 'coach' */
+
 .course-list-coach {
-  margin-top: 20px; /* Ajuste la marge supérieure pour les coachs */
+  margin-top: 20px;
 }
 
-/* Style pour chaque carte de cours */
+
 .course-container {
   box-sizing: border-box;
   padding: 0;
@@ -44,10 +44,10 @@
   border: none;
 }
 
-/* Réponse pour les écrans plus petits */
+
 @media (max-width: 768px) {
   .course-list {
-    grid-template-columns: 1fr; /* Une seule colonne sur les petits écrans */
+    grid-template-columns: 1fr; 
   }
 }
  

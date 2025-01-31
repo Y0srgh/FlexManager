@@ -37,4 +37,5 @@ export class CoursePageComponent implements OnInit {
   closeDetails() {
     this.selectedCourse = null;
   }
+  
 }

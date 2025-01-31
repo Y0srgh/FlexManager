@@ -1,4 +1,3 @@
-/* Conteneur principal */
 .reservation-card {
   max-width: 400px; 
   background-color: #f7f7f7; 
@@ -19,7 +18,6 @@
   margin-bottom: 20px; 
 }
 
-/* Section du coach */
 .coach-section {
   margin-bottom: 20px;
 }

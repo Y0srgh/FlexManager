@@ -1,4 +1,4 @@
-/* Conteneur principal de la carte */
+
 .course-details-container {
     position: relative;
     display: flex;
@@ -14,13 +14,13 @@
     position: relative;
   }
   
-  /* Informations du coach */
+
   .coach-info {
     text-align: center;
     flex: 0 0 180px;
   }
   
-  /* Photo du coach */
+
   .coach-photo {
     width: 120px;
     height: 120px;
@@ -30,7 +30,7 @@
     border: 2px solid #421A3F;
   }
   
-  /* Informations du cours */
+  
   .course-info {
     flex-grow: 1;
     text-align: left;
@@ -43,7 +43,7 @@
     padding-bottom: 30px;
   }
   
-  /* Nom du cours */
+
   .course-name {
     font-size: 1.8rem;
     font-weight: bold;
@@ -52,7 +52,6 @@
     text-transform: uppercase;
   }
   
-  /* Description du cours */
   .course-description {
     font-size: 1rem;
     color: #555;
@@ -60,31 +59,31 @@
     margin-bottom: 15px;
   }
   
-  /* Détails spécifiques du cours */
+ 
   .course-details-item {
     font-size: 1rem;
     color: #555;
     margin-bottom: 10px;
   }
   
-  /* Conteneur pour les boutons */
+  
   .buttons-container {
     position: absolute;
     right: 10px;
     bottom: 10px;
     display: flex;
     flex-wrap: wrap;
-    gap: 10px; /* Espacement entre les boutons */
+    gap: 10px; 
     justify-content: flex-end;
     margin-top: 0;
     width: auto;
   }
   
-  /* Bouton Réserver, Editer et Supprimer */
+
   .reserve-btn,
   .edit-btn,
   .delete-btn {
-    background-color: #421A3F; /* Mauve */
+    background-color: #421A3F; 
     color: white;
     border: none;
     padding: 10px 20px;
@@ -94,13 +93,13 @@
     transition: background-color 0.3s ease;
     width: auto;
     width: 120px;
-    margin-right: 10px; /* Ajout d'un espacement explicite entre les boutons */
+    margin-right: 10px;
   }
   
   .reserve-btn:hover,
   .edit-btn:hover,
   .delete-btn:hover {
-    background-color: #5A2A56; /* Hover mauve */
+    background-color: #5A2A56; 
   }
   
   .reserve-btn:focus,
@@ -110,7 +109,7 @@
     box-shadow: 0 0 0 3px rgba(66, 26, 63, 0.5);
   }
   
-  /* Bouton Delete (Gris) */
+ 
   .delete-btn {
     background-color: #6c757d;
   }
@@ -124,9 +123,9 @@
     box-shadow: 0 0 0 3px rgba(108, 117, 125, 0.5);
   }
   
-  /* Suppression de l'espace entre les boutons */
+  
   .buttons-container > button:last-child {
-    margin-right: 0; /* Retirer le margin-right du dernier bouton */
+    margin-right: 0; 
   }
   .close-btn {
     position: absolute;
@@ -137,9 +136,9 @@
     font-size: 30px;
     color: #333;
     cursor: pointer;
-    z-index: 1000; /* Pour s'assurer qu'il est au-dessus du contenu */
+    z-index: 1000; 
   }
   
   .close-btn:hover {
-    color: #ff4c4c; /* Changement de couleur au survol */
+    color: #ff4c4c; 
   }

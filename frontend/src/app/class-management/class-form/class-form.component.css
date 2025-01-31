@@ -1,8 +1,6 @@
-
 body {
     font-family: 'Roboto', sans-serif;
 }
-
 
 .form-container {
     max-width: 400px;
@@ -12,7 +10,6 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     border-radius: 0;
 }
-
 
 .form-group {
     margin-bottom: 15px;
@@ -49,7 +46,6 @@ textarea:focus {
     box-shadow: 0 0 4px rgba(95, 43, 79, 0.5);
 }
 
-/* Personnalisation de l'input de date */
 .custom-date-input {
     display: flex;
     align-items: center;
@@ -69,7 +65,6 @@ mat-datepicker-toggle {
     cursor: pointer;
 }
 
-
 .button-container {
     display: flex;
     width: 100%;
@@ -88,7 +83,6 @@ mat-datepicker-toggle {
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-
 .save-button {
     background-color: #5f2b4f;
     color: white;
@@ -100,16 +94,11 @@ mat-datepicker-toggle {
 }
 
 .save-button:disabled {
-    background-color: #cccccc; 
-    color: #666666; 
-    cursor: not-allowed; 
-    box-shadow: none; 
+    background-color: #5A2A56;
+    color: white;
+    cursor: not-allowed;
+    box-shadow: none;
 }
-
-.save-button:disabled:hover {
-    background-color: #cccccc; 
-}
-
 
 .cancel-button {
     background-color: #ccc;
