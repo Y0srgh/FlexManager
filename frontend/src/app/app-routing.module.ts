@@ -6,7 +6,6 @@ const routes: Routes = [
   
   { path: 'course', component: CoursePageComponent },
   
- 
 
 ];
 

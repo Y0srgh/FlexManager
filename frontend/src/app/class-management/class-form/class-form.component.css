@@ -6,7 +6,7 @@
     padding: 25px;
     background-color: #f9f9f9;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    border-radius: 8px; /* Coins arrondis */
+    border-radius: 8px; 
     position: relative;
 }
 
@@ -35,7 +35,7 @@ textarea {
     font-size: 14px;
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
-    background-color: #fff; /* Arrière-plan clair */
+    background-color: #fff; 
 }
 
 textarea {
