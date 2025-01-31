@@ -1,5 +1,10 @@
 <div class="add-class-btn-container" *ngIf="role === 'coach'">
-    <button class="add-class-btn">+ Add Class</button>
+    <button (click)="openModal()" class="add-class-btn">+ Add Class</button>
+  </div>
+  <div class="modal" *ngIf="showModal">
+    <div class="modal-content">
+      <app-class-form (closeModal)="closeModal()"></app-class-form>
+    </div>
   </div>
   
   <div class="course-list">

@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Course } from '../../models/course.model';
+import { Router } from '@angular/router'; 
 
 @Component({
   selector: 'app-course-details',
@@ -8,15 +9,17 @@ import { Course } from '../../models/course.model';
 })
 export class CourseDetailsComponent {
   @Input() course: Course | null = null;
-  @Input() role: string = 'user';  
+  @Input() role: string = 'coach';  
   @Output() close = new EventEmitter<void>(); 
+ 
+  @Output() edit = new EventEmitter<Course>(); 
 
-  isEditing: boolean = false;  
+  constructor(private router: Router) {} 
 
-  
-  editCourse() {
-    this.isEditing = true;
+  onEdit(courseId: number) {
+    this.router.navigate(['/course-edit', courseId]);
   }
+  
 
   
   closePopup() {

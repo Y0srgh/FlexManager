@@ -11,9 +11,8 @@
       
       <div class="buttons-container">
         <div *ngIf="role === 'coach'" class="edit-btn-container">
-          <button *ngIf="!isEditing" class="edit-btn" (click)="editCourse()">Edit</button>
-          <button *ngIf="isEditing" class="save-btn">Save</button>
-          <button *ngIf="isEditing" class="cancel-btn" (click)="isEditing = false">Cancel</button>
+          
+          <button class="edit-btn" (click)="onEdit(course.id)">Edit</button>
           <button class="delete-btn">Delete</button>
         </div>
       </div>

@@ -8,7 +8,7 @@ import { Course } from '../../models/course.model';
 })
 export class CourseComponent {
   @Input() course: Course | null = null;
-  @Input() role: string = 'user'; 
+  @Input() role: string = 'coach'; 
   @Output() viewDetails = new EventEmitter<number>();  
 
   showDetails: boolean = false;

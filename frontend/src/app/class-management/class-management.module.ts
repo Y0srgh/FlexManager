@@ -12,7 +12,8 @@ import { CoursePageComponent } from './course-page/course-page.component';
     ClassFormComponent,
     CourseComponent,
     CourseDetailsComponent,
-    CoursePageComponent
+    CoursePageComponent,
+    
   ],
   imports: [
     CommonModule

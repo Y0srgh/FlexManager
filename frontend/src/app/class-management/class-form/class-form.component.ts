@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component , Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
+import { Course } from '../../models/course.model';
 
 @Component({
   selector: 'app-class-form',
@@ -8,7 +9,9 @@ import { DateAdapter } from '@angular/material/core';
   styleUrls: ['./class-form.component.css']
 })
 export class ClassFormComponent {
+  @Output() closeModal = new EventEmitter<void>();
   courseForm: FormGroup;
+ 
 
   constructor(private fb: FormBuilder) {
     this.courseForm = this.fb.group(
@@ -64,16 +67,24 @@ export class ClassFormComponent {
  
   onSubmit() {
     this.courseForm.reset();
+    
   }
 
   
   onCancel() {
     this.courseForm.reset();
+   
   }
+  
 
  
   get isFormValid() {
     return this.courseForm.valid && 
            !this.courseForm.get('endTime')?.hasError('invalidTime');
+
   }
+
+
+    
+  
 }
