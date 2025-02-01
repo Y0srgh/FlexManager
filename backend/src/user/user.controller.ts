@@ -30,7 +30,6 @@ import { ManagerService } from './manager.service';
 import { ParentService } from './parent.service';
 import { CreateParentDto } from './dto/create-parent.dto';
 import { Response, Request } from 'express';
-import { RefreshTokenGuard } from './guards/refresh-token.guard';
 @Controller('auth')
 export class UserController {
   constructor(
@@ -56,18 +55,6 @@ export class UserController {
     return this.userService.signIn(userData, response);
   }
 
-  @UseGuards(RefreshTokenGuard)
-  @Get('refresh')
-  async refreshToken(
-    @Req() request: Request,
-    @Res({ passthrough: true }) response: Response,
-    @User() user: UserEntity,
-  ) {
-    console.log("i am in refresh controller", request);
-    
-    const refreshToken = request.user['refreshToken'];
-    return this.userService.refreshTokens(user.id, refreshToken);
-  }
   //principe : definir les "fonctionnalités" de tous les utilisateur ici et restreindre l'accès en fonction du role de l'utilisateur (RBAC)
   //exemple :
   // @Post('manager')
@@ -130,7 +117,7 @@ export class UserController {
   //-------------manager
   @Post('manager')
   @Role(Roles.MANAGER)
-  @UseGuards(JwtAuthGuard,RefreshTokenGuard)
+  @UseGuards(JwtAuthGuard, RolesGuard)
   createManager(@Body() CreateManagerDto: CreateManagerDto) {
     return this.managerService.createManager(CreateManagerDto);
   }

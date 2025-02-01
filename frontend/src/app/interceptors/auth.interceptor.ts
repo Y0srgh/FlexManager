@@ -39,8 +39,8 @@ export class AuthInterceptor implements HttpInterceptor {
             if (event instanceof HttpResponse) {
               console.log('event', event);
               const newAccessToken = event.headers.get('x-new-access-token');
-              console.log("-------------------------------", newAccessToken);
-              
+              console.log('-------------------------------', newAccessToken);
+
               if (newAccessToken) {
                 console.log('New access token received:', newAccessToken);
                 localStorage.setItem('accessToken', newAccessToken);
@@ -56,17 +56,18 @@ export class AuthInterceptor implements HttpInterceptor {
           },
         })
       );
+    } else {
+      return next.handle(req).pipe(
+        tap({
+          next: (response) => {
+            console.log('response', response);
+          },
+          error: (error) => {
+            console.log(error);
+          },
+        })
+      );
     }
-    return next.handle(req).pipe(
-      tap(
-        (response) => {
-          console.log('response', response);
-        },
-        (error) => {
-          console.log(error);
-        }
-      )
-    );
   }
 }
 

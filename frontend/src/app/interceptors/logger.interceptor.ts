@@ -13,6 +13,7 @@ export class LoggerInterceptor implements HttpInterceptor {
         if (event instanceof HttpResponse) {
           // Retrieve the x-new-access-token header
           const newAccessToken = event.headers.get('x-new-access-token');
+          console.log('newAccessToken : ',newAccessToken);
           
         //   if (newAccessToken) {
         //     console.log('New Access Token:', newAccessToken);
