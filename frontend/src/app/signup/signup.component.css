@@ -136,6 +136,67 @@
 .form-subtitle {
   color: var(--blue-gray);
   margin-bottom: 2rem;
+
+  a {
+    color: var(--color-6);
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    transition: all 0.3s ease;
+    padding: 0 4px;
+
+    &::before {
+      content: "";
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(to right, var(--color-6), var(--color-7));
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease;
+    }
+
+    &:hover {
+      color: var(--color-7);
+      text-shadow: 0 0 20px rgba(61, 90, 254, 0.3);
+
+      &::before {
+        transform: scaleX(1);
+        transform-origin: left;
+      }
+    }
+
+    &:active {
+      transform: translateY(1px);
+    }
+
+    &::after {
+      content: "→";
+      margin-left: 4px;
+      opacity: 0;
+      transform: translateX(-8px);
+      transition: all 0.3s ease;
+    }
+
+    &:hover::after {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}
+
+@keyframes glowPulse {
+  0% {
+    text-shadow: 0 0 10px rgba(61, 90, 254, 0.2);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(61, 90, 254, 0.4);
+  }
+  100% {
+    text-shadow: 0 0 10px rgba(61, 90, 254, 0.2);
+  }
 }
 
 .form-grid {

@@ -3,7 +3,7 @@
     <form (ngSubmit)="onSubmit()" #signinForm="ngForm">
       <h2 class="form-title">Welcome Back !</h2>
       <p class="form-subtitle">
-        Log in to continue your fitness journey with us
+        Log in to continue your fitness journey with us. <a [routerLink]="'/register'">Don't have an account ?</a>
       </p>
       <div class="form-grid">
         <app-input-field
