@@ -2,21 +2,17 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FullCalendarModule } from '@fullcalendar/angular';
 
 // Material Modules
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 
 // Components
-import { AppComponent } from './app.component';
 import { CoachComponent } from './private-coach/coach/coach.component';
 import { CoachListComponent } from './private-coach/coach-list/coach-list.component';
 import { RequestCardComponent } from './private-coach/request-card/request-card.component';
@@ -117,13 +113,11 @@ import { CourseService } from './services/course.service';
     MatInputModule,
     AppRoutingModule,
     // RouterModule.forRoot(routes),
-    MatIconModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoggerInterceptor, multi: true },
   ],
-  providers: [CourseService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
