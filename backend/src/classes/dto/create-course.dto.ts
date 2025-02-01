@@ -8,6 +8,10 @@ export class CreateCourseDto {
   @IsString()
   description: string;
 
+  @IsString()
+  @IsOptional()
+  coachPhoto: string;
+
   @IsInt()
   duration: number;
 

@@ -26,7 +26,7 @@ export class Course {
     this.title = title;
     this.coachId = coachId;  
     this.coachName = coachName;
-    this.coachPhoto = coachPhoto;
+    this.coachPhoto = coachPhoto || "assets/yoga.jpg";
     this.description = description;
     this.startTime = startTime;
     this.endTime = endTime;

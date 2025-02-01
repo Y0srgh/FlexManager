@@ -1,6 +1,12 @@
 <div class="course-container">
   <div class="course-photo">
-    <img [src]="course?.coachPhoto" alt="Coach Photo" class="coach-photo" />
+    <!-- <img src="assets/yoga.jpg" alt="Coach Photo" 
+class="coach-photo" /> -->
+<img [src]="course ? course.coachPhoto : 'assets/default-photo.jpg'" 
+     alt="Coach Photo" 
+     class="coach-photo" />
+
+
     <p class="coach-name">{{ course?.coachName }}</p> 
   </div>
   <div class="course-details">

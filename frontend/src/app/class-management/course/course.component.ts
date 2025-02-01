@@ -22,4 +22,6 @@ export class CourseComponent {
   toggleDetails() {
     this.showDetails = !this.showDetails;
   }
+
+  
 }
