@@ -15,7 +15,7 @@ import { CoachComponent } from './private-coach/coach/coach.component';
 import { CoachListComponent } from './private-coach/coach-list/coach-list.component';
 import { RequestCardComponent } from './private-coach/request-card/request-card.component';
 import {ReservationCardComponent} from './private-coach/reservation-card/reservation-card.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FullCalendarModule } from '@fullcalendar/angular';
 
 
@@ -47,6 +47,20 @@ import { CalendarComponent } from './calendar/calendar.component';
 //   { path: '**', redirectTo: '' } 
 // ];
 
+import { ClassFormComponent } from './class-management/class-form/class-form.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatNativeDateModule } from '@angular/material/core';
+import {CourseComponent} from './class-management/course/course.component'
+import {CourseDetailsComponent} from './class-management/course-details/course-details.component'
+import { Course } from './models/course.model';
+import {CoursePageComponent} from './class-management/course-page/course-page.component'
+import { CourseService } from './services/course.service'; 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
+
 
 @NgModule({
   declarations: [
@@ -57,7 +71,14 @@ import { CalendarComponent } from './calendar/calendar.component';
     CoachListComponent,
     RequestCardComponent,
     ReservationCardComponent,
-    CalendarComponent,       
+    CalendarComponent,       ,
+    ClassFormComponent,
+    CourseComponent,
+    CourseDetailsComponent, 
+    CoursePageComponent,
+    
+    
+
   ],
   imports: [
     BrowserModule,
@@ -75,10 +96,20 @@ import { CalendarComponent } from './calendar/calendar.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    FullCalendarModule
+    FullCalendarModule, 
+    MatDatepickerModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+    BrowserAnimationsModule,
+  
+    
   ],
 
-  providers: [],
+  providers: [CourseService],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { 
+ 
+}

@@ -1,0 +1,22 @@
+<div class="course-details-container" *ngIf="course">
+    <div class="coach-info">
+      <img [src]="course.coachPhoto" alt="Photo du coach" class="coach-photo">
+      <h2 class="coach-name">{{ course.coachName }}</h2>
+    </div>
+    <div class="course-info">
+      <h3 class="course-name">{{ course.name }}</h3>
+      <p class="course-description">{{ course.description }}</p>
+      <p><strong>Durée :</strong> {{ course.duration }}</p>
+      <p><strong>Capacité :</strong> {{ course.courseCapacity }} places</p>
+      
+      <div class="buttons-container">
+        <div *ngIf="role === 'coach'" class="edit-btn-container">
+          
+          <button class="edit-btn" (click)="onEdit(course.id)">Edit</button>
+          <button class="delete-btn">Delete</button>
+        </div>
+      </div>
+      
+      <button class="close-btn" (click)="closePopup()">×</button>
+    </div>
+  </div> 

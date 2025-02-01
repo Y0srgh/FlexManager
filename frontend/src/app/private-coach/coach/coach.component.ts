@@ -6,6 +6,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./coach.component.css']
 })
 export class CoachComponent {
+  
   @Input() coach!: { name: string, specialty: string, image: string };  
   @Output() select = new EventEmitter<string>();
 

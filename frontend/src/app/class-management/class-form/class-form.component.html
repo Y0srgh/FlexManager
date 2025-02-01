@@ -1,0 +1,46 @@
+<div class="form-container">
+  <button class="close-button" (click)="closeModal.emit()">✖</button>
+  <form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+    <div class="form-content">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input id="title" type="text" formControlName="title" placeholder="Enter title" />
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" formControlName="description" placeholder="Enter description"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="date">Date</label>
+        <div class="custom-date-input">
+          <input id="date" matInput [matDatepicker]="picker" formControlName="date" placeholder="Pick a date" />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </div>
+        <small *ngIf="courseForm.get('date')?.touched && courseForm.get('date')?.hasError('matDatepicker')" style="color: red;">
+          Invalid date format.
+        </small>
+      </div>
+
+      <div class="form-group">
+        <label for="startTime">Start Time</label>
+        <input id="startTime" type="time" formControlName="startTime" />
+      </div>
+
+      <div class="form-group">
+        <label for="endTime">End Time</label>
+        <input id="endTime" type="time" formControlName="endTime" />
+        <small *ngIf="courseForm.get('endTime')?.hasError('invalidTime')" style="color: red;">
+          End time must be later than start time.
+        </small>
+      </div>
+
+      <div class="button-container">
+        <button type="submit" class="custom-button save-button" [disabled]="!isFormValid">Save</button>
+        <button type="button" class="custom-button cancel-button" (click)="onCancel()">Cancel</button>
+      </div>
+    </div>
+  </form>
+</div>

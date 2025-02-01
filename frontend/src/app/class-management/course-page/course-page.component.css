@@ -1,0 +1,96 @@
+
+.app-container {
+  background-image: url('https://media.istockphoto.com/id/1438034462/fr/photo/femme-sportive-latino-et-africaine-faisant-de-lexercice-et-construisant-du-muscle-dans-le.jpg?s=612x612&w=0&k=20&c=1vzZ61xLQHwJQ6Ubu1oa5AP3spI5STLrf2lisJbGSOY=');
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+  background-attachment: fixed; 
+  margin: 0;
+  padding: 0;
+  height: 100vh; 
+  display: flex;
+  flex-direction: column;
+}
+.add-class-btn-container {
+  margin-top: 30px; 
+  margin-bottom: 5px; 
+  margin-right: 20px;
+  text-align: right; 
+}
+
+
+.add-class-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #6c757d; 
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.add-class-btn:hover {
+  background-color: #5a636a; 
+}
+
+
+.course-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px; 
+  margin-top: 10px; 
+}
+
+
+.course-list-coach {
+  margin-top: 20px;
+}
+
+
+.course-container {
+  box-sizing: border-box;
+  padding: 0;
+  background-color: transparent;
+  box-shadow: none;
+  border: none;
+}
+
+
+@media (max-width: 768px) {
+  .course-list {
+    grid-template-columns: 1fr; 
+  }
+}
+ 
+/* Style pour la modale */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Contenu de la modale */
+.modal-content {
+  background-color: white;
+  padding: 0px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 100%;
+}
+
+/* Bouton de fermeture de la modale (en option) */
+.close-btn {
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
