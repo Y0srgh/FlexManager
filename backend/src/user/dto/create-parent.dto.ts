@@ -14,7 +14,7 @@ export class CreateParentDto {
 
   @IsOptional()
   @IsEnum(Roles)
-  role: Roles = Roles.CLIENT;
+  role: Roles = Roles.PARENT;
 
   @IsNumber()
   associatedAccountsCount : number = 0;

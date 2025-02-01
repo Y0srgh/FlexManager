@@ -30,6 +30,7 @@ export class BaseService<T> {
         email: createDto.email,
         role: createDto.role,
         password: createDto.password || defaultPassword,
+        phone: createDto.phone
       } as UserSingUpDto;
 
       const user = await this.userService.signUp(signupCoach);

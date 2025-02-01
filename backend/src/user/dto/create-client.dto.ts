@@ -1,4 +1,17 @@
-import { IsString, IsOptional, IsBoolean, IsEnum, IsJSON, IsUUID, IsMobilePhone, IsEmail, Length, IS_STRONG_PASSWORD, IsStrongPassword, IsArray } from 'class-validator';
+import {
+  IsString,
+  IsOptional,
+  IsBoolean,
+  IsEnum,
+  IsJSON,
+  IsUUID,
+  IsMobilePhone,
+  IsEmail,
+  Length,
+  IS_STRONG_PASSWORD,
+  IsStrongPassword,
+  IsArray,
+} from 'class-validator';
 import { Assistant } from 'src/enums/assistant_type.enum';
 import { Roles } from 'src/enums/user-role.enum';
 import { UserSingUpDto } from './user-sign-up.dto';
@@ -13,11 +26,14 @@ export class CreateClientDto extends UserSingUpDto {
   email: string;
 
   @IsString()
-  @IsStrongPassword( { minLength: 6, minLowercase: 1, minUppercase: 1, minNumbers: 1}, { message: 'weak password' })
+  @IsStrongPassword(
+    { minLength: 6, minLowercase: 1, minUppercase: 1, minNumbers: 1 },
+    { message: 'weak password' },
+  )
   password: string;
 
   @IsMobilePhone('ar-TN')
-  phone?: string;
+  phone: string;
 
   @IsOptional()
   @IsEnum(Roles)
@@ -28,7 +44,7 @@ export class CreateClientDto extends UserSingUpDto {
   gender: Gender;
 
   @IsOptional()
-  physicalDetails?: { weight: number; height: number; age:number };
+  physicalDetails?: { weight: number; height: number; age: number };
 
   // @IsOptional()
   // @IsUUID()
@@ -64,4 +80,3 @@ export class CreateClientDto extends UserSingUpDto {
   // @IsJSON()
   // paymentInfo?: any;
 }
-
