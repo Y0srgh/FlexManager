@@ -5,6 +5,7 @@ import {
   OneToOne,
   JoinColumn,
   PrimaryColumn,
+  OneToMany,
 } from 'typeorm';
 import { UserEntity } from './user.entity';
 import { Assistant } from 'src/enums/assistant_type.enum';
