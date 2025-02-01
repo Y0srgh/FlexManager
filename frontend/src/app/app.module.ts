@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 import { CourseManagementComponent } from './components/course-management/course-management.component';
 import { CourseFormComponent } from './components/course-form/course-form.component';
@@ -33,6 +34,7 @@ import { SigninComponent } from './signin/signin.component';
 import { ClientComponent } from './client/client.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { LoggerInterceptor } from './interceptors/logger.interceptor';
+import { JoinOptionsComponent } from './join-options/join-options.component';
 
 // const routes: Routes = [
 //   { path: '', component: HeroComponent },
@@ -67,6 +69,7 @@ import { LoggerInterceptor } from './interceptors/logger.interceptor';
     InputFieldComponent,
     SigninComponent,
     ClientComponent,
+    JoinOptionsComponent,
   ],
   imports: [
     BrowserModule,
@@ -80,6 +83,7 @@ import { LoggerInterceptor } from './interceptors/logger.interceptor';
     MatInputModule,
     AppRoutingModule,
     // RouterModule.forRoot(routes),
+    MatIconModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

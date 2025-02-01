@@ -1,0 +1,251 @@
+.join-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+    padding: 3rem 2rem;
+    background: url("/hero-bg1.png") no-repeat center center/cover;
+    min-height: 100vh;
+    position: relative;
+    
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.57);
+        z-index: 1;
+    }
+}
+
+.content-wrapper {
+    position: relative;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    max-width: 450px;
+    width: 90%;
+    animation: fadeIn 0.8s ease-out;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background: linear-gradient(45deg, #ff3e00, #ff7b00, #00b4db, #ff3e00);
+        z-index: -1;
+        border-radius: 22px;
+        background-size: 400%;
+        animation: borderGlow 8s linear infinite;
+        opacity: 0.5;
+    }
+}
+
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.join-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    padding: 1.2rem;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #ff3e00, #ff7b00);
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 62, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255, 62, 0, 0.4);
+        
+        &::after {
+            transform: translateX(100%);
+        }
+    }
+
+    &:active {
+        transform: translateY(1px);
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.2),
+            transparent
+        );
+        transition: transform 0.5s ease;
+    }
+
+    i {
+        font-size: 1.4rem;
+        animation: pulse 2s infinite;
+    }
+
+    &:nth-child(2) {
+        background: linear-gradient(135deg, #00b4db, #0083b0);
+        box-shadow: 0 4px 15px rgba(0, 180, 219, 0.3);
+
+        &:hover {
+            box-shadow: 0 6px 20px rgba(0, 180, 219, 0.4);
+        }
+    }
+}
+
+.signin-link {
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    animation: fadeIn 0.8s ease-out;
+    
+    span {
+        color: #ffffff;
+        font-size: 0.95rem;
+        opacity: 0.9;
+    }
+    
+    .link-button {
+        background: none;
+        border: none;
+        color: #ff7b00;
+        cursor: pointer;
+        padding: 0;
+        font-weight: 600;
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+        
+        &:hover {
+            color: #ff3e00;
+            text-shadow: 0 0 15px rgba(255, 62, 0, 0.5);
+        }
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes borderGlow {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 400% 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .join-container {
+        padding: 2rem 1rem;
+    }
+
+    .content-wrapper {
+        padding: 2rem;
+    }
+
+    .join-button {
+        padding: 1rem;
+        font-size: 1rem;
+
+        i {
+            font-size: 1.2rem;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .content-wrapper {
+        padding: 1.5rem;
+    }
+
+    .signin-link {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+    }
+}
+
+:host {
+    display: block;
+    background-color: #111;
+    min-height: 100vh;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ff3e00;
+    border-radius: 4px;
+    
+    &:hover {
+        background: #ff7b00;
+    }
+}
