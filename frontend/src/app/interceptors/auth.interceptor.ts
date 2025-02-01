@@ -30,7 +30,7 @@ export class AuthInterceptor implements HttpInterceptor {
           Authorization: `Bearer ${accessToken}`,
           'Content-Type': 'application/json',
         },
-        withCredentials: true,
+        // withCredentials: true,
       });
 
       return next.handle(cloned).pipe(
@@ -46,6 +46,8 @@ export class AuthInterceptor implements HttpInterceptor {
                 localStorage.setItem('accessToken', newAccessToken);
               }
               if (event.status === 401) {
+                console.log('removing access token and must be signed out');
+                
                 localStorage.removeItem('accessToken');
               }
             }

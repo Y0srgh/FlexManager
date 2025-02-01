@@ -113,13 +113,13 @@ export class UserService {
       user.refreshToken =  refreshToken;
       await this.userRepository.save(user);
       
-      response.cookie('refreshToken', refreshToken, {
-        httpOnly: true,
-        // secure: false,
-        sameSite: 'lax',
-        secure: process.env.NODE_ENV === 'production',
-        maxAge: 7 * 24 * 60 * 60 * 1000,
-      });
+      // response.cookie('refreshToken', refreshToken, {
+      //   httpOnly: true,
+      //   // secure: false,
+      //   sameSite: 'lax',
+      //   secure: process.env.NODE_ENV === 'production',
+      //   maxAge: 7 * 24 * 60 * 60 * 1000,
+      // });
       
       console.log("access token---------------------------------------", accessToken);
       console.log("user", user);

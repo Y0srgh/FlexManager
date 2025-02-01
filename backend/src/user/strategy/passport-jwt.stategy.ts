@@ -32,22 +32,18 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     const user = await this.userRepositor.findOne({
       where: { username: payload.username },
     });
+
     if (!user) {
       throw new NotFoundException('User not found');
     }
-
-    const refreshToken = req.cookies['refreshToken'];
-    console.log('Refresh Token2----------------------------:', refreshToken);
 
     const currentTime = Math.floor(Date.now() / 1000);
     if (payload.exp < currentTime) {
       console.log('Access token expired, checking refresh token');
 
-      if (!user.refreshToken || (user.refreshToken!=refreshToken)) {
+      if (!user.refreshToken) {
         throw new UnauthorizedException('No refresh token found');
       }
-
-      if(refreshToken){
 
         try {
           const refreshPayload = this.jwtService.verify(user.refreshToken, {
@@ -87,9 +83,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         } catch (error) {
           throw new UnauthorizedException('Invalid refresh token');
         }
-      }else{
-        throw new UnauthorizedException('No refresh token found');
-      }
+     
     } else {
       delete user.password;
       delete user.salt;
