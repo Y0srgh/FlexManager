@@ -33,7 +33,7 @@ export class BaseService<T> {
         phone: createDto.phone
       } as UserSingUpDto;
 
-      const user = await this.userService.signUp(signupCoach);
+      var user = await this.userService.signUp(signupCoach);
 
       console.log('extract user', extraData(user));
 
@@ -46,6 +46,9 @@ export class BaseService<T> {
 
       return this.repository.save(newUser);
     } catch (error) {
+      if (user) {
+        await this.repository.delete(user.id);
+      }
       console.log('error-------------------------', error);
       throw error;
     }
