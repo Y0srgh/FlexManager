@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import AOS from 'aos';
 
 
 @Component({
@@ -9,10 +8,5 @@ import AOS from 'aos';
 })
 export class AppComponent {
   title = 'frontend';
-  ngOnInit(): void {
-    AOS.init({
-      duration: 1000, 
-      once: false,     
-    });
-  }
+ 
 }

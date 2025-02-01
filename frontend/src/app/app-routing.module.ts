@@ -1,15 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CoursePageComponent } from './class-management/course-page/course-page.component';
-
-const routes: Routes = [
-  
-  { path: 'course', component: CoursePageComponent },
-  
-
-];
-
-// Importer les composants associés
 import { HeroComponent } from './components/hero/hero.component';
 import { StatsComponent } from './components/stats/stats.component';
 import { WhyChooseUsComponent } from './components/why-choose-us/why-choose-us.component';
@@ -21,6 +12,7 @@ import { LayoutComponent } from './components/layout/layout.component';
 
 const routes: Routes = [
   { path: '', component: LayoutComponent },
+  { path: 'course', component: CoursePageComponent },
 ];
 
 @NgModule({
