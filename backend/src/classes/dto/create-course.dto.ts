@@ -1,9 +1,33 @@
+import { IsString, IsInt, IsOptional, IsDateString } from 'class-validator';
+import { time } from 'console';
+
 export class CreateCourseDto {
-    title: string;
-    description: string;
-    date: string;
-    startTime: string;
-    endTime:string;
-    duration: number;
-  }
-  
+  @IsString()
+  title: string;
+
+  @IsString()
+  description: string;
+
+  @IsInt()
+  duration: number;
+
+  @IsOptional()
+ 
+  startTime?: string;
+
+  @IsOptional()
+
+  endTime?: string;
+
+  @IsOptional()
+  @IsDateString()
+  date?: string;
+
+  @IsOptional()
+  @IsInt()
+  capacity?: number;
+
+  @IsOptional()
+ 
+  coachId?: string;  
+}

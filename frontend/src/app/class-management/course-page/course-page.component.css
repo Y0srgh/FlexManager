@@ -1,6 +1,6 @@
 
 .app-container {
-  background-image: url('https://media.istockphoto.com/id/1438034462/fr/photo/femme-sportive-latino-et-africaine-faisant-de-lexercice-et-construisant-du-muscle-dans-le.jpg?s=612x612&w=0&k=20&c=1vzZ61xLQHwJQ6Ubu1oa5AP3spI5STLrf2lisJbGSOY=');
+  background-image: url('https://images.pexels.com/photos/1552252/pexels-photo-1552252.jpeg?cs=srgb&dl=pexels-leonardho-1552252.jpg&fm=jpg');
   background-size: cover; 
   background-position: center; 
   background-repeat: no-repeat; 
@@ -10,6 +10,7 @@
   height: 100vh; 
   display: flex;
   flex-direction: column;
+  
 }
 .add-class-btn-container {
   margin-top: 30px; 

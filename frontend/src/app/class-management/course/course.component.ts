@@ -8,19 +8,18 @@ import { Course } from '../../models/course.model';
 })
 export class CourseComponent {
   @Input() course: Course | null = null;
-  @Input() role: string = 'coach'; 
-  @Output() viewDetails = new EventEmitter<number>();  
+  @Output() viewDetails = new EventEmitter<string>();
 
   showDetails: boolean = false;
 
   onViewDetails() {
     if (this.course) {
-      this.viewDetails.emit(this.course.id);  
-      this.showDetails = true;  
+      this.viewDetails.emit(this.course.id);
+      this.showDetails = true;
     }
   }
 
   toggleDetails() {
     this.showDetails = !this.showDetails;
   }
-}  
+}

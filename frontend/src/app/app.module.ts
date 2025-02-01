@@ -30,7 +30,6 @@ import { PricingComponent } from './components/pricing/pricing.component';
 import { TestimonialsComponent } from './components/testimonials/testimonials.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { LayoutComponent } from './components/layout/layout.component';
-import { ButtonComponent } from './components/shared/button/button.component';
 import { SignupComponent } from './signup/signup.component';
 import { ProgressIndicatorComponent } from './components/progress-indicator/progress-indicator.component';
 import { InputFieldComponent } from './components/input-field/input-field.component';
@@ -52,6 +51,7 @@ import { CoursePageComponent } from './class-management/course-page/course-page.
 // Interceptors
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { LoggerInterceptor } from './interceptors/logger.interceptor';
+import { ButtonComponent } from './components/shared/button/button.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +67,7 @@ import { LoggerInterceptor } from './interceptors/logger.interceptor';
     TestimonialsComponent,
     FooterComponent,
     LayoutComponent,
-    ButtonComponent,
+   ButtonComponent,
     SignupComponent,
     ProgressIndicatorComponent,
     InputFieldComponent,

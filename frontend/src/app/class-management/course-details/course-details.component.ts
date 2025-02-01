@@ -9,14 +9,13 @@ import { Router } from '@angular/router';
 })
 export class CourseDetailsComponent {
   @Input() course: Course | null = null;
-  @Input() role: string = 'coach';  
   @Output() close = new EventEmitter<void>(); 
  
   @Output() edit = new EventEmitter<Course>(); 
 
   constructor(private router: Router) {} 
 
-  onEdit(courseId: number) {
+  onEdit(courseId: string) {
     this.router.navigate(['/course-edit', courseId]);
   }
   

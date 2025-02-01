@@ -1,30 +1,36 @@
 export class Course {
-  id: number;
-  name: string;
-  coachId: number; 
+  id: string;
+  title: string;
+  coachId: string; 
   coachName: string;
   coachPhoto: string; 
   description: string;
+  startTime: string;
+  endTime: string;
   duration: string;
-  courseCapacity: number;  
+  capacity: number;  
   
   constructor(
-    id: number,
-    name: string,
-    coachId: number,  
+    id: string,
+    title: string,
+    coachId: string,  
     coachName: string,
     coachPhoto: string,
     description: string,
+    startTime: string,
+    endTime: string,
     duration: string,
-    courseCapacity: number 
+    capacity: number 
   ) {
     this.id = id;
-    this.name = name;
+    this.title = title;
     this.coachId = coachId;  
     this.coachName = coachName;
     this.coachPhoto = coachPhoto;
     this.description = description;
+    this.startTime = startTime;
+    this.endTime = endTime;
     this.duration = duration;
-    this.courseCapacity = courseCapacity; 
+    this.capacity = capacity; 
   }
 }

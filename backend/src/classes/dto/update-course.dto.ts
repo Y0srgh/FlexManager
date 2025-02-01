@@ -6,5 +6,5 @@ export class UpdateCourseDto {
     date?: string;
     time?: string;
     duration?: number;
-  }
+    capacity?: number; }
   

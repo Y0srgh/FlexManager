@@ -70,7 +70,7 @@
 .course-name {
   font-size: 1.6rem;
   font-weight: bold;
-  color:  white;
+  color:  black;
   margin: 0 0 10px 0;
   text-transform: uppercase;
   display: flex;
@@ -88,13 +88,14 @@
 
 
 .course-description {
-  font-size: 0.95rem;
-  color: white;
+  font-size: 1rem;
+  color: black;
   line-height: 1.6;
   margin: 10px 0;
   text-align: justify;
   word-break: break-word;
   white-space: normal;
+  font-weight: 700;
   
   
   display: block; 

@@ -3,7 +3,7 @@ import { CoachEntity } from 'src/user/entities/coach.entity';
 
 @Entity('courses')
 export class Course {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
@@ -23,6 +23,10 @@ export class Course {
 
   @Column({ type: 'date', nullable: true })
   date: string; 
+
+  @Column({ type: 'int', nullable: true })
+  capacity?: number; 
+
   @ManyToOne(() => CoachEntity, (coach) => coach.courses, { onDelete: 'SET NULL' })
   coach: CoachEntity;
 }
