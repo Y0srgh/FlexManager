@@ -1,5 +1,16 @@
 
-
+.app-container {
+  background-image: url('https://media.istockphoto.com/id/1438034462/fr/photo/femme-sportive-latino-et-africaine-faisant-de-lexercice-et-construisant-du-muscle-dans-le.jpg?s=612x612&w=0&k=20&c=1vzZ61xLQHwJQ6Ubu1oa5AP3spI5STLrf2lisJbGSOY=');
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+  background-attachment: fixed; 
+  margin: 0;
+  padding: 0;
+  height: 100vh; 
+  display: flex;
+  flex-direction: column;
+}
 .add-class-btn-container {
   margin-top: 30px; 
   margin-bottom: 5px; 
@@ -11,7 +22,7 @@
 .add-class-btn {
   padding: 10px 20px;
   font-size: 16px;
-  background-color: #4CAF50; 
+  background-color: #6c757d; 
   color: white;
   border: none;
   border-radius: 5px;
@@ -20,7 +31,7 @@
 }
 
 .add-class-btn:hover {
-  background-color: #45a049; 
+  background-color: #5a636a; 
 }
 
 
