@@ -12,9 +12,11 @@ export class ButtonComponent {
   @Input() buttonType: string = 'primary';   
   @Input() type: string = 'button';   
   @Input() icon: string = '';   
+  @Input() link?: string ;
   @Output() buttonClick = new EventEmitter<void>(); 
 
   handleClick(): void {
     this.buttonClick.emit();
+    
   }
 }
