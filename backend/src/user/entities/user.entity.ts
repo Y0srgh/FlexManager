@@ -36,6 +36,9 @@ export class UserEntity extends TimestampEntity {
   @Column()
   salt: string;
 
+  @Column({ nullable: true })
+  refreshToken: string;
+
   @OneToOne(() => CoachEntity, (coach) => coach.user, {
     nullable: true,
     cascade: true,
@@ -44,7 +47,7 @@ export class UserEntity extends TimestampEntity {
 
   @OneToOne(() => ClientEntity, (client) => client.user, {
     nullable: true,
-    cascade: true,
+    // cascade: true,
   })
   client: ClientEntity;
 

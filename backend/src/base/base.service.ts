@@ -9,7 +9,7 @@ export class BaseService<T> {
   constructor(
     private readonly repository: Repository<T>,
     protected readonly userService?: any,
-    protected readonly passwordService?: any
+    protected readonly passwordService?: any,
   ) {}
 
   async create(data: Partial<T>): Promise<T> {
@@ -17,27 +17,38 @@ export class BaseService<T> {
     return this.repository.save(entity);
   }
 
-  async createWithUser(createDto: any,extraData: (user: any) => Partial<T>): Promise<T> {
-      try {
-        const defaultPassword = this.passwordService.generateDefaultPassword();
-        const signupCoach: UserSingUpDto = {username: createDto.username, email: createDto.email, role : createDto.role, password: defaultPassword} as UserSingUpDto;
-    
-        const user = await this.userService.signUp(signupCoach);
-        
-    
-        const newUser = this.repository.create({
-          ...extraData(user),
-          id: user.id,
-          user: user,
-        } as DeepPartial<T>);
-    console.log("i am here",newUser);
-    
-        return this.repository.save(newUser);
-      } catch (error) {
-        console.log("error-------------------------",error);
-        throw error;
-      }
+  async createWithUser(
+    createDto: any,
+    extraData: (user: any) => Partial<T>,
+  ): Promise<T> {
+    try {
+      console.log('the dto', createDto);
+
+      const defaultPassword = this.passwordService.generateDefaultPassword();
+      const signupCoach: UserSingUpDto = {
+        username: createDto.username,
+        email: createDto.email,
+        role: createDto.role,
+        password: createDto.password || defaultPassword,
+      } as UserSingUpDto;
+
+      const user = await this.userService.signUp(signupCoach);
+
+      console.log('extract user', extraData(user));
+
+      const newUser = this.repository.create({
+        ...extraData(user),
+        id: user.id,
+        user: user,
+      } as DeepPartial<T>);
+      console.log('i am here', newUser);
+
+      return this.repository.save(newUser);
+    } catch (error) {
+      console.log('error-------------------------', error);
+      throw error;
     }
+  }
 
   async findAll(): Promise<T[]> {
     return this.repository.find();

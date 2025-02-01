@@ -1,4 +1,11 @@
-import { Entity, Column, ManyToOne, OneToOne, JoinColumn, PrimaryColumn, OneToMany } from 'typeorm';
+import {
+  Entity,
+  Column,
+  ManyToOne,
+  OneToOne,
+  JoinColumn,
+  PrimaryColumn,
+} from 'typeorm';
 import { UserEntity } from './user.entity';
 import { Assistant } from 'src/enums/assistant_type.enum';
 import { TimestampEntity } from 'src/Generics/timestamp.entities';
@@ -9,14 +16,16 @@ import { Reservation } from 'src/reservation/entities/reservation.entity';
 
 @Entity('clients')
 export class ClientEntity extends TimestampEntity {
-
   @PrimaryColumn('uuid')
   id: string;
 
   @Column({ type: 'json', nullable: true })
-  physicalDetails: { weight: number; height: number, age:number };
+  physicalDetails: { weight: number; height: number; age: number };
 
-  @ManyToOne(() => ParentEntity, (client) => client.children,{ nullable: true, eager: true })
+  @ManyToOne(() => ParentEntity, (client) => client.children, {
+    nullable: true,
+    eager: true,
+  })
   parentAccount: ParentEntity;
 
   @Column({ type: 'uuid', nullable: true })
@@ -26,7 +35,7 @@ export class ClientEntity extends TimestampEntity {
   gender: string;
 
   //goal
-  @Column({type:'enum', default: Goal.WEIGHTLOSS, enum: Goal})
+  @Column({ type: 'enum', array:true, enum: Goal, default: [Goal.MUSCLEGAIN] })
   goal: string[];
 
   @Column({ type: 'enum', default: Assistant.ONE, enum: Assistant })
@@ -49,8 +58,8 @@ export class ClientEntity extends TimestampEntity {
   @Column({ type: 'json', nullable: true })
   paymentInfo: any;
 
-   @OneToOne(() => UserEntity, (user) => user.client, {
-    eager: true,
+  @OneToOne(() => UserEntity, (user) => user.client, {
+    eager: true, onDelete: 'CASCADE', onUpdate: 'CASCADE', cascade: true
   })
   @JoinColumn()
   user: UserEntity;

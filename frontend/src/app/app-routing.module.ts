@@ -9,9 +9,17 @@ import { NutritionistsComponent } from './components/nutritionist/nutritionist.c
 import { PricingComponent } from './components/pricing/pricing.component';
 import { TestimonialsComponent } from './components/testimonials/testimonials.component';
 import { LayoutComponent } from './components/layout/layout.component';
+import { SignupComponent } from './signup/signup.component';
+import { SigninComponent } from './signin/signin.component';
+import { ClientComponent } from './client/client.component';
+import { JoinOptionsComponent } from './join-options/join-options.component';
 
 const routes: Routes = [
   { path: '', component: LayoutComponent },
+  { path: 'signup/sportsman', component: SignupComponent },
+  { path: 'signin', component: SigninComponent },
+  { path: 'client', component: ClientComponent },
+  { path: 'register', component: JoinOptionsComponent },
   { path: 'course', component: CoursePageComponent },
 ];
 

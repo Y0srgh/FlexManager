@@ -63,8 +63,7 @@
         <li *ngFor="let feature of plan.features">{{ feature }}</li>
       </ul>
       <app-button
-        [backgroundColor]="plan.featured && '#fff' ||'#000'"
-        [textColor]="plan.featured && '#000' ||'#fff'"
+        [buttonType]="plan.featured && 'pricing-featured' ||'pricing'"
         [buttonText]="'Choose Plan'"
         (buttonClick)="onChoosePlan()"
       ></app-button>
