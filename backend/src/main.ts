@@ -27,6 +27,14 @@ async function bootstrap() {
     allowedHeaders: ['Content-Type', 'Accept','Content-Type', 'Authorization', 'x-new-access-token'],
     exposedHeaders: ['x-new-access-token'],
   });
+
+  app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200'); 
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.setHeader('Access-Control-Expose-Headers', 'x-new-access-token');
+    res.removeHeader('Vary'); 
+    next();
+  });
   // app.enableCors({
   //   origin: 'http://localhost:4200',
   //   methods: ['PUT,POST,GET,DELETE,OPTIONS'],

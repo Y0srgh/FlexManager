@@ -45,45 +45,50 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         throw new UnauthorizedException('No refresh token found');
       }
 
-        try {
-          const refreshPayload = this.jwtService.verify(user.refreshToken, {
-            secret: process.env.SECRET,
-          });
+      try {
+        const refreshPayload = this.jwtService.verify(user.refreshToken, {
+          secret: process.env.SECRET,
+        });
 
-          console.log('-----------------------------', refreshPayload.exp);
-          const expirationDate = refreshPayload.exp * 1000;
-          console.log("expiration", expirationDate);
+        console.log('-----------------------------', refreshPayload.exp);
+        const expirationDate = refreshPayload.exp * 1000;
+        console.log('expiration', expirationDate);
+
+        console.log(
+          'Token Expiration:',
+          new Date(expirationDate).toLocaleString(),
+        );
+        console.log(new Date(Date.now()).toLocaleString());
+        console.log(Date.now());
+        console.log(currentTime);
+
+        if (refreshPayload.exp < currentTime) {
+          console.log('refresh token expired');
           
-
-          console.log('Token Expiration:', new Date(expirationDate).toLocaleString());
-          console.log(new Date(Date.now()).toLocaleString());
-          console.log(Date.now());
-          console.log(currentTime);
-
-          if (refreshPayload.exp < currentTime) {
-            throw new UnauthorizedException('Refresh token expired');
-          }
-
-          // If refresh token is valid, generate a new access token
-          const newAccessToken = this.jwtService.sign(
-            { username: user.username, email: user.email, role: user.role },
-            { secret: process.env.SECRET, expiresIn: '1m' },
-          );
-
-          console.log('New access token generated:', newAccessToken);
-
-          delete user.password;
-          delete user.salt;
-          delete user.createdAt;
-          delete user.updatedAt;
-          delete user.deletedAt;
-          // console.log('the user is', user, newAccessToken);
-          req['accessToken'] = newAccessToken;
-          return { ...user, newAccessToken };
-        } catch (error) {
-          throw new UnauthorizedException('Invalid refresh token');
+          throw new UnauthorizedException('Refresh token expired');
         }
-     
+
+        // If refresh token is valid, generate a new access token
+        const newAccessToken = this.jwtService.sign(
+          { username: user.username, email: user.email, role: user.role },
+          { secret: process.env.SECRET, expiresIn: '1m' },
+        );
+
+        console.log('New access token generated:', newAccessToken);
+
+        delete user.password;
+        delete user.salt;
+        delete user.createdAt;
+        delete user.updatedAt;
+        delete user.deletedAt;
+        // console.log('the user is', user, newAccessToken);
+        req['accessToken'] = newAccessToken;
+        return { ...user, newAccessToken };
+      } catch (error) {
+        console.log('refresh token expired 2', error);
+
+        throw new UnauthorizedException('Invalid refresh token');
+      }
     } else {
       delete user.password;
       delete user.salt;

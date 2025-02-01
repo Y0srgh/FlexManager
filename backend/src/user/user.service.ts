@@ -97,13 +97,13 @@ export class UserService {
       };
 
       const accessToken = await this.jwtService.signAsync(payload, {
-        expiresIn: '1m',
+        expiresIn: '15m',
       });
 
       const refreshToken = await this.jwtService.signAsync(
         { ...payload, tokenType: 'refresh' },
         {
-          expiresIn: '2m',
+          expiresIn: '7d',
         },
       );
 
