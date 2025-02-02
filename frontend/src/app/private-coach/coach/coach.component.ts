@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Coach } from '../../models/coach.model';
 
 @Component({
   selector: 'app-coach',
@@ -7,11 +8,11 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class CoachComponent {
   
-  @Input() coach!: { name: string, specialty: string, image: string };  
-  @Output() select = new EventEmitter<string>();
+  @Input() coach!: Coach;    
+  @Output() select = new EventEmitter<number>();
 
   selectCoach() {
-    this.select.emit(this.coach.name);  
-    console.log(`${this.coach.name} has been selected!`);
+    this.select.emit(this.coach.id);  
+    console.log(`Coach sélectionné : ${this.coach.name} (ID: ${this.coach.id})`);
   }
 }

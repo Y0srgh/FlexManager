@@ -1,0 +1,18 @@
+/* Conteneur de la liste de coachs */
+.coach-list {
+    display: flex;
+    flex-wrap: wrap; /* Permet aux éléments de revenir à la ligne si nécessaire */
+    gap: 20px; /* Espacement entre les cartes */
+    justify-content: flex-start; /* Aligne les éléments sur la gauche */
+    margin: 20px 0;
+  }
+  
+  /* Style des coachs (éléments) */
+  app-coach {
+    width: calc(33.333% - 13.333px); /* Largeur de 3 éléments par ligne avec l'espacement */
+    box-sizing: border-box; /* Assure que l'espacement est bien pris en compte */
+    /* Si tu veux que l'élément ait la même hauteur pour tous, tu peux ajouter :
+       height: 100%;
+    */
+  }
+  
