@@ -9,7 +9,7 @@
       [formControlName]="controlName"
       class="form-control"
       [class.is-invalid]="isFieldInvalid(basicDetails, controlName)"
-      placeholder="Enter {{ controlName }}"
+      [placeholder]="placeholder || 'Enter '+ controlName"
     />
     <i
       *ngIf="type === 'password'"
@@ -27,6 +27,11 @@
       *ngIf="basicDetails.get(controlName)?.errors?.['minlength'] && controlName === 'username'"
     >
       {{ label }} must be at least 3 characters
+    </span>
+    <span
+      *ngIf="basicDetails.get(controlName)?.errors?.['pattern'] && controlName === 'associatedAccountsCount'"
+    >
+      You have to associate at least 1 account and up to 9 accounts
     </span>
     <span *ngIf="basicDetails.get(controlName)?.errors?.['email']">
       Please enter a valid email

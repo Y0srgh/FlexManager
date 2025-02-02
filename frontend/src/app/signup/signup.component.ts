@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BaseService } from '../base/base.service';
 import { SignupService } from './signup.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -14,6 +15,9 @@ export class SignupComponent implements OnInit {
   signupForm!: FormGroup;
   currentStep = 1;
   submitted = false;
+
+  router: Router = Inject(Router);
+
 
   goals = [
     'Weight Loss',
@@ -127,7 +131,7 @@ export class SignupComponent implements OnInit {
   }
 
   exit() {
-    console.log('Exiting signup process');
+    this.router.navigate(['/signin']);
   }
 
   isFieldInvalid(formGroup: FormGroup, fieldName: string): boolean {

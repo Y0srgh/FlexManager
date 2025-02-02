@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ControlContainer, FormControl, FormGroup, FormGroupDirective } from '@angular/forms';
+import { AbstractControl, ControlContainer, FormArray, FormControl, FormGroup, FormGroupDirective } from '@angular/forms';
 import { SignupService } from '../../signup/signup.service';
 
 @Component({
@@ -15,6 +15,7 @@ export class InputFieldComponent {
   @Input() controlName!: string;
   @Input() basicDetails!: FormGroup;
   @Input() showPassword: boolean = false;
+  @Input() placeholder: string = '';
 
 
 

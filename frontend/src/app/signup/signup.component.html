@@ -12,7 +12,10 @@
         class="form-step"
       >
         <h2 class="form-title">Basic Details</h2>
-        <p class="form-subtitle">Please fill in your personal information. <a [routerLink]="'/signin'">Already have an account ?</a></p>
+        <p class="form-subtitle">
+          Please fill in your personal information.
+          <a [routerLink]="'/signin'">Already have an account ?</a>
+        </p>
 
         <div class="form-grid">
           <app-input-field
@@ -22,7 +25,7 @@
             controlName="username"
             type="text"
           >
-        </app-input-field>
+          </app-input-field>
 
           <app-input-field
             [basicDetails]="basicDetails"

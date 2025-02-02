@@ -35,6 +35,7 @@ import { ClientComponent } from './client/client.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { LoggerInterceptor } from './interceptors/logger.interceptor';
 import { JoinOptionsComponent } from './join-options/join-options.component';
+import { SignupParentComponent } from './signup-parent/signup-parent.component';
 
 // const routes: Routes = [
 //   { path: '', component: HeroComponent },
@@ -70,6 +71,7 @@ import { JoinOptionsComponent } from './join-options/join-options.component';
     SigninComponent,
     ClientComponent,
     JoinOptionsComponent,
+    SignupParentComponent,
   ],
   imports: [
     BrowserModule,
