@@ -5,6 +5,7 @@
   flex-wrap: wrap; /* Permet aux cartes de s'adapter en ligne */
   gap: 20px; /* Espacement entre les cartes */
   margin: 20px 0;
+  
 }
 
 /* Style de la carte coach */
@@ -13,10 +14,10 @@
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  background-color: #f9f9f9;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);;
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   width: 260px; /* Largeur fixe, ajustable */
   text-align: center;
   overflow: hidden;
@@ -26,7 +27,7 @@
 /* Effet au survol de la carte */
 .coach-item:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
 }
 
 /* Image du coach */
@@ -36,6 +37,7 @@
   border-radius: 50%;
   object-fit: cover;
   margin-bottom: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   /* Suppression du contour */
 }
 
@@ -46,35 +48,42 @@
 
 .coach-info h3 {
   font-family: 'Poppins', sans-serif;
-  color: #333;
+  color: black;
   font-size: 18px;
   margin: 5px 0;
+  text-transform: uppercase;
 }
 
 .coach-info p {
-  font-family: 'League Spartan', sans-serif;
-  color: #777;
+  font-family: 'Poppins', sans-serif;
+  color: black; /* Couleur du texte */
   font-size: 14px;
-  margin-bottom: 15px;
+  
+  font-weight: bold; /* Texte en gras */
 }
 
 
 .select-btn {
-  background-color: #896CFE;
+  background-color: #421A3F;
   color: #fff;
   border: none;
   padding: 12px;
   width: 100%;
   border-radius: 10px 10px 10px 10px; 
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s ease;
   font-size: 14px;
+  font-weight: bold;
 }
 
 
 .select-btn:hover {
-  background-color: #B3A0FF;
-}
+  background-color: #5A2A56;}
+  
+  .select-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(66, 26, 63, 0.5); /* Effet de focus */
+  }
 
 /* Adaptation pour les petits écrans */
 @media (max-width: 768px) {

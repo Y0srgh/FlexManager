@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-reservation-card',
@@ -9,7 +9,7 @@ export class ReservationCardComponent {
   @Input() coachName: string = 'Roua';
   @Input() coachDescription: string = 'Cardio & Strength';
   @Input() coachImage: string = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSDr5J9LXZpWBmh373DYjQSPr9BX61pOGoxA&s';
-
+  @Output() close: EventEmitter<void> = new EventEmitter();
   selectedDate: string = '';
   startTime: string = '';
   endTime: string = '';
@@ -25,5 +25,8 @@ export class ReservationCardComponent {
       return false;
     }
     return true; 
+  }
+  onBookClick() {
+    this.close.emit();  
   }
 }

@@ -1,4 +1,5 @@
 <div class="coach-list">
+  
   <app-coach
   *ngFor="let coach of coaches"
   [coach]="coach"
@@ -11,7 +12,8 @@
       <app-reservation-card 
         [coachName]="selectedCoach?.name || ''" 
         [coachDescription]="selectedCoach?.specialty || ''" 
-        [coachImage]="selectedCoach?.image || ''">
+        [coachImage]="selectedCoach?.image || ''"
+        (close)="closeModal()">
       </app-reservation-card>
     </div>
   </div>
