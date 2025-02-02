@@ -115,10 +115,10 @@
 .view-details-btn {
   padding: 10px 20px;
   background-color: #421A3F;
-  color: white;
+  color: rgb(231, 230, 230);
   border: none;
   cursor: pointer;
-  border-radius: 50px;
+  border-radius: 10px;
   font-size: 1rem;
   font-weight: bold;
   transition: background-color 0.3s ease, transform 0.3s ease;
