@@ -75,7 +75,7 @@ textarea {
     height: 120px;
 }
 
-.custom-date-input {
+/* .custom-date-input {
     display: flex;
     align-items: center;
     position: relative;
@@ -105,7 +105,25 @@ mat-datepicker-toggle:hover {
   .cdk-overlay-container {
     z-index: 1050 !important;
   }
-  
+   */
+   .custom-date-input {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.custom-date-input input {
+    padding-right: 40px;
+}
+
+mat-datepicker-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #5f2b4f;
+    cursor: pointer;
+}
 
 .button-container {
     display: flex;
