@@ -45,7 +45,6 @@ export class SignupParentComponent {
           ],
         ],
         phone: ['', [Validators.required, Validators.pattern('^[0-9]{8}$')]],
-        gender: ['', Validators.required],
       }),
       associatedAccounts: this.fb.group({
         associatedAccountsCount: [
