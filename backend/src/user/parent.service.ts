@@ -12,6 +12,7 @@ import { UserEntity } from './entities/user.entity';
 import { NotFoundError } from 'rxjs';
 import { Roles } from 'src/enums/user-role.enum';
 import { EmailService } from 'src/common/utils/email.service';
+import { ParentChildRequestEntity } from './entities/parent-child.entity';
 
 @Injectable()
 export class ParentService extends BaseService<ParentEntity> {
@@ -22,14 +23,16 @@ export class ParentService extends BaseService<ParentEntity> {
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
 
+    @InjectRepository(ParentChildRequestEntity)
+    private readonly parentChildRequestRepository: Repository<ParentChildRequestEntity>,
+
     protected userService: UserService,
-    
+
     protected clientService: ClientService,
-    
+
     protected passwordService: PasswordService,
 
-    private readonly emailService: EmailService, 
-
+    private readonly emailService: EmailService,
   ) {
     super(parentRepository, userService, passwordService);
   }
@@ -37,13 +40,25 @@ export class ParentService extends BaseService<ParentEntity> {
   async createParent(createParentDto: CreateParentDto) {
     console.log('createParentDto', createParentDto);
 
-    if (createParentDto.associatedAccountsCount && +createParentDto.associatedAccountsCount>0) {
+    const parent = await this.createWithUser(createParentDto, (user) => ({
+      // children: createParentDto.childrenEmails?.map(
+      //   (id) => ({ id }) as ClientEntity,
+      // ),
+      associatedAccountsCount: createParentDto.associatedAccountsCount,
+      role: Roles.PARENT,
+    }));
+
+    if (
+      createParentDto.associatedAccountsCount &&
+      +createParentDto.associatedAccountsCount > 0
+    ) {
       if (
         createParentDto.associatedAccountsCount !==
         createParentDto.childrenEmails.length
       ) {
         throw new NotFoundException(`Incoherent information`);
       }
+
       const children = await Promise.all(
         createParentDto.childrenEmails.map(async (childEmail) => {
           console.log(childEmail);
@@ -58,20 +73,23 @@ export class ParentService extends BaseService<ParentEntity> {
             );
           }
           console.log('child ----------------------', child);
-          
+
           if (child.role !== 'client') {
             throw new NotFoundException(
               `This is not a correct Sportsman email`,
             );
           }
-
+          await this.parentChildRequestRepository.save({
+            parent,
+            child,
+            status: 'pending',
+          });
           const childUsername = child.username;
-
           try {
             await this.emailService.sendParentAssociationEmail(
               childEmail,
               childUsername,
-              createParentDto.username
+              createParentDto.username,
             );
           } catch (error) {
             console.error(`Failed to send email to ${childEmail}:`, error);
@@ -88,10 +106,8 @@ export class ParentService extends BaseService<ParentEntity> {
       createParentDto.childrenEmails,
     );
 
-    return this.createWithUser(createParentDto, (user) => ({
-      children: createParentDto.childrenEmails?.map((id) => ({ id } as ClientEntity)),
-      associatedAccountsCount: createParentDto.associatedAccountsCount,
-      role: Roles.PARENT
-    }));
+    return parent;
   }
+
+  
 }

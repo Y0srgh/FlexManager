@@ -21,11 +21,11 @@ export class ClientEntity extends TimestampEntity {
   @Column({ type: 'json', nullable: true })
   physicalDetails: { weight: number; height: number; age: number };
 
-  @ManyToOne(() => ParentEntity, (client) => client.children, {
-    nullable: true,
-    eager: true,
-  })
-  parentAccount: ParentEntity;
+  // @ManyToOne(() => ParentEntity, (client) => client.children, {
+  //   nullable: true,
+  //   eager: true,
+  // })
+  // parentAccount: ParentEntity;
 
   @Column({ type: 'uuid', nullable: true })
   preferredCoachId: string;
@@ -33,23 +33,22 @@ export class ClientEntity extends TimestampEntity {
   @Column({ type: 'enum', default: Gender.MALE, enum: Gender })
   gender: string;
 
-  //goal
   @Column({ type: 'enum', array:true, enum: Goal, default: [Goal.MUSCLEGAIN] })
   goal: string[];
 
   @Column({ type: 'enum', default: Assistant.ONE, enum: Assistant })
   nutritionAssistanceType: string;
 
-  @Column({ type: 'json', nullable: true })
-  mealTracking: { meals: string[]; calories: number };
+  // @Column({ type: 'json', nullable: true })
+  // mealTracking: { meals: string[]; calories: number };
 
-  @Column({ type: 'json', nullable: true })
-  progressTracking: {
-    caloriesBurned: number;
-    weightLoss: number;
-    trainingFrequency: { weekly: number; monthly: number };
-    muscleGain: number;
-  };
+  // @Column({ type: 'json', nullable: true })
+  // progressTracking: {
+  //   caloriesBurned: number;
+  //   weightLoss: number;
+  //   trainingFrequency: { weekly: number; monthly: number };
+  //   muscleGain: number;
+  // };
 
   @Column({ nullable: true })
   subscriptionStatus: string;

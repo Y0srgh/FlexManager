@@ -30,6 +30,7 @@ import { ManagerService } from './manager.service';
 import { ParentService } from './parent.service';
 import { CreateParentDto } from './dto/create-parent.dto';
 import { Response, Request } from 'express';
+import { ParentChildRequestService } from './parent-child-request.service';
 @Controller('auth')
 export class UserController {
   constructor(
@@ -38,6 +39,7 @@ export class UserController {
     private readonly clientService: ClientService,
     private readonly managerService: ManagerService,
     private readonly parentService: ParentService,
+    private readonly parentChildService: ParentChildRequestService,
   ) {}
 
   @Post('signup')
@@ -104,7 +106,7 @@ export class UserController {
   @Role(Roles.MANAGER)
   @UseGuards(JwtAuthGuard, RolesGuard)
   findAllClients(@Req() req: Request) {
-    console.log("i am in find all clients");
+    console.log('i am in find all clients');
     // console.log('Access Token from Header:', res.get('x-new-access-token'));
     return this.clientService.findAll();
   }
@@ -141,4 +143,34 @@ export class UserController {
   createParent(@Body() createParentDto: CreateParentDto) {
     return this.parentService.createParent(createParentDto);
   }
+
+  /*
+  async getPendingRequests(parentId: string) {
+    return this.parentChildRequestRepository.find({
+      where: { parent: { id: parentId }, status: 'pending' },
+      relations: ['child'],
+    });
+  }
+  */
+
+  /*-------Requests-----*/
+  @Get('request')
+  async getAllRequests() {
+    return this.parentChildService.findAll();
+  }
+
+  @Get('request/pending-parent-request/:id')
+  // @Role(Roles.PARENT)
+  // @UseGuards(JwtAuthGuard, RolesGuard)
+  async getParentPendingRequests(@Param('id') parentId: string) {
+    return this.parentChildService.getParentPendingRequests(parentId);
+  }
+
+  @Get('request/pending-child-request/:id')
+  // @Role(Roles.CLIENT)
+  // @UseGuards(JwtAuthGuard, RolesGuard)
+  async getChildPendingRequests(@Param('id') childId: string) {
+    return this.parentChildService.getChildPendingRequests(childId);
+  }
+
 }

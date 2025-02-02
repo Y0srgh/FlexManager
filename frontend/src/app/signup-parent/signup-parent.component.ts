@@ -121,7 +121,7 @@ export class SignupParentComponent {
     this.submitted = true;
     this.linkChildren = false;
     console.log('submitting form...', this.associatedAccounts.value);
-   
+
     const parentData = {
       ...this.basicDetails.value,
       associatedAccountsCount: this.associatedAccounts.get(
@@ -163,21 +163,21 @@ export class SignupParentComponent {
     this.signupForm
       .get('associatedAccounts.associatedAccountsCount')
       ?.setValue(0);
-      const parentData = {
-        ...this.basicDetails.value,
-        associatedAccountsCount: 0,
-        childrenEmails: [],
-      };
-      console.log('parentData---------------', parentData);
-  
-      this.baseService.post(`${this.endpoint}`, parentData).subscribe({
-        next: (response: any) => {
-          console.log('Parent created successfully:', response);
-        },
-        error: (error) => {
-          console.error('Signup failed:', error);
-        },
-      });
+    const parentData = {
+      ...this.basicDetails.value,
+      associatedAccountsCount: 0,
+      childrenEmails: [],
+    };
+    console.log('parentData---------------', parentData);
+
+    this.baseService.post(`${this.endpoint}`, parentData).subscribe({
+      next: (response: any) => {
+        console.log('Parent created successfully:', response);
+      },
+      error: (error) => {
+        console.error('Signup failed:', error);
+      },
+    });
     this.currentStep++;
   }
 }

@@ -16,11 +16,13 @@ import { ManagerService } from './manager.service';
 import { ManagerEntity } from './entities/manager.entity';
 import { ParentService } from './parent.service';
 import { ParentEntity } from './entities/parents.entity';
+import { ParentChildRequestEntity } from './entities/parent-child.entity';
+import { ParentChildRequestService } from './parent-child-request.service';
 dotenv.config()
 
 @Module({
    imports: [
-    TypeOrmModule.forFeature([UserEntity, CoachEntity, ClientEntity, ManagerEntity, ParentEntity]),
+    TypeOrmModule.forFeature([UserEntity, CoachEntity, ClientEntity, ManagerEntity, ParentEntity, ParentChildRequestEntity]),
     PassportModule.register({defaultStrategy: 'jwt-refresh'}),
     JwtModule.register({
       secret: process.env.SECRET,
@@ -30,6 +32,6 @@ dotenv.config()
     }),
 ],
   controllers: [UserController],
-  providers: [UserService, JwtStrategy,CoachService, ClientService, ManagerService, ParentService],
+  providers: [UserService, JwtStrategy,CoachService, ClientService, ManagerService, ParentService, ParentChildRequestService],
 })
 export class UserModule {}
