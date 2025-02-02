@@ -26,5 +26,6 @@ class="coach-photo" /> -->
   *ngIf="showDetails" 
   [course]="course" 
   (close)="toggleDetails()" 
-  class="app-course-details-popup">
+  class="app-course-details-popup"
+  (deleted)="removeCourse($event)">
 </app-course-details>

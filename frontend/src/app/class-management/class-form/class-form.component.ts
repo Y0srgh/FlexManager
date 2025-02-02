@@ -1,6 +1,7 @@
-import { Component , Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DateAdapter } from '@angular/material/core';
+import { HttpClient } from '@angular/common/http';
+import { OverlayContainer } from '@angular/cdk/overlay';
 import { Course } from '../../models/course.model';
 
 @Component({
@@ -8,12 +9,15 @@ import { Course } from '../../models/course.model';
   templateUrl: './class-form.component.html',
   styleUrls: ['./class-form.component.css']
 })
-export class ClassFormComponent {
+export class ClassFormComponent implements OnInit, OnDestroy {
   @Output() closeModal = new EventEmitter<void>();
   courseForm: FormGroup;
- 
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private overlayContainer: OverlayContainer
+  ) {
     this.courseForm = this.fb.group(
       {
         title: ['', Validators.required],
@@ -28,7 +32,19 @@ export class ClassFormComponent {
     );
   }
 
- 
+  ngOnInit(): void {
+    // Attach the overlay container to the form container
+    const formContainer = document.querySelector('.form-container');
+    if (formContainer) {
+      this.overlayContainer.getContainerElement().classList.add('form-container');
+    }
+  }
+
+  ngOnDestroy(): void {
+    // Clean up by removing the custom class
+    this.overlayContainer.getContainerElement().classList.remove('form-container');
+  }
+
   dateValidator(control: any) {
     const date = control.value;
     console.log('Date:', date);
@@ -41,11 +57,9 @@ export class ClassFormComponent {
     return null;
   }
 
- 
   timeValidator(group: FormGroup) {
     const startTime = group.get('startTime')?.value;
     const endTime = group.get('endTime')?.value;
-    console.log('Start Time:', startTime);
 
     if (startTime && endTime) {
       const start = this.timeToMinutes(startTime);
@@ -64,27 +78,29 @@ export class ClassFormComponent {
     return hours * 60 + minutes;
   }
 
- 
   onSubmit() {
-    this.courseForm.reset();
-    
+    if (this.courseForm.valid) {
+      const courseData = this.courseForm.value;
+
+      this.http.post('http://localhost:4000/courses', courseData).subscribe(
+        (response) => {
+          console.log('Course submitted successfully:', response);
+          this.courseForm.reset();
+          this.closeModal.emit(); 
+        },
+        (error) => {
+          console.error('Error submitting course:', error);
+        }
+      );
+    }
   }
 
-  
   onCancel() {
     this.courseForm.reset();
-   
   }
-  
 
- 
   get isFormValid() {
     return this.courseForm.valid && 
            !this.courseForm.get('endTime')?.hasError('invalidTime');
-
   }
-
-
-    
-  
 }

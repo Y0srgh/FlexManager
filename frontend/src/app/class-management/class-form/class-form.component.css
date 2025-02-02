@@ -98,6 +98,14 @@ mat-datepicker-toggle {
 mat-datepicker-toggle:hover {
     color: #ff6f61;
 }
+.custom-datepicker {
+    z-index: 10000 !important; 
+  }
+  
+  .cdk-overlay-container {
+    z-index: 1050 !important;
+  }
+  
 
 .button-container {
     display: flex;

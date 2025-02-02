@@ -17,7 +17,8 @@
         <div class="custom-date-input">
           <input id="date" matInput [matDatepicker]="picker" formControlName="date" placeholder="Pick a date" />
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
+          <mat-datepicker #picker panelClass="custom-datepicker"></mat-datepicker>
+
         </div>
         <small *ngIf="courseForm.get('date')?.touched && courseForm.get('date')?.hasError('matDatepicker')" style="color: red;">
           Invalid date format.

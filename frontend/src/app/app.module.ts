@@ -6,7 +6,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { RouterModule } from '@angular/router';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-
+import { Overlay } from '@angular/cdk/overlay';
+import { MAT_DATEPICKER_SCROLL_STRATEGY } from '@angular/material/datepicker';
+import { inject } from '@angular/core';
 // Material Modules
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -108,6 +110,11 @@ import { ButtonComponent } from './components/shared/button/button.component';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoggerInterceptor, multi: true },
+    { provide: MAT_DATEPICKER_SCROLL_STRATEGY,
+      useFactory: () => {
+        const overlay = inject(Overlay);
+        return () => overlay.scrollStrategies.reposition();
+      }}
   ],
   bootstrap: [AppComponent],
 })

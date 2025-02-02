@@ -49,4 +49,6 @@ export class CoursePageComponent implements OnInit {
   onEdit(courseId: string) {
     this.router.navigate(['/course-edit', courseId]);
   }
+
+  
 }

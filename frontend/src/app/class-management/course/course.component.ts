@@ -11,6 +11,8 @@ export class CourseComponent {
   @Output() viewDetails = new EventEmitter<string>();
 
   showDetails: boolean = false;
+  courses: Course[] = [];
+
 
   onViewDetails() {
     if (this.course) {
@@ -22,6 +24,9 @@ export class CourseComponent {
   toggleDetails() {
     this.showDetails = !this.showDetails;
   }
-
+  removeCourse(courseId: string) {
+    this.courses = this.courses.filter(course => course.id !== courseId);
+  }
+  
   
 }

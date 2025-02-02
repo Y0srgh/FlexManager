@@ -13,6 +13,7 @@ export class CreateCourseDto {
   coachPhoto: string;
 
   @IsInt()
+  @IsOptional()
   duration: number;
 
   @IsOptional()

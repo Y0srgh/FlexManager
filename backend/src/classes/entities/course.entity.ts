@@ -12,7 +12,7 @@ export class Course {
   @Column()
   description: string;
 
-  @Column()
+@Column({nullable: true })
   duration: number;
   @Column({nullable: true})
 coachPhoto : string;
