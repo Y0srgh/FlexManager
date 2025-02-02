@@ -45,10 +45,6 @@ export class SessionService {
   }
   public disconnectSession(): void {
     window.sessionStorage.clear();
-    localStorage.removeItem("pcart");
-    localStorage.removeItem("scart");
-    localStorage.removeItem("total");
-    localStorage.removeItem("ptotal");
-    localStorage.removeItem("stotal");
+
   }
 }

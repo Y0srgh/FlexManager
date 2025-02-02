@@ -1,0 +1,146 @@
+<div class="main-content">
+<div class="content">
+    <div class="text">
+      <p class="sub-p">Subscription Details</p>
+      <p (click)="sendtoStripeManagement()" class="bill">Manage Billing Info</p>
+    </div>
+    <div class="for-border">
+      <div class="plan">
+        <p class="cr-text">Current Plan</p>
+        <p class="btn">{{ User_plan }}</p>
+      </div>
+      <div class="plan subs">
+        <p class="cr-text">Subscription Status</p>
+        <p *ngIf="user.siteSubscriptions.subscription_active" class="act">Active</p>
+        <p *ngIf="!user.siteSubscriptions.subscription_active" class="notact">Not Active</p>
+      </div>
+      
+      <div class="credit" *ngIf="user.siteSubscriptions.subscription_active; else noStripe">
+        <p class="cr-usage">Membership Status</p>
+        <div class="credit-text">
+          <p>You have {{ daysleft }} days left. Keep pushing!</p>
+        </div>
+        <div class="bar">
+            <div class="bar-fill" [style.width.%]="barvalue"></div>
+          </div>
+      </div>
+
+      <ng-template #noStripe>
+        <div class="credit">
+          <p class="cr-usage">Subscription Expired</p>
+          <div class="credit-text">
+            <p>Renew now to keep your workouts going!</p>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+  <div class="main-head">
+    <h1>Choose The Plan That Fits Your Needs</h1>
+  </div>
+
+
+  <div class="plans" *ngIf="User_plan === 'PRO'">
+    <div class="box">
+        <p class="box-head box2">Free Trial</p>
+        <p id="p">Neque porro quisquam est qui dolore</p>
+        <div class="price">
+          <h1>$0</h1><span>/Month</span>
+        </div>
+        <p id="p" class="p-marg">Neeed to fill it later idk rememer to ask about it</p>
+        <p id="p"><i class="fa-solid fa-check pro-d"></i>idk</p>
+        <button (click)="upgradePayment('FREETRIAL')">Downgrade Subscription</button>
+    </div>
+      <div class="box">
+        <p class="box-head box2">Pro Plan</p>
+        <p id="p">Neeed to fill it later idk rememer to ask about it</p>
+        <div class="price">
+          <h1>$30</h1><span>/Month</span>
+        </div>
+        <p id="p" class="p-marg">Neeed to fill it later idk rememer to ask about it</p>
+        <p id="p"><i class="fa-solid fa-check pro-d"></i>test</p>
+        <button>Current Subscription</button>
+      </div>
+  
+      <div class="box box-sub">
+        <p class="box-head">Premium Plan</p>
+        <p class="p-pro">Neeed to fill it later idk rememer to ask about it</p>
+        <div class="price">
+          <h1>$40</h1><span>/Month</span>
+        </div>
+        <p class="p-pro p-pro2" style="color: white; margin-top: -18px;">test</p>
+        <p class="p-pro"><i class="fa-solid fa-check pro-i"></i>test</p>
+        <button id="up" (click)="upgradePayment('PREMIUM')">Upgrade Subscription</button>
+      </div>
+    </div>
+
+  <div class="plans" *ngIf="User_plan === 'PREMIUM'">
+    <div class="box">
+        <p class="box-head box2">Free Trial</p>
+        <p id="p">Neeed to fill it later idk rememer to ask about its</p>
+        <div class="price">
+          <h1>$0</h1><span>/Month</span>
+        </div>
+        <p id="p" class="p-marg">Neeed to fill it later idk rememer to ask about it</p>
+        <p id="p"><i class="fa-solid fa-check pro-d"></i>test</p>
+        <button (click)="upgradePayment('FREETRIAL')">Downgrade Subscription</button>
+    </div>
+        <div class="box">
+          <p class="box-head box2">Pro Plan</p>
+          <p id="p">Neeed to fill it later idk rememer to ask about its</p>
+          <div class="price">
+            <h1>$30</h1><span>/Month</span>
+          </div>
+          <p id="p" class="p-marg">Neeed to fill it later idk rememer to ask about it</p>
+          <p id="p"><i class="fa-solid fa-check pro-d"></i>test</p>
+          <button (click)="upgradePayment('PRO')">Downgrade Subscription</button>
+        </div>
+  
+        <div class="box box-sub">
+          <p class="box-head">Premium Plan</p>
+          <p class="p-pro">Neeed to fill it later idk rememer to ask about its</p>
+          <div class="price">
+            <h1>$40</h1><span>/Month</span>
+          </div>
+          <p class="p-pro p-pro2" style="color: white; margin-top: -18px;">test</p>
+          <p class="p-pro"><i class="fa-solid fa-check pro-i"></i>test</p>
+          <button id="up">Current Subscription</button>
+        </div>
+    </div>
+
+  
+    <div class="plans" *ngIf="User_plan === 'FREETRIAL'">
+        <div class="box">
+            <p class="box-head box2">Free Trial</p>
+            <p id="p">Neeed to fill it later idk rememer to ask about its</p>
+            <div class="price">
+              <h1>$0</h1><span>/Month</span>
+            </div>
+            <p id="p" class="p-marg" >Neeed to fill it later idk rememer to ask about it</p>
+            <p id="p"><i class="fa-solid fa-check pro-d"></i>test</p>
+            <button >Current Subscription</button>
+        </div>
+      <div class="box box-sub" >
+        <p class="box-head">Pro Plan</p>
+        <p id="p-pro">Neeed to fill it later idk rememer to ask about its</p>
+        <div class="price">
+          <h1>$30</h1><span>/Month</span>
+        </div>
+        <p class="p-pro p-pro2" style="color: white; margin-top: -18px;">test</p>
+        <p class="p-pro"><i class="fa-solid fa-check pro-i"></i>test</p>
+        <button  id="up" (click)="upgradePayment('PRO')">Upgrade Subscription</button>
+      </div>
+  
+      <div class="box box-sub">
+        <p class="box-head">Premium Plan</p>
+        <p class="p-pro">Neeed to fill it later idk rememer to ask about its</p>
+        <div class="price">
+          <h1>$40</h1><span>/Month</span>
+        </div>
+        <p class="p-pro p-pro2" style="color: white; margin-top: -18px;">test</p>
+        <p class="p-pro"><i class="fa-solid fa-check pro-i"></i>test</p>
+        <button id="up" (Onclick)="upgradePayment('PREMIUM')">Upgrade Subscription</button>
+      </div>
+  </div>
+  
+</div>

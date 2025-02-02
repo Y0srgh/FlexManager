@@ -4,8 +4,5 @@ export class CreateSitePaymentDto {
     readonly userId: string;
   
     @IsString()
-    readonly customerId: string;
-  
-    @IsString()
     readonly priceId: string;
 }
