@@ -36,6 +36,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { LoggerInterceptor } from './interceptors/logger.interceptor';
 import { JoinOptionsComponent } from './join-options/join-options.component';
 import { SignupParentComponent } from './signup-parent/signup-parent.component';
+import { PendingRequestsComponent } from './pending-requests/pending-requests.component';
 
 // const routes: Routes = [
 //   { path: '', component: HeroComponent },
@@ -72,6 +73,7 @@ import { SignupParentComponent } from './signup-parent/signup-parent.component';
     ClientComponent,
     JoinOptionsComponent,
     SignupParentComponent,
+    PendingRequestsComponent,
   ],
   imports: [
     BrowserModule,

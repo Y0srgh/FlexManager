@@ -1,0 +1,38 @@
+<div class="pending-requests-container">
+  <header class="section-header">
+    <h2>Pending Parent Association Requests</h2>
+    <div class="header-accent"></div>
+  </header>
+
+  <div class="requests-grid" *ngIf="requests.length > 0">
+    <div class="request-card" *ngFor="let request of requests">
+      <div class="request-status">
+        <span class="status-badge">{{ request.status }}</span>
+      </div>
+
+      <div class="member-info">
+        <div class="avatar">
+          {{ request.parent.username.charAt(0).toUpperCase() }}
+        </div>
+
+        <div class="details">
+          <h3>{{ request.parent.username }}</h3>
+          <div class="contact-info">
+            <p><i class="fas fa-envelope"></i> {{ request.parent.email }}</p>
+            <p><i class="fas fa-phone"></i> {{ request.parent.phone }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <button class="btn approve" (click)="updateRequestStatus(request.id, 'approved')">Approve</button>
+        <button class="btn reject" (click)="updateRequestStatus(request.id, 'rejected')">Reject</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="no-requests" *ngIf="requests.length === 0">
+    <i class="fas fa-clipboard-check"></i>
+    <p>No pending requests at the moment</p>
+  </div>
+</div>

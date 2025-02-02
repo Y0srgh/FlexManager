@@ -18,9 +18,11 @@ export class BaseService {
     return this.http.post<T>(`${this.baseUrl}/${endpoint}`, body, { headers });
   }
 
-  put<T>(endpoint: string, body: any, headers?: HttpHeaders): Observable<T> {
-    return this.http.put<T>(`${this.baseUrl}/${endpoint}`, body, { headers });
+  patch<T>(endpoint: string, body: any, headers?: HttpHeaders): Observable<T> {
+    return this.http.patch<T>(`${this.baseUrl}/${endpoint}`, body, { headers });
   }
+
+
 
   delete<T>(endpoint: string, params?: HttpParams): Observable<T> {
     return this.http.delete<T>(`${this.baseUrl}/${endpoint}`, { params });

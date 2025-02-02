@@ -5,6 +5,7 @@ import { BaseService } from 'src/base/base.service';
 import { PasswordService } from 'src/common/utils/password.service';
 import { UserService } from './user.service';
 import { ParentChildRequestEntity } from './entities/parent-child.entity';
+import { EmailService } from 'src/common/utils/email.service';
 
 @Injectable()
 export class ParentChildRequestService extends BaseService<ParentChildRequestEntity> {
@@ -15,6 +16,8 @@ export class ParentChildRequestService extends BaseService<ParentChildRequestEnt
     protected passwordService: PasswordService,
 
     protected userService: UserService,
+
+    private readonly emailService: EmailService,
   ) {
     super(parentChildRepository, userService, passwordService);
   }
@@ -32,6 +35,11 @@ export class ParentChildRequestService extends BaseService<ParentChildRequestEnt
     }
 
     request.status = status;
+    await this.emailService.sendParentAssociationResponseEmail(
+      request.parent.user.email,
+      request.child.user.username,
+      request.status
+    );
     await this.parentChildRepository.save(request);
   }
 
@@ -43,9 +51,20 @@ export class ParentChildRequestService extends BaseService<ParentChildRequestEnt
   }
 
   async getChildPendingRequests(childId: string) {
-    return this.parentChildRepository.find({
+    const requests = await this.parentChildRepository.find({
       where: { child: { id: childId }, status: 'pending' },
       relations: ['parent'],
     });
+
+    return requests.map((request) => ({
+      id: request.id,
+      status: request.status,
+      parent: {
+        id: request.parent.id,
+        username: request.parent.user.username,
+        email: request.parent.user.email,
+        phone: request.parent.user.phone,
+      },
+    }));
   }
 }

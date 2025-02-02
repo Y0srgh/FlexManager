@@ -86,7 +86,7 @@ export class ParentService extends BaseService<ParentEntity> {
           });
           const childUsername = child.username;
           try {
-            await this.emailService.sendParentAssociationEmail(
+            await this.emailService.sendParentAssociationRequestEmail(
               childEmail,
               childUsername,
               createParentDto.username,
