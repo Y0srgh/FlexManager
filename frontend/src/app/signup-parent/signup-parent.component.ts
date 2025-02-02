@@ -17,7 +17,7 @@ import { Router } from '@angular/router';
 })
 export class SignupParentComponent {
   signupForm!: FormGroup;
-  currentStep = 3;
+  currentStep = 1;
   submitted = false;
 
   showPassword: boolean = false;
@@ -117,6 +117,8 @@ export class SignupParentComponent {
   }
 
   onSubmit() {
+    this.submitted=true;
+    this.linkChildren = false;
     console.log('submitting form...', this.associatedAccounts.value);
   }
 
