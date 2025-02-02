@@ -1,21 +1,23 @@
 import { IsOptional, IsInt, Min, Max, ValidateNested } from 'class-validator';
 
 export class PhysicalDetailsDto {
+  // @IsInt()
+  // @Min(8)
+  // @Max(120)
   @IsOptional()
-  @IsInt()
-  @Min(10)
-  @Max(300)
-  weight: number;
+  age: number;
 
+  // @IsInt()
+  // @Min(100)
+  // @Max(250)
   @IsOptional()
-  @IsInt()
-  @Min(100)
-  @Max(250)
   height: number;
 
+  // @IsInt()
+  // @Min(10)
+  // @Max(300)
   @IsOptional()
-  @IsInt()
-  @Min(8)
-  @Max(120)
-  age: number;
+  weight: number;
+
+
 }

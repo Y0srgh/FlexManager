@@ -135,10 +135,10 @@ export class UserController {
   }
 
   //-----------parent
+  // @Role(Roles.CLIENT)
+  // @UseGuards(JwtAuthGuard, RolesGuard)
   @Post('parent')
-  @Role(Roles.CLIENT)
-  @UseGuards(JwtAuthGuard, RolesGuard)
-  createParent(@Body() createParentDto: CreateParentDto, @User() user) {
-    return this.parentService.createParent(createParentDto, user);
+  createParent(@Body() createParentDto: CreateParentDto) {
+    return this.parentService.createParent(createParentDto);
   }
 }

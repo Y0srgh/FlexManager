@@ -65,6 +65,14 @@ export class BaseService<T> {
     }
     return entity;
   }
+  //find by email
+  async findByEmail(email: string): Promise<T> {
+    const entity = await this.repository.findOne({ where: { user: { email } } as any });
+    if (!entity) {
+      throw new NotFoundException(`Entity with email "${email}" not found`);
+    }
+    return entity;
+  }
 
   async update(id: string, data: Partial<T>): Promise<T> {
     const entity = await this.findOne(id);

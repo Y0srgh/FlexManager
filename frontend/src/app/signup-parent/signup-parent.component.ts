@@ -16,6 +16,8 @@ import { Router } from '@angular/router';
   styleUrl: './signup-parent.component.css',
 })
 export class SignupParentComponent {
+  private readonly endpoint = 'auth/parent';
+
   signupForm!: FormGroup;
   currentStep = 1;
   submitted = false;
@@ -116,9 +118,30 @@ export class SignupParentComponent {
   }
 
   onSubmit() {
-    this.submitted=true;
+    this.submitted = true;
     this.linkChildren = false;
     console.log('submitting form...', this.associatedAccounts.value);
+   
+    const parentData = {
+      ...this.basicDetails.value,
+      associatedAccountsCount: this.associatedAccounts.get(
+        'associatedAccountsCount'
+      )?.value,
+      childrenEmails: this.associatedAccounts
+        .get('children')
+        ?.value.map((child: { email: string }) => child.email),
+    };
+    console.log('parentData---------------', parentData);
+
+    this.baseService.post(`${this.endpoint}`, parentData).subscribe({
+      next: (response: any) => {
+        console.log('Parent created successfully:', response);
+        // this.router.navigate(['signin']);
+      },
+      error: (error) => {
+        console.error('Signup failed:', error);
+      },
+    });
   }
 
   exit() {
@@ -137,7 +160,24 @@ export class SignupParentComponent {
 
   skipChildLinking() {
     this.linkChildren = false;
-    this.signupForm.get('associatedAccounts.children')?.setValue([]);
+    this.signupForm
+      .get('associatedAccounts.associatedAccountsCount')
+      ?.setValue(0);
+      const parentData = {
+        ...this.basicDetails.value,
+        associatedAccountsCount: 0,
+        childrenEmails: [],
+      };
+      console.log('parentData---------------', parentData);
+  
+      this.baseService.post(`${this.endpoint}`, parentData).subscribe({
+        next: (response: any) => {
+          console.log('Parent created successfully:', response);
+        },
+        error: (error) => {
+          console.error('Signup failed:', error);
+        },
+      });
     this.currentStep++;
   }
 }
