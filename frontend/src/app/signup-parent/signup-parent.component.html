@@ -1,0 +1,203 @@
+<div class="signup-container">
+  <div class="signup-card">
+    <app-progress-indicator
+      [currentStep]="currentStep"
+      [totalSteps]="3"
+    ></app-progress-indicator>
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <div
+        *ngIf="currentStep === 1"
+        formGroupName="basicDetails"
+        class="form-step"
+      >
+        <h2 class="form-title">Basic Details</h2>
+        <p class="form-subtitle">
+          Please fill in your personal information.
+          <a [routerLink]="'/signin'">Already have an account ?</a>
+        </p>
+        <div class="form-grid">
+          <app-input-field
+            [basicDetails]="basicDetails"
+            label="Username"
+            iconClass="fa-user"
+            controlName="username"
+            type="text"
+          >
+          </app-input-field>
+
+          <app-input-field
+            [basicDetails]="basicDetails"
+            label="Email"
+            iconClass="fa-envelope"
+            controlName="email"
+            type="email"
+          ></app-input-field>
+
+          <app-input-field
+            [basicDetails]="basicDetails"
+            label="Password"
+            iconClass="fa-lock"
+            controlName="password"
+            [showPassword]="showPassword"
+            type="password"
+          >
+          </app-input-field>
+
+          <app-input-field
+            [basicDetails]="basicDetails"
+            label="Phone"
+            iconClass="fa-phone"
+            controlName="phone"
+            type="tel"
+          ></app-input-field>
+        </div>
+        <div class="form-actions">
+          <div class="btn">
+            <app-button
+              type="button"
+              (click)="nextStep()"
+              buttonText="Next Step"
+              buttonType="primary"
+              icon="fa-arrow-right"
+            ></app-button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        *ngIf="currentStep === 2"
+        formGroupName="associatedAccounts"
+        class="form-step"
+      >
+        <div class="step-header">
+          <a (click)="skipChildLinking()" class="skip-a"> Skip for Now </a>
+          <!-- <app-button
+            type="button"
+            (click)="skipChildLinking()"
+            buttonText="Skip for Now"
+            buttonType="secondary"
+            class="skip-button"
+          ></app-button> -->
+          <h2 class="form-title">
+            Want to associate your children's account to yours ?
+          </h2>
+
+          <p class="form-subtitle">
+            After this step you can see every step your child take. If you
+            choose to skip this step for now, you still can associate your
+            account to your child's account later whenever you decide to. Please
+            note that it would not be an instant action since it needs an
+            approval from your child.
+          </p>
+          <div class="form-actions">
+            <div class="btn">
+              <app-button
+                type="button"
+                (click)="previousStep()"
+                buttonText="Previous"
+                buttonType="secondary"
+                icon="fa-arrow-left"
+              ></app-button>
+            </div>
+            <app-button
+              type="button"
+              (click)="onLinkChild()"
+              buttonText="Link Child Account"
+              buttonType="primary"
+            ></app-button>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="currentStep === 3">
+        <div *ngIf="linkChildren === false" class="form-step thank-you">
+          <div class="success-animation">
+            <i class="fas fa-check-circle"></i>
+          </div>
+          <h2 class="form-title">Thank You!</h2>
+          <p class="success-message">
+            Your registration has been completed successfully.
+          </p>
+          <p class="welcome-message">Welcome to our fitness family!</p>
+          <div class="btn">
+            <app-button
+              type="button"
+              (click)="exit()"
+              buttonText="Get Started"
+              buttonType="primary"
+              icon="fa-arrow-right"
+            ></app-button>
+          </div>
+        </div>
+
+        <div *ngIf="linkChildren === true" class="form-step">
+          <h2 class="form-title">Keep an eye on your child</h2>
+          <p class="form-subtitle">
+            Fill in the respective emails of your children.
+          </p>
+          <!-- <div class="form-grid">
+            <app-input-field
+              [basicDetails]="associatedAccounts"
+              label="Children Number"
+              iconClass="fa-user"
+              controlName="associatedAccountsCount"
+              type="text"
+            >
+            </app-input-field>
+            <div
+              *ngFor="
+                let i of [].constructor(
+                  associatedAccounts.get('associatedAccountsCount')?.value
+                )
+              "
+            >
+              <app-input-field
+                [basicDetails]="basicDetails"
+                label="Email"
+                iconClass="fa-envelope"
+                controlName="email"
+                type="email"
+              ></app-input-field>
+            </div>
+          </div> -->
+          <div class="form-grid">
+            <app-input-field
+              [basicDetails]="associatedAccounts"
+              label="Children Number"
+              iconClass="fa-user"
+              controlName="associatedAccountsCount"
+              type="text"
+              placeholder="How many child to supervise?"
+            >
+            </app-input-field>
+            <div
+              *ngIf="
+                +associatedAccounts.get('associatedAccountsCount')?.value <= 9
+              "
+            >
+              <div *ngFor="let childGroup of children.controls; let i = index">
+                <app-input-field
+                  [basicDetails]="asFormGroup(childGroup)"
+                  label="Child Email {{ i + 1 }}"
+                  iconClass="fa-envelope"
+                  controlName="email"
+                  type="email"
+                ></app-input-field>
+              </div>
+            </div>
+          </div>
+          <div class="form-actions">
+            <div class="btn">
+              <app-button
+                type="submit"
+                buttonText="Submit Info"
+                buttonType="primary"
+                icon="fa-check"
+              ></app-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

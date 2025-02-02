@@ -1,0 +1,187 @@
+<div class="signup-container">
+  <div class="signup-card">
+    <app-progress-indicator
+      [currentStep]="currentStep"
+      [totalSteps]="3"
+    ></app-progress-indicator>
+
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <div
+        *ngIf="currentStep === 1"
+        formGroupName="basicDetails"
+        class="form-step"
+      >
+        <h2 class="form-title">Basic Details</h2>
+        <p class="form-subtitle">
+          Please fill in your personal information.
+          <a [routerLink]="'/signin'">Already have an account ?</a>
+        </p>
+
+        <div class="form-grid">
+          <app-input-field
+            [basicDetails]="basicDetails"
+            label="Username"
+            iconClass="fa-user"
+            controlName="username"
+            type="text"
+          >
+          </app-input-field>
+
+          <app-input-field
+            [basicDetails]="basicDetails"
+            label="Email"
+            iconClass="fa-envelope"
+            controlName="email"
+            type="email"
+          ></app-input-field>
+
+          <app-input-field
+            [basicDetails]="basicDetails"
+            label="Password"
+            iconClass="fa-lock"
+            controlName="password"
+            [showPassword]="showPassword"
+            type="password"
+          >
+          </app-input-field>
+
+          <app-input-field
+            [basicDetails]="basicDetails"
+            label="Phone"
+            iconClass="fa-phone"
+            controlName="phone"
+            type="tel"
+          ></app-input-field>
+
+          <div class="form-group">
+            <label>Gender</label>
+            <div class="input-container">
+              <i class="fas fa-venus-mars input-icon"></i>
+              <select
+                formControlName="gender"
+                class="form-control"
+                [class.is-invalid]="isFieldInvalid(basicDetails, 'gender')"
+              >
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="error" *ngIf="isFieldInvalid(basicDetails, 'gender')">
+              Please select a gender
+            </div>
+          </div>
+
+          <app-input-field
+            [basicDetails]="basicDetails"
+            label="Age"
+            iconClass="fa-birthday-cake"
+            controlName="age"
+            type="number"
+          ></app-input-field>
+
+          <app-input-field
+            [basicDetails]="basicDetails"
+            label="Height (cm)"
+            iconClass="fa-ruler-vertical"
+            controlName="height"
+            type="number"
+          ></app-input-field>
+
+          <app-input-field
+            [basicDetails]="basicDetails"
+            label="Weight (kg)"
+            iconClass="fa-weight"
+            controlName="weight"
+            type="number"
+          ></app-input-field>
+        </div>
+        <div class="form-actions">
+          <div class="btn">
+            <app-button
+              type="button"
+              (click)="nextStep()"
+              buttonText="Next Step"
+              buttonType="primary"
+              icon="fa-arrow-right"
+            ></app-button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        *ngIf="currentStep === 2"
+        formGroupName="membershipDetails"
+        class="form-step"
+      >
+        <h2 class="form-title">Membership Details</h2>
+        <p class="form-subtitle">Choose your fitness journey</p>
+
+        <div class="goals-grid">
+          <div
+            class="goal-card"
+            *ngFor="let goal of goals"
+            [class.selected]="
+              membershipDetails.get('goal')?.value.includes(goal)
+            "
+            (click)="selectGoal(goal)"
+          >
+            <div class="goal-icon">
+              <i [class]="getGoalIcon(goal)"></i>
+            </div>
+            <h3>{{ goal }}</h3>
+            <p>{{ getGoalDescription(goal) }}</p>
+          </div>
+        </div>
+
+        <div
+          class="error goal-error"
+          *ngIf="isFieldInvalid(membershipDetails, 'goal')"
+        >
+          Please select your fitness goal
+        </div>
+
+        <div class="form-actions">
+          <div class="btn">
+            <app-button
+              type="button"
+              (click)="previousStep()"
+              buttonText="Previous"
+              buttonType="secondary"
+              icon="fa-arrow-left"
+            ></app-button>
+          </div>
+          <div class="btn">
+            <app-button
+              type="submit"
+              buttonText="Submit Info"
+              buttonType="primary"
+              icon="fa-check"
+            ></app-button>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="currentStep === 3" class="form-step thank-you">
+        <div class="success-animation">
+          <i class="fas fa-check-circle"></i>
+        </div>
+        <h2 class="form-title">Thank You!</h2>
+        <p class="success-message">
+          Your registration has been completed successfully.
+        </p>
+        <p class="welcome-message">Welcome to our fitness family!</p>
+        <div class="btn">
+          <app-button
+            type="button"
+            (click)="exit()"
+            buttonText="Get Started"
+            buttonType="primary"
+            icon="fa-arrow-right"
+          ></app-button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

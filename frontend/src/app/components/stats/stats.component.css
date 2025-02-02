@@ -1,0 +1,22 @@
+.stats {
+    padding: 2rem 1rem;
+    text-align: center;
+    background-color: #f3f3f3;
+  }
+  
+  .stats-container {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+  }
+  
+  .stat-item h2 {
+    font-size: 2.5rem;
+    color: #000;
+  }
+  
+  .stat-item p {
+    color: #777;
+    font-size: 1rem;
+  }
+  

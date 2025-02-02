@@ -1,0 +1,9 @@
+<section class="nutritionists">
+  <h2>Meet Our Nutritionists</h2>
+  <div class="nutritionist-cards">
+    <div class="card" *ngFor="let nutritionist of nutritionists" [attr.data-aos-delay]="nutritionist.delay" data-aos="zoom-out-down">
+      <img [src]="nutritionist.image" [alt]="nutritionist.name" />
+      <h3>{{ nutritionist.name }}</h3>
+    </div>
+  </div>
+</section>

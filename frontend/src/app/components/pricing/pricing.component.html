@@ -1,0 +1,72 @@
+<!-- <section class="pricing">
+  <h2>JOIN TODAY</h2>
+  <div class="pricing-cards">
+    <div class="card" data-aos="fade-down"
+    data-aos-easing="linear"
+    data-aos-delay="100">
+      <h3>Beginner Plan</h3>
+      <p>$10 / Month</p>
+      <ul>
+        <li>Lorem ipsum dolor sit amet.</li>
+        <li>Lorem ipsum dolor sit amet.</li>
+      </ul>
+       <app-button
+      [backgroundColor]="'#000'"
+      [textColor]="'#fff'"
+      [buttonText]="'Choose Plan'"
+      (buttonClick)="onChoosePlan()"
+    ></app-button>
+    </div>
+    <div class="card featured" data-aos="fade-down"
+    data-aos-easing="linear"
+    data-aos-delay="200" >
+      <h3>Premium Plan</h3>
+      <p>$15 / Month</p>
+      <ul>
+        <li>Lorem ipsum dolor sit amet.</li>
+        <li>Lorem ipsum dolor sit amet.</li>
+      </ul>
+       <app-button
+      [backgroundColor]="'#000'"
+      [textColor]="'#fff'"
+      [buttonText]="'Choose Plan'"
+      (buttonClick)="onChoosePlan()"
+    ></app-button>
+    </div>
+    <div class="card" data-aos="fade-down"
+    data-aos-easing="linear"
+    data-aos-delay="300">
+      <h3>Advanced Plan</h3>
+      <p>$20 / Month</p>
+      <ul>
+        <li>Lorem ipsum dolor sit amet.</li>
+        <li>Lorem ipsum dolor sit amet.</li>
+      </ul>
+       <app-button
+      [backgroundColor]="'#000'"
+      [textColor]="'#fff'"
+      [buttonText]="'Choose Plan'"
+      (buttonClick)="onChoosePlan()"
+    ></app-button>
+    </div>
+  </div>
+</section> -->
+<section class="pricing">
+  <h2>JOIN TODAY</h2>
+  <div class="pricing-cards">
+    <div class="card" *ngFor="let plan of pricingPlans" [class.featured]="plan.featured" data-aos="fade-down"
+    data-aos-easing="linear"
+    [attr.data-aos-delay]="plan.delay">
+      <h3>{{ plan.name }}</h3>
+      <p>{{ plan.price }}</p>
+      <ul>
+        <li *ngFor="let feature of plan.features">{{ feature }}</li>
+      </ul>
+      <app-button
+        [buttonType]="plan.featured && 'pricing-featured' ||'pricing'"
+        [buttonText]="'Choose Plan'"
+        (buttonClick)="onChoosePlan()"
+      ></app-button>
+    </div>
+  </div>
+</section>

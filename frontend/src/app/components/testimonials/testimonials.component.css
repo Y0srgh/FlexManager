@@ -1,0 +1,19 @@
+.testimonials {
+    padding: 3rem 1rem;
+    text-align: center;
+    background: #f3f3f3;
+  }
+  
+  .testimonial-slider {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+  }
+  
+  .testimonial {
+    max-width: 300px;
+    padding: 1rem;
+    background: #fff;
+    border-radius: 8px;
+  }
+  
