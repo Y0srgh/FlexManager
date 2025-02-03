@@ -1,4 +1,6 @@
 @import "aos/dist/aos.css";
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
 
 :root {
   /* Palette de couleurs */
