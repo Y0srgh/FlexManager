@@ -184,7 +184,7 @@
       rgba(255, 255, 255, 0.2),
       transparent
     );
-    transition: transform 0.5s ease;
+    transition: all 2s ease;
   }
 }
 
@@ -196,7 +196,7 @@
 
 .btn.approve:hover {
   background: #23b364;
-  background: linear-gradient(135deg, #f396e0, #5a1a51);
+  background: linear-gradient(135deg, #bb45a3, #5d1553);
 }
 
 .btn.reject {
@@ -207,7 +207,7 @@
 
 .btn.reject:hover {
   background: #ff5252;
-  background: linear-gradient(135deg, #9b9b9b, #2c2b2c);
+  background: linear-gradient(135deg, #aeaeae, #3e3d3e);
 }
 
 .no-requests {
