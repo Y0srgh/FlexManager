@@ -163,12 +163,52 @@
   color: #421A3F;
   transform: scale(1.1);
 }
-@import '~ngx-toastr/toastr.css'; 
-
-.toast-success {
-  background-color: #28a745 !important; 
+/* Change background color of the snack bar */
+.mat-snack-bar-container {
+  background-color: #28a745; /* green background */
+  color: white; /* text color */
+  font-size: 16px; /* font size */
+  border-radius: 4px; /* rounded corners */
 }
 
-.toast-error {
-  background-color: #dc3545 !important; 
+/* Change position of the snack bar */
+.mat-snack-bar-container {
+  top: 50px !important;  /* Adjust top position */
+  left: 20px !important; /* Adjust left position */
 }
+
+.mat-button {
+  color: white;
+}
+
+/* Additional custom styles */
+.mat-snack-bar-container.mat-success {
+  background-color: #28a745;
+}
+
+.mat-snack-bar-container.mat-error {
+  background-color: #dc3545;
+}
+/* Add shadow to snackbar */
+.custom-snackbar {
+  background-color: #28a745;
+  color: white;
+  font-size: 16px;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);  /* Add shadow */
+}
+
+/* Custom animation for the snackbar */
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.custom-snackbar {
+  animation: slideIn 0.5s ease-out; /* Apply animation */
+}
+

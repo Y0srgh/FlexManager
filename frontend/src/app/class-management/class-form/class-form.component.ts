@@ -3,7 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { Course } from '../../models/course.model';
-import { ToastrService } from 'ngx-toastr';
+
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-class-form',
@@ -19,13 +20,14 @@ export class ClassFormComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private http: HttpClient,
     private overlayContainer: OverlayContainer,
-     private toastr: ToastrService
+    private snackBar: MatSnackBar
   ) {
     this.courseForm = this.fb.group(
       {
         title: ['', Validators.required],
         description: ['', Validators.required],
         date: [null, [Validators.required, this.dateValidator.bind(this)]], 
+        capacity: ['', Validators.required] ,
         startTime: [null, Validators.required],
         endTime: [null, Validators.required],
       },
@@ -89,14 +91,25 @@ export class ClassFormComponent implements OnInit, OnDestroy {
         (response) => {
 
           console.log('Course submitted successfully:', response);
-          this.toastr.success('Class added successfully !', 'Success'); 
+          this.snackBar.open('Class added successfully!', 'close', {
+            duration: 3000, 
+            verticalPosition: 'top', 
+            horizontalPosition: 'right',  
+            panelClass: 'custom-snackbar',
+          });
           this.courseAdded.emit(response);
           this.courseForm.reset();
           this.closeModal.emit(); 
         },
         (error) => {
           console.error('Error submitting course:', error);
-          this.toastr.error('Error adding class !', 'Error'); 
+          this.snackBar.open('Error adding class', 'close', {
+            duration: 3000, 
+            verticalPosition: 'top', 
+            horizontalPosition: 'right',  
+            panelClass: 'custom-snackbar',
+          });
+        
         }
       );
     }

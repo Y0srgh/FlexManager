@@ -3,6 +3,7 @@ import { Course } from '../../models/course.model';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-course-details',
   templateUrl: './course-details.component.html',
@@ -19,7 +20,7 @@ export class CourseDetailsComponent {
   constructor(
     private router: Router,
     private http: HttpClient,
-    private toastr: ToastrService 
+    private snackBar: MatSnackBar
   ) {}
 
   onEdit(courseId: string) {
@@ -30,12 +31,23 @@ export class CourseDetailsComponent {
     if (confirm('Are you sure you want to delete this course?')) {
       this.http.delete(`${this.apiUrl}/${courseId}`).subscribe(
         () => {
-          this.toastr.success('Course deleted successfully!', 'Success'); 
+          this.snackBar.open('Class deleted successfully!', 'close', {
+            duration: 3000, 
+            verticalPosition: 'top', 
+            horizontalPosition: 'right',  
+            panelClass: 'custom-snackbar',
+          });
           this.deleted.emit(courseId);
         },
         (error) => {
           console.error('Error deleting course:', error);
-          this.toastr.error('Failed to delete course. Please try again.', 'Error');
+          this.snackBar.open('Error deleting class!', 'close', {
+            duration: 3000, 
+            verticalPosition: 'top', 
+            horizontalPosition: 'right',  
+            panelClass: 'custom-snackbar',
+          });
+          
         }
       );
     }
