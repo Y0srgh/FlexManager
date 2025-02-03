@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environment/environment';
 import JwtResponse from '../../model/JwtResponse';
-const ACCESS_KEY = 'auth-key';
+const ACCESS_KEY = 'accessToken';
 const USER_KEY = 'user-key';
 const REFRESH_KEY = 'refresh-key';
+import * as jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -31,9 +32,12 @@ export class SessionService {
     sessionStorage.setItem(USER_KEY, JSON.stringify(jwtresp));
   }
   public getUserDetails(): JwtResponse | null {
-    const userSession = sessionStorage.getItem(USER_KEY);
-    if (!userSession) return null;
-    return JSON.parse(userSession);
+    const accessToken = localStorage.getItem(ACCESS_KEY);
+
+    console.log(accessToken)
+    if (accessToken) return jwt_decode.jwtDecode(accessToken);
+
+    return null;
   }
 
   public isLoggedIn() {
@@ -44,7 +48,7 @@ export class SessionService {
     return this.http.post<any>(`${environment.BASE_URL}/logout`,{});
   }
   public disconnectSession(): void {
-    window.sessionStorage.clear();
+    // window.sessionStorage.clear();
 
   }
 }

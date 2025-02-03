@@ -4,45 +4,52 @@ import Stripe from 'stripe';
 import { SiteSubscriptionRepository } from './site-payment.repository'; 
 import { CreateSitePaymentDto } from './dto/create-site-payment.dto';
 import { CheckSubscriptionDto } from './dto/CheckSubsccription.dto';
+import { InjectStripeClient } from '@golevelup/nestjs-stripe';
 @Injectable()
 export class SitePaymentService {
-  private stripe: Stripe;
 
   constructor(
     private configService: ConfigService,
+    @InjectStripeClient() private stripe : Stripe,
     private subscriptionRepo: SiteSubscriptionRepository,
   ) {
-    this.stripe = new Stripe(this.configService.get<string>('STRIPE_SECRET_KEY'),{});
   }
 
   async createCustomer(email: string, name: string) {
     return await this.stripe.customers.create({ email, name });
   }
 
-  async createSubscription(createSitePaymentDto : CreateSitePaymentDto) {
-    const subscription = await this.stripe.subscriptions.create({
-      customer: createSitePaymentDto.customerId,
-      items: [{ price: createSitePaymentDto.priceId }],
-      payment_behavior: 'default_incomplete',
-      expand: ['latest_invoice.payment_intent'],
-    });
-
-    // Save subscription details to the database
-    await this.subscriptionRepo.create({
-      userId: createSitePaymentDto.userId,
-      stripeCustomerId: createSitePaymentDto.customerId,
-      stripeSubscriptionId: subscription.id,
-      priceId:createSitePaymentDto.priceId,
-      isActive: subscription.status === 'active',
-    });
-
-    return subscription;
+  async createSubscriptionSession(
+    userId : string,
+    customerId: any,
+    priceId: string,
+  ): Promise<Stripe.Response<Stripe.Checkout.Session> | undefined> {
+    try {
+      console.log(priceId);
+      return this.stripe.checkout.sessions.create({
+        success_url: 'https://localhost:4200/',
+        customer: customerId,
+        line_items: [
+          {
+            price: priceId,
+            quantity: 1,
+          },
+        ],
+        mode: 'subscription',
+      metadata : {
+        userId : userId
+      }
+      }
+    );
+    } catch (error) {
+      console.error('Error from stripe:', error);
+    }
   }
-  checkCurrentSubscription(checkSubscriptionDto: CheckSubscriptionDto) {
-    const { userId, customerId } = checkSubscriptionDto;
+  checkCurrentSubscription(user : any , customerId : string) {
+
 
     // Check if the subscription exists for the given userId or customerId
-    const subscription = this.subscriptionRepo.findByUserId(userId
+    const subscription = this.subscriptionRepo.findByUserId(user
     );
 
     if (!subscription) {
@@ -54,9 +61,8 @@ export class SitePaymentService {
     };
   }
 
-  async cancelSubscription(cancelSubscriptionDto: CheckSubscriptionDto) {
-    const { userId, customerId } = cancelSubscriptionDto;
-    const subscription = await this.subscriptionRepo.findByUserId(userId);
+  async cancelSubscription(user : any , customerId : string) {
+    const subscription = await this.subscriptionRepo.findByUserId(user.id);
 
     if (!subscription) {
       return { message: 'No subscription found to cancel.' };

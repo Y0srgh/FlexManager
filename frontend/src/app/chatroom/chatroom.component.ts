@@ -6,7 +6,6 @@ import { ChatMessageDTO } from '../model/messageDTO';
 import { DatePipe } from '@angular/common';
 import { UserService } from '../services/Userservice/user.service';
 import { SessionService } from '../services/sessionManager/session.service';
-import { ButtonComponent } from "../button/button.component";
 @Component({
   selector: 'app-chatroom',
   templateUrl: './chatroom.component.html',

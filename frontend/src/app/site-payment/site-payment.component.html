@@ -11,11 +11,11 @@
       </div>
       <div class="plan subs">
         <p class="cr-text">Subscription Status</p>
-        <p *ngIf="user.siteSubscriptions.subscription_active" class="act">Active</p>
-        <p *ngIf="!user.siteSubscriptions.subscription_active" class="notact">Not Active</p>
+        <p *ngIf="subscription_active" class="act">Active</p>
+        <p *ngIf="!subscription_active" class="notact">Not Active</p>
       </div>
       
-      <div class="credit" *ngIf="user.siteSubscriptions.subscription_active; else noStripe">
+      <div class="credit" *ngIf="subscription_active; else noStripe">
         <p class="cr-usage">Membership Status</p>
         <div class="credit-text">
           <p>You have {{ daysleft }} days left. Keep pushing!</p>
@@ -139,7 +139,7 @@
         </div>
         <p class="p-pro p-pro2" style="color: white; margin-top: -18px;">test</p>
         <p class="p-pro"><i class="fa-solid fa-check pro-i"></i>test</p>
-        <button id="up" (Onclick)="upgradePayment('PREMIUM')">Upgrade Subscription</button>
+        <button id="up" (click)="upgradePayment('PREMIUM')">Upgrade Subscription</button>
       </div>
   </div>
   

@@ -41,6 +41,13 @@ export class UserService {
       throw new ConflictException('username or email already exist');
     }
   }
+  async findOne(id: string): Promise<UserEntity> {
+    const entity = await this.userRepository.findOne({ where: { id } as any });
+    if (!entity) {
+      throw new NotFoundException(`Entity with ID "${id}" not found`);
+    }
+    return entity;
+  }
 
   /*async signIn(credientials: UserSingInDto) {
     const { username, email, password } = credientials;
@@ -92,6 +99,7 @@ export class UserService {
         username: user.username,
         email: user.email,
         role: user.role,
+        id : user.id
       };
 
       const accessToken = await this.jwtService.signAsync(payload, {

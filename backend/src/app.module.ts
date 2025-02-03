@@ -1,4 +1,4 @@
-import { ConfigurableModuleBuilder, Module } from '@nestjs/common';
+import { ConfigurableModuleBuilder, MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -14,10 +14,15 @@ import { BaseService } from './base/base.service';
 import { PrivateSessionModule } from './private-session/private-session.module';
 import { MessengerModule } from './messenger/messenger.module';
 import { SitePaymentModule } from './site-payment/site-payment.module';
+import configs from './site-payment/config';
+
 
 @Module({
   imports: [CourseModule ,  
-    ConfigModule.forRoot(), 
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load : [ configs]
+    }), 
     TypeOrmModule.forRoot({
       type: 'postgres',
       url: 'postgresql://postgres:root@localhost:5433/flexmanager',
@@ -36,5 +41,5 @@ import { SitePaymentModule } from './site-payment/site-payment.module';
   providers: [AppService],
 })
 export class AppModule {
-  
+
 }

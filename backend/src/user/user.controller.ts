@@ -110,6 +110,7 @@ export class UserController {
   }
 
   @Get('client/:id')
+  @UseGuards(JwtAuthGuard)
   findOneClient(@Param('id') id: string) {
     return this.clientService.findOne(id);
   }
@@ -128,7 +129,6 @@ export class UserController {
   findAllManagers() {
     return this.managerService.findAll();
   }
-
   @Get('manager/:id')
   findOneManager(@Param('id') id: string) {
     return this.managerService.findOne(id);
@@ -140,5 +140,9 @@ export class UserController {
   @Post('parent')
   createParent(@Body() createParentDto: CreateParentDto) {
     return this.parentService.createParent(createParentDto);
+  }
+  @Get("User")
+  getUserById(@Param("id") id : string){
+    return this.userService.findOne(id);
   }
 }

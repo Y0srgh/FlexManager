@@ -10,7 +10,7 @@ import { Observable, tap } from 'rxjs';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  private protectedPaths = ['/auth/client'];
+  private protectedPaths = ['/auth/client',"/site-payment/create-subscription"];
 
   intercept(
     req: HttpRequest<any>,
@@ -48,13 +48,13 @@ export class AuthInterceptor implements HttpInterceptor {
               if (event.status === 401) {
                 console.log('removing access token and must be signed out');
                 
-                localStorage.removeItem('accessToken');
+                // localStorage.removeItem('accessToken');
               }
             }
           },
           error: (error) => {
             console.error('Error in request:', error);
-            localStorage.removeItem('accessToken');
+            // localStorage.removeItem('accessToken');
           },
         })
       );
@@ -62,6 +62,7 @@ export class AuthInterceptor implements HttpInterceptor {
       return next.handle(req).pipe(
         tap({
           next: (response) => {
+            console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
             console.log('response', response);
           },
           error: (error) => {

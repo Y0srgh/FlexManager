@@ -53,6 +53,8 @@ import { SitePaymentService } from './services/site-payment/site-payment.service
 @NgModule({
   declarations: [
     AppComponent,
+    ChatroomComponent,
+    TimeAgoPipe,
     CourseManagementComponent,
     CourseFormComponent,
     SidebarComponent,

@@ -5,9 +5,9 @@ import { RequestLoggingInterceptor } from './request-logging/request-logging.int
 import * as cookieParser from 'cookie-parser';
 import * as express from 'express';
 import * as cors from 'cors';
-
+import * as bodyParser from 'body-parser';
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: true });
+  const app = await NestFactory.create(AppModule, { cors: true,rawBody: true });
   app.use(cookieParser());
   app.useGlobalInterceptors(new RequestLoggingInterceptor());
 
@@ -24,7 +24,7 @@ async function bootstrap() {
     methods: ['GET','HEAD','PUT','PATCH','POST','DELETE'],
     preflightContinue: false,
     credentials: true,
-    allowedHeaders: ['Content-Type', 'Accept','Content-Type', 'Authorization', 'x-new-access-token'],
+    allowedHeaders: ['Content-Type', 'Accept','Content-Type', 'Authorization', 'x-new-access-token','stripe-signature'],
     exposedHeaders: ['x-new-access-token'],
   });
 
@@ -57,7 +57,6 @@ async function bootstrap() {
 
   //   next();
   // });
-
   await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();

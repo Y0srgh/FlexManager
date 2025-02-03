@@ -9,4 +9,5 @@ export class User {
 
   @Column()
   password: string;  
+  siteSubscription: any;
 }

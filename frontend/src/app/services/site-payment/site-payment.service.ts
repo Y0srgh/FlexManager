@@ -11,13 +11,13 @@ export class SitePaymentService {
 
   constructor(private  http: HttpClient ) { }
   
-  HandlePayment (plan : string,UserId : string) : any {
-    return this.http.post<any>(`${environment.BASE_URL}/create-subscription`,{userId : UserId,priceId: this.getPrice(plan)})
+  HandlePayment (plan : string) : any {
+    return this.http.post<any>(`${environment.BASE_URL}/site-payment/create-subscription`,{priceId: this.getPrice(plan)})
   }
   getPrice(plan: string): string {
     const priceMap: Record<string, Price> = {
-      basic: Price.FREETRIAl,
-      standard: Price.PRO,
+      freetrial: Price.FREETRIAl,
+      pro: Price.PRO,
       premium: Price.PREMIEM,
     };
     return priceMap[plan.toLowerCase()] ?? null;

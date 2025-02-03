@@ -14,8 +14,8 @@ export class SiteSubscriptionRepository {
     return this.siteSubscriptionRepo.save(data);
   }
 
-  findByUserId(userId: string) {
-    return this.siteSubscriptionRepo.findOne({ where: { userId } });
+  findByUserId(id: string) {
+    return this.siteSubscriptionRepo.findOne({ where: { user : { id } } });
   }
 
   updateSubscription(id: string, data: Partial<siteSubscriptions>) {

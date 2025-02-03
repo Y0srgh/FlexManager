@@ -6,12 +6,14 @@ import {
   Column,
   OneToOne,
   PrimaryColumn,
-  JoinColumn
+  JoinColumn,
+  OneToMany
 } from 'typeorm';
 import { CoachEntity } from './coach.entity';
 import { ClientEntity } from './client.entity';
 import { ManagerEntity } from './manager.entity';
 import { ParentEntity } from './parents.entity';
+import { siteSubscriptions } from 'src/site-payment/entities/site-payment.entity';
 
 @Entity('users')
 export class UserEntity extends TimestampEntity {
@@ -63,5 +65,15 @@ export class UserEntity extends TimestampEntity {
   })
   @JoinColumn()
   parent: ParentEntity;
+
+  @OneToOne(()=> siteSubscriptions,(siteSubscription) => siteSubscription.user, {
+    nullable: true,
+    cascade: true,
+  })
+  @JoinColumn()
+  siteSubscription : siteSubscriptions;
+
+  
+ 
 
 }
