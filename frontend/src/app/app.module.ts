@@ -37,6 +37,7 @@ import { LoggerInterceptor } from './interceptors/logger.interceptor';
 import { JoinOptionsComponent } from './join-options/join-options.component';
 import { SignupParentComponent } from './signup-parent/signup-parent.component';
 import { PendingRequestsComponent } from './pending-requests/pending-requests.component';
+import { ChildAssociationComponent } from './child-association/child-association.component';
 
 // const routes: Routes = [
 //   { path: '', component: HeroComponent },
@@ -74,6 +75,7 @@ import { PendingRequestsComponent } from './pending-requests/pending-requests.co
     JoinOptionsComponent,
     SignupParentComponent,
     PendingRequestsComponent,
+    ChildAssociationComponent,
   ],
   imports: [
     BrowserModule,

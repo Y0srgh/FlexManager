@@ -159,19 +159,12 @@ export class UserController {
     return this.parentChildService.findAll();
   }
 
-  @Get('request/pending-parent-request/:id')
-  // @Role(Roles.PARENT)
-  // @UseGuards(JwtAuthGuard, RolesGuard)
-  async getParentPendingRequests(@Param('id') parentId: string) {
-    return this.parentChildService.getParentPendingRequests(parentId);
-  }
-
   @Get('request/pending-child-request')
   @Role(Roles.CLIENT)
   @UseGuards(JwtAuthGuard, RolesGuard)
   async getChildPendingRequests(@User() client) {
     console.log('i am here');
-    
+
     return this.parentChildService.getChildPendingRequests(client.id);
   }
 
@@ -185,13 +178,36 @@ export class UserController {
     return this.parentChildService.updateRequestStatus(requestId, status);
   }
 
+  @Get('request/pending-parent-request')
+  @Role(Roles.PARENT)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  async getParentPendingRequests(@User() client) {
+    return this.parentChildService.getParentPendingRequests(client.id);
+  }
 
+  @Post('request/associate-children')
+  @Role(Roles.PARENT)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  async addChildAfterSignup(
+    @Body()
+    associateChildrenDto: {
+      childrenEmails: string[];
+    },
+    @User() client
+  ) {
+    await this.parentService.associateChildren(
+      client.id,
+      associateChildrenDto.childrenEmails,
+      client.username,
+    );
+
+    return { message: 'Child association request sent' };
+  }
 
   @Get('request/pending-child-request/:id')
   // @Role(Roles.CLIENT)
   // @UseGuards(JwtAuthGuard, RolesGuard)
-  async getChildPendingRequestsId(@Param('id') id : string) {
+  async getChildPendingRequestsId(@Param('id') id: string) {
     return this.parentChildService.getChildPendingRequests(id);
   }
-
 }

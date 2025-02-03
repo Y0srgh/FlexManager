@@ -109,5 +109,65 @@ export class ParentService extends BaseService<ParentEntity> {
     return parent;
   }
 
-  
+  async associateChildren(
+    parentId: string,
+    childrenEmails: string[],
+    parentUsername: string,
+  ) {
+    
+    const parent = await this.parentRepository.findOne({
+      where: { id: parentId },
+    });
+
+    if (!parent) {
+      throw new NotFoundException('Parent not found');
+    }
+
+    if (!childrenEmails.length) {
+      throw new NotFoundException(`No child emails provided`);
+    }
+
+    const children = await Promise.all(
+      childrenEmails.map(async (childEmail) => {
+        console.log(`Processing child: ${childEmail}`);
+
+        const child = await this.userRepository.findOne({
+          where: { email: childEmail } as any,
+        });
+
+        if (!child) {
+          throw new NotFoundException(
+            `Child with email ${childEmail} not found`,
+          );
+        }
+
+        if (child.role !== 'client') {
+          throw new NotFoundException(`Invalid child role for ${childEmail}`);
+        }
+
+        await this.parentChildRequestRepository.save({
+          parent,
+          child,
+          status: 'pending',
+        });
+
+        try {
+          await this.emailService.sendParentAssociationRequestEmail(
+            childEmail,
+            child.username,
+            parentUsername,
+          );
+        } catch (error) {
+          console.error(`Failed to send email to ${childEmail}:`, error);
+        }
+
+        return child;
+      }),
+    );
+
+    console.log(
+      `Children associated:`,
+      children.map((child) => child.email),
+    );
+  }
 }
