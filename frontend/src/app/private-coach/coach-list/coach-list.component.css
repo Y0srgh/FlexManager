@@ -1,0 +1,62 @@
+
+.coach-list {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 20px; 
+    justify-content: flex-start; 
+    margin: 20px 0;
+    background-image: url('https://images.pexels.com/photos/1552252/pexels-photo-1552252.jpeg?cs=srgb&dl=pexels-leonardho-1552252.jpg&fm=jpg');
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-attachment: fixed; 
+    max-height: 1000vh;
+    padding-top: 40px;
+     
+  }
+  
+  
+  app-coach {
+    width: calc(33.333% - 13.333px); 
+    box-sizing: border-box; 
+    
+  }
+  .modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .modal-content {
+    background-color: white;
+    padding: 0px;
+    border-radius: 5px;
+    width: 50%;
+    max-width: 500px;
+    position: relative;
+  }
+  
+  .close {
+    position: absolute; 
+    top: 10px; 
+    right: 10px; 
+    cursor: pointer;
+    font-size: 24px; 
+    color: #333; 
+    z-index: 1000; 
+    padding: 10px; 
+    background-color: rgba(255, 255, 255, 0.8); 
+    border-radius: 50%; /* Forme arrondie */
+    transition: color 0.3s ease, background-color 0.3s ease; 
+  }
+  
+  .close:hover {
+    color: rgba(95, 43, 79, 0.6); 
+    background-color: rgba(255, 255, 255, 1); 
+  }

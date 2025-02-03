@@ -1,61 +1,98 @@
+/* Conteneur principal des cartes */
 .coach-container {
   display: flex;
-  justify-content: center; 
+  justify-content: center;
+  flex-wrap: wrap; /* Permet aux cartes de s'adapter en ligne */
+  gap: 20px; /* Espacement entre les cartes */
   margin: 20px 0;
+  
 }
 
+/* Style de la carte coach */
 .coach-item {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  padding: 15px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-  margin-bottom: 20px;
-  width: 85%; 
-  justify-content: space-between;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);;
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  width: 260px; /* Largeur fixe, ajustable */
+  text-align: center;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* Effet au survol de la carte */
+.coach-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Image du coach */
 .coach-img {
-  width: 60px;
-  height: 60px;
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
   object-fit: cover;
-  margin-right: 20px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  /* Suppression du contour */
 }
 
+/* Informations du coach */
 .coach-info {
-  margin-left: 15px;
+  padding: 5px 10px;
 }
 
-.coach-item h3 {
+.coach-info h3 {
   font-family: 'Poppins', sans-serif;
-  color: #333;
+  color: black;
   font-size: 18px;
-  margin: 0;
+  margin: 5px 0;
+  text-transform: uppercase;
 }
 
-.coach-item p {
-  font-family: 'League Spartan', sans-serif;
-  color: #777;
+.coach-info p {
+  font-family: 'Poppins', sans-serif;
+  color: black; /* Couleur du texte */
   font-size: 14px;
-  margin: 0;
+  
+  font-weight: bold; /* Texte en gras */
 }
+
 
 .select-btn {
-  background-color: #896CFE;
+  background-color: #421A3F;
   color: #fff;
-  border: 1px solid #B3A0FF;
-  padding: 12px 20px;
-  border-radius: 6px;
+  border: none;
+  padding: 12px;
+  width: 100%;
+  border-radius: 10px 10px 10px 10px; 
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s ease;
   font-size: 14px;
-  margin-left: auto; 
-  margin-right: 20px;
+  font-weight: bold;
 }
 
+
 .select-btn:hover {
-  background-color: #B3A0FF;
+  background-color: #5A2A56;}
+  
+  .select-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(66, 26, 63, 0.5); /* Effet de focus */
+  }
+
+/* Adaptation pour les petits écrans */
+@media (max-width: 768px) {
+  .coach-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .coach-item {
+    width: 90%;
+  }
 }

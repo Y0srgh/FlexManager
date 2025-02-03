@@ -49,6 +49,7 @@ import { ClassFormComponent } from './class-management/class-form/class-form.com
 import { CourseComponent } from './class-management/course/course.component';
 import { CourseDetailsComponent } from './class-management/course-details/course-details.component';
 import { CoursePageComponent } from './class-management/course-page/course-page.component';
+import { RequestPageComponent} from './private-coach/request-page/request-page.component';
 
 // Interceptors
 import { AuthInterceptor } from './interceptors/auth.interceptor';
@@ -87,6 +88,7 @@ import { ButtonComponent } from './components/shared/button/button.component';
     CourseComponent,
     CourseDetailsComponent,
     CoursePageComponent,
+    RequestPageComponent,
   ],
   imports: [
     BrowserModule,

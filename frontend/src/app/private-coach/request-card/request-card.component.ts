@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { PrivateReservation } from '../../models/private-reservation.model';
 
 @Component({
   selector: 'app-request-card',
@@ -6,17 +7,13 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./request-card.component.css']
 })
 export class RequestCardComponent {
-  @Input() name: string = 'Rayen';
-  @Input() time: string = '5:00 PM, Jan 12';
-  @Input() imageUrl: string = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1_699OIlro1Us8yuRGDpgO1q1Tj2dIIeJQA&s';
+  @Input() reservation!: PrivateReservation;
 
   onAccept() {
-    console.log('Request accepted');
+    console.log(`Reservation accepted for Client: ${this.reservation.name}`);
   }
 
   onRefuse() {
-    console.log('Request refused');
+    console.log(`Reservation refused for Client: ${this.reservation.name}`);
   }
 }
-
-  

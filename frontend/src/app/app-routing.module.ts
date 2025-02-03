@@ -13,6 +13,8 @@ import { SignupComponent } from './signup/signup.component';
 import { SigninComponent } from './signin/signin.component';
 import { ClientComponent } from './client/client.component';
 import { JoinOptionsComponent } from './join-options/join-options.component';
+import { CoachListComponent } from './private-coach/coach-list/coach-list.component';
+import {RequestPageComponent} from './private-coach/request-page/request-page.component';
 
 const routes: Routes = [
   { path: '', component: LayoutComponent },
@@ -21,6 +23,8 @@ const routes: Routes = [
   { path: 'client', component: ClientComponent },
   { path: 'register', component: JoinOptionsComponent },
   { path: 'course', component: CoursePageComponent },
+  { path: 'coaches', component: CoachListComponent },
+  { path: 'requests', component: RequestPageComponent },
 ];
 
 @NgModule({

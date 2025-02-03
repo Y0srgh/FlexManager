@@ -1,0 +1,19 @@
+.request-page {
+    padding: 30px;
+    margin: 0 auto;
+    background-image: url('https://images.pexels.com/photos/1552252/pexels-photo-1552252.jpeg?cs=srgb&dl=pexels-leonardho-1552252.jpg&fm=jpg');
+    background-size: cover; 
+    background-position: center center; 
+    width: 100%;
+    min-height: 100vh;
+  }
+  
+  .request-page h2 {
+    font-size: 28px;
+    color: #FFFFFF; 
+    text-align: center;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-family: 'Poppins', sans-serif;
+  }

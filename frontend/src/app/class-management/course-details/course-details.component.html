@@ -1,28 +1,28 @@
 <div class="course-details-container" *ngIf="course">
-    <div class="coach-info">
-      <img [src]="course.coachPhoto" alt="Photo du coach" class="coach-photo">
-      <h2 class="coach-name">{{ course.coachName }}</h2>
-    </div>
-    <div class="course-info">
-      <h3 class="course-name">{{ course.title }}</h3>
-      <p class="course-description">{{ course.description }}</p>
-      <p *ngIf="course.startTime && course.endTime">
-        <strong>Time:</strong> {{ course.startTime }} - {{ course.endTime }}
-      </p>
-  
-      <p *ngIf="!course.startTime || !course.endTime">
-        <strong>Time:</strong> Not specified
-      </p>
-      <p><strong>Capacity :</strong> {{ course.capacity }}</p>
-      
-      <div class="buttons-container">
-        <div  class="edit-btn-container">
-          
-          <button class="edit-btn" (click)="onEdit(course.id)">Edit</button>
-          <button class="delete-btn" (click)="onDelete(course.id)">Delete</button>
-        </div>
+  <div class="coach-info">
+    <img [src]="course.coachPhoto" alt="Photo du coach" class="coach-photo">
+    <h2 class="coach-name">{{ course.coachName }}</h2>
+  </div>
+  <div class="course-info">
+    <h3 class="course-name">{{ course.title }}</h3>
+    <p class="course-description">{{ course.description }}</p>
+    <p *ngIf="course.startTime && course.endTime">
+      <strong>Time:</strong> {{ course.startTime }} - {{ course.endTime }}
+    </p>
+
+    <p *ngIf="!course.startTime || !course.endTime">
+      <strong>Time:</strong> Not specified
+    </p>
+    <p><strong>Capacity :</strong> {{ course.capacity }}</p>
+    
+    <div class="buttons-container">
+      <div  class="edit-btn-container">
+        
+        <button class="edit-btn" (click)="onEdit(course.id)">Edit</button>
+        <button class="delete-btn" (click)="onDelete(course.id)">Delete</button>
       </div>
-      
-      <button class="close-btn" (click)="closePopup()">×</button>
     </div>
-  </div> 
+    
+    <button class="close-btn" (click)="closePopup()">×</button>
+  </div>
+</div> 
