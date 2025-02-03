@@ -163,3 +163,12 @@
   color: #421A3F;
   transform: scale(1.1);
 }
+@import '~ngx-toastr/toastr.css'; 
+
+.toast-success {
+  background-color: #28a745 !important; 
+}
+
+.toast-error {
+  background-color: #dc3545 !important; 
+}

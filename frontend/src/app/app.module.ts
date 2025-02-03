@@ -55,6 +55,7 @@ import { RequestPageComponent} from './private-coach/request-page/request-page.c
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { LoggerInterceptor } from './interceptors/logger.interceptor';
 import { ButtonComponent } from './components/shared/button/button.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -108,6 +109,7 @@ import { ButtonComponent } from './components/shared/button/button.component';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
+    ToastrModule.forRoot(), 
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

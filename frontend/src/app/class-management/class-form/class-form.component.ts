@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { Course } from '../../models/course.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-class-form',
@@ -11,12 +12,14 @@ import { Course } from '../../models/course.model';
 })
 export class ClassFormComponent implements OnInit, OnDestroy {
   @Output() closeModal = new EventEmitter<void>();
+  @Output() courseAdded = new EventEmitter<any>()
   courseForm: FormGroup;
 
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
-    private overlayContainer: OverlayContainer
+    private overlayContainer: OverlayContainer,
+     private toastr: ToastrService
   ) {
     this.courseForm = this.fb.group(
       {
@@ -33,7 +36,7 @@ export class ClassFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // Attach the overlay container to the form container
+  
     const formContainer = document.querySelector('.form-container');
     if (formContainer) {
       this.overlayContainer.getContainerElement().classList.add('form-container');
@@ -41,7 +44,7 @@ export class ClassFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // Clean up by removing the custom class
+  
     this.overlayContainer.getContainerElement().classList.remove('form-container');
   }
 
@@ -84,12 +87,16 @@ export class ClassFormComponent implements OnInit, OnDestroy {
 
       this.http.post('http://localhost:4000/courses', courseData).subscribe(
         (response) => {
+
           console.log('Course submitted successfully:', response);
+          this.toastr.success('Class added successfully !', 'Success'); 
+          this.courseAdded.emit(response);
           this.courseForm.reset();
           this.closeModal.emit(); 
         },
         (error) => {
           console.error('Error submitting course:', error);
+          this.toastr.error('Error adding class !', 'Error'); 
         }
       );
     }
