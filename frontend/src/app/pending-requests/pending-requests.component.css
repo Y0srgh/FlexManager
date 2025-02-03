@@ -213,6 +213,8 @@
   text-align: center;
   padding: 3rem;
   color: #666;
+  color: #ffffff;
+  z-index: 50;
 }
 
 .no-requests i {
