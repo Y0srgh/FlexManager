@@ -1,0 +1,258 @@
+.background-image {
+
+  background-image: url('https://images.pexels.com/photos/1552252/pexels-photo-1552252.jpeg?cs=srgb&dl=pexels-leonardho-1552252.jpg&fm=jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.payment-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+
+  .payment-container {
+    display: flex;
+    gap: 30px;
+    
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
+  }
+
+  .payment-form-section {
+    flex: 1;
+    padding: 40px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .payment-summary {
+    width: 350px;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    position: sticky;
+    top: 20px;
+    height: fit-content;
+
+    &.hidden {
+      display: none;
+    }
+  }
+
+  .form-section {
+    margin-bottom: 25px;
+
+    h3 {
+      margin-bottom: 15px;
+      color: #333;
+    }
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #555;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      
+      &:focus {
+        outline: none;
+        border-color: #007bff;
+      }
+    }
+  }
+
+  .error-message {
+    color: #dc3545;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+
+  .card-details {
+    display: flex;
+    gap: 15px;
+
+    .half-width {
+      flex: 1;
+    }
+  }
+
+  .form-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+
+    button {
+      padding: 10px 20px;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+
+      &.btn-primary {
+        background: #5F2B4F;
+        color: white;
+
+        &:disabled {
+          background: #ccc;
+          cursor: not-allowed;
+        }
+      }
+
+      &.btn-secondary {
+        background: #6c757d;
+        color: white;
+      }
+    }
+  }
+
+  .plan-options {
+    .plan-option {
+      margin-bottom: 10px;
+      
+      label {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        cursor: pointer;
+
+        &.selected {
+          border-color: #007bff;
+          background: rgba(0,123,255,0.05);
+        }
+      }
+    }
+  }
+
+  .security-notice {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 4px;
+  }
+}
+
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  animation: popupFadeIn 0.3s ease-out;
+
+  .success-icon {
+    width: 60px;
+    height: 60px;
+    background-color: #28a745;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    color: white;
+    font-size: 30px;
+  }
+
+  h2 {
+    color: #333;
+    margin-bottom: 15px;
+  }
+
+  p {
+    color: #666;
+    margin-bottom: 10px;
+  }
+
+  .payment-details {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 4px;
+    margin: 20px 0;
+
+    p {
+      margin: 5px 0;
+      font-size: 14px;
+    }
+  }
+
+  button {
+    margin-top: 20px;
+    min-width: 120px;
+  }
+}
+
+@keyframes popupFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.btn-primary {
+  &:disabled {
+    position: relative;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #ffffff;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: button-loading-spinner 1s linear infinite;
+      right: 10px;
+      top: calc(50% - 10px);
+    }
+  }
+}
+
+@keyframes button-loading-spinner {
+  from {
+    transform: rotate(0turn);
+  }
+  to {
+    transform: rotate(1turn);
+  }
+}
+

@@ -1,0 +1,36 @@
+<div class="subscription-container">
+  <div class="subscription-card" *ngFor="let subscription of subscriptions">
+    <div class="subscription-photo">
+      <img 
+        [src]="subscription.image" 
+        alt="{{ subscription.name }} Image" 
+        class="subscription-img"
+      />
+    </div>
+    <div class="subscription-details">
+      <h2 class="subscription-name">{{ subscription.name }}</h2>
+      <p class="subscription-price"><strong>Price:</strong> {{ subscription.price }} DT</p>
+      <p class="subscription-equipment"><strong>Equipment:</strong> {{ subscription.equipment }}</p>
+      <button class="view-details-btn" (click)="openModal(subscription)">View Details</button>
+    </div>
+  </div>
+</div>
+
+<!-- <div *ngIf="selectedSubscription" class="modal-overlay" (click)="closeModal()"></div>
+<div *ngIf="selectedSubscription" class="subscription-modal">
+  <button class="close-btn" (click)="closeModal()">×</button>
+  <div class="modal-content">
+    <div class="modal-image">
+      <img [src]="selectedSubscription.image" alt="{{ selectedSubscription.name }} Image" />
+    </div>
+    <div class="modal-details">
+      <h2>{{ selectedSubscription.name }}</h2>
+      <p>{{ selectedSubscription.details }}</p>
+      <p><strong>Equipment:</strong> {{ selectedSubscription.equipment }}</p>
+      <p><strong>Benefits:</strong></p>
+      <ul>
+        <li *ngFor="let benefit of selectedSubscription.benefits">{{ benefit }}</li>
+      </ul>
+    </div>
+  </div>
+</div> -->

@@ -1,0 +1,11 @@
+<button class="close-btn" (click)="closeDetailsModal()">✖</button>
+<div class="details-container">
+    <h3>{{data.name}}</h3>
+    <p style="text-align: center;">{{data.details}}</p>
+    <p><strong>Equipements: </strong>{{data.equipment}} </p>
+    <p><strong>Benefits:</strong></p>
+    <ul class="custom-list">
+        <li *ngFor="let benefit of data.benefits">{{ benefit }}</li>
+      </ul>
+    
+    </div>

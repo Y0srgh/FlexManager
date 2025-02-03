@@ -1,0 +1,106 @@
+/* Assurer que body et html prennent toute la hauteur de la fenêtre */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+/* Conteneur principal */
+.app-container {
+  background-image: url('https://images.pexels.com/photos/1552252/pexels-photo-1552252.jpeg?cs=srgb&dl=pexels-leonardho-1552252.jpg&fm=jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0;
+  margin: 0;
+  height: 100%; /* Assure que le conteneur prend toute la hauteur */
+}
+
+/* Conteneur des cartes */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* Adaptatif */
+  gap: 30px;
+  width: 90%;
+  max-width: 1200px;
+  margin-top: 20px;
+}
+
+/* Style des cartes */
+.course-container {
+  background: rgba(255, 255, 255, 0.15); /* Transparence plus subtile */
+  border-radius: 20px;
+  backdrop-filter: blur(10px); /* Effet de flou */
+  padding: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  min-width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.course-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Image des cartes */
+.course-image {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 15px;
+}
+
+/* Titre des cartes */
+.course-title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #000;
+}
+
+/* Description des cartes */
+.course-description {
+  font-size: 1rem;
+  color: #000;
+  opacity: 0.8;
+}
+
+/* Bouton View Details */
+.view-details-btn {
+  padding: 8px 16px;
+  font-size: 1rem;
+  color: white;
+  background-color: #53284f;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.view-details-btn:hover {
+  background-color: #3a1d36;
+}
+
+/* Responsive : une seule colonne sur mobile */
+@media screen and (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+
+  .course-container {
+    flex-direction: column;
+    text-align: center;
+    min-width: 100%;
+  }
+
+  .course-image {
+    margin-bottom: 10px;
+  }
+}

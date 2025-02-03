@@ -1,0 +1,180 @@
+/* Conteneur principal des abonnements */
+.subscription-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 cartes par ligne */
+  column-gap: 250px; /* Espace plus grand entre les colonnes */
+  row-gap: 30px; /* Espace entre les lignes */
+
+  justify-items: center;
+  margin: 20px;
+}
+
+/* Cartes d'abonnement */
+.subscription-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%; /* 100% de la largeur de la cellule de la grille */
+  max-width: 350px; /* Taille plus petite des cartes */
+  background: rgba(255, 255, 255, 0.15); /* Effet transparent */
+  border-radius: 16px;
+  backdrop-filter: blur(10px); /* Flou pour l'effet verre */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden; 
+}
+
+.subscription-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Image des abonnements */
+.subscription-photo {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.subscription-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+
+/* Détails de l'abonnement */
+.subscription-details {
+  padding: 15px;
+  text-align: left;
+}
+
+.subscription-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.subscription-price, 
+.subscription-equipment {
+  font-size: 1rem;
+  color: #fff;
+  opacity: 0.9;
+  margin: 5px 0;
+}
+
+/* Bouton View Details */
+.view-details-btn {
+  padding: 10px 20px;
+  background-color: rgba(66, 26, 63, 0.8); /* Plus de transparence */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.view-details-btn:hover {
+  background-color: rgba(90, 42, 86, 1);
+  transform: scale(1.05);
+}
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+/* Fenêtre modale */
+.subscription-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  width: 90%;
+  max-width: 500px;
+}
+
+/* Contenu de la modale */
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: left;
+}
+
+.modal-image img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+/* Bouton de fermeture */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #333;
+}
+
+/* Responsive : une seule colonne sur mobile */
+@media screen and (max-width: 768px) {
+  .subscription-container {
+    grid-template-columns: 1fr; /* Une seule colonne sur mobile */
+  }
+
+  .subscription-card {
+    width: 90%;
+  }
+}
+/* Détails de l'abonnement */
+.subscription-details {
+  padding: 15px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: left; /* Centrer horizontalement tout le contenu */
+}
+
+/* Espacement entre le prix et l'équipement */
+.subscription-price, 
+.subscription-equipment {
+  font-size: 1rem;
+  color: #fff;
+  opacity: 0.9;
+  margin: 10px 0; /* Augmenter l'espacement entre les éléments */
+}
+
+/* Bouton View Details */
+.view-details-btn {
+  padding: 10px 20px;
+  background-color: rgba(66, 26, 63, 0.8); /* Plus de transparence */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 15px; /* Espacement entre les informations et le bouton */
+  /* align-self: flex-end; */ /* Décale le bouton vers la droite */
+}
+
+.view-details-btn:hover {
+  background-color: rgba(90, 42, 86, 1);
+  transform: scale(1.05);
+}

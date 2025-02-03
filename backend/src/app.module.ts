@@ -3,23 +3,24 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Test } from './test/entities/test.entity';
-import * as dotenv from 'dotenv';
-import { TestModule } from './test/test.module';
+import * as dotenv from 'dotenv'; // Assurez-vous que dotenv est bien importé
 
-dotenv.config();
+import { TestModule } from './test/test.module';
+import { SubscriptionsModule } from './subscription/subscription.module';
+
+dotenv.config(); // Charger les variables d'environnement depuis le fichier .env
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot(), // Charger la configuration
     TypeOrmModule.forRoot({
-      type: 'postgres',
-      url: process.env.DATABASE_URL,
-      entities: ['dist/**/*.entity{.ts,.js}'],
-      synchronize: true
+      type: 'postgres', // Type de base de données
+      url: process.env.DATABASE_URL, // Récupérer la variable DATABASE_URL
+      entities: ['dist/**/*.entity{.ts,.js}'], // Entités de l'application
+      synchronize: true, // Synchroniser les entités avec la base de données (ne pas utiliser en production)
     }),
-    TypeOrmModule.forFeature([Test]),
-    TestModule
+    TestModule, // Votre module de test (si nécessaire)
+    SubscriptionsModule, // Module des abonnements
   ],
   controllers: [AppController],
   providers: [AppService],
