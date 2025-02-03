@@ -53,7 +53,7 @@ export class CourseService {
   }
 
   updateCourse(course: Course): Observable<Course> {
-    return this.http.put<Course>(`${this.apiUrl}/${course.id}`, course);
+    return this.http.patch<Course>(`${this.apiUrl}/${course.id}`, course);
   }
 
   deleteCourse(id: number): Observable<void> {
