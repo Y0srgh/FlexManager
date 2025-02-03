@@ -104,8 +104,8 @@ export class ParentChildAssociationComponent {
   }
 
   exit(){
-    console.log('exitting');
-    
+    console.log('exitting');   
+    this.router.navigate(['pending-child-request']); 
   }
 
   /*
