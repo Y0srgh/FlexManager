@@ -1,4 +1,4 @@
-import { IsUUID, IsDateString, IsString, IsInt, IsNotEmpty } from 'class-validator';
+import { IsUUID, IsDateString, IsString, IsInt, IsNotEmpty, IsOptional } from 'class-validator';
 
 export class CreateReservationDto {
   @IsDateString()
@@ -13,6 +13,7 @@ export class CreateReservationDto {
   endTime: string;
 
   @IsInt()
+  @IsOptional()
   duration: number;
 
   @IsUUID()
