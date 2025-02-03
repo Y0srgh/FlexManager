@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 interface Plan {
   type: string;
   name: string;
-  price: number;
   discount?: number;
 }
 
@@ -15,18 +14,20 @@ interface Plan {
 })
 export class PaymentComponent implements OnInit {
   paymentForm! : FormGroup;
-  paymentType: string = 'course';
+  paymentType: string = 'subscription';
   selectedItem: string = '';
   selectedPlan: string = '';
   showItemSelection: boolean = false;
   transactionId: string = '';
   isProcessing: boolean = false;
   showSuccessPopup: boolean = false;
+  showErrorPopup: boolean = false;
+
 
   plans: Plan[] = [
-    { type: 'monthly', name: 'Monthly Plan', price: 60 },
-    { type: 'annual', name: 'Annual Plan', price: 40, discount: 15 },
-    { type: 'quarterly', name: 'Quarterly Plan', price: 50, discount: 10 }
+    { type: 'monthly', name: 'Monthly Plan' },
+    { type: 'annual', name: 'Annual Plan' ,discount: 15 },
+    { type: 'quarterly', name: 'Quarterly Plan', discount: 10 }
   ];
 
   availableItems: any[] = [];
@@ -47,7 +48,7 @@ export class PaymentComponent implements OnInit {
       expiryDate: ['', [Validators.required, Validators.pattern('^(0[1-9]|1[0-2])\/([0-9]{2})$')]],
       cvc: ['', [Validators.required, Validators.pattern('^[0-9]{3,4}$')]],
       country: ['', Validators.required],
-      paymentType: ['course', Validators.required],
+      paymentType: ['subscrpition', Validators.required],
       totalAmount: [{ value: 0, disabled: true }],
       zipCode: [''],
       planType: ['monthly']
@@ -69,10 +70,12 @@ export class PaymentComponent implements OnInit {
     this.updateFormValidation();
   }
 
-  onPlanChange(planType: string): void {
+  
+  onPlanChange(planType: string) {
     this.selectedPlan = planType;
-    this.updateTotal();
+    this.calculateTotal(); 
   }
+  
 
   updateFormValidation(): void {
     const totalAmountControl = this.paymentForm.get('totalAmount');
@@ -112,9 +115,9 @@ export class PaymentComponent implements OnInit {
   }
 
   onSubmit(): void {
+    console.log("Form Submitted", this.paymentForm.value);
     if (this.paymentForm.valid && !this.isProcessing) {
       this.isProcessing = true;
-      
       // Simulate payment processing
       this.processPayment(this.paymentForm.value)
         .then(() => {
@@ -131,7 +134,15 @@ export class PaymentComponent implements OnInit {
       this.markFormGroupTouched(this.paymentForm);
     }
   }
-
+  
+  showPaymentSuccess() {
+    alert("Payment processed successfully!");
+  }
+  
+  showPaymentError() {
+    alert("An error occurred while processing the payment.");
+  }
+  
   private processPayment(paymentDetails: any): Promise<void> {
     // Simulate API call to payment gateway
     return new Promise((resolve, reject) => {
@@ -143,15 +154,7 @@ export class PaymentComponent implements OnInit {
     });
   }
 
-  showPaymentSuccess(): void {
-    this.showSuccessPopup = true;
-  }
-
-  showPaymentError(): void {
-    // Implement error handling here
-    alert('Payment failed. Please try again.');
-  }
-
+ 
   closeSuccessPopup(): void {
     this.showSuccessPopup = false;
     this.resetForm();

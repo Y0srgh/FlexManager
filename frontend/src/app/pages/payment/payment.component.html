@@ -1,19 +1,12 @@
 <div class="payment-wrapper background-image">
-<div class="payment-wrapper">
   <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
-    <!-- Main Payment Container -->
     <div class="payment-container">
-      
-      <!-- Left Section: Payment Form -->
       <div class="payment-form-section">
         <header class="form-header">
           <h2>Payment Details</h2>
           <p>Please enter your payment information below</p>
         </header>
 
-            
-
-        <!-- Purchase Details -->
         <section class="form-section">
           <h3>Purchase Details</h3>
           <div class="form-group">
@@ -25,7 +18,7 @@
             </select>
           </div>
 
-          <!-- Dynamic Item Selection -->
+          <!-- Item selection (only visible if 'course' or 'subscription' is selected) -->
           <div class="form-group" *ngIf="showItemSelection">
             <label for="itemList">Select {{ paymentType }}</label>
             <select id="itemList" [(ngModel)]="selectedItem" [ngModelOptions]="{standalone: true}">
@@ -35,81 +28,57 @@
             </select>
           </div>
 
-          <!-- Conditional Fields -->
-          <ng-container [ngSwitch]="paymentType">
-            <div class="form-group" *ngSwitchCase="'course'">
-              <label for="totalAmount">Total Amount</label>
-              <input type="number" id="totalAmount" formControlName="totalAmount" readonly>
-            </div>
 
-            <div class="form-group" *ngSwitchCase="'subscription'">
-              <label for="promoCode">Promo Code</label>
-              <input type="text" id="promoCode" formControlName="zipCode" placeholder="Enter promo code">
-            </div>
+          <!-- Additional details if subscription or private session is selected -->
+          <ng-container [ngSwitch]="paymentType">
+           
           </ng-container>
+          
         </section>
 
-        <!-- Action Buttons -->
+        <!-- Form Actions -->
         <div class="form-actions">
           <button type="button" class="btn-secondary" (click)="resetForm()">Cancel</button>
-          <button type="submit" class="btn-primary" ><!-- [disabled]="!paymentForm.valid" -->
-            Pay Now
-          </button>
+          <button type="submit" class="btn-primary">Pay Now</button>
+
         </div>
       </div>
 
-      <!-- Right Section: Summary -->
-      <div class="payment-summary" [ngClass]="{'hidden': paymentType === 'course'}">
-        <div class="summary-content">
-          <h3>Order Summary</h3>
+     <!-- Payment Summary (Visible when Payment Type is 'subscription' or 'private session') -->
+<div *ngIf="paymentType === 'subscription' || paymentType === 'Private Session'" class="payment-summary">
+  <div class="summary-content">
+    <h3>Order Summary</h3>
+    <div class="plan-options">
+      <div class="plan-option" *ngFor="let plan of plans">
+        <label [class.selected]="selectedPlan === plan.type">
+          <input type="radio" [value]="plan.type" formControlName="planType" (change)="onPlanChange(plan.type)">
+          <span class="plan-details">
+            <span class="plan-name">{{ plan.name }}</span>
+            <span class="plan-badge" *ngIf="plan.discount">Save {{ plan.discount }}%</span>
+          </span>
+        </label>
+      </div>
+    </div>
+  
+
+
           
-          <!-- Plan Options -->
-          <div class="plan-options">
-            <div class="plan-option" *ngFor="let plan of plans">
-              <label [class.selected]="selectedPlan === plan.type">
-                <input type="radio" 
-                       [value]="plan.type" 
-                       formControlName="planType" 
-                       (change)="onPlanChange(plan.type)">
-                <span class="plan-details">
-                  <span class="plan-name">{{ plan.name }}</span>
-                  <span class="plan-price">{{ plan.price }}DT/Month</span>
-                  <span class="plan-badge" *ngIf="plan.discount">Save {{ plan.discount }}%</span>
-                </span>
-              </label>
-            </div>
-          </div>
-
-          <!-- Total Amount -->
-          <div class="total-section">
-            <span>Total Amount:</span>
-            <strong>{{ calculateTotal() }}DT</strong>
-          </div>
-
-          <!-- Security Notice -->
           <div class="security-notice">
             <span class="security-icon">🔒</span>
             <p>Secure payment guaranteed. All transactions are protected.</p>
           </div>
-
-          
         </div>
       </div>
-      <!-- Success Popup -->
-<div class="popup-overlay" *ngIf="showSuccessPopup">
-  <div class="popup-content">
-    <div class="success-icon">✓</div>
-    <h2>Thank You!</h2>
-    <p>Your payment has been processed successfully.</p>
-    <div class="payment-details">
-      <p>Amount Paid: {{paymentForm.get('totalAmount')?.value}} DT</p>
-      <p>Transaction ID: {{transactionId}}</p>
     </div>
-    <button class="btn-primary" (click)="closeSuccessPopup()">Close</button>
-  </div>
-</div>
 
+    <!-- Success Popup (Triggered after successful payment) -->
+    <div class="popup-overlay" *ngIf="showSuccessPopup">
+      <div class="popup-content">
+        <div class="success-icon">✓</div>
+        <h2>Thank You!</h2>
+        <p>Your payment has been processed successfully.</p>
+        <button class="btn-primary" (click)="closeSuccessPopup()">Close</button>
+      </div>
     </div>
   </form>
-</div>
 </div>
