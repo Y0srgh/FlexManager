@@ -6,12 +6,14 @@ import { BaseService } from '../base/base.service';
   providedIn: 'root'
 })
 export class ChildAssociationService {
-  private apiUrl = `auth/request/associate-children`;
+  private apiUrl = `auth/request`;
 
   constructor( private baseService: BaseService) {}
 
   associateChildren(childrenEmails: string[]): Observable<any> {
-    return this.baseService.post<any>(`${this.apiUrl}/associate-children`, {
+    console.log("i am here ---------------");
+    
+    return this.baseService.post<any>(`${this.apiUrl}`, {
       childrenEmails
     });
   }

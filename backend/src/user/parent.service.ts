@@ -111,9 +111,12 @@ export class ParentService extends BaseService<ParentEntity> {
 
   async associateChildren(
     parentId: string,
-    childrenEmails: string[],
+    childrenEmails: any,
     parentUsername: string,
   ) {
+
+    console.log("children emails", childrenEmails);
+    
     
     const parent = await this.parentRepository.findOne({
       where: { id: parentId },
@@ -129,15 +132,15 @@ export class ParentService extends BaseService<ParentEntity> {
 
     const children = await Promise.all(
       childrenEmails.map(async (childEmail) => {
-        console.log(`Processing child: ${childEmail}`);
+        console.log(`Processing child: ${childEmail.email}`);
 
         const child = await this.userRepository.findOne({
-          where: { email: childEmail } as any,
+          where: { email: childEmail.email } as any,
         });
 
         if (!child) {
           throw new NotFoundException(
-            `Child with email ${childEmail} not found`,
+            `Child with email ${childEmail.email} not found`,
           );
         }
 
@@ -153,12 +156,12 @@ export class ParentService extends BaseService<ParentEntity> {
 
         try {
           await this.emailService.sendParentAssociationRequestEmail(
-            childEmail,
+            childEmail.email,
             child.username,
             parentUsername,
           );
         } catch (error) {
-          console.error(`Failed to send email to ${childEmail}:`, error);
+          console.error(`Failed to send email to ${childEmail.email}:`, error);
         }
 
         return child;

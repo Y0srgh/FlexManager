@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
 .parent-association-container {
   padding: 2rem;
   background: url("/background5.jpg") no-repeat center center/cover;
@@ -93,7 +95,6 @@
   transform: translateY(2px);
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
 .signup-container {
   min-height: 100vh;

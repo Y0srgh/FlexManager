@@ -190,14 +190,14 @@ export class UserController {
   @UseGuards(JwtAuthGuard, RolesGuard)
   async addChildAfterSignup(
     @Body()
-    associateChildrenDto: {
-      childrenEmails: string[];
-    },
+    associateChildrenDto,
     @User() client
   ) {
+    console.log('associateChildrenDto---------------------',associateChildrenDto);
+    
     await this.parentService.associateChildren(
       client.id,
-      associateChildrenDto.childrenEmails,
+      associateChildrenDto,
       client.username,
     );
 

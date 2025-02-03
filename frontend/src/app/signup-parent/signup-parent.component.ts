@@ -24,7 +24,7 @@ export class SignupParentComponent {
 
   showPassword: boolean = false;
 
-  linkChildren: boolean = true;
+  linkChildren: boolean = false;
 
   constructor(
     private fb: FormBuilder,

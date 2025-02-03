@@ -38,6 +38,7 @@ import { JoinOptionsComponent } from './join-options/join-options.component';
 import { SignupParentComponent } from './signup-parent/signup-parent.component';
 import { PendingRequestsComponent } from './pending-requests/pending-requests.component';
 import { ChildAssociationComponent } from './child-association/child-association.component';
+import { ParentChildAssociationComponent } from './parent-child-association/parent-child-association.component';
 
 // const routes: Routes = [
 //   { path: '', component: HeroComponent },
@@ -76,6 +77,7 @@ import { ChildAssociationComponent } from './child-association/child-association
     SignupParentComponent,
     PendingRequestsComponent,
     ChildAssociationComponent,
+    ParentChildAssociationComponent,
   ],
   imports: [
     BrowserModule,
