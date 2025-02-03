@@ -8,6 +8,7 @@ import * as dotenv from 'dotenv'; // Assurez-vous que dotenv est bien importé
 import { TestModule } from './test/test.module';
 import { SubscriptionsModule } from './subscription/subscription.module';
 
+
 dotenv.config(); // Charger les variables d'environnement depuis le fichier .env
 
 @Module({
@@ -20,7 +21,7 @@ dotenv.config(); // Charger les variables d'environnement depuis le fichier .env
       synchronize: true, // Synchroniser les entités avec la base de données (ne pas utiliser en production)
     }),
     TestModule, // Votre module de test (si nécessaire)
-    SubscriptionsModule, // Module des abonnements
+    SubscriptionsModule, 
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -12,6 +12,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DetailsModalComponent } from './pages/membership-page/membership-list/details-dialog/details-modal/details-modal.component';
 import { MemberShipComponent } from './pages/membership-page/membership-list/membership-list.component';
 import { MembershipPageComponent } from './pages/membership-page/membership-page.component';
+import { SuccessComponent } from './pages/payment/success/success.component';
+import { FailedComponent } from './pages/payment/failed/failed.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { MembershipPageComponent } from './pages/membership-page/membership-page
     MemberShipComponent,
     MembershipPageComponent,
     DetailsModalComponent,
+    SuccessComponent,
+    FailedComponent,
   
     
   ],

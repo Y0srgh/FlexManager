@@ -18,7 +18,6 @@
             </select>
           </div>
 
-          <!-- Item selection (only visible if 'course' or 'subscription' is selected) -->
           <div class="form-group" *ngIf="showItemSelection">
             <label for="itemList">Select {{ paymentType }}</label>
             <select id="itemList" [(ngModel)]="selectedItem" [ngModelOptions]="{standalone: true}">
@@ -27,42 +26,35 @@
               </option>
             </select>
           </div>
-
-
-          <!-- Additional details if subscription or private session is selected -->
-          <ng-container [ngSwitch]="paymentType">
-           
-          </ng-container>
-          
         </section>
 
-        <!-- Form Actions -->
         <div class="form-actions">
           <button type="button" class="btn-secondary" (click)="resetForm()">Cancel</button>
           <button type="submit" class="btn-primary">Pay Now</button>
-
         </div>
       </div>
-
-     <!-- Payment Summary (Visible when Payment Type is 'subscription' or 'private session') -->
-<div *ngIf="paymentType === 'subscription' || paymentType === 'Private Session'" class="payment-summary">
-  <div class="summary-content">
-    <h3>Order Summary</h3>
-    <div class="plan-options">
-      <div class="plan-option" *ngFor="let plan of plans">
-        <label [class.selected]="selectedPlan === plan.type">
-          <input type="radio" [value]="plan.type" formControlName="planType" (change)="onPlanChange(plan.type)">
-          <span class="plan-details">
-            <span class="plan-name">{{ plan.name }}</span>
-            <span class="plan-badge" *ngIf="plan.discount">Save {{ plan.discount }}%</span>
-          </span>
-        </label>
+      <div *ngIf="showErrorPopup" class="popup-overlay">
+        <div class="popup-content">
+          <div class="error-icon">⚠️</div>
+          <h2>Error!</h2>
+          <p>Please complete all required fields before submitting the payment.</p>
+          <button class="btn-primary" (click)="showErrorPopup = false">Close</button>
+        </div>
       </div>
-    </div>
-  
-
-
-          
+      <div *ngIf="paymentType === 'subscription' || paymentType === 'Private Session'" class="payment-summary">
+        <div class="summary-content">
+          <h3>Order Summary</h3>
+          <div class="plan-options">
+            <div class="plan-option" *ngFor="let plan of plans">
+              <label [class.selected]="selectedPlan === plan.type">
+                <input type="radio" [value]="plan.type" formControlName="planType" (change)="onPlanChange(plan.type)">
+                <span class="plan-details">
+                  <span class="plan-name">{{ plan.name }}</span>
+                  <span class="plan-badge" *ngIf="plan.discount">Save {{ plan.discount }}%</span>
+                </span>
+              </label>
+            </div>
+          </div>
           <div class="security-notice">
             <span class="security-icon">🔒</span>
             <p>Secure payment guaranteed. All transactions are protected.</p>
@@ -71,14 +63,6 @@
       </div>
     </div>
 
-    <!-- Success Popup (Triggered after successful payment) -->
-    <div class="popup-overlay" *ngIf="showSuccessPopup">
-      <div class="popup-content">
-        <div class="success-icon">✓</div>
-        <h2>Thank You!</h2>
-        <p>Your payment has been processed successfully.</p>
-        <button class="btn-primary" (click)="closeSuccessPopup()">Close</button>
-      </div>
-    </div>
+    
   </form>
 </div>

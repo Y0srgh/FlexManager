@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+
 interface Plan {
   type: string;
   name: string;
@@ -13,26 +14,24 @@ interface Plan {
   styleUrls: ['./payment.component.scss']
 })
 export class PaymentComponent implements OnInit {
-  paymentForm! : FormGroup;
-  paymentType: string = 'subscription';
+  paymentForm!: FormGroup;
+  paymentType: string = '';
   selectedItem: string = '';
   selectedPlan: string = '';
   showItemSelection: boolean = false;
   transactionId: string = '';
   isProcessing: boolean = false;
-  showSuccessPopup: boolean = false;
   showErrorPopup: boolean = false;
-
 
   plans: Plan[] = [
     { type: 'monthly', name: 'Monthly Plan' },
-    { type: 'annual', name: 'Annual Plan' ,discount: 15 },
+    { type: 'annual', name: 'Annual Plan', discount: 15 },
     { type: 'quarterly', name: 'Quarterly Plan', discount: 10 }
   ];
 
   availableItems: any[] = [];
 
-  constructor(private fb: FormBuilder ,  private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router) {
     this.initializeForm();
   }
 
@@ -42,65 +41,25 @@ export class PaymentComponent implements OnInit {
 
   private initializeForm(): void {
     this.paymentForm = this.fb.group({
-      name: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
-      cardType: ['', Validators.required],
-      cardNumber: ['', [Validators.required, Validators.pattern('^[0-9]{16}$')]],
-      expiryDate: ['', [Validators.required, Validators.pattern('^(0[1-9]|1[0-2])\/([0-9]{2})$')]],
-      cvc: ['', [Validators.required, Validators.pattern('^[0-9]{3,4}$')]],
-      country: ['', Validators.required],
-      paymentType: ['subscrpition', Validators.required],
-      totalAmount: [{ value: 0, disabled: true }],
-      zipCode: [''],
-      planType: ['monthly']
+      paymentType: ['', Validators.required], 
+      planType: ['monthly', Validators.required]
     });
   }
 
   private loadAvailableItems(): void {
-    // Simulate API call to load items based on payment type
     this.availableItems = [
       { id: 1, name: 'Basic Course', price: 100 },
-      { id: 2, name: 'Premium Course', price: 200 },
-      // Add more items as needed
+      { id: 2, name: 'Premium Course', price: 200 }
     ];
   }
 
   onPaymentTypeChange(event: any): void {
     this.paymentType = event.target.value;
     this.showItemSelection = ['course', 'subscription', 'Private Session'].includes(this.paymentType);
-    this.updateFormValidation();
   }
 
-  
   onPlanChange(planType: string) {
     this.selectedPlan = planType;
-    this.calculateTotal(); 
-  }
-  
-
-  updateFormValidation(): void {
-    const totalAmountControl = this.paymentForm.get('totalAmount');
-    const zipCodeControl = this.paymentForm.get('zipCode');
-
-    if (this.paymentType === 'course') {
-      totalAmountControl?.enable();
-      zipCodeControl?.disable();
-    } else if (this.paymentType === 'subscription') {
-      totalAmountControl?.disable();
-      zipCodeControl?.enable();
-    } else {
-      totalAmountControl?.disable();
-      zipCodeControl?.disable();
-    }
-  }
-
-  calculateTotal(): number {
-    // Implement your total calculation logic here
-    return 0;
-  }
-
-  updateTotal(): void {
-    const total = this.calculateTotal();
-    this.paymentForm.patchValue({ totalAmount: total });
   }
 
   isFieldInvalid(fieldName: string): boolean {
@@ -109,58 +68,40 @@ export class PaymentComponent implements OnInit {
   }
 
   resetForm(): void {
-    this.paymentForm.reset();
+    this.paymentForm.reset({ paymentType: '', planType: 'monthly' });
     this.selectedItem = '';
     this.selectedPlan = '';
   }
 
-  onSubmit(): void {
-    console.log("Form Submitted", this.paymentForm.value);
-    if (this.paymentForm.valid && !this.isProcessing) {
-      this.isProcessing = true;
-      // Simulate payment processing
-      this.processPayment(this.paymentForm.value)
-        .then(() => {
-          this.showPaymentSuccess();
-        })
-        .catch((error) => {
-          console.error('Payment failed:', error);
-          this.showPaymentError();
-        })
-        .finally(() => {
-          this.isProcessing = false;
-        });
-    } else {
-      this.markFormGroupTouched(this.paymentForm);
-    }
-  }
-  
-  showPaymentSuccess() {
-    alert("Payment processed successfully!");
-  }
-  
-  showPaymentError() {
-    alert("An error occurred while processing the payment.");
-  }
-  
   private processPayment(paymentDetails: any): Promise<void> {
-    // Simulate API call to payment gateway
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       setTimeout(() => {
-        // Generate random transaction ID
         this.transactionId = 'TXN' + Math.random().toString(36).substr(2, 9).toUpperCase();
         resolve();
-      }, 2000); // Simulate 2 second processing time
+      }, 2000);
     });
   }
 
- 
-  closeSuccessPopup(): void {
-    this.showSuccessPopup = false;
-    this.resetForm();
-    // Optionally redirect to another page
-    // this.router.navigate(['/dashboard']);
+  onSubmit(): void {
+    if (this.paymentForm.valid) {
+      this.isProcessing = true;
+      const paymentDetails = this.paymentForm.value;
+  
+      this.processPayment(paymentDetails)
+        .then(() => {
+          this.isProcessing = true;
+          this.router.navigate(['/success']); 
+        })
+        .catch(() => {
+          this.isProcessing = false;
+          this.showErrorPopup = true; 
+        });
+    } else {
+      this.markFormGroupTouched(this.paymentForm); 
+      this.showErrorPopup = true; 
+    }
   }
+  
 
 
   private markFormGroupTouched(formGroup: FormGroup): void {
