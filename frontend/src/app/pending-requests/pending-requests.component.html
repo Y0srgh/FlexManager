@@ -1,6 +1,6 @@
 <div class="pending-requests-container">
   <header class="section-header">
-    <h2>Pending Parent Association Requests</h2>
+    <h2>Pending Association Requests</h2>
     <div class="header-accent"></div>
   </header>
 
@@ -24,9 +24,13 @@
         </div>
       </div>
 
-      <div class="action-buttons">
+      <div *ngIf="request.role === 'client'" class="action-buttons">
         <button class="btn approve" (click)="updateRequestStatus(request.id, 'approved')">Approve</button>
         <button class="btn reject" (click)="updateRequestStatus(request.id, 'rejected')">Reject</button>
+      </div>
+
+      <div *ngIf="request.role === 'parent'" class="action-buttons">
+        <button class="btn revoke" (click)="updateRequestStatus(request.id, 'rejected')">Revoke</button>
       </div>
     </div>
   </div>

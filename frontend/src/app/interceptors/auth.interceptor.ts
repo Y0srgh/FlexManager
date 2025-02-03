@@ -48,13 +48,13 @@ export class AuthInterceptor implements HttpInterceptor {
               if (event.status === 401) {
                 console.log('removing access token and must be signed out');
                 
-                localStorage.removeItem('accessToken');
+                // localStorage.removeItem('accessToken');
               }
             }
           },
           error: (error) => {
             console.error('Error in request:', error);
-            localStorage.removeItem('accessToken');
+            // localStorage.removeItem('accessToken');
           },
         })
       );

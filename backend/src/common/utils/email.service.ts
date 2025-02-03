@@ -126,4 +126,16 @@ export class EmailService {
       statusMessage,
     );
   }
+
+  async sendRevokeAssociationResponseEmail(
+    parentEmail: string,
+    childUsername: string,
+  ): Promise<void> {
+    const statusMessage =`Unfortunately, ${childUsername} has revoked the association request.`;
+    await this.sendEmail(
+      parentEmail,
+      'Parent Association Request Update',
+      statusMessage,
+    );
+  }
 }

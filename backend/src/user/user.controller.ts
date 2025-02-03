@@ -160,22 +160,31 @@ export class UserController {
   }
 
   @Get('request/pending-child-request')
-  @Role(Roles.CLIENT)
+  @Role(Roles.CLIENT, Roles.PARENT)
   @UseGuards(JwtAuthGuard, RolesGuard)
   async getChildPendingRequests(@User() client) {
     console.log('i am here');
+    if (client.role === Roles.CLIENT) {
+      
+      return this.parentChildService.getChildPendingRequests(client.id);
+    }
 
-    return this.parentChildService.getChildPendingRequests(client.id);
+    if (client.role === Roles.PARENT) {
+      return this.parentChildService.getParentPendingRequests(client.id);
+
+    }
+
   }
 
   @Patch('request/pending-child-request/:id/status')
-  @Role(Roles.CLIENT)
+  @Role(Roles.CLIENT, Roles.PARENT)
   @UseGuards(JwtAuthGuard, RolesGuard)
   async updateRequestStatus(
     @Param('id') requestId: string,
     @Body('status') status: 'approved' | 'rejected',
+    @User() user
   ) {
-    return this.parentChildService.updateRequestStatus(requestId, status);
+    return this.parentChildService.updateRequestStatus(requestId, status, user.role);
   }
 
   @Get('request/pending-parent-request')

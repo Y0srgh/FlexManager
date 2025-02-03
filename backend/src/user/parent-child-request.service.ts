@@ -6,6 +6,7 @@ import { PasswordService } from 'src/common/utils/password.service';
 import { UserService } from './user.service';
 import { ParentChildRequestEntity } from './entities/parent-child.entity';
 import { EmailService } from 'src/common/utils/email.service';
+import { Roles } from 'src/enums/user-role.enum';
 
 @Injectable()
 export class ParentChildRequestService extends BaseService<ParentChildRequestEntity> {
@@ -25,6 +26,7 @@ export class ParentChildRequestService extends BaseService<ParentChildRequestEnt
   async updateRequestStatus(
     requestId: string,
     status: 'approved' | 'rejected',
+    role: Roles,
   ) {
     const request = await this.parentChildRepository.findOne({
       where: { id: requestId },
@@ -35,19 +37,40 @@ export class ParentChildRequestService extends BaseService<ParentChildRequestEnt
     }
 
     request.status = status;
-    await this.emailService.sendParentAssociationResponseEmail(
-      request.parent.user.email,
-      request.child.user.username,
-      request.status
-    );
+    if (role === Roles.CLIENT) {
+      await this.emailService.sendParentAssociationResponseEmail(
+        request.parent.user.email,
+        request.child.user.username,
+        request.status,
+      );
+    } else if (role === Roles.PARENT) {
+      await this.emailService.sendRevokeAssociationResponseEmail(
+        request.child.user.email,
+        request.parent.user.username,
+      );
+    } else {
+      throw new NotFoundException(`Role not found`);
+    }
     await this.parentChildRepository.save(request);
   }
 
   async getParentPendingRequests(parentId: string) {
-    return this.parentChildRepository.find({
+    const requests = await this.parentChildRepository.find({
       where: { parent: { id: parentId }, status: 'pending' },
       relations: ['child'],
     });
+
+    return requests.map((request) => ({
+      id: request.id,
+      status: request.status,
+      parent: {
+        id: request.child.id,
+        username: request.child.user.username,
+        email: request.child.user.email,
+        phone: request.child.user.phone,
+      },
+      role: Roles.PARENT,
+    }));
   }
 
   async getChildPendingRequests(childId: string) {
@@ -65,6 +88,7 @@ export class ParentChildRequestService extends BaseService<ParentChildRequestEnt
         email: request.parent.user.email,
         phone: request.parent.user.phone,
       },
+      role: Roles.CLIENT,
     }));
   }
 }

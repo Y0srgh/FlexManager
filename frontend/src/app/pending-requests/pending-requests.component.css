@@ -209,6 +209,17 @@
   background: linear-gradient(135deg, #aeaeae, #3e3d3e);
 }
 
+.btn.revoke {
+  background: #e33838;
+  background: linear-gradient(135deg, #2c2b2c,#9b9b9b, #2c2b2c);
+  color: white;
+}
+
+.btn.revoke:hover {
+  background: #ff5252;
+  background: linear-gradient(135deg,#3e3d3e, #aeaeae, #3e3d3e);
+}
+
 .no-requests {
   text-align: center;
   padding: 3rem;
