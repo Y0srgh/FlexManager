@@ -32,7 +32,6 @@ export class ReservationCardComponent {
   onBookClick() {
     // Construction des données de réservation avec les objets complets pour coach et client
     const reservationData = new PrivateReservation(
-      '',  // id (vide si la base de données génère l'ID automatiquement)
       this.coach.id,  // coachId
       '481cffd8-42b7-4036-b28a-37cae55aaf93',  // clientId (Remplace '1' par l'ID du client connecté)
       this.selectedDate,  // date
