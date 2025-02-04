@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -8,5 +9,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'frontend';
+  showNavbar = true;
+  constructor(private router: Router) {
+    this.router.events.subscribe(() => {
+      const hiddenRoutes = ['/signup', '/signin' ,'/']; 
+      this.showNavbar = !hiddenRoutes.includes(this.router.url);
+    });
+  }
  
 }
