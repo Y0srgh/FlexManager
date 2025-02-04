@@ -14,6 +14,7 @@ import { ParentEntity } from './parents.entity';
 import { Gender } from 'src/enums/gender.enum';
 import { Goal } from 'src/enums/goal.enum';
 import { TrackEntity } from '../../progress-tracking/track.entity';
+import { Reservation } from 'src/reservation/entities/reservation.entity';
 
 @Entity('clients')
 export class ClientEntity extends TimestampEntity {
