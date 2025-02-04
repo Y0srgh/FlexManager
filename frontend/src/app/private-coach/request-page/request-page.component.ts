@@ -12,6 +12,11 @@ export class RequestPageComponent implements OnInit {
   reservations: PrivateReservation[] = [];
 
   constructor(private reservationService: PrivateReservationService) { }
+  onReservationUpdated(updatedReservationId: string) {
+    // Filtrer la réservation mise à jour pour la supprimer de la liste affichée
+    this.reservations = this.reservations.filter(reservation => reservation.id !== updatedReservationId);
+  }
+  
 
   ngOnInit(): void {
     // Récupérer toutes les réservations

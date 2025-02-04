@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input,Output, EventEmitter } from '@angular/core';
 import { PrivateReservation } from '../../models/private-reservation.model';
 import { PrivateReservationService } from '../../services/private-reservation.service'; // Importation du service
+
 
 @Component({
   selector: 'app-request-card',
@@ -9,6 +10,7 @@ import { PrivateReservationService } from '../../services/private-reservation.se
 })
 export class RequestCardComponent {
   @Input() reservation!: PrivateReservation; // Référence à l'objet PrivateReservation passé en entrée
+  @Output() reservationUpdated = new EventEmitter<string>(); 
 
   constructor(private reservationService: PrivateReservationService) {} // Injection du service
 
@@ -30,7 +32,9 @@ export class RequestCardComponent {
       this.reservationService.updateState(this.reservation.id, state).subscribe(
         (updatedReservation) => {
           console.log('Réservation mise à jour:', updatedReservation);
+          
           this.reservation = updatedReservation; // Mise à jour de la réservation avec les nouvelles données
+          this.reservationUpdated.emit(this.reservation.id); 
         },
         (error) => {
           console.error('Erreur lors de la mise à jour de la réservation:', error);
