@@ -13,7 +13,7 @@ import { CourseModule } from './classes/strategy/courses.module';
 import { CommonModule } from './common/common.module';
 import { BaseService } from './base/base.service';
 import { PrivateSessionModule } from './private-session/private-session.module';
-import { ProgressTrackingModule } from './progress-tracking/progress-tracking.module';
+import { ClientService } from './user/client.service';
 
 @Module({
   imports: [CourseModule ,  
@@ -30,7 +30,6 @@ import { ProgressTrackingModule } from './progress-tracking/progress-tracking.mo
     UserModule,
     CommonModule,
     PrivateSessionModule,
-    ProgressTrackingModule
 
 ],
 controllers: [AppController],

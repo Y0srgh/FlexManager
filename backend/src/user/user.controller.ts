@@ -9,6 +9,8 @@ import {
   UseGuards,
   Res,
   Req,
+  Inject,
+  forwardRef,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserSingUpDto } from './dto/user-sign-up.dto';
@@ -31,7 +33,6 @@ import { ParentService } from './parent.service';
 import { CreateParentDto } from './dto/create-parent.dto';
 import { Response, Request } from 'express';
 import { ParentChildRequestService } from './parent-child-request.service';
-import { ProgressTrackingService } from 'src/progress-tracking/progress-tracking.service';
 @Controller('auth')
 export class UserController {
   constructor(
@@ -41,7 +42,7 @@ export class UserController {
     private readonly managerService: ManagerService,
     private readonly parentService: ParentService,
     private readonly parentChildService: ParentChildRequestService,
-    private readonly progressService: ProgressTrackingService
+    
   ) {}
 
   @Post('signup')
@@ -64,7 +65,6 @@ export class UserController {
   // @Post('manager')
   // @UseGuards(JwtAuthGuard)
   // async admin(@User({ roles: [Roles.MANAGER] }) user: UserEntity) {....}
-
 
   @Post('coach')
   @Role(Roles.MANAGER)
@@ -168,15 +168,12 @@ export class UserController {
   async getChildPendingRequests(@User() client) {
     console.log('i am here');
     if (client.role === Roles.CLIENT) {
-      
       return this.parentChildService.getChildPendingRequests(client.id);
     }
 
     if (client.role === Roles.PARENT) {
       return this.parentChildService.getParentPendingRequests(client.id);
-
     }
-
   }
 
   @Patch('request/pending-child-request/:id/status')
@@ -185,9 +182,13 @@ export class UserController {
   async updateRequestStatus(
     @Param('id') requestId: string,
     @Body('status') status: 'approved' | 'rejected',
-    @User() user
+    @User() user,
   ) {
-    return this.parentChildService.updateRequestStatus(requestId, status, user.role);
+    return this.parentChildService.updateRequestStatus(
+      requestId,
+      status,
+      user.role,
+    );
   }
 
   @Get('request/pending-parent-request')
@@ -203,10 +204,13 @@ export class UserController {
   async addChildAfterSignup(
     @Body()
     associateChildrenDto,
-    @User() client
+    @User() client,
   ) {
-    console.log('associateChildrenDto---------------------',associateChildrenDto);
-    
+    console.log(
+      'associateChildrenDto---------------------',
+      associateChildrenDto,
+    );
+
     await this.parentService.associateChildren(
       client.id,
       associateChildrenDto,
@@ -223,19 +227,21 @@ export class UserController {
     return this.parentChildService.getChildPendingRequests(id);
   }
 
-
-
-
-
-
-
-  
   @Get('progress')
   @Role(Roles.CLIENT)
   @UseGuards(JwtAuthGuard, RolesGuard)
   async getUserProgress(@User() user) {
     console.log(' i am in the controller', user);
 
-    return this.progressService.getProgressHistory(user.id);
+    return this.clientService.getProgressHistory(user.id);
+  }
+
+  @Patch('progress')
+  @Role(Roles.CLIENT)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  async updateUserProgress(@User() user, @Body() trackBody) {
+    console.log(' i am in the controller', user);
+
+    return this.clientService.updateProgressHistory(user.id, trackBody);
   }
 }
