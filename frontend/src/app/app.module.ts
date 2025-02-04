@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Overlay } from '@angular/cdk/overlay';
 import { MAT_DATEPICKER_SCROLL_STRATEGY } from '@angular/material/datepicker';
 import { inject } from '@angular/core';
@@ -15,6 +16,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 
 import { HttpClientModule } from '@angular/common/http';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -50,7 +53,6 @@ import { ProgressIndicatorComponent } from './components/progress-indicator/prog
 import { InputFieldComponent } from './components/input-field/input-field.component';
 import { SigninComponent } from './signin/signin.component';
 import { ClientComponent } from './client/client.component';
-import { JoinOptionsComponent } from './join-options/join-options.component';
 import { CalendarComponent } from './calendar/calendar.component';
 
 import { ClassFormComponent } from './class-management/class-form/class-form.component';
@@ -62,6 +64,24 @@ import { RequestPageComponent} from './private-coach/request-page/request-page.c
 // Interceptors
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { LoggerInterceptor } from './interceptors/logger.interceptor';
+import { JoinOptionsComponent } from './join-options/join-options.component';
+import { SignupParentComponent } from './signup-parent/signup-parent.component';
+import { PendingRequestsComponent } from './pending-requests/pending-requests.component';
+import { ChildAssociationComponent } from './child-association/child-association.component';
+import { ParentChildAssociationComponent } from './parent-child-association/parent-child-association.component';
+import { FitnessTrackerComponent } from './fitness-tracker/fitness-tracker.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+
+// const routes: Routes = [
+//   { path: '', component: HeroComponent },
+//   { path: 'stats', component: StatsComponent },
+//   { path: 'why-choose-us', component: WhyChooseUsComponent },
+//   { path: 'coaches', component: CoachesComponent },
+//   { path: 'nutritionnist', component: NutritionistsComponent },
+//   { path: 'pricing', component: PricingComponent },
+//   { path: 'testimonials', component: TestimonialsComponent },
+//   { path: '**', redirectTo: '' }
+// ];
 import { ButtonComponent } from './components/shared/button/button.component';
 import { ToastrModule } from 'ngx-toastr';
 
@@ -92,6 +112,11 @@ import { CourseFormComponent } from './components/course-form/course-form.compon
     SigninComponent,
     ClientComponent,
     JoinOptionsComponent,
+    SignupParentComponent,
+    PendingRequestsComponent,
+    ChildAssociationComponent,
+    ParentChildAssociationComponent,
+    FitnessTrackerComponent,
     CalendarComponent,
     CourseManagementComponent,
     CourseFormComponent,
@@ -122,12 +147,24 @@ import { CourseFormComponent } from './components/course-form/course-form.compon
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
+    AppRoutingModule,
+    // RouterModule.forRoot(routes),
+    MatIconModule,
+
+    MatDatepickerModule,
+
+    MatNativeDateModule,
+
+    NgxChartsModule,
+    BrowserAnimationsModule,
+
     MatIconModule,
     ToastrModule.forRoot(), 
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoggerInterceptor, multi: true },
+    
     { provide: MAT_DATEPICKER_SCROLL_STRATEGY,
       useFactory: () => {
         const overlay = inject(Overlay);

@@ -28,13 +28,9 @@ export class UserSingUpDto {
   password: string;
 
   @IsMobilePhone('ar-TN')
-  phone?: string;
+  phone: string;
 
   @IsOptional()
   @IsEnum(Roles)
   role: Roles = Roles.USER;
-
-  //refresh token
-  @IsString()
-  refreshToken: string;
 }

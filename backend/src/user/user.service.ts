@@ -29,9 +29,7 @@ export class UserService {
     const user = this.userRepository.create({
       ...data,
     });
-
-    console.log('user from signup', user);
-
+    console.log('user from signup -----------------------', user);
     user.salt = await bcrypt.genSalt();
     user.password = await bcrypt.hash(user.password, user.salt);
     try {

@@ -9,9 +9,12 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
     return super.canActivate(context);
   }
   handleRequest(err: any, user: any, info: any, context: ExecutionContext) {
+    console.log(user);
+    
     if (err || !user) {
       throw err || new UnauthorizedException();
     }
+    console.log(' i am here');
   
     const req = context.switchToHttp().getRequest<Request>();
     const res = context.switchToHttp().getResponse<Response>();

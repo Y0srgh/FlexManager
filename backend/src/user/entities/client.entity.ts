@@ -13,7 +13,7 @@ import { TimestampEntity } from 'src/Generics/timestamp.entities';
 import { ParentEntity } from './parents.entity';
 import { Gender } from 'src/enums/gender.enum';
 import { Goal } from 'src/enums/goal.enum';
-import { Reservation } from 'src/reservation/entities/reservation.entity';
+import { TrackEntity } from '../../progress-tracking/track.entity';
 
 @Entity('clients')
 export class ClientEntity extends TimestampEntity {
@@ -23,11 +23,8 @@ export class ClientEntity extends TimestampEntity {
   @Column({ type: 'json', nullable: true })
   physicalDetails: { weight: number; height: number; age: number };
 
-  @ManyToOne(() => ParentEntity, (client) => client.children, {
-    nullable: true,
-    eager: true,
-  })
-  parentAccount: ParentEntity;
+  @OneToMany(() => TrackEntity, (progress) => progress.client, { cascade: true })
+  progressHistory: TrackEntity[];
 
   @Column({ type: 'uuid', nullable: true })
   preferredCoachId: string;
@@ -35,23 +32,11 @@ export class ClientEntity extends TimestampEntity {
   @Column({ type: 'enum', default: Gender.MALE, enum: Gender })
   gender: string;
 
-  //goal
   @Column({ type: 'enum', array:true, enum: Goal, default: [Goal.MUSCLEGAIN] })
   goal: string[];
 
   @Column({ type: 'enum', default: Assistant.ONE, enum: Assistant })
   nutritionAssistanceType: string;
-
-  @Column({ type: 'json', nullable: true })
-  mealTracking: { meals: string[]; calories: number };
-
-  @Column({ type: 'json', nullable: true })
-  progressTracking: {
-    caloriesBurned: number;
-    weightLoss: number;
-    trainingFrequency: { weekly: number; monthly: number };
-    muscleGain: number;
-  };
 
   @Column({ nullable: true })
   subscriptionStatus: string;

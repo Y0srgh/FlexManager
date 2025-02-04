@@ -14,6 +14,7 @@ import { CommonModule } from './common/common.module';
 import { BaseService } from './base/base.service';
 import { ReservationModule } from './reservation/reservation.module';
 import { PrivateSessionModule } from './private-session/private-session.module';
+import { ProgressTrackingModule } from './progress-tracking/progress-tracking.module';
 
 @Module({
   imports: [CourseModule ,  
@@ -30,7 +31,8 @@ import { PrivateSessionModule } from './private-session/private-session.module';
     UserModule,
     CommonModule,
     ReservationModule,
-    PrivateSessionModule
+    PrivateSessionModule,
+    ProgressTrackingModule
 
 ],
 controllers: [AppController],

@@ -133,6 +133,7 @@
 }
 
 .form-subtitle {
+  color: #fff;
   color: var(--blue-gray);
   margin-bottom: 2rem;
 

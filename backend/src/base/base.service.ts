@@ -1,7 +1,5 @@
 import { DeepPartial, Repository } from 'typeorm';
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { UserService } from 'src/user/user.service';
-import { PasswordService } from 'src/common/utils/password.service';
 import { UserSingUpDto } from 'src/user/dto/user-sign-up.dto';
 
 @Injectable()
@@ -13,6 +11,8 @@ export class BaseService<T> {
   ) {}
 
   async create(data: Partial<T>): Promise<T> {
+    console.log('---------------- daata ---------', data);
+    
     const entity = this.repository.create(data as DeepPartial<T>);
     return this.repository.save(entity);
   }
@@ -30,9 +30,10 @@ export class BaseService<T> {
         email: createDto.email,
         role: createDto.role,
         password: createDto.password || defaultPassword,
+        phone: createDto.phone
       } as UserSingUpDto;
 
-      const user = await this.userService.signUp(signupCoach);
+      var user = await this.userService.signUp(signupCoach);
 
       console.log('extract user', extraData(user));
 
@@ -45,6 +46,9 @@ export class BaseService<T> {
 
       return this.repository.save(newUser);
     } catch (error) {
+      if (user) {
+        await this.repository.delete(user.id);
+      }
       console.log('error-------------------------', error);
       throw error;
     }
@@ -58,6 +62,14 @@ export class BaseService<T> {
     const entity = await this.repository.findOne({ where: { id } as any });
     if (!entity) {
       throw new NotFoundException(`Entity with ID "${id}" not found`);
+    }
+    return entity;
+  }
+  //find by email
+  async findByEmail(email: string): Promise<T> {
+    const entity = await this.repository.findOne({ where: { user: { email } } as any });
+    if (!entity) {
+      throw new NotFoundException(`Entity with email "${email}" not found`);
     }
     return entity;
   }

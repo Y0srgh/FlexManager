@@ -1,0 +1,38 @@
+<div *ngIf="linkChildren === true" class="form-step">
+    <h2 class="form-title">Keep an eye on your child</h2>
+    <p class="form-subtitle">
+      Fill in the respective emails of your children.
+    </p>
+    <div class="form-grid">
+      <app-input-field
+        [basicDetails]="associatedAccounts"
+        label="Children Number"
+        iconClass="fa-user"
+        controlName="associatedAccountsCount"
+        type="text"
+        placeholder="How many children to supervise?"
+      >
+      </app-input-field>
+  
+      <div *ngIf="+associatedAccounts.get('associatedAccountsCount')?.value <= 9">
+        <div *ngFor="let childGroup of children.controls; let i = index">
+          <app-input-field
+            [basicDetails]="asFormGroup(childGroup)"
+            label="Child Email {{ i + 1 }}"
+            iconClass="fa-envelope"
+            controlName="email"
+            type="email"
+          ></app-input-field>
+        </div>
+      </div>
+    </div>
+    <div class="form-actions">
+      <app-button
+        type="submit"
+        (click)="onSubmit()"
+        buttonText="Submit"
+        buttonType="primary"
+        icon="fa-arrow-right"
+      ></app-button>
+    </div>
+</div>

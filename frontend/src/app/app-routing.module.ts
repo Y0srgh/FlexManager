@@ -18,12 +18,20 @@ import { JoinOptionsComponent } from './join-options/join-options.component';
 import { CoachListComponent } from './private-coach/coach-list/coach-list.component';
 import {RequestPageComponent} from './private-coach/request-page/request-page.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { SignupParentComponent } from './signup-parent/signup-parent.component';
+import { PendingRequestsComponent } from './pending-requests/pending-requests.component';
+import { ParentChildAssociationComponent } from './parent-child-association/parent-child-association.component';
+import { FitnessTrackerComponent } from './fitness-tracker/fitness-tracker.component';
 
 const routes: Routes = [
   { path: '', component: LayoutComponent },
   { path: 'signup/sportsman', component: SignupComponent },
+  { path: 'signup/parent', component: SignupParentComponent },
   { path: 'signin', component: SigninComponent },
   { path: 'client', component: ClientComponent },
+  { path: 'tracker', component: FitnessTrackerComponent },
+  { path: 'pending-child-request', component: PendingRequestsComponent },
+  { path: 'associate-child', component: ParentChildAssociationComponent },
   { path: 'register', component: JoinOptionsComponent },
   { path: 'course', component: CoursePageComponent },
   { path: 'coaches', component: CoachListComponent },

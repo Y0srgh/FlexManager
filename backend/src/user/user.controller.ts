@@ -30,6 +30,8 @@ import { ManagerService } from './manager.service';
 import { ParentService } from './parent.service';
 import { CreateParentDto } from './dto/create-parent.dto';
 import { Response, Request } from 'express';
+import { ParentChildRequestService } from './parent-child-request.service';
+import { ProgressTrackingService } from 'src/progress-tracking/progress-tracking.service';
 @Controller('auth')
 export class UserController {
   constructor(
@@ -38,6 +40,8 @@ export class UserController {
     private readonly clientService: ClientService,
     private readonly managerService: ManagerService,
     private readonly parentService: ParentService,
+    private readonly parentChildService: ParentChildRequestService,
+    private readonly progressService: ProgressTrackingService
   ) {}
 
   @Post('signup')
@@ -60,6 +64,7 @@ export class UserController {
   // @Post('manager')
   // @UseGuards(JwtAuthGuard)
   // async admin(@User({ roles: [Roles.MANAGER] }) user: UserEntity) {....}
+
 
   @Post('coach')
   @Role(Roles.MANAGER)
@@ -104,7 +109,7 @@ export class UserController {
   @Role(Roles.MANAGER)
   @UseGuards(JwtAuthGuard, RolesGuard)
   findAllClients(@Req() req: Request) {
-    console.log("i am in find all clients");
+    console.log('i am in find all clients');
     // console.log('Access Token from Header:', res.get('x-new-access-token'));
     return this.clientService.findAll();
   }
@@ -135,10 +140,102 @@ export class UserController {
   }
 
   //-----------parent
+  // @Role(Roles.CLIENT)
+  // @UseGuards(JwtAuthGuard, RolesGuard)
   @Post('parent')
+  createParent(@Body() createParentDto: CreateParentDto) {
+    return this.parentService.createParent(createParentDto);
+  }
+
+  /*
+  async getPendingRequests(parentId: string) {
+    return this.parentChildRequestRepository.find({
+      where: { parent: { id: parentId }, status: 'pending' },
+      relations: ['child'],
+    });
+  }
+  */
+
+  /*-------Requests-----*/
+  @Get('request')
+  async getAllRequests() {
+    return this.parentChildService.findAll();
+  }
+
+  @Get('request/pending-child-request')
+  @Role(Roles.CLIENT, Roles.PARENT)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  async getChildPendingRequests(@User() client) {
+    console.log('i am here');
+    if (client.role === Roles.CLIENT) {
+      
+      return this.parentChildService.getChildPendingRequests(client.id);
+    }
+
+    if (client.role === Roles.PARENT) {
+      return this.parentChildService.getParentPendingRequests(client.id);
+
+    }
+
+  }
+
+  @Patch('request/pending-child-request/:id/status')
+  @Role(Roles.CLIENT, Roles.PARENT)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  async updateRequestStatus(
+    @Param('id') requestId: string,
+    @Body('status') status: 'approved' | 'rejected',
+    @User() user
+  ) {
+    return this.parentChildService.updateRequestStatus(requestId, status, user.role);
+  }
+
+  @Get('request/pending-parent-request')
+  @Role(Roles.PARENT)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  async getParentPendingRequests(@User() client) {
+    return this.parentChildService.getParentPendingRequests(client.id);
+  }
+
+  @Post('request/associate-children')
+  @Role(Roles.PARENT)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  async addChildAfterSignup(
+    @Body()
+    associateChildrenDto,
+    @User() client
+  ) {
+    console.log('associateChildrenDto---------------------',associateChildrenDto);
+    
+    await this.parentService.associateChildren(
+      client.id,
+      associateChildrenDto,
+      client.username,
+    );
+
+    return { message: 'Child association request sent' };
+  }
+
+  @Get('request/pending-child-request/:id')
+  // @Role(Roles.CLIENT)
+  // @UseGuards(JwtAuthGuard, RolesGuard)
+  async getChildPendingRequestsId(@Param('id') id: string) {
+    return this.parentChildService.getChildPendingRequests(id);
+  }
+
+
+
+
+
+
+
+  
+  @Get('progress')
   @Role(Roles.CLIENT)
   @UseGuards(JwtAuthGuard, RolesGuard)
-  createParent(@Body() createParentDto: CreateParentDto, @User() user) {
-    return this.parentService.createParent(createParentDto, user);
+  async getUserProgress(@User() user) {
+    console.log(' i am in the controller', user);
+
+    return this.progressService.getProgressHistory(user.id);
   }
 }
