@@ -18,6 +18,6 @@ export class FitnessTrackingService {
   }
 
   addProgressEntry(entry: Partial<ProgressTracking>): Observable<ProgressTracking> {
-    return this.baseService.post<ProgressTracking>(`${this.apiUrl}/progress-tracking`, entry);
+    return this.baseService.patch<ProgressTracking>(`${this.apiUrl}`, entry);
   }
 }

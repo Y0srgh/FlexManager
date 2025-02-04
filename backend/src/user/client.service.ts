@@ -42,16 +42,35 @@ export class ClientService extends BaseService<ClientEntity> {
 
   async updateProgressHistory(userId: string, trackBody: any) {
     const client = await this.findOne(userId);
+    console.log("trackBody", trackBody.caloriesBurned);
+    
+    const oldProgress = await this.trackRepository.findOne({
+      where: { client: { id: client.id } },
+      relations: ['client'],
+      order: { createdAt: 'DESC' },
+    });
+    
+
+
+    console.log("oldProgress----------------------------",oldProgress);
+    
+  
+
     const progress = new TrackEntity();
+    console.log("initial progress", progress);
+    
     progress.client = client;
-    progress.weight = trackBody.weight;
-    progress.muscleRate = trackBody.muscleRate;
-    progress.caloriesBurned = trackBody.caloriesBurned;
-    progress.fatRate = trackBody.fatRate;
+    progress.weight = trackBody.weight!==undefined? trackBody.weight : oldProgress.weight;
+    progress.muscleRate = trackBody.muscleRate!==undefined? trackBody.muscleRate :oldProgress.muscleRate;
+    progress.caloriesBurned = trackBody.caloriesBurned!==undefined? trackBody.caloriesBurned :oldProgress.caloriesBurned;
+    progress.fatRate = trackBody.fatRate!==undefined? trackBody.fatRate :oldProgress.fatRate;
+    console.log("progress------------------------", progress);
     await this.trackRepository.save(progress);
     return progress;
   }
 
+  
+  
   async createClient(createClientDto: CreateClientDto): Promise<ClientEntity> {
     const client = await this.createWithUser(createClientDto, () => ({
       physicalDetails: createClientDto.physicalDetails,

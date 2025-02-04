@@ -20,26 +20,8 @@
           {{ metric.trend > 0 ? "↑" : "↓" }} {{ Math.abs(metric.trend) }}%
         </div>
       </div>
-      <!-- <ngx-charts-line-chart
-        [view]="view"
-        [scheme]="colorScheme"
-        [results]="metric.data"
-        [gradient]="true"
-        [xAxis]="true"
-        [yAxis]="true"
-        [legend]="false"
-        [showXAxisLabel]="true"
-        [showYAxisLabel]="false"
-        [xAxisLabel]="'Date'"
-        [yAxisLabel]="metric.name"
-        [timeline]="false"
-        [curve]="curve"
-        [autoScale]="true"
-        [roundDomains]="false"
-        [animations]="true"
-        [tooltipDisabled]="false"
-      >
-      </ngx-charts-line-chart> -->
+      <button mat-button color="primary" (click)="openProgressForm(metric.metric)">+ Add Record</button>
+
       <ngx-charts-line-chart
         [view]="view"
         [scheme]="colorScheme"
@@ -59,3 +41,5 @@
     </div>
   </div>
 </div>
+
+

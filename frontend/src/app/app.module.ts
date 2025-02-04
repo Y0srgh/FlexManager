@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -88,6 +88,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CourseManagementComponent } from './components/course-management/course-management.component';
 import { CourseFormComponent } from './components/course-form/course-form.component';
+import { ProgressFormDialogComponent } from './progress-form-dialog/progress-form-dialog.component';
 
 @NgModule({
   declarations: [
@@ -127,6 +128,7 @@ import { CourseFormComponent } from './components/course-form/course-form.compon
     CourseDetailsComponent,
   NavbarComponent,DashboardComponent,CardComponent ,HomeComponent ,CoursePageComponent,
     RequestPageComponent,
+    ProgressFormDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -151,23 +153,28 @@ import { CourseFormComponent } from './components/course-form/course-form.compon
 
     MatDatepickerModule,
 
-    MatNativeDateModule,
 
     NgxChartsModule,
     BrowserAnimationsModule,
 
     MatIconModule,
     ToastrModule.forRoot(), 
+
+    MatButtonModule,
+
+    MatDialogModule,
+    ReactiveFormsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoggerInterceptor, multi: true },
-    
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
     { provide: MAT_DATEPICKER_SCROLL_STRATEGY,
       useFactory: () => {
         const overlay = inject(Overlay);
         return () => overlay.scrollStrategies.reposition();
-      }}
+      }},
+          provideAnimationsAsync()
   ],
   bootstrap: [AppComponent],
 })

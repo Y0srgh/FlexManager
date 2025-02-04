@@ -5,6 +5,7 @@ import { FitnessTrackingService } from './fitness-tracker.service';
 import { ProgressTracking } from './progress-tracking.interface';
 import { NgxChartsModule, ScaleType } from '@swimlane/ngx-charts';
 import { curveCatmullRom } from 'd3-shape';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import {
   animate,
   state,
@@ -12,6 +13,7 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
+import { ProgressFormDialogComponent } from '../progress-form-dialog/progress-form-dialog.component';
 
 @Component({
   selector: 'app-fitness-tracker',
@@ -27,7 +29,6 @@ import {
 })
 export class FitnessTrackerComponent implements OnInit {
   metrics: any[] = [];
-  // Default view dimensions – these will be updated on init and window resize.
   view: [number, number] = [700, 300];
   colorScheme = {
     name: 'default',
@@ -36,33 +37,28 @@ export class FitnessTrackerComponent implements OnInit {
     domain: ['#2196F3', '#fff', '#fff', '#fff'],
   };
   latestStats: any[] = [];
-  Math = Math; 
-  curve = curveCatmullRom; 
+  Math = Math;
+  curve = curveCatmullRom;
 
-  constructor(private fitnessTrackingService: FitnessTrackingService) {}
+  constructor(private fitnessTrackingService: FitnessTrackingService, private dialog: MatDialog) {}
 
   ngOnInit() {
     this.setViewDimensions();
     this.loadProgressData();
   }
 
-  // Listen for window resize events
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.setViewDimensions();
   }
 
-  // Adjust the chart view dimensions based on the window width
   private setViewDimensions() {
     const width = window.innerWidth;
     if (width < 576) {
-      // For very small screens, use 95% of the window width
       this.view = [width * 0.95, 300];
     } else if (width < 992) {
-      // For medium screens, use a slightly smaller width
       this.view = [Math.min(700, width * 0.9), 300];
     } else {
-      // For larger screens, use the default width
       this.view = [700, 300];
     }
   }
@@ -83,10 +79,16 @@ export class FitnessTrackerComponent implements OnInit {
     if (data.length > 0) {
       const latest = data[data.length - 1];
       this.latestStats = [
-        { label: 'Current Weight', value: `${latest.weight || 'not precised'} kg` },
+        {
+          label: 'Current Weight',
+          value: `${latest.weight || 'not precised'} kg`,
+        },
         { label: 'Fat Rate', value: `${latest.fatRate || 0}%` },
         { label: 'Muscle Rate', value: `${latest.muscleRate || 0}%` },
-        { label: 'Calories Burned', value: `${latest.caloriesBurned || 0} kcal` },
+        {
+          label: 'Calories Burned',
+          value: `${latest.caloriesBurned || 0} kcal`,
+        },
       ];
     }
   }
@@ -101,6 +103,8 @@ export class FitnessTrackerComponent implements OnInit {
 
       return {
         name: names[index],
+        index,
+        metric,
         data: [
           {
             name: `${names[index]} Progress`,
@@ -110,7 +114,7 @@ export class FitnessTrackerComponent implements OnInit {
         trend: trend,
       };
     });
-  }  
+  }
 
   private transformData(data: any[], metric: string) {
     const datas = data
@@ -120,14 +124,14 @@ export class FitnessTrackerComponent implements OnInit {
           month: '2-digit',
           day: '2-digit',
           hour: '2-digit',
-          minute: '2-digit'
+          minute: '2-digit',
         }),
         value: item[metric],
       }))
       .filter((item) => item.value !== null);
     return datas;
   }
-  
+
   private calculateTrend(series: any[]): number {
     if (series.length < 2) return 0;
     const first = series[0].value;
@@ -135,5 +139,49 @@ export class FitnessTrackerComponent implements OnInit {
     return Number((((last - first) / first) * 100).toFixed(1));
   }
 
-  
+  isFormOpen = false;
+  selectedMetric: string = '';
+  progressEntry: { metric: string; value: number } = {
+    metric: '',
+    value: 0,
+  };
+
+  openProgressForm(metricName: string): void {
+    const dialogRef = this.dialog.open(ProgressFormDialogComponent, {
+      data: { metricName },
+      width: '400px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('-----------', result);
+        const record = { [result.name.metricName]: result.value.value };
+        console.log(record);
+        this.fitnessTrackingService.addProgressEntry(record).subscribe({
+          next: (data) => {
+           console.log("data");
+           this.loadProgressData();
+          },
+          error: (error) => {
+            console.error('Error loading progress data:', error);
+          },
+        });
+        
+        this.addNewRecord(metricName, result.value, result.date);
+      }
+    });
+  }
+
+
+  private addNewRecord(metricName: string, value: number, date: Date): void {
+    const metricIndex = this.metrics.findIndex(m => m.name === metricName);
+    if (metricIndex !== -1) {
+      this.metrics[metricIndex].data.push({
+        name: date.toISOString(),
+        value: value
+      });
+      this.metrics[metricIndex].trend = this.calculateTrend(this.metrics[metricIndex].data[0].series);
+    }
+  }
+
 }
