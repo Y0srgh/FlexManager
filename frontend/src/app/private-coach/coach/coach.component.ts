@@ -7,13 +7,11 @@ import { Coach } from '../../models/coach.model';
   styleUrls: ['./coach.component.css']
 })
 export class CoachComponent {
-  
   @Input() coach!: Coach;    
   @Output() select = new EventEmitter<string>();
 
   selectCoach() {
-   
-    this.select.emit(this.coach.id);  
+    this.select.emit(this.coach.id);
     console.log(`Coach sélectionné : ${this.coach.name} (ID: ${this.coach.id})`);
   }
 }

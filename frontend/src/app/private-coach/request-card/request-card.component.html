@@ -2,15 +2,15 @@
   <div class="user-info">
     <img class="user-image" [src]="reservation.imageUrl" alt="User" />
     <div class="details">
-      <p class="name">{{ reservation.name }}</p>
-        <p class="date-time">
-          <span class="date">
-            <span class="calendar-icon">📅</span> {{ reservation.date }}
-          </span>
-          <span class="time">
-            <span class="clock-icon">🕒</span> from {{ reservation.startTime }} to {{ reservation.endTime }}
-          </span>
-        </p>
+      <p class="name">{{ reservation.clientId }}</p> <!-- Affichage de l'ID du client à la place du nom -->
+      <p class="date-time">
+        <span class="date">
+          <span class="calendar-icon">📅</span> {{ reservation.date }}
+        </span>
+        <span class="time">
+          <span class="clock-icon">🕒</span> from {{ reservation.startTime }} to {{ reservation.endTime }}
+        </span>
+      </p>
     </div>
   </div>
   <div class="actions">

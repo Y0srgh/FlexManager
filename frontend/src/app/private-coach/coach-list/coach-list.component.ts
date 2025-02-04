@@ -29,13 +29,13 @@ export class CoachListComponent implements OnInit {
     );
   }
 
-  selectCoach(coachId: string) {  
+  selectCoach(coachId: string) {
     const selectedCoach = this.coaches.find(coach => coach.id === coachId);
     if (selectedCoach) {
       this.selectedCoach = selectedCoach;
-      this.isModalOpen = true;  
+      this.isModalOpen = true;
     } else {
-      this.selectedCoach = null;  
+      this.selectedCoach = null;
     }
   }
 
