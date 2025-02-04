@@ -11,7 +11,8 @@ export class CreateReservationDto {
   @IsString()
   @IsNotEmpty()
   endTime: string;
-
+  @IsString()
+  state:string;
   @IsInt()
   @IsOptional()
   duration: number;
