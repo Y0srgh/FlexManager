@@ -8,7 +8,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { StripeModule } from '@golevelup/nestjs-stripe';
 import { SitePaymentWebhookService } from './site-payment-webhook.service';
 import { UserEntity } from 'src/user/entities/user.entity';
-
+import { UserService } from 'src/user/user.service';
+import { JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [TypeOrmModule.forFeature([siteSubscriptions,UserEntity]),
@@ -20,7 +21,7 @@ import { UserEntity } from 'src/user/entities/user.entity';
     }),
   ],
   controllers: [SitePaymentController],
-  providers: [SitePaymentService, SiteSubscriptionRepository,SitePaymentWebhookService,],
+  providers: [SitePaymentService,UserService,JwtService, SiteSubscriptionRepository,SitePaymentWebhookService,],
 })
 export class SitePaymentModule {
 

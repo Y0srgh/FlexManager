@@ -24,7 +24,7 @@ export class SitePaymentComponent implements OnInit {
   ngOnInit(): void {
      this.UserSession =this.sessionService.getUserDetails();
      if (this.UserSession){
-      this.userService.getUserById(this.UserSession.id ).subscribe((User)=>{
+      this.userService.getUserById(this.UserSession.id).subscribe((User)=>{
         this.user=User
       })
      }
@@ -39,9 +39,9 @@ export class SitePaymentComponent implements OnInit {
   }
 
   upgradePayment(plan : string){
-    console.log("aaaaaaaaaaaaaaaaaaaa");
+    console.log(plan);
      this.sitePaymentService.HandlePayment(plan).subscribe((data : any)=>{
-      console.log(data);
+      window.open(data.redirectUrl,"_blank");
     }); 
     }
 

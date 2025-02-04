@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateMessengerDto } from './dto/create-messenger.dto';
 import { UpdateMessengerDto } from './dto/update-messenger.dto';
 import { MessengerRepo } from "./messenger.repository"
-import { User } from './entities/user.entity';
+import { UserEntity } from 'src/user/entities/user.entity';
 
 @Injectable()
 export class MessengerService {

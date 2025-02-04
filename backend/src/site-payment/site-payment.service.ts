@@ -25,9 +25,9 @@ export class SitePaymentService {
     priceId: string,
   ): Promise<Stripe.Response<Stripe.Checkout.Session> | undefined> {
     try {
-      console.log(priceId);
+      console.log("price ID ----------------------", priceId);
       return this.stripe.checkout.sessions.create({
-        success_url: 'https://localhost:4200/',
+        success_url: 'https://localhost:4200/success',
         customer: customerId,
         line_items: [
           {

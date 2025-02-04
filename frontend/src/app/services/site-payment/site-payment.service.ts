@@ -15,12 +15,7 @@ export class SitePaymentService {
     return this.http.post<any>(`${environment.BASE_URL}/site-payment/create-subscription`,{priceId: this.getPrice(plan)})
   }
   getPrice(plan: string): string {
-    const priceMap: Record<string, Price> = {
-      freetrial: Price.FREETRIAl,
-      pro: Price.PRO,
-      premium: Price.PREMIEM,
-    };
-    return priceMap[plan.toLowerCase()] ?? null;
+    return Price[plan as keyof typeof Price];
   }
   getDaysSinceSubscription(subscription : any): number {
     const today = new Date();

@@ -48,6 +48,19 @@ export class UserService {
     }
     return entity;
   }
+  async findOneByEmailUsername(email: string,username : string) : Promise<UserEntity> {
+    const entity = await this.userRepository.findOne({ 
+      where: { 
+        email: email, 
+        username: username 
+      } 
+    });
+    if (!entity) {
+      throw new NotFoundException(`Entity with email "${email}" and username "${username}" not found`);
+    }
+    return entity;
+   
+  }
 
   /*async signIn(credientials: UserSingInDto) {
     const { username, email, password } = credientials;

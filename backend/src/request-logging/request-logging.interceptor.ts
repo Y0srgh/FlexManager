@@ -31,7 +31,7 @@ export class RequestLoggingInterceptor implements NestInterceptor {
         
         // res.set('x-new-access-token', req['accessToken']);
         // res.setHeader('x-new-access-token', req['accessToken']);
-        res.setHeader('access-control-allow-origin', 'http://localhost:4200');
+        res?.setHeader('access-control-allow-origin', 'http://localhost:4200');
         console.log('response header', res.getHeaders());
         const newAccessToken = req['accessToken'];
         if (newAccessToken) {

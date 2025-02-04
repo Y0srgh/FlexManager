@@ -1,5 +1,5 @@
 import { ManyToOne,JoinColumn,Entity,PrimaryGeneratedColumn,Column,CreateDateColumn } from "typeorm";
-import { User } from "./user.entity";
+import { UserEntity } from "src/user/entities/user.entity";
 @Entity()
 export class Messenger {
     @PrimaryGeneratedColumn('uuid')

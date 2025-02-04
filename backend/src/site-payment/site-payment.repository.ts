@@ -11,6 +11,7 @@ export class SiteSubscriptionRepository {
 
   
   create(data: Partial<siteSubscriptions>) {
+    console.log(data);
     return this.siteSubscriptionRepo.save(data);
   }
 
@@ -21,4 +22,7 @@ export class SiteSubscriptionRepository {
   updateSubscription(id: string, data: Partial<siteSubscriptions>) {
     return this.siteSubscriptionRepo.update(id, data);
   }
+  // save(siteSubscription : siteSubscriptions){
+  //   return this.siteSubscriptionRepo.save(siteSubscription);
+  // }
 }

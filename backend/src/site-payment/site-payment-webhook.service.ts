@@ -4,15 +4,18 @@ import Stripe from 'stripe';
 import { Request } from 'express';
 import { SiteSubscriptionRepository } from './site-payment.repository';
 import { UserEntity } from 'src/user/entities/user.entity';
+import { UserService } from 'src/user/user.service';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User } from 'src/decorators/user.decorator';
+import { RevPriceId } from 'src/enums/ReversePrice-id.enum';
+import process from 'process';
 @Injectable()
 export class SitePaymentWebhookService {
   constructor(
     @InjectStripeClient() private stripe: Stripe,
     @InjectRepository(UserEntity)
     private userRepository: Repository<UserEntity>,
+    private userService : UserService,
     private siteSubscriptionRepository :SiteSubscriptionRepository
 
 
@@ -22,13 +25,23 @@ export class SitePaymentWebhookService {
   async handleSubscriptionUpdate(event: Stripe.Event): Promise<void> {
     const dataObject = event.data.object as Stripe.Subscription;
     const customer : any = await this.stripe.customers.retrieve(dataObject.customer.toString());
-    const user = await this.userRepository.findOne({ 
-        where: { 
-          email: customer.email, 
-          username: customer.name 
-        } 
+    const subuser : UserEntity = await this.userService.findOneByEmailUsername(  customer.email, customer.name );
+    const priceId = dataObject.items.data[0].plan.id;
+    console.log(subuser);  
+      const subscription = await this.siteSubscriptionRepository.create({
+        stripeCustomerId:dataObject.customer.toString(),
+        stripeSubscriptionId:  dataObject.id,
+        priceId: priceId,
+        isActive:dataObject.items.data[0].plan.active,
+        Plan: RevPriceId[priceId as keyof typeof RevPriceId],
+        user: subuser, 
       });
-    console.log(user);
+    console.log("testing ----------------------");
+    console.log(subscription)
+    
+    console.log(dataObject.items.data[0].plan);
+    console.log(dataObject.items.data[0].plan.id);
+    console.log();
     // console.log('Subscription Updated:',customer.email);
     // console.log('Subscription Updated:', dataObject.metadata);
   }
@@ -41,13 +54,13 @@ export class SitePaymentWebhookService {
   }
 
 
-  @StripeWebhookHandler('*') // Catch-all for other events
+  @StripeWebhookHandler('*') 
   async handleWebhook(req: Request, @Body() body: string): Promise<void> {
     const sig = req.headers['stripe-signature'] as string;
-    const webhookSecret = 'your_webhook_signing_secret'; // Stripe's webhook secret
+    const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
     try {
-      // Ensure raw body is passed for signature verification
+  
       const event = this.stripe.webhooks.constructEvent(body, sig, webhookSecret);
 
       console.log('Webhook event received:', event);

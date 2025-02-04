@@ -66,12 +66,10 @@ export class UserEntity extends TimestampEntity {
   @JoinColumn()
   parent: ParentEntity;
 
-  @OneToOne(()=> siteSubscriptions,(siteSubscription) => siteSubscription.user, {
-    nullable: true,
+  @OneToMany(()=> siteSubscriptions,(siteSubscription) => siteSubscription.user, {
     cascade: true,
   })
-  @JoinColumn()
-  siteSubscription : siteSubscriptions;
+  siteSubscription : siteSubscriptions[];
 
   
  

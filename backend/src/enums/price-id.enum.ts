@@ -1,5 +1,6 @@
 export enum PriceId {
-  FREETRIAl = "price_1QG3kpEt5xiNvM25rn3LMLGI",
-  PRO ="price_1QG3m0Et5xiNvM25JaUFuEo4",
-  PREMIEM ="price_1QBLGvJfcqEyxtJLRnxBuooR",
+  FREETRIAl = "price_1QoMpdJfcqEyxtJLfL38GKZ5",
+  PRO ="price_1QoMtOJfcqEyxtJLryqQHR8Y",
+  PREMIEM ="price_1QoMu3JfcqEyxtJLu4Mdhbf5",
+  SINGLESESSION  ="price_1QoRafJfcqEyxtJL4NBvvkRC",
   }

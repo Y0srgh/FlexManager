@@ -1,5 +1,5 @@
-import { User } from 'src/messenger/entities/user.entity';
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn ,OneToOne, JoinColumn } from 'typeorm';
+import { UserEntity } from 'src/user/entities/user.entity';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn ,OneToOne, JoinColumn, ManyToOne } from 'typeorm';
 
 @Entity('siteSubscriptions')
 export class siteSubscriptions {
@@ -22,8 +22,11 @@ export class siteSubscriptions {
   @CreateDateColumn()
   createdAt: Date;
 
-  @OneToOne(()=> User,(user) => user.siteSubscription)
-  user : User;
+  @ManyToOne(()=> UserEntity,(user) => user.siteSubscription,{
+    nullable:false,
+  })
+  @JoinColumn({name : 'userId' })
+  user : UserEntity;
 
   @UpdateDateColumn()
   updatedAt: Date;
