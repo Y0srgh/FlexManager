@@ -8,7 +8,7 @@
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     position: relative;
-    overflow: hidden;
+    overflow: visible; /* Change this to visible if necessary */
     animation: glow 4s infinite alternate;
 }
 
@@ -51,7 +51,7 @@ textarea {
     font-size: 14px;
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.9);
     color: #333;
     transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
 }
@@ -98,14 +98,14 @@ mat-datepicker-toggle {
 mat-datepicker-toggle:hover {
     color: #ff6f61;
 }
+
 .custom-datepicker {
-    z-index: 10000 !important; 
-  }
-  
-  .cdk-overlay-container {
+    z-index: 10000 !important;
+}
+
+.cdk-overlay-container {
     z-index: 1050 !important;
-  }
-  
+}
 
 .button-container {
     display: flex;
@@ -178,7 +178,7 @@ mat-datepicker-toggle:hover {
     transform: scale(1.1);
 }
 
-/* Neon Accent Animation */
+
 @keyframes neon {
     0% {
         filter: hue-rotate(0deg);
@@ -200,3 +200,6 @@ mat-datepicker-toggle:hover {
     animation: neon 8s infinite linear;
     z-index: -1;
 }
+
+
+  

@@ -9,6 +9,7 @@ import { Course } from '../../models/course.model';
 export class CourseComponent {
   @Input() course: Course | null = null;
   @Output() viewDetails = new EventEmitter<string>();
+  @Output() deleted = new EventEmitter<string>(); 
 
   showDetails: boolean = false;
   courses: Course[] = [];
@@ -24,9 +25,9 @@ export class CourseComponent {
   toggleDetails() {
     this.showDetails = !this.showDetails;
   }
-  removeCourse(courseId: string) {
-    this.courses = this.courses.filter(course => course.id !== courseId);
+
+  
+  onCourseDeleted(courseId: string) {
+    this.deleted.emit(courseId); 
   }
-  
-  
 }

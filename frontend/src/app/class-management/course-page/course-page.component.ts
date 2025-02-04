@@ -50,5 +50,11 @@ export class CoursePageComponent implements OnInit {
     this.router.navigate(['/course-edit', courseId]);
   }
 
-  
+  onCourseAdded(newCourse: any) {
+    this.courses.push(newCourse); 
+  }
+  onCourseDeleted(courseId: string) {
+    this.courses = this.courses.filter(course => course.id !== courseId);
+  }
+
 }

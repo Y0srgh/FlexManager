@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { Course } from '../../models/course.model';
 
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 @Component({
   selector: 'app-class-form',
   templateUrl: './class-form.component.html',
@@ -11,18 +13,21 @@ import { Course } from '../../models/course.model';
 })
 export class ClassFormComponent implements OnInit, OnDestroy {
   @Output() closeModal = new EventEmitter<void>();
+  @Output() courseAdded = new EventEmitter<any>()
   courseForm: FormGroup;
 
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
-    private overlayContainer: OverlayContainer
+    private overlayContainer: OverlayContainer,
+    private snackBar: MatSnackBar
   ) {
     this.courseForm = this.fb.group(
       {
         title: ['', Validators.required],
         description: ['', Validators.required],
         date: [null, [Validators.required, this.dateValidator.bind(this)]], 
+        capacity: ['', Validators.required] ,
         startTime: [null, Validators.required],
         endTime: [null, Validators.required],
       },
@@ -33,7 +38,7 @@ export class ClassFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // Attach the overlay container to the form container
+  
     const formContainer = document.querySelector('.form-container');
     if (formContainer) {
       this.overlayContainer.getContainerElement().classList.add('form-container');
@@ -41,7 +46,7 @@ export class ClassFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // Clean up by removing the custom class
+  
     this.overlayContainer.getContainerElement().classList.remove('form-container');
   }
 
@@ -84,12 +89,27 @@ export class ClassFormComponent implements OnInit, OnDestroy {
 
       this.http.post('http://localhost:4000/courses', courseData).subscribe(
         (response) => {
+
           console.log('Course submitted successfully:', response);
+          this.snackBar.open('Class added successfully!', 'close', {
+            duration: 3000, 
+            verticalPosition: 'top', 
+            horizontalPosition: 'right',  
+            panelClass: 'custom-snackbar',
+          });
+          this.courseAdded.emit(response);
           this.courseForm.reset();
           this.closeModal.emit(); 
         },
         (error) => {
           console.error('Error submitting course:', error);
+          this.snackBar.open('Error adding class', 'close', {
+            duration: 3000, 
+            verticalPosition: 'top', 
+            horizontalPosition: 'right',  
+            panelClass: 'custom-snackbar',
+          });
+        
         }
       );
     }
