@@ -10,6 +10,7 @@ export class CourseComponent {
   @Input() course: Course | null = null;
   @Output() viewDetails = new EventEmitter<string>();
   @Output() deleted = new EventEmitter<string>(); 
+  @Output() updated = new EventEmitter<Course>();
 
   showDetails: boolean = false;
   courses: Course[] = [];
@@ -29,5 +30,8 @@ export class CourseComponent {
   
   onCourseDeleted(courseId: string) {
     this.deleted.emit(courseId); 
+  }
+  onCourseUpdated(updatedCourse: Course) {
+    this.updated.emit(updatedCourse);  
   }
 }

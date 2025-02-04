@@ -27,5 +27,6 @@ class="coach-photo" /> -->
   [course]="course" 
   (close)="toggleDetails()" 
   class="app-course-details-popup"
-  (deleted)="onCourseDeleted($event)">
+  (deleted)="onCourseDeleted($event)"
+  (updated)="onCourseUpdated($event)">
 </app-course-details>

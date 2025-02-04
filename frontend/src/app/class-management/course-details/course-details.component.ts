@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, output } from '@angular/core';
 import { Course } from '../../models/course.model';
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -12,6 +12,7 @@ export class CourseDetailsComponent {
   @Input() course: Course | null = null;
   @Output() close = new EventEmitter<void>();
   @Output() deleted = new EventEmitter<string>();
+  @Output() updated = new EventEmitter<Course>();
 
   isEditing = false;
 
@@ -57,6 +58,7 @@ export class CourseDetailsComponent {
         (updatedCourse) => {
           this.course = updatedCourse; 
           this.isEditing = false; 
+          this.updated.emit(updatedCourse);  
           this.snackBar.open('Course updated successfully!', 'Close', {
             duration: 3000,
             verticalPosition: 'top',

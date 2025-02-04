@@ -56,5 +56,10 @@ export class CoursePageComponent implements OnInit {
   onCourseDeleted(courseId: string) {
     this.courses = this.courses.filter(course => course.id !== courseId);
   }
+  onCourseUpdated(updatedCourse: Course) {
+    const index = this.courses.findIndex(course => course.id === updatedCourse.id);
+    if (index !== -1) {
+      this.courses[index] = updatedCourse;  
+    }}
 
 }
