@@ -1,5 +1,5 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RequestCardComponent } from './request-card.component';
 
 describe('RequestCardComponent', () => {
@@ -21,3 +21,4 @@ describe('RequestCardComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+

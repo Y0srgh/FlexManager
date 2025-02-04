@@ -1,0 +1,61 @@
+<div [formGroup]="basicDetails" class="form-group">
+  <label>{{ label }}</label>
+  <div class="input-container">
+    <i [class]="'fas input-icon ' + iconClass"></i>
+    <input
+      [type]="
+        (type === 'password' && (showPassword ? 'text' : 'password')) || type
+      "
+      [formControlName]="controlName"
+      class="form-control"
+      [class.is-invalid]="isFieldInvalid(basicDetails, controlName)"
+      placeholder="Enter {{ controlName }}"
+    />
+    <i
+      *ngIf="type === 'password'"
+      class="fas password-toggle"
+      [class.fa-eye]="!showPassword"
+      [class.fa-eye-slash]="showPassword"
+      (click)="togglePasswordVisibility()"
+    ></i>
+  </div>
+  <div class="error" *ngIf="isFieldInvalid(basicDetails, controlName)">
+    <span *ngIf="basicDetails.get(controlName)?.errors?.['required']">
+      {{ label }} is required
+    </span>
+    <span
+      *ngIf="basicDetails.get(controlName)?.errors?.['minlength'] && controlName === 'username'"
+    >
+      {{ label }} must be at least 3 characters
+    </span>
+    <span *ngIf="basicDetails.get(controlName)?.errors?.['email']">
+      Please enter a valid email
+    </span>
+    <span
+      *ngIf="basicDetails.get(controlName)?.errors?.['pattern'] && controlName === 'password'"
+    >
+      Please enter a valid password:
+      <ul>
+        <li>At least 6 characters</li>
+        <li>At least one lowercase letter</li>
+        <li>At least one uppercase letter</li>
+        <li>At least one digit</li>
+      </ul>
+    </span>
+    <span
+      *ngIf="basicDetails.get(controlName)?.errors?.['pattern'] && controlName === 'phone'"
+    >
+      Please enter a valid 8-digit phone number
+    </span>
+    <span
+      *ngIf="basicDetails.get(controlName)?.errors?.['min'] || basicDetails.get(controlName)?.errors?.['max']"
+    >
+      <ng-container *ngIf="controlName === 'age'"
+        >Age must be between 16 and 100</ng-container
+      >
+      <ng-container *ngIf="controlName === 'height'"
+        >Height must be between 100 and 250 cm</ng-container
+      >
+    </span>
+  </div>
+</div>

@@ -7,6 +7,8 @@ import {
   Param,
   Delete,
   UseGuards,
+  Res,
+  Req,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserSingUpDto } from './dto/user-sign-up.dto';
@@ -15,11 +17,11 @@ import { UserEntity } from './entities/user.entity';
 import { UserSingInDto } from './dto/user-sign-in.dto';
 import { UserSignInValidationPipe } from 'src/pipes/signin/user-sing-in.pipe';
 import { CreateCoachDto } from './dto/create-coach.dto';
-import { JwtAuthGuard } from './guards/jwt-auth.guards';
+import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { User } from 'src/decorators/user.decorator';
 import { Roles } from 'src/enums/user-role.enum';
 import { Role } from 'src/decorators/role.decorator';
-import { RolesGuard } from './guards/role.guards';
+import { RolesGuard } from './guards/role.guard';
 import { CreateClientDto } from './dto/create-client.dto';
 import { CoachService } from './coach.service';
 import { ClientService } from './client.service';
@@ -27,7 +29,7 @@ import { CreateManagerDto } from './dto/create-manager.dto';
 import { ManagerService } from './manager.service';
 import { ParentService } from './parent.service';
 import { CreateParentDto } from './dto/create-parent.dto';
-
+import { Response, Request } from 'express';
 @Controller('auth')
 export class UserController {
   constructor(
@@ -44,10 +46,13 @@ export class UserController {
   }
 
   @Post('signin')
-  async signIn(@Body(UserSignInValidationPipe) userData: UserSingInDto) {
+  async signIn(
+    @Body(UserSignInValidationPipe) userData: UserSingInDto,
+    @Res({ passthrough: true }) response: Response,
+  ) {
     console.log('i am heree');
 
-    return this.userService.signIn(userData);
+    return this.userService.signIn(userData, response);
   }
 
   //principe : definir les "fonctionnalités" de tous les utilisateur ici et restreindre l'accès en fonction du role de l'utilisateur (RBAC)
@@ -86,17 +91,21 @@ export class UserController {
   // }
 
   //---------client
+  // @Role(Roles.MANAGER)
+  // @UseGuards(JwtAuthGuard, RolesGuard)
   @Post('client')
-  @Role(Roles.MANAGER)
-  @UseGuards(JwtAuthGuard, RolesGuard)
-  createClient(@Body() CreateClientDto: CreateClientDto) {
-    return this.clientService.createClient(CreateClientDto);
+  createClient(@Body() createClientDto: CreateClientDto) {
+    console.log('createClientDto', createClientDto);
+
+    return this.clientService.createClient(createClientDto);
   }
 
   @Get('client')
   @Role(Roles.MANAGER)
   @UseGuards(JwtAuthGuard, RolesGuard)
-  findAllClients() {
+  findAllClients(@Req() req: Request) {
+    console.log("i am in find all clients");
+    // console.log('Access Token from Header:', res.get('x-new-access-token'));
     return this.clientService.findAll();
   }
 
@@ -129,8 +138,7 @@ export class UserController {
   @Post('parent')
   @Role(Roles.CLIENT)
   @UseGuards(JwtAuthGuard, RolesGuard)
-  createParent(@Body() createParentDto: CreateParentDto,@User() user) {
+  createParent(@Body() createParentDto: CreateParentDto, @User() user) {
     return this.parentService.createParent(createParentDto, user);
   }
-
 }

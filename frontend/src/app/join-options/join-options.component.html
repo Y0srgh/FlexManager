@@ -1,0 +1,17 @@
+<div class="join-container">
+    <div class="content-wrapper">
+        <div class="buttons-container">
+            <button *ngFor="let option of joinOptions"
+                    (click)="onJoinClick(option.type)"
+                    class="join-button">
+                <i [class]="option.iconClass"></i>
+                {{option.label}}
+            </button>
+        </div>
+        
+        <div class="signin-link">
+            <span>Already have an account?</span>
+            <button class="link-button" (click)="onSignInClick()">Sign in</button>
+        </div>
+    </div>
+</div>

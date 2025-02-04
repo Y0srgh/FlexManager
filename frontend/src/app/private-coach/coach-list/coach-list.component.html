@@ -1,8 +1,18 @@
 <div class="coach-list">
-    <app-coach
-      *ngFor="let coach of coaches"
-      [coach]="coach"
-      (select)="selectCoach(coach)"
-    ></app-coach>
+  <app-coach
+    *ngFor="let coach of coaches"
+    [coach]="coach"
+    (select)="selectCoach($event)">
+  </app-coach>
+</div>
+
+<div class="modal" *ngIf="isModalOpen">
+  <div class="modal-content">
+    <span class="close" (click)="closeModal()">&times;</span>
+    <app-reservation-card 
+      *ngIf="selectedCoach"
+      [coach]="selectedCoach" 
+      (close)="closeModal()">
+    </app-reservation-card>
   </div>
-  
+</div>

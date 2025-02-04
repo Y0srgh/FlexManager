@@ -16,7 +16,7 @@ export class Reservation {
   @Column({ type: 'time' })
   endTime: string;
 
-  @Column({ type: 'int' })
+  @Column({ type: 'int' , nullable: true})
   duration: number; // in minutes
 
   @Column({ type: 'enum', enum: ['pending', 'approved', 'canceled'], default: 'pending' })

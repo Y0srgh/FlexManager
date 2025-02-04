@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BaseService } from '../base/base.service';
+import { SignupService } from './signup.service';
 
 @Component({
   selector: 'app-signup',
@@ -7,6 +9,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent implements OnInit {
+  private readonly endpoint = 'auth/client';
+
   signupForm!: FormGroup;
   currentStep = 1;
   submitted = false;
@@ -21,7 +25,11 @@ export class SignupComponent implements OnInit {
 
   showPassword: boolean = false;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private baseService: BaseService,
+    private signupService: SignupService
+  ) {}
 
   ngOnInit() {
     this.signupForm = this.fb.group({
@@ -52,7 +60,7 @@ export class SignupComponent implements OnInit {
         ],
       }),
       membershipDetails: this.fb.group({
-        goal: ['', Validators.required],
+        goal: [[''], Validators.required],
       }),
     });
   }
@@ -68,24 +76,11 @@ export class SignupComponent implements OnInit {
   }
 
   nextStep() {
-    if (this.currentStep === 1) {
-      Object.keys(this.basicDetails.controls).forEach((key) => {
-        const control = this.basicDetails.get(key);
-        control?.markAsTouched();
-      });
-
-      if (this.basicDetails.valid) {
-        this.currentStep++;
-      } else {
-        console.log('Form errors:', this.basicDetails.errors);
-      }
-    }
+    this.currentStep = this.signupService.nextStep(this.currentStep, this.basicDetails);
   }
 
   previousStep() {
-    if (this.currentStep > 1) {
-      this.currentStep--;
-    }
+    this.currentStep = this.signupService.previousStep(this.currentStep);
   }
 
   onSubmit() {
@@ -98,9 +93,36 @@ export class SignupComponent implements OnInit {
       });
     }
 
-    if (this.signupForm.valid) {
-      console.log('Form submitted:', this.signupForm.value);
-      this.currentStep++;
+    console.log('Form value:', this.signupForm.value);
+
+    const clientDetails = {
+      username: this.signupForm.value.basicDetails.username,
+      email: this.signupForm.value.basicDetails.email,
+      phone: this.signupForm.value.basicDetails.phone,
+      gender: this.signupForm.value.basicDetails.gender,
+      role: 'client',
+      password: this.signupForm.value.basicDetails.password,
+      physicalDetails: {
+        weight: this.signupForm.value.basicDetails.weight,
+        height: this.signupForm.value.basicDetails.height,
+        age: this.signupForm.value.basicDetails.age,
+      },
+      nutritionAssistanceType: 'AI',
+      goal: this.signupForm.value.membershipDetails.goal,
+    };
+
+    console.log("client details", clientDetails);
+    
+    if (this.signupForm.valid && this.currentStep === 2) {
+      this.baseService.post(`${this.endpoint}`, clientDetails).subscribe({
+        next: (response) => {
+          console.log('Signup successful:', response);
+          this.currentStep++; // Move to the next step
+        },
+        error: (error) => {
+          console.error('Signup failed:', error);
+        },
+      });
     }
   }
 
@@ -109,8 +131,7 @@ export class SignupComponent implements OnInit {
   }
 
   isFieldInvalid(formGroup: FormGroup, fieldName: string): boolean {
-    const field = formGroup.get(fieldName);
-    return field ? field.invalid && (field.dirty || field.touched) : false;
+    return this.signupService.isFieldInvalid(formGroup, fieldName);
   }
 
   getGoalIcon(goal: string): string {
@@ -141,10 +162,23 @@ export class SignupComponent implements OnInit {
   }
 
   selectGoal(goal: string) {
-    this.membershipDetails.get('goal')?.setValue(goal);
+    if (this.membershipDetails.get('goal')?.value.includes('')) {
+      this.membershipDetails.get('goal')?.setValue([goal]);
+      console.log(
+        'membershipDetails',
+        this.membershipDetails.get('goal')?.value
+      );
+    } else {
+      const goalList = this.membershipDetails.get('goal')?.value || [];
+      if (!this.membershipDetails.get('goal')?.value.includes(goal)) {
+        goalList.push(goal);
+        this.membershipDetails.get('goal')?.setValue(goalList);
+      } else {
+        goalList.splice(goalList.indexOf(goal), 1);
+        this.membershipDetails.get('goal')?.setValue(goalList);
+      }
+    }
   }
 
-  togglePasswordVisibility() {
-    this.showPassword = !this.showPassword;
-  }
+  
 }

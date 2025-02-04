@@ -1,0 +1,39 @@
+<div class="signup-container">
+  <div class="signup-card">
+    <form (ngSubmit)="onSubmit()" #signinForm="ngForm">
+      <h2 class="form-title">Welcome Back !</h2>
+      <p class="form-subtitle">
+        Log in to continue your fitness journey with us. <a [routerLink]="'/register'">Don't have an account ?</a>
+      </p>
+      <div class="form-grid">
+        <app-input-field
+            [basicDetails]="signinDetails"
+            label="Username or Email"
+            iconClass="fa-envelope"
+            controlName="email"
+            type="email"
+          ></app-input-field>
+
+        <app-input-field
+          [basicDetails]="signinDetails"
+          label="Password"
+          iconClass="fa-lock"
+          controlName="password"
+          [showPassword]="showPassword"
+          type="password"
+        >
+        </app-input-field>
+      </div>
+      <div class="form-actions">
+        <div class="btn">
+          <app-button
+            type="submit"
+            buttonText="Log in"
+            buttonType="primary"
+            icon="fa-arrow-right"
+          ></app-button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<div class="progress-indicator">
+  <div class="progress-bar">
+    <div class="progress" [style.width]="progressWidth + '%'"></div>
+  </div>
+  <div class="steps">
+    <div
+      class="step"
+      [class.active]="currentStep >= 1"
+      [class.completed]="currentStep > 1"
+    >
+      <div class="step-icon">1</div>
+      <span class="step-label">Basic Details</span>
+    </div>
+    <div
+      class="step"
+      [class.active]="currentStep >= 2"
+      [class.completed]="currentStep > 2"
+    >
+      <div class="step-icon">2</div>
+      <span class="step-label">Membership</span>
+    </div>
+    <div class="step" [class.active]="currentStep >= 3">
+      <div class="step-icon">3</div>
+      <span class="step-label">Complete</span>
+    </div>
+  </div>
+</div>

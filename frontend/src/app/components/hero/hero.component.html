@@ -3,13 +3,14 @@
     <h1>Elevate your workout</h1>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
     <app-button
-    [backgroundColor]="'#fff'"
-    [textColor]="'#000'"
-    [buttonText]="'Get Started'"
-    (buttonClick)="onGetStartedClick()"
-  ></app-button>    <div class="social-icons">
-      <a href="#"><i class="fab fa-twitter"></i></a>
-      <a href="#"><i class="fab fa-facebook"></i></a>
+      buttonType="'home'"
+      [buttonText]="'Get Started'"
+      (buttonClick)="onGetStartedClick()"
+      [link]="link"
+    ></app-button>
+    <div class="social-icons">
+      <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+      <a href="#"><i class="fa-brands fa-meta"></i></a>
     </div>
   </div>
 </section>

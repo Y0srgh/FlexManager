@@ -9,10 +9,11 @@ import { TestModule } from './test/test.module';
 import { UserModule } from './user/user.module';
 
 dotenv.config();
-import { CourseModule } from './classes/entities/strategy/courses.module';
+import { CourseModule } from './classes/strategy/courses.module';
 import { CommonModule } from './common/common.module';
 import { BaseService } from './base/base.service';
 import { ReservationModule } from './reservation/reservation.module';
+import { PrivateSessionModule } from './private-session/private-session.module';
 
 @Module({
   imports: [CourseModule ,  
@@ -28,10 +29,13 @@ import { ReservationModule } from './reservation/reservation.module';
     TestModule,
     UserModule,
     CommonModule,
-    ReservationModule
+    ReservationModule,
+    PrivateSessionModule
 
 ],
 controllers: [AppController],
 providers: [AppService],
 })
-export class AppModule {}
+export class AppModule {
+  
+}
