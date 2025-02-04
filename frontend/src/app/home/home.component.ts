@@ -8,11 +8,11 @@ import { Router } from '@angular/router';
 export class HomeComponent {
   cards = [
     { title: 'Dashboard', icon: 'dashboard', route: '/dashboard', image: 'assets/dashboard.png' }, 
-    { title: 'Classes', icon: 'class', route: '/classes', image: 'assets/classes.webp' }, 
+    { title: 'Classes', icon: 'class', route: '/course', image: 'assets/classes.webp' }, 
     { title: 'Nutrition', icon: 'restaurant', route: '/nutrition', image: 'assets/nutrition.jpg' }, 
 
     { title: 'Performance', icon: 'trending_up', route: '/performance', image: 'assets/performance.png' },
-    { title: 'Private Sessions', icon: 'fitness_center', route: '/private-sessions', image: 'assets/private.png' }, 
+    { title: 'Private Sessions', icon: 'fitness_center', route: '/coaches', image: 'assets/private.png' }, 
 
 
     { title: 'Plannings', icon: 'event', route: '/calendar', image: 'assets/calendar.webp' },
