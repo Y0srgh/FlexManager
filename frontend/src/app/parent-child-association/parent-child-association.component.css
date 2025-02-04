@@ -1,6 +1,6 @@
 .signup-container {
   min-height: 100vh;
-  background: url("/background3.jpg") no-repeat center center/cover;
+  background: url("/assets/background3.jpg") no-repeat center center/cover;
   display: flex;
   justify-content: center;
   align-items: center;

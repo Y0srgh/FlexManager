@@ -16,7 +16,7 @@ export class CourseDetailsComponent {
 
   isEditing = false;
 
-  private apiUrl = 'http://localhost:4000/courses';
+  private apiUrl = 'http://localhost:3000/courses';
   editedCourse: Course = {
     id: '',
     title: '',

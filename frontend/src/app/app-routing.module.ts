@@ -25,6 +25,8 @@ import { FitnessTrackerComponent } from './fitness-tracker/fitness-tracker.compo
 
 const routes: Routes = [
   { path: '', component: LayoutComponent },
+  { path: 'nut', component: NutritionistsComponent },
+
   { path: 'signup/sportsman', component: SignupComponent },
   { path: 'signup/parent', component: SignupParentComponent },
   { path: 'signin', component: SigninComponent },

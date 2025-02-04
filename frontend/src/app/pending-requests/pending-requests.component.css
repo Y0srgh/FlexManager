@@ -5,7 +5,7 @@
   align-items: flex;
   justify-content: center;
   padding: 1rem;
-  background: url("/background5.jpg") no-repeat center center/cover;
+  background: url("/assets/background5.jpg") no-repeat center center/cover;
   position: relative;
   &::before {
     content: "";
