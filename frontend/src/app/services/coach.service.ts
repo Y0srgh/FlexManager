@@ -23,7 +23,7 @@ export class CoachService {
             coach.id,                           
             coach.expertise || '',              
             coach.user?.username || '',         
-            'https://img.freepik.com/vecteurs-libre/illustration-du-jeune-prince-vecteur_1308-174367.jpg'         
+            'https://www.logiquetechno.com/wp-content/uploads/2020/11/retirer-photo-de-profil-facebook.png'         
           ))
       )
     );

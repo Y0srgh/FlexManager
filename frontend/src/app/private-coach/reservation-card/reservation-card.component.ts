@@ -33,7 +33,7 @@ export class ReservationCardComponent {
     // Construction des données de réservation avec les objets complets pour coach et client
     const reservationData = new PrivateReservation(
       this.coach.id,  // coachId
-      '481cffd8-42b7-4036-b28a-37cae55aaf93',  // clientId (Remplace '1' par l'ID du client connecté)
+      '2a702592-b2fe-4d81-a0a6-54a1f5aff196',  // clientId (Remplace '1' par l'ID du client connecté)
       this.selectedDate,  // date
       this.startTime,  // startTime
       this.endTime  // endTime
