@@ -8,7 +8,7 @@ import { SitePaymentComponent } from "./site-payment/site-payment.component";
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  imports: [ChatroomComponent, SitePaymentComponent],
+  /* imports: [ChatroomComponent, SitePaymentComponent], */
 })
 export class AppComponent {
   title = 'frontend';
