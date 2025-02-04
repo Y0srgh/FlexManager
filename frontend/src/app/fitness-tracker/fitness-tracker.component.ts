@@ -40,8 +40,19 @@ export class FitnessTrackerComponent implements OnInit {
 
   constructor(private fitnessTrackingService: FitnessTrackingService) {}
 
+  private updateView() {
+    const containerWidth = document.querySelector('.charts-grid')?.clientWidth || 700;
+    this.view = [containerWidth - 50, 300];
+  }
+  
   ngOnInit() {
     this.loadProgressData();
+    this.updateView();
+    window.addEventListener('resize', () => this.updateView());
+  }
+  
+  ngOnDestroy() {
+    window.removeEventListener('resize', () => this.updateView());
   }
 
   private loadProgressData() {
@@ -60,10 +71,10 @@ export class FitnessTrackerComponent implements OnInit {
     if (data.length > 0) {
       const latest = data[data.length - 1];
       this.latestStats = [
-        { label: 'Current Weight', value: `${latest.weight} kg` },
-        { label: 'Fat Rate', value: `${latest.fatRate}%` },
-        { label: 'Muscle Rate', value: `${latest.muscleRate}%` },
-        { label: 'Calories Burned', value: `${latest.caloriesBurned} kcal` },
+        { label: 'Current Weight', value: `${latest.weight || 'not precised'} kg` },
+        { label: 'Fat Rate', value: `${latest.fatRate || 0}%` },
+        { label: 'Muscle Rate', value: `${latest.muscleRate || 0}%` },
+        { label: 'Calories Burned', value: `${latest.caloriesBurned || 0} kcal` },
       ];
     }
   }
