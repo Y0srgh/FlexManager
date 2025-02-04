@@ -7,7 +7,7 @@ import {
   PrimaryColumn,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { ClientEntity } from '../user/entities/client.entity';
+import { ClientEntity } from './client.entity';
 
 @Entity('progress_tracking')
 export class TrackEntity extends TimestampEntity {

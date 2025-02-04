@@ -18,8 +18,7 @@ import { ParentService } from './parent.service';
 import { ParentEntity } from './entities/parents.entity';
 import { ParentChildRequestEntity } from './entities/parent-child.entity';
 import { ParentChildRequestService } from './parent-child-request.service';
-import { TrackEntity } from 'src/progress-tracking/track.entity';
-import { ProgressTrackingService } from 'src/progress-tracking/progress-tracking.service';
+import { TrackEntity } from './entities/track.entity';
 dotenv.config();
 
 @Module({
@@ -32,7 +31,6 @@ dotenv.config();
       ParentEntity,
       ParentChildRequestEntity,
       TrackEntity,
-      ProgressTrackingService
     ]),
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
@@ -51,7 +49,7 @@ dotenv.config();
     ManagerService,
     ParentService,
     ParentChildRequestService,
-    ProgressTrackingService
   ],
+  exports: [UserService, ClientService],
 })
 export class UserModule {}

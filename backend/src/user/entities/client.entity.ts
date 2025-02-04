@@ -13,7 +13,7 @@ import { TimestampEntity } from 'src/Generics/timestamp.entities';
 import { ParentEntity } from './parents.entity';
 import { Gender } from 'src/enums/gender.enum';
 import { Goal } from 'src/enums/goal.enum';
-import { TrackEntity } from '../../progress-tracking/track.entity';
+import { TrackEntity } from './track.entity';
 import { Reservation } from 'src/reservation/entities/reservation.entity';
 
 @Entity('clients')

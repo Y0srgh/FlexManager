@@ -2,7 +2,6 @@ import { DeepPartial, Repository } from 'typeorm';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { UserSingUpDto } from 'src/user/dto/user-sign-up.dto';
 
-@Injectable()
 export class BaseService<T> {
   constructor(
     private readonly repository: Repository<T>,
