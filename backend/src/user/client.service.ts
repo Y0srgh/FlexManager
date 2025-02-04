@@ -60,10 +60,10 @@ export class ClientService extends BaseService<ClientEntity> {
     console.log("initial progress", progress);
     
     progress.client = client;
-    progress.weight = trackBody.weight!==undefined? trackBody.weight : oldProgress.weight;
-    progress.muscleRate = trackBody.muscleRate!==undefined? trackBody.muscleRate :oldProgress.muscleRate;
-    progress.caloriesBurned = trackBody.caloriesBurned!==undefined? trackBody.caloriesBurned :oldProgress.caloriesBurned;
-    progress.fatRate = trackBody.fatRate!==undefined? trackBody.fatRate :oldProgress.fatRate;
+    progress.weight = trackBody.weight!==undefined? trackBody.weight : (oldProgress?.weight || null);
+    progress.muscleRate = trackBody.muscleRate!==undefined? trackBody.muscleRate :(oldProgress?.muscleRate || null);
+    progress.caloriesBurned = trackBody.caloriesBurned!==undefined? trackBody.caloriesBurned :(oldProgress?.caloriesBurned || null);
+    progress.fatRate = trackBody.fatRate!==undefined? trackBody.fatRate :(oldProgress?.fatRate || null);
     console.log("progress------------------------", progress);
     await this.trackRepository.save(progress);
     return progress;

@@ -125,6 +125,7 @@ export class FitnessTrackerComponent implements OnInit {
           day: '2-digit',
           hour: '2-digit',
           minute: '2-digit',
+          second: '2-digit',
         }),
         value: item[metric],
       }))
