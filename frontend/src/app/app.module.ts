@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { TimeAgoPipe } from './pipes/time-ago.pipe';
-import { ReactiveFormsModule } from '@angular/forms';
 import { PaymentComponent } from './pages/payment/payment.component';
 import { ChatroomComponent } from './chatroom/chatroom.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -101,9 +100,7 @@ import { SitePaymentService } from './services/site-payment/site-payment.service
     RouterModule ,
     MatDialogModule,
     AppRoutingModule,
-    HttpClientModule
-    FormsModule,
-    ReactiveFormsModule,
+    HttpClientModule,
     MatTableModule,
     MatCardModule,
     MatButtonModule,

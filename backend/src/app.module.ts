@@ -35,7 +35,6 @@ import configs from './site-payment/config';
     TestModule,
     SubscriptionsModule,
     SitePaymentModule,
-    BaseService,
     MessengerModule,
     UserModule,
     CommonModule,
