@@ -1,14 +1,12 @@
 <div class="progress-dashboard">
   <div class="dashboard-header">
-    <h1>Fitness Progress Dashboard</h1>
     <div class="header-stats">
-      <div class="stat-card" *ngFor="let metric of latestStats; index as i" [style.--index]="i">
+      <div class="stat-card" *ngFor="let metric of latestStats">
         <div class="stat-value">{{ metric.value }}</div>
         <div class="stat-label">{{ metric.label }}</div>
       </div>
     </div>
   </div>
-<div class="chart-container">
 
   <div class="charts-grid">
     <div class="chart-card" *ngFor="let metric of metrics">
@@ -19,9 +17,29 @@
           [class.positive]="metric.trend > 0"
           [class.negative]="metric.trend < 0"
         >
-          {{ metric.trend > 0 ? '↑' : '↓' }} {{ Math.abs(metric.trend) }}%
+          {{ metric.trend > 0 ? "↑" : "↓" }} {{ Math.abs(metric.trend) }}%
         </div>
       </div>
+      <!-- <ngx-charts-line-chart
+        [view]="view"
+        [scheme]="colorScheme"
+        [results]="metric.data"
+        [gradient]="true"
+        [xAxis]="true"
+        [yAxis]="true"
+        [legend]="false"
+        [showXAxisLabel]="true"
+        [showYAxisLabel]="false"
+        [xAxisLabel]="'Date'"
+        [yAxisLabel]="metric.name"
+        [timeline]="false"
+        [curve]="curve"
+        [autoScale]="true"
+        [roundDomains]="false"
+        [animations]="true"
+        [tooltipDisabled]="false"
+      >
+      </ngx-charts-line-chart> -->
       <ngx-charts-line-chart
         [view]="view"
         [scheme]="colorScheme"
@@ -29,9 +47,9 @@
         [gradient]="true"
         [xAxis]="true"
         [yAxis]="true"
-        [legend]="true"
+        [legend]="false"
         [showXAxisLabel]="true"
-        [showYAxisLabel]="true"
+        [showYAxisLabel]="false"
         [xAxisLabel]="'Date'"
         [yAxisLabel]="metric.name"
         [timeline]="false"
@@ -41,4 +59,3 @@
     </div>
   </div>
 </div>
-  </div>

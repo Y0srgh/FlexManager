@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Chart } from 'chart.js';
 import { FitnessTrackingService } from './fitness-tracker.service';
@@ -27,12 +27,13 @@ import {
 })
 export class FitnessTrackerComponent implements OnInit {
   metrics: any[] = [];
+  // Default view dimensions – these will be updated on init and window resize.
   view: [number, number] = [700, 300];
   colorScheme = {
     name: 'default',
     selectable: true,
     group: ScaleType.Ordinal,
-    domain: ['#2196F3', '#FF9800', '#4CAF50', '#E91E63'],
+    domain: ['#2196F3', '#fff', '#fff', '#fff'],
   };
   latestStats: any[] = [];
   Math = Math; 
@@ -40,21 +41,30 @@ export class FitnessTrackerComponent implements OnInit {
 
   constructor(private fitnessTrackingService: FitnessTrackingService) {}
 
-  private updateView() {
-    const containerWidth = document.querySelector('.charts-grid')?.clientWidth || 700;
-    console.log("------------", containerWidth);
-    
-    this.view = [containerWidth - 100, 300];
-  }
-  
   ngOnInit() {
+    this.setViewDimensions();
     this.loadProgressData();
-    this.updateView();
-    window.addEventListener('resize', () => this.updateView());
   }
-  
-  ngOnDestroy() {
-    window.removeEventListener('resize', () => this.updateView());
+
+  // Listen for window resize events
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.setViewDimensions();
+  }
+
+  // Adjust the chart view dimensions based on the window width
+  private setViewDimensions() {
+    const width = window.innerWidth;
+    if (width < 576) {
+      // For very small screens, use 95% of the window width
+      this.view = [width * 0.95, 300];
+    } else if (width < 992) {
+      // For medium screens, use a slightly smaller width
+      this.view = [Math.min(700, width * 0.9), 300];
+    } else {
+      // For larger screens, use the default width
+      this.view = [700, 300];
+    }
   }
 
   private loadProgressData() {
@@ -82,8 +92,8 @@ export class FitnessTrackerComponent implements OnInit {
   }
 
   private processData(data: any[]) {
-    const metrics = ['weight', 'fatRate', 'muscleRate', 'caloriesBurned'];
-    const names = ['Weight', 'Fat Rate', 'Muscle Rate', 'Calories Burned'];
+    const metrics = ['weight', 'caloriesBurned', 'fatRate', 'muscleRate'];
+    const names = ['Weight', 'Calories Burned', 'Fat Rate', 'Muscle Rate'];
 
     this.metrics = metrics.map((metric, index) => {
       const series = this.transformData(data, metric);
@@ -100,11 +110,9 @@ export class FitnessTrackerComponent implements OnInit {
         trend: trend,
       };
     });
-  }
+  }  
 
   private transformData(data: any[], metric: string) {
-    console.log('data', data);
-    
     const datas = data
       .map((item) => ({
         name: new Date(item.updatedAt).toLocaleDateString('fr-FR', {
@@ -113,21 +121,19 @@ export class FitnessTrackerComponent implements OnInit {
           day: '2-digit',
           hour: '2-digit',
           minute: '2-digit'
-
         }),
         value: item[metric],
       }))
       .filter((item) => item.value !== null);
-  
-    console.log('datas ------------', datas);
     return datas;
   }
   
-
   private calculateTrend(series: any[]): number {
     if (series.length < 2) return 0;
     const first = series[0].value;
     const last = series[series.length - 1].value;
     return Number((((last - first) / first) * 100).toFixed(1));
   }
+
+  
 }
