@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { TimeAgoPipe } from './pipes/time-ago.pipe';
+import { ReactiveFormsModule } from '@angular/forms';
+import { PaymentComponent } from './pages/payment/payment.component';
 import { ChatroomComponent } from './chatroom/chatroom.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
@@ -8,12 +10,18 @@ import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-
+import {MatDialogModule} from '@angular/material/dialog';
 import { CourseManagementComponent } from './components/course-management/course-management.component';
 import { CourseFormComponent } from './components/course-form/course-form.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DetailsModalComponent } from './pages/membership-page/membership-list/details-dialog/details-modal/details-modal.component';
+import { MemberShipComponent } from './pages/membership-page/membership-list/membership-list.component';
+import { MembershipPageComponent } from './pages/membership-page/membership-page.component';
+import { SuccessComponent } from './pages/payment/success/success.component';
+import { FailedComponent } from './pages/payment/failed/failed.component';
 import { SitePaymentComponent } from './site-payment/site-payment.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -53,6 +61,12 @@ import { SitePaymentService } from './services/site-payment/site-payment.service
 @NgModule({
   declarations: [
     AppComponent,
+    PaymentComponent,
+    MemberShipComponent,
+    MembershipPageComponent,
+    DetailsModalComponent,
+    SuccessComponent,
+    FailedComponent,
     ChatroomComponent,
     TimeAgoPipe,
     CourseManagementComponent,
@@ -81,7 +95,13 @@ import { SitePaymentService } from './services/site-payment/site-payment.service
   imports: [
     HttpClientModule,
     BrowserModule,
-
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    FormsModule,
+    RouterModule ,
+    MatDialogModule,
+    AppRoutingModule,
+    HttpClientModule
     FormsModule,
     ReactiveFormsModule,
     MatTableModule,

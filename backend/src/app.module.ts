@@ -3,9 +3,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Test } from './test/entities/test.entity';
-import * as dotenv from 'dotenv';
+import * as dotenv from 'dotenv'; // Assurez-vous que dotenv est bien importé
+import { SubscriptionsModule } from './subscription/subscription.module';
 import { TestModule } from './test/test.module';
+import { Test } from './test/entities/test.entity';
+
 import { UserModule } from './user/user.module';
 dotenv.config();
 import { CourseModule } from './classes/strategy/courses.module';
@@ -25,13 +27,15 @@ import configs from './site-payment/config';
     }), 
     TypeOrmModule.forRoot({
       type: 'postgres',
-      url: 'postgresql://postgres:root@localhost:5433/flexmanager',
+      url: process.env.DATABASE_URL,
       entities: ['dist/**/*.entity{.ts,.js}'],
       synchronize: true
     }),
     TypeOrmModule.forFeature([Test]),
     TestModule,
+    SubscriptionsModule,
     SitePaymentModule,
+    BaseService,
     MessengerModule,
     UserModule,
     CommonModule,
