@@ -28,17 +28,18 @@ export class RequestPageComponent implements OnInit {
 
       console.log('Réservations après transformation :', this.reservations);
 
-      // Filtrer les réservations en fonction de l'ID du coach
-      this.reservations = this.reservations.filter(reservation => reservation.coachId === this.coachId);
+      // Filtrer les réservations en fonction de l'ID du coach et de l'état 'pending'
+      this.reservations = this.reservations.filter(reservation => 
+        reservation.coachId === this.coachId && reservation.state === 'pending'
+      );
 
-      console.log('Réservations filtrées :', this.reservations);
+      console.log('Réservations filtrées et en attente :', this.reservations);
     });
   }
 
   private transformReservation(data: any): PrivateReservation {
     console.log('Données avant transformation :', data);
 
-    
     return {
       id: data.id,
       coachId: data.coachEntity?.id || undefined,  
