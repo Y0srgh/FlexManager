@@ -1,146 +1,80 @@
 <div class="main-content">
-<div class="content">
-    <div class="text">
-      <p class="sub-p">Subscription Details</p>
-      <p (click)="sendtoStripeManagement()" class="bill">Manage Billing Info</p>
-    </div>
-    <div class="for-border">
-      <div class="plan">
-        <p class="cr-text">Current Plan</p>
-        <p class="btn">{{ User_plan }}</p>
+  <div class="content">
+      <!-- Header Section -->
+      <div class="text">
+          <p class="sub-p">Subscription Details</p>
+          <p>Billing details <span class="bill" (click)="sendtoStripeManagement()">here</span></p>
       </div>
-      <div class="plan subs">
-        <p class="cr-text">Subscription Status</p>
-        <p *ngIf="subscription_active" class="act">Active</p>
-        <p *ngIf="!subscription_active" class="notact">Not Active</p>
-      </div>
-      
-      <div class="credit" *ngIf="subscription_active; else noStripe">
-        <p class="cr-usage">Membership Status</p>
-        <div class="credit-text">
-          <p>You have {{ daysleft }} days left. Keep pushing!</p>
-        </div>
-        <div class="bar">
-            <div class="bar-fill" [style.width.%]="barvalue"></div>
+
+      <!-- Current Plan Section -->
+      <div class="for-border">
+          <div class="plan">
+              <div class="cr-text">Current Plan</div>
+              <div class="btn">Free Trial</div>
           </div>
       </div>
 
-      <ng-template #noStripe>
-        <div class="credit">
-          <p class="cr-usage">Subscription Expired</p>
-          <div class="credit-text">
-            <p>Renew now to keep your workouts going!</p>
+      <!-- Credit Usage Section -->
+      <div class="credit">
+          <div class="cr-usage">Credit Usage</div>
+          <p>100% of your monthly credits used</p>
+          <div class="bar">
+              <div class="bar-fill" style="width: 100%"></div>
           </div>
-        </div>
-      </ng-template>
-    </div>
-  </div>
-  <div class="main-head">
-    <h1>Choose The Plan That Fits Your Needs</h1>
-  </div>
-
-
-  <div class="plans" *ngIf="User_plan === 'PRO'">
-    <div class="box">
-        <p class="box-head box2">Free Trial</p>
-        <p id="p">Neque porro quisquam est qui dolore</p>
-        <div class="price">
-          <h1>$0</h1><span>/Month</span>
-        </div>
-        <p id="p" class="p-marg">Neeed to fill it later idk rememer to ask about it</p>
-        <p id="p"><i class="fa-solid fa-check pro-d"></i>idk</p>
-        <button (click)="upgradePayment('FREETRIAL')">Downgrade Subscription</button>
-    </div>
-      <div class="box">
-        <p class="box-head box2">Pro Plan</p>
-        <p id="p">Neeed to fill it later idk rememer to ask about it</p>
-        <div class="price">
-          <h1>$30</h1><span>/Month</span>
-        </div>
-        <p id="p" class="p-marg">Neeed to fill it later idk rememer to ask about it</p>
-        <p id="p"><i class="fa-solid fa-check pro-d"></i>test</p>
-        <button>Current Subscription</button>
       </div>
-  
-      <div class="box box-sub">
-        <p class="box-head">Premium Plan</p>
-        <p class="p-pro">Neeed to fill it later idk rememer to ask about it</p>
-        <div class="price">
-          <h1>$40</h1><span>/Month</span>
-        </div>
-        <p class="p-pro p-pro2" style="color: white; margin-top: -18px;">test</p>
-        <p class="p-pro"><i class="fa-solid fa-check pro-i"></i>test</p>
-        <button id="up" (click)="upgradePayment('PREMIUM')">Upgrade Subscription</button>
-      </div>
-    </div>
 
-  <div class="plans" *ngIf="User_plan === 'PREMIUM'">
-    <div class="box">
-        <p class="box-head box2">Free Trial</p>
-        <p id="p">Neeed to fill it later idk rememer to ask about its</p>
-        <div class="price">
-          <h1>$0</h1><span>/Month</span>
-        </div>
-        <p id="p" class="p-marg">Neeed to fill it later idk rememer to ask about it</p>
-        <p id="p"><i class="fa-solid fa-check pro-d"></i>test</p>
-        <button (click)="upgradePayment('FREETRIAL')">Downgrade Subscription</button>
-    </div>
+      <!-- Message for Available Plans -->
+      <div class="main-head">
+        <h1>Choose The Plan That Fits Your Needs</h1>
+      </div>
+
+      <!-- Available Plans Section -->
+    <div class="plans">
+        <!-- Free Trial Plan -->
         <div class="box">
-          <p class="box-head box2">Pro Plan</p>
-          <p id="p">Neeed to fill it later idk rememer to ask about its</p>
+          <div class="box-head">Free Trial</div>
           <div class="price">
-            <h1>$30</h1><span>/Month</span>
+            <h1>$0</h1>
+            <span>/Month</span>
           </div>
-          <p id="p" class="p-marg">Neeed to fill it later idk rememer to ask about it</p>
-          <p id="p"><i class="fa-solid fa-check pro-d"></i>test</p>
-          <button (click)="upgradePayment('PRO')">Downgrade Subscription</button>
+          <p>Perfect for testing our service</p>
+          <button (click)="selectPlan('Free Trial')">Current Plan</button>
         </div>
   
-        <div class="box box-sub">
-          <p class="box-head">Premium Plan</p>
-          <p class="p-pro">Neeed to fill it later idk rememer to ask about its</p>
-          <div class="price">
-            <h1>$40</h1><span>/Month</span>
-          </div>
-          <p class="p-pro p-pro2" style="color: white; margin-top: -18px;">test</p>
-          <p class="p-pro"><i class="fa-solid fa-check pro-i"></i>test</p>
-          <button id="up">Current Subscription</button>
-        </div>
-    </div>
-
-  
-    <div class="plans" *ngIf="User_plan === 'FREETRIAL'">
+        <!-- Pro Plan -->
         <div class="box">
-            <p class="box-head box2">Free Trial</p>
-            <p id="p">Neeed to fill it later idk rememer to ask about its</p>
-            <div class="price">
-              <h1>$0</h1><span>/Month</span>
-            </div>
-            <p id="p" class="p-marg" >Neeed to fill it later idk rememer to ask about it</p>
-            <p id="p"><i class="fa-solid fa-check pro-d"></i>test</p>
-            <button >Current Subscription</button>
+          <div class="box-head">Pro Plan</div>
+          <div class="price">
+            <h1>$30</h1>
+            <span>/Month</span>
+          </div>
+          <p>Ideal for growing companies</p>
+          <button (click)="selectPlan('Pro Plan')">Upgrade Plan</button>
         </div>
-      <div class="box box-sub" >
-        <p class="box-head">Pro Plan</p>
-        <p id="p-pro">Neeed to fill it later idk rememer to ask about its</p>
-        <div class="price">
-          <h1>$30</h1><span>/Month</span>
+  
+        <!-- Premium Plan -->
+        <div class="box">
+          <div class="box-head">Premium Plan</div>
+          <div class="price">
+            <h1>$40</h1>
+            <span>/Month</span>
+          </div>
+          <p>For advanced features and support</p>
+          <button (click)="selectPlan('Premium Plan')">Upgrade Plan</button>
         </div>
-        <p class="p-pro p-pro2" style="color: white; margin-top: -18px;">test</p>
-        <p class="p-pro"><i class="fa-solid fa-check pro-i"></i>test</p>
-        <button  id="up" (click)="upgradePayment('PRO')">Upgrade Subscription</button>
       </div>
   
-      <div class="box box-sub">
-        <p class="box-head">Premium Plan</p>
-        <p class="p-pro">Neeed to fill it later idk rememer to ask about its</p>
-        <div class="price">
-          <h1>$40</h1><span>/Month</span>
-        </div>
-        <p class="p-pro p-pro2" style="color: white; margin-top: -18px;">test</p>
-        <p class="p-pro"><i class="fa-solid fa-check pro-i"></i>test</p>
-        <button id="up" (click)="upgradePayment('SINGLESESSION')">Upgrade Subscription</button>
-      </div>
+      <!-- Popup -->
+<div class="modal-container" *ngIf="popupVisible">
+  <div class="success-card">
+    <span class="close-btn" (click)="goHome()">&times;</span>
+    <div class="success-icon">✓</div>
+    <h2>Thank You!</h2>
+    <p>Thank you for choosing the {{ selectedPlan }}. Please proceed to the billing details for further steps.</p>
+    <button class="btn-primary" (click)="sendtoStripeManagement()">Billing Details</button>
+    
   </div>
-  
 </div>
+
+    </div>
+  </div>

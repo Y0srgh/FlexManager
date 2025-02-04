@@ -2,10 +2,12 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { RequestLoggingInterceptor } from './request-logging/request-logging.interceptor';
-import * as cookieParser from 'cookie-parser';
+
 import * as express from 'express';
 import * as cors from 'cors';
 import * as bodyParser from 'body-parser';
+import cookieParser = require('cookie-parser'); 
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: true,rawBody: true });
   app.use(cookieParser());

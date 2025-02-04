@@ -1,867 +1,342 @@
-main-content
-{
+/* General Styling */
+body {
+  font-family: 'Poppins', sans-serif;
   margin: 0;
   padding: 0;
-  border: 0;
-  font-size: 62.5%;
-  vertical-align: baseline;
-  font-weight: normal;
-  overflow-x: hidden !important;
-  font-family: "League Spartan", sans-serif;
-  color: #172a39;
-
-  line-height: 1;
+  color: white;
 }
 
-@media (max-width:1180px) {
-    .content {
-      width: 90%;
-    }
-  
-    .second-main {
-      width: 90%;
-    }
-  
-    .main-head {
-      padding: 20px;
-      text-align: center;
-    }
-  
-    .plans {
-      display: grid;
-      grid-template-columns: auto auto;
-      gap: 16px;
-      width: 90%;
-    }
-  }
-  
-  @media (max-width:960px) {
-    .content {
-      padding: 10px;
-    }
-  
-    .sub-p {
-      font-size: 18px;
-      font-weight: 400;
-    }
-  
-    .bill {
-      font-size: 12px;
-      font-weight: 400;
-    }
-  
-    .plan p {
-      font-size: 18px;
-      font-weight: 400;
-    }
-  
-    .cr-usage {
-      font-size: 18px;
-      font-weight: 400;
-  
-    }
-  
-    .credit-text {
-      font-size: 13px;
-    }
-  
-    .heading {
-      font-size: 28px;
-      font-weight: 600;
-      padding: .8rem;
-      line-height: 37.8px;
-    }
-  
-    .second-main p {
-      font-size: 13px;
-      font-weight: 400;
-    }
-  
-    .cr {
-      color: #864AF9;
-      font-weight: bold;
-      line-height: 1.8;
-      font-size: 19px;
-      font-weight: 500;
-    }
-  
-  }
-  
-  @media (max-width:880px) {
-  
-  
-  
-    .credit-box {
-      /* grid-template-columns: 400px; */
-      justify-content: center;
-      /* width: 90%; */
-    }
-  
-    .admin-header .profile-icn::before {
-      display: none;
-    }
-  
-    .admin-header .profile-icn {
-      margin-left: 0px;
-    }
-  
-    .plans {
-      justify-content: center;
-      padding: 15px;
-      grid-template-columns: 400px;
-    }
-  }
-  @media only screen and (max-width: 1200px) {
-    .profile-head h4 {
-      font-size: 1.8rem;
-    }
-    .profile-head .email {
-      font-size: 1.3rem;
-    }
-    .profile-nav-item .profile-nav-left a,
-    .profile-footer a {
-      font-size: 1.4rem;
-    }
-    .profile-nav-item .profile-nav-right .count {
-      font-size: 1.4rem;
-    }
-  }
-  @media (max-width:650px) {
-    .admin-header {
-      height: 181px;
-  
-    }
-  
-    .admin-header .profile-icn {
-      flex-direction: column;
-    }
-  
-    .admin-header .profile-icn {
-      margin-top: 1rem;
-      flex-direction: column;
-    }
-  
-    /* Flexbox Layout for Header: Aligns profile and credit score section */
-    .header-profile,
-    .header-two {
-      flex-direction: column;
-  
-    }
-  
-    .plans {
-      margin: 0 auto;
-    }
-  
-    .box {
-      width: 100%;
-      margin-bottom: 1rem;
-      height: auto;
-      padding: 14px 20px;
-    }
-  
-    .credit {
-      height: auto;
-    }
-  
-    .content {
-      padding: 8px;
-      /* height: auto; */
-    }
-  
-    .plans {
-      grid-template-columns: auto;
-      gap: 16px;
-      width: 90%;
-    }
-  
-    .sub-p {
-      font-size: 17px;
-      font-weight: 400;
-    }
-  
-    .plan p {
-      font-size: 17px;
-      font-weight: 400;
-    }
-  
-    .cr-usage {
-      font-size: 17px;
-      font-weight: 400;
-  
-    }
-  
-    .heading {
-      font-size: 26px;
-    }
-  
-    .cr {
-      font-size: 17px;
-    }
-  
-    .main-head h1 {
-      font-size: 1.34rem;
-      font-weight: 600;
-    }
-  }
-  
-  @media (max-width:420px) {
-    .bar,.bar-fill {
-      height: 15px;
-      
-      margin-bottom: 5px;
-    }
-  
-    .credit-box {
-      grid-template-columns: auto;
-      padding: 10px;
-      width: 100%;
-    }
-  
-    .plans {
-      grid-template-columns: auto;
-      padding: 15px 30px;
-      width: 100%;
-    }
-  
-    .box {
-      width: 100%;
-      padding: 15px;
-    }
-  
-    .box button {
-      padding: 6px 15px;
-    }
-  
-    .box-cont {
-      padding: 15px;
-    }
-  }
+.main-content {
+  background-image: url('https://images.pexels.com/photos/1552252/pexels-photo-1552252.jpeg?cs=srgb&dl=pexels-leonardho-1552252.jpg&fm=jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+  display: flex;
+  color : white;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+}
 
 
-  /* Universal Reset: Removes default margin and padding from all elements */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  
-  }
-  
-  /* Body Styling: Sets a default background and font */
-  body {
-    font-family: 'Poppins';
-    /* background: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(54, 99, 255, 0.03) 88%, rgba(54, 99, 255, 0) 100%); */
-    background: linear-gradient(180deg,
-        rgba(253, 253, 255, 1) 0%,
-        /* Lightest color at the top */
-        rgba(247, 249, 255, 1) 33%,
-        /* Second color */
-        rgba(243, 247, 254, 1) 66%,
-        /* Third color */
-        rgba(230, 231, 238, 1) 100%
-        /* Darkest color at the bottom */
-      );
-    backdrop-filter: blur(20px);
-    /* Adjust the blur level for a softer effect */
-    -webkit-backdrop-filter: blur(20px);
-  }
-  
-  /* Header Section: Credit score styling */
-  .admin-header .credit-score span {
-    color: #000;
-    font-size: 14px;
-    font-weight: 600;
-    color: #ffffff;
-  }
-  .admin-header .Logout span {
-    color: #000;
-    font-size: 14px;
-    font-weight: 600;
-    color: #ffffff;
-  }
-  .profile-icn img {
-    filter: invert(100%);
-  }
-  
-  /* Header Section: Styling for the header background, padding, and bottom border */
-  .admin-header {
-    background: #191919;
-    padding: 12px 0;
-    border-bottom: 1px solid #000;
-  }
-  
-  /* Header Container: Limits the maximum width of the header content */
-  .admin-header .container {
-    max-width: 1239px;
-  }
-  
-  /* Profile Icon: Sets size, shape, alignment, and relative positioning for the profile icon */
-  .admin-header .Logout {
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-  }
-  .admin-header .Logout:after {
-    display: none;
-  }
-  /* Flexbox Layout for Header: Aligns profile and credit score section */
-  .header-profile,
-  .header-two {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  .hm-logo {
-    color: white;
-    display: flex;
-    /* align-content: center; */
-  }
-  
-  .logo-text p {
-    font-size: 22px;
-    font-family: 'Poppins';
-    font-weight: 700;
-    text-align: center;
-    margin-left: 8px;
-    margin-bottom: 0px;
-  }
-  
-  /* Profile Icon Divider: Adds a dividing line inside the profile icon */
-  .admin-header .Logout::before {
-    position: absolute;
-    content: "";
-    width: 1px;
-    height: 30px;
-    background: rgba(0, 0, 0, 0.5);
-    top: 50%;
-    transform: translateY(-50%);
-    left: -16px;
-  }
-  
-  /* Content Container: Sets width, margin, padding, and border styling for the content section */
-  .content {
-    border: 1px solid rgba(141, 138, 138, 0.493);
-    max-width: 1296px;
-    height: auto;
-    margin: auto;
-    margin-top: 50px;
-    padding: 24px 0px 34px 0px;
-    border-radius: 8px;
-    background-color: #fff;
-    gap: 16px;
-  }
-  
-  .for-border {
-    width: 95.5%;
-    margin: 0 auto;
-  }
-  
-  .for-border .plan p {
-    margin-bottom: 0px;
-  }
-  
-  /* Text Flexbox: Aligns text content with space between the elements */
-  .text {
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 2px solid rgba(128, 128, 128, 0.486);
-    padding-left: 24px;
-    padding-right: 24px;
-    align-items: center;
-  }
-  
-  .sub-p {
-    font-size: 24px;
-    font-weight: 500;
-  }
-  
-  /* Bill Button: Adds styles for the bill info button */
-  .bill {
-    text-transform: capitalize;
-    border: 1px solid rgba(0, 0, 0, 1);
-    padding: 10px 15px;
-    border-radius: 66px;
-    cursor: pointer;
-    transition: all ease-in 0.2s;
-    font-size: 16px;
-    font-weight: 500;
-  }
-  
-  /* Hover Effect for Bill Button: Changes background and text color on hover */
-  .bill:hover {
-    background-color: #896CFE;
-    color: #fff;
-  }
-  
-  /* Plan Section: Sets layout and baseline alignment for the subscription plans */
-  .plan {
-    display: flex;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
-    text-transform: capitalize;
-    padding: 40px 5px;
-    height: 74px;
-    align-items: center;
-    margin-bottom: 0px;
-  }
-  
-  .io {
-    font-size: 8px;
-  }
-  
-  /* Plan Text Spacing: Adds margin between text elements inside the plan section */
-  .cr-text {
-    margin-right: 24px;
-    font-size: 20px;
-    font-weight: 500;
-  }
-  
-  /* Plan Button: Basic styles for the plan button */
-  .plan .btn {
-    background-color: #CCCCCC;
-    ;
-    border-radius: 30px;
-    text-transform: capitalize;
-    border-radius: 100px;
-    padding: 5px 10px;
-    font-size: 18px;
-    font-weight: 500;
-    color: #000;
-  }
-  
-  /* Subscription Status Styling: Sets styles for the subscription status */
-  .subs {
-    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
-    height: 74px;
-  }
-  body {
-    background-color: #f0f0f0; /* Light gray background color */
-  }
-  /* Active Subscription Styling: Adds background color, border radius, and padding to the active status */
-  .act {
-    background-color: #41FF714D;
-    border-radius: 30px;
-    text-transform: capitalize;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    color: #000000;
-    font-size: 18px;
-    font-weight: 500;
-  }
-  .notact {
-    background-color: #ff41414d;
-    border-radius: 30px;
-    text-transform: capitalize;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    color: #000000;
-    font-size: 18px;
-    font-weight: 500;
-  }
-  
-  /* Credit Section Text: Applies capitalization to the credit section text */
-  .credit p {
-    text-transform: capitalize;
-  }
-  
-  .cr-usage {
-    font-size: 20px;
-    font-weight: 500;
-  }
-  
-  .credit {
-    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
-    padding: 25px 5px;
-    height: auto;
-  }
-  
-  .credit-text {
-    display: flex;
-    justify-content: space-between;
-    color: rgba(0, 0, 0, 0.7);
-  
-  }
-  
-  /* Credit Bar: Creates a progress bar with a gradient fill */
-  .bar {
-    width: 100%;
-    height: 18px;
-    background-color: rgba(217, 217, 217, 1);
-    border-radius: 40px;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .bar-fill {
-    height: 100%;
-    width: 44%;
-    background-color: rgba(72, 90, 255, 1);
-    border-radius: 60px
-  }
-  
-  /* Secondary Main Section: Adjusts margins and width for the section containing additional content */
-  .second-main {
-    width: 1150px;
-    margin: auto;
-    margin-top: 40px;
-    margin-bottom: 48px;
-  }
-  
-  /* Heading Style: Centers the heading and adds padding and font size */
-  .heading {
-    display: flex;
-    justify-content: center;
-    font-size: 36px;
-    font-weight: 700;
-    line-height: 43.8px;
-    color: rgba(0, 0, 0, 1);
-    margin-bottom: 24px;
-  }
-  
-  /* Text inside Second Main Section: Sets width and margin for paragraphs */
-  .second-main p {
-    max-width: 830px;
-    margin: 0 auto;
-    text-align: center;
-    font-family: 'League Spartan';
-    font-size: 16px;
-    font-weight: 400;
-    text-transform: capitalize;
-    line-height: 21.6px;
-    color: rgba(0, 0, 0, 0.7);
-  }
-  
-  /* Credit Purchase Box: Centers and styles the credit purchase input and button */
-  .credit-box {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 16px;
-    margin-top: 40px;
-    width: 100%;
-  
-  }
-  
-  .box-cont {
-    width: 420px;
-    max-width: 100%;
-    background-color: #fff;
-    padding: 25px 27px;
-    border-radius: 8px;
-  }
-  
-  /* Input Field Styles: Adds padding, border color, and radius for the input fields inside credit purchase box */
-  .box-cont input {
-    border-radius: 4px;
-    border: 1px solid rgba(227, 227, 227, 1);
-    padding: 10px 24px;
-    width: 100%;
-    margin-bottom: 2rem;
-    color: rgba(169, 169, 169);
-    font-size: 14.5px;
-    font-weight: 500;
-  }
-  
-  /* Credit Box Heading Style: Applies color, bold font, and line height to the heading */
-  .cr {
-    color: rgba(72, 90, 255, 1);
-    font-weight: bold;
-    line-height: 2.2;
-    font-size: 20px;
-    font-weight: 500;
-  }
-  
-  /* Purchase Button Styles: Defines basic styles for the purchase button */
-  .credit-box button {
-    border: none;
-    border-radius: 5px;
-    width: 100%;
-    color: #ffffff;
-    background-color: rgba(72, 90, 255, 1);
-    padding: 9px 24px;
-    cursor: pointer;
-    font-size: 20px;
-    font-weight: 500;
-    transition: all ease-in 0.2s;
-    border: 1px solid rgba(0, 0, 0, 0.7);
-  }
-  
-  .dollar {
-    color: rgba(0, 0, 0, 0.7);
-  }
-  
-  /* Purchase Button Hover: Changes background color on hover */
-  .credit-box button:hover {
-    background-color:#896CFE;
-  }
-  
-  /* Main Heading Style: Centers the main heading for the plans section */
-  .main-head {
-    display: flex;
-    justify-content: center;
-    text-transform: capitalize;
-    margin-top: 40px;
-    height: 108px;
-    margin-bottom: 72px;
-  
-  }
-  
-  .main-head h1 {
-    font-size: 42px;
-    font-weight: 700;
-    width: 40%;
-    text-align: center;
-  }
-  
-  /* Plans Grid Layout: Sets up a three-column grid for the plans section */
+
+.content {
+  max-width: 800px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  color: white;
+  text-align: center;
+}
+
+.text .sub-p {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.text .bill {
+  cursor: pointer;
+  color: #ffcc00;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.text .bill:hover {
+  color: #ffdd33;
+}
+
+.for-border {
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  margin-top: 1.5rem;
+}
+
+.plan {
+  margin-bottom: 1.5rem;
+}
+
+.plan .cr-text {
+  font-weight: 600;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.plan .btn {
+  padding: 0.75rem;
+  border-radius: 8px;
+  background-color: #53284f;
+  color: white;
+  font-weight: 500;
+  text-align: center;
+  transition: background-color 0.2s;
+}
+
+.plan .btn:hover {
+  background-color: #6a3a66;
+}
+
+.credit {
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  margin-top: 1.5rem;
+}
+
+.credit .cr-usage {
+  font-weight: 600;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.bar {
+  width: 100%;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+  overflow: hidden;
+  margin-top: 0.5rem;
+}
+
+.bar-fill {
+  height: 100%;
+  background-color: #34d399;
+  transition: width 0.5s ease-in-out;
+}
+
+.plans {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.box {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  padding: 1.5rem;
+  border-radius: 16px;
+  text-align: center;
+  color: white;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.box .box-head {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.price {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin: 1rem 0;
+}
+
+.price h1 {
+  margin: 0;
+  font-weight: 700;
+}
+
+.price span {
+  font-size: 1rem;
+  margin-left: 0.5rem;
+}
+
+button {
+  padding: 0.75rem;
+  border-radius: 8px;
+  background-color: #53284f;
+  color: white;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 100%;
+}
+
+button:hover {
+  background-color: #6a3a66;
+}
+
+button:disabled {
+  background-color: #3a1d37;
+  cursor: not-allowed;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
   .plans {
-    margin: 0 auto;
-    margin-bottom: 5rem;
-    align-items: stretch;
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    max-width: 1118px;
-    /* background: rgba(255, 255, 255, 0.02); */
-  }
-  
-  /* Plan Box Style: Basic styles for each plan box */
-  .box {
-    background-color: #fff;
-    padding: 28px 32px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1),
-      0 6px 20px rgba(0, 0, 0, 0.1);
-    min-height: 370px;
-    border-radius: 16px;
-    display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    max-width: 430px;
-    max-height: 605px;
-    flex-wrap: wrap;
-  
   }
-  
-  .pro-i {
-    color: white;
+
+  .box {
+    margin-bottom: 1.5rem;
   }
-  .pro-d {
-    color: #864AF9;
+}
+/* Fond avec image et effet fixe */
+.app-container {
+  background-image: url('https://images.pexels.com/photos/1552252/pexels-photo-1552252.jpeg?cs=srgb&dl=pexels-leonardho-1552252.jpg&fm=jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+/* Style de la carte de succès */
+.success-card {
+  background: rgba(255, 255, 255, 0.2); /* Semi-transparent */
+  backdrop-filter: blur(10px); /* Effet de flou */
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Icône de succès */
+.success-icon {
+  width: 60px;
+  height: 60px;
+  background-color: #2ecc71;
+  color: white;
+  font-size: 32px;
+  font-weight: bold;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+/* Style du bouton */
+.btn-primary {
+  background-color: #5F2B4F;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+.btn-primary:hover {
+  background-color: #421A3F;
+}
+/* Fond assombri pour la popup */
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* Fond assombri */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* S'assurer que c'est au-dessus du reste */
+}
+
+/* Style de la carte de succès */
+.success-card {
+  background: rgba(255, 255, 255, 0.3); /* Semi-transparent */
+  backdrop-filter: blur(15px); /* Effet de flou */
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  width: 380px;
+  max-width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Icône de succès */
+.success-icon {
+  width: 60px;
+  height: 60px;
+  background-color: #2ecc71;
+  color: white;
+  font-size: 32px;
+  font-weight: bold;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Boutons */
+.btn-primary {
+  background-color: #5F2B4F;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 15px;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #421A3F;
+  transform: scale(1.05);
+}
+
+/* Bouton de fermeture */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 22px;
+  color: white;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-weight: bold;
+}
+
+.close-btn:hover {
+  color: #ff6961;
+}
+
+/* Adaptation pour les petits écrans */
+@media (max-width: 600px) {
+  .success-card {
+    width: 90%;
+    padding: 20px;
   }
-  
-  /* Plan Box Heading: Styles the heading inside each plan box */
-  .box-head {
-    margin-top: .5rem;
-    text-transform: capitalize;
-    font-size: 26px;
-    font-weight: 700;
-  }
-  
-  .box2 {
-    background: linear-gradient(271.13deg, rgba(142, 142, 142, 0) 0%, rgba(142, 142, 142, 0.5) 25%, rgba(17, 17, 17, 1) 143.74%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  
-  .box p {
-    margin-bottom: 0px;
-    /* color: rgba(227, 227, 227, 1); */
-  }
-  
-  .box-head {
-    color: white;
-  }
-  
-  /* Text inside Plan Boxes: Sets width and capitalization for plan descriptions */
-  .box p {
-    text-transform: capitalize;
-    width: 95%;
-  
-  }
-  
-  .for-border .plan p {
-    margin-bottom: 0px;
-  }
-  
-  .box-head p {
-    font-size: 16px;
-    font-weight: 400;
-  }
-  
-  .p-excl {
-    color: rgba(255, 255, 255, 0.7);
-  }
-  
-  #p {
-    font-size: 14px;
-    font-weight: 400;
-    color: rgba(0, 0, 0, 0.7);
-  }
-  
-  .p-marg {
-    margin-top: -18px;
-  }
-  
-  /* Price Display: Aligns price text and icons inside plan boxes */
-  .price {
-    display: flex;
-    align-items: center;
-  }
-  
-  /* Price Text Styling: Aligns price span to the bottom */
-  .price span {
-    display: flex;
-    align-items: self-start;
-    font-size: 16px;
-    font-weight: 400;
-    margin-left: 5px;
-  }
-  
-  .price h1 {
-    font-size: 40px;
-    font-weight: 700;
-    margin-bottom: 0px;
-  }
-  
-  .p-pro2 p {
-    color: white;
-  }
-  
-  .p-cent {
-    color: rgba(96, 101, 113, 1);
-    text-align: center;
-  }
-  
-  .i-blue {
-    color: rgba(72, 90, 255, 1);
-  }
-  
-  /* Plan Icon Styling: Colors and spaces icons in plan descriptions */
-  i {
-    color: rgba(14, 68, 255, 1);
-    margin-right: 10px;
-    font-size: 1.2rem;
-  }
-  
-  /* Button Styling inside Plan Boxes: Styles and adds hover effects to buttons */
-  .box button {
-    border: 1px solid rgba(25, 25, 25, 1);
-    border-radius: 10px;
+
+  .btn-primary {
     width: 100%;
-    color: rgba(25, 25, 25, 1);
-    background-color: #fff;
-    padding: 14px 18px;
-    text-transform: capitalize;
-    font-weight: 600;
-    cursor: pointer;
-    margin-bottom: 0.67rem;
-    transition: all ease-in 0.3s;
-    font-size: 18px;
   }
-  
-  .excl {
-    background-color: rgba(72, 90, 255, 1);
-    color: white;
-  }
-  
-  .box-sub {
-    background-color: #896CFE;
-    color: rgba(250, 250, 250, 1);
-  }
-  
-  /* Upgrade Button: Special styling for the upgrade button */
-  #up {
-    border-radius: 10px;
-    background-color:  #896CFE;
-    color: rgba(25, 25, 25, 1);
-    transition: all ease-in 0.2s;
-    border-color: white;
-    color: white;
-    font-size: 18px;
-    font-weight: 600;
-  }
-  
-  /* Hover Effect for Upgrade Button: Changes background color on hover */
-  #up:hover {
-    background-color: #B3A0FF;
-    color: white;
-  }
-  
-  /* Hover Effect for Other Plan Buttons: Changes background color and text color on hover */
-  .box button:hover {
-    background-color: #896CFE;
-    color: white;
-  }
-  
-  
-  .profile-dropdown {
-    background: #ffffff;
-    box-shadow: 0px 16px 32px -4px rgba(12, 12, 13, 0.1),
-      0px 4px 4px -4px rgba(12, 12, 13, 0.05);
-    border-radius: 0.8rem;
-    border: none;
-    width: auto;
-    height: auto;
-    margin-top: 16px !important;
-  }
-  
-  .profile-head {
-    padding: 1.8rem 1.4rem;
-    border-bottom: #19191933 1px solid;
-  }
-  .profile-head h4 {
-    margin: 0 0 1.2rem;
-    font-size: 2rem;
-    font-weight: 600;
-    color: #191919;
-    text-transform: capitalize;
-  }
-  .profile-head .email {
-    display: block;
-    font-size: 1.6rem;
-    font-weight: 400;
-    color: #191919b2;
-  }
-  
-  .profile-body {
-    border-bottom: #19191933 1px solid;
-  }
-  
-  
-  .profile-nav-item {
-    padding: 1.4rem 1.4rem;
-    display: flex;
-    align-items: center;
-  }
-  .profile-nav-item .profile-nav-left {
-    min-width: 0;
-  }
-  .profile-nav-item .profile-nav-left a,
-  .profile-footer a {
-    font-size: 1.6rem;
-    font-weight: 400;
-    color: #191919;
-    transition: color ease 0.2s;
-    text-decoration: none;
-  }
-  .profile-nav-item .profile-nav-left a:hover,
-  .profile-footer a:hover,
-  .profile-nav-item .profile-nav-left a:focus,
-  .profile-footer a:focus {
-    color: #3663ff;
-  }
-  .profile-nav-item .profile-nav-right {
-    margin-left: auto;
-  }
-  .profile-nav-item .profile-nav-right .count {
-    font-size: 1.6rem;
-    font-weight: 300;
-    color: #19191980;
-  }
-  
-  .profile-footer {
-    padding: 1.8rem 1.4rem;
-  }
+}
+

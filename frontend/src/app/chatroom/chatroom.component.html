@@ -1,87 +1,88 @@
-<div class="chat-wrapper">
-  <div class="chat-sidebar">
-    <div class="sidebar-header">
-      <img src="assets/images/community.svg" alt="Community Icon">
-      <h3 class="text-center tittle"> Contacts</h3>
-      <hr class="sidebar-divider">
-    </div>
-    
-    <div class="contact-list">
-      <div *ngFor="let contact of contacts" 
-           class="contact-item" 
-           [ngClass]="{'active': contact.id === recipientId}" 
-           (click)="selectContact(contact.id)">
-        <img class="avatar-img rounded-circle" [src]="generateAvatarUrl(contact.username)" />
-        <span>{{ contact.username }}</span>
+<div class="main-content">
+  <div class="content">
+    <h1 class="sub-p">Welcome to the Chat</h1>
+    <p class="bill">Explore the interface and stay connected.</p>
+  </div>
+
+  <div class="chat-wrapper">
+    <!-- Chat Sidebar -->
+    <div class="chat-sidebar">
+      <div class="sidebar-header">
+        <!-- Remplacer l'image par une icône -->
+        <i class="bi bi-person-circle fs-1"></i>
+        <h3 class="text-center title">Contacts</h3>
+        <hr class="sidebar-divider">
+      </div>
+
+      <div class="contact-list">
+        <div *ngFor="let contact of contacts" 
+             class="contact-item" 
+             [ngClass]="{'active': contact.id === recipientId}" 
+             (click)="selectContact(contact.id)">
+          <!-- Remplacer l'image de l'avatar par une icône -->
+          <i class="bi bi-person-circle avatar-icon"></i>
+          <span>{{ contact.username }}</span>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="flex">
-    <div class="card card-chat rounded-start-lg-0 border-start-lg-0">
-      <div class="card-body h-100">
-        <div class="tab-content py-0 mb-0 h-100" id="chatTabsContent">
-          <div class="fade tab-pane show active h-100" id="chat-1" role="tabpanel" aria-labelledby="chat-1-tab">
-            <div class="d-sm-flex justify-content-between align-items-center ">
-              <div class="d-flex mb-2 mb-sm-0">
-                <div class="flex-shrink-0 avatar me-2">
-                  <img class="avatar-img rounded-circle" [src]="recipient.photo ? recipient.photo : generateAvatarUrl(recipient.username)" [alt]="recipient.username">
+
+    <!-- Chat Main Area -->
+    <div class="flex">
+      <div class="card card-chat rounded-start-lg-0 border-start-lg-0">
+        <div class="card-body h-100">
+          <div class="tab-content py-0 mb-0 h-100" id="chatTabsContent">
+            <div class="fade tab-pane show active h-100" id="chat-1" role="tabpanel" aria-labelledby="chat-1-tab">
+              <div class="d-sm-flex justify-content-between align-items-center">
+                <div class="d-flex mb-2 mb-sm-0">
+                  <div class="flex-shrink-0 avatar me-2">
+                    
+                    <i class="bi bi-person-circle avatar-icon"></i>
+                  </div>
+                  <div class="d-block flex-grow-1">
+                    <h6 class="mb-0 mt-1">{{ recipient.username }}</h6>
+                    <div class="small text-secondary">
+                      <i class="fa-solid fa-circle text-success me-1"></i>Online
+                    </div>
+                  </div>
                 </div>
-                <div class="d-block flex-grow-1">
-                  <h6 class="mb-0 mt-1">{{ recipient.username }}</h6>
-                  <div class="small text-secondary"><i class="fa-solid fa-circle text-success me-1"></i>Online</div>
-                </div>
-              </div>
-              <div class="d-flex align-items-center">
-                <a href="#!" class="icon-md rounded-circle btn btn-primary-soft me-2 px-2" title="Audio call">
-                  <i class="bi bi-telephone-fill"></i>
-                </a>
-                <a href="#!" class="icon-md rounded-circle btn btn-primary-soft me-2 px-2" title="Video call">
-                  <i class="bi bi-camera-video-fill"></i>
-                </a>
-                <div class="dropdown">
-                  <a class="icon-md rounded-circle btn btn-primary-soft me-2 px-2" href="#" data-bs-toggle="dropdown">
-                    <i class="bi bi-three-dots-vertical"></i>
+                <div class="d-flex align-items-center">
+                
+                  <a href="#!" class="icon-md rounded-circle btn btn-primary-soft me-2 px-2" title="Audio call">
+                    <i class="bi bi-telephone-fill"></i>
                   </a>
-                  <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="#">Mark as read</a></li>
-                    <li><a class="dropdown-item" href="#">Mute conversation</a></li>
-                    <li><a class="dropdown-item" href="#">View profile</a></li>
-                    <li><a class="dropdown-item" href="#">Delete chat</a></li>
-                    <li class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">Archive chat</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <hr>
-
-            <!-- Chat Messages -->
-            <div class="chat-conversation-content overflow-auto custom-scrollbar" #chatMessages>
-              <div *ngFor="let message of messages" class="message-container" [ngClass]="{'sent': isCurrentUser(message.sender.id), 'received': !isCurrentUser(message.sender.id)}">
-                <!-- Avatar -->
-                <div *ngIf="!isCurrentUser(message.sender.id)" class="avatar">
-                  <img class="avatar-img rounded-circle" [src]="generateAvatarUrl(message.sender.username)" [alt]="message.sender.username">
-                </div>
-                <!-- Message Content -->
-                <div class="message-content">
-                  <div class="message-text" [ngClass]="{'sent-message': isCurrentUser(message.sender.id), 'received-message': !isCurrentUser(message.sender.id)}">
-                    {{ message.content }}
-                  </div>
-                  <!-- Timestamp -->
-                  <div class="message-time">
-                    {{ message.timestamp | timeAgo }}
+                 
+                  <a href="#!" class="icon-md rounded-circle btn btn-primary-soft me-2 px-2" title="Video call">
+                    <i class="bi bi-camera-video-fill"></i>
+                  </a>
+                  <div class="dropdown">
+                    <a class="icon-md rounded-circle btn btn-primary-soft me-2 px-2" href="#" data-bs-toggle="dropdown">
+                      <i class="bi bi-three-dots-vertical"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                      <li><a class="dropdown-item" href="#">Mark as read</a></li>
+                      <li><a class="dropdown-item" href="#">Mute conversation</a></li>
+                      <li><a class="dropdown-item" href="#">View profile</a></li>
+                      <li><a class="dropdown-item" href="#">Delete chat</a></li>
+                      <li class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="#">Archive chat</a></li>
+                    </ul>
                   </div>
                 </div>
               </div>
+              <hr>
+              <!-- Chat Messages Section -->
+              <div class="chat-messages">
+                <div *ngFor="let message of messages" [ngClass]="{'received': !isCurrentUser(message.sender.id), 'sent': isCurrentUser(message.sender.id)}" class="message">
+                  <p>{{ message.content }}</p>
+                  <span class="time">{{ message.timestamp | date: 'shortTime' }}</span>
+                </div>
+              </div>
+              <!-- Chat Input Section -->
+              <div class="chat-input mt-3">
+                <input type="text" class="form-control" [(ngModel)]="content" placeholder="Type your message...">
+                <button class="btn btn-primary mt-2" (click)="sendMessage()">Send</button>
+              </div>
             </div>
-          </div>
-        </div>
-
-        <!-- Chat Footer -->
-        <div class="card-footer">
-          <div class="d-sm-flex align-items-end">
-            <textarea class="form-control mb-sm-0 mb-3" [(ngModel)]="content" placeholder="Type a message here..." rows="1"></textarea>
-            <button class="btn btn-sm btn-primary-soft ms-2" (click)="sendMessage()">Send<i class="fa-solid fa-paper-plane fs-6"></i></button>
           </div>
         </div>
       </div>

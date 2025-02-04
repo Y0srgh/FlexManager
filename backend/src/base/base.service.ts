@@ -4,6 +4,7 @@ import { UserService } from 'src/user/user.service';
 import { PasswordService } from 'src/common/utils/password.service';
 import { UserSingUpDto } from 'src/user/dto/user-sign-up.dto';
 
+
 @Injectable()
 export class BaseService<T> {
   constructor(

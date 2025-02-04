@@ -1,5 +1,6 @@
 import { Component ,OnInit,OnDestroy, ElementRef, ViewChild, Input} from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { ChatserviceService } from '../services/chatservice/chatservice.service';
 import { Subscription } from 'rxjs';
 import { ChatMessageDTO } from '../model/messageDTO';
@@ -10,6 +11,7 @@ import { SessionService } from '../services/sessionManager/session.service';
   selector: 'app-chatroom',
   templateUrl: './chatroom.component.html',
   styleUrl: './chatroom.component.css',
+
 
 })
 

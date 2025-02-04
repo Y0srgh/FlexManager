@@ -89,6 +89,7 @@ import { SitePaymentService } from './services/site-payment/site-payment.service
     ClientComponent,
     JoinOptionsComponent,
     SignupParentComponent,
+    ChatroomComponent,
     SitePaymentComponent,
   ],
   imports: [
