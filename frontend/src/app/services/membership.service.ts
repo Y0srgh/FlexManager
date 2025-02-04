@@ -16,11 +16,10 @@ interface membership {
 })
 export class MembershipService {
 
-  private apiUrl = 'http://localhost:3000/subscriptions'; // URL de ton API back-end
+  private apiUrl = 'http://localhost:3000/subscriptions'; 
 
   constructor(private http: HttpClient) { }
 
-  // Fonction pour récupérer les abonnements depuis l'API
   getMemberships(): Observable<membership[]> {
     return this.http.get<membership[]>(this.apiUrl);
   }

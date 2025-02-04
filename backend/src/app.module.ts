@@ -20,7 +20,7 @@ dotenv.config(); // Charger les variables d'environnement depuis le fichier .env
       entities: ['dist/**/*.entity{.ts,.js}'], // Entités de l'application
       synchronize: true, // Synchroniser les entités avec la base de données (ne pas utiliser en production)
     }),
-    TestModule, // Votre module de test (si nécessaire)
+    TestModule, 
     SubscriptionsModule, 
   ],
   controllers: [AppController],

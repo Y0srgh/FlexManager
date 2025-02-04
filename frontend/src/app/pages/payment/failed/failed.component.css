@@ -12,9 +12,9 @@
     height: 100vh;
 }
 
-/* Style de la carte d'échec */
+
 .failed-card {
-    background: rgba(255, 255, 255, 0.2); /* Semi-transparent */
+    background: rgba(255, 255, 255, 0.2); 
     backdrop-filter: blur(10px); /* Effet de flou */
     padding: 30px;
     border-radius: 12px;
