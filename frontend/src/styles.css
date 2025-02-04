@@ -1,5 +1,7 @@
 @import "aos/dist/aos.css";
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
+/* @import '@angular/material/prebuilt-themes/indigo-pink.css'; */
+
 
 
 :root {
@@ -72,7 +74,6 @@ html::-webkit-scrollbar-thumb {
 html::-webkit-scrollbar-thumb:hover {
   background: var(--color-2);
 } */
-@import '@angular/material/prebuilt-themes/indigo-pink.css';
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

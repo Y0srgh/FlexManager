@@ -87,7 +87,7 @@ export class ClassFormComponent implements OnInit, OnDestroy {
     if (this.courseForm.valid) {
       const courseData = this.courseForm.value;
 
-      this.http.post('http://localhost:4000/courses', courseData).subscribe(
+      this.http.post('http://localhost:3000/courses', courseData).subscribe(
         (response) => {
 
           console.log('Course submitted successfully:', response);

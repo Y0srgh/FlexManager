@@ -36,7 +36,7 @@ export class CalendarComponent implements OnInit {
 
   loadEvents() {
 
-    this.http.get<any[]>('http://localhost:4000/courses').subscribe(courses => {
+    this.http.get<any[]>('http://localhost:3000/courses').subscribe(courses => {
       console.log('Courses fetched:', courses); 
       if (!Array.isArray(courses)) {
         console.error('Courses data is not an array:', courses);
@@ -44,7 +44,7 @@ export class CalendarComponent implements OnInit {
       }
 
 
-      this.http.get<any[]>('http://localhost:4000/reservations').subscribe(reservations => {
+      this.http.get<any[]>('http://localhost:3000/reservations').subscribe(reservations => {
         console.log('Reservations fetched:', reservations); 
         if (!Array.isArray(reservations)) {
           console.error('Reservations data is not an array:', reservations);

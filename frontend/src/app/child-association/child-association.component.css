@@ -2,7 +2,7 @@
 
 .parent-association-container {
   padding: 2rem;
-  background: url("/background5.jpg") no-repeat center center/cover;
+  background: url("/assets/background5.jpg") no-repeat center center/cover;
   position: relative;
   min-height: 96vh;
 }
@@ -103,7 +103,7 @@
   justify-content: center;
   padding: 1rem;
   /* background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); */
-  background: url("/background4.jpg") no-repeat center center/cover;
+  background: url("/assets/background4.jpg") no-repeat center center/cover;
   position: relative;
   &::before {
     content: "";

@@ -9,7 +9,7 @@ import {  map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class CoachService {
-  private apiUrl = 'http://localhost:4000/auth/coach'; 
+  private apiUrl = 'http://localhost:3000/auth/coach'; 
 
   constructor(private http: HttpClient) {}
 

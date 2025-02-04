@@ -10,7 +10,7 @@ import { Observable, tap } from 'rxjs';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  private protectedPaths = ['/auth/client', '/auth/request/pending-child-request', '/auth/request/associate-children', '/auth/progress', '/progress'];
+  private protectedPaths = ['/auth/client', '/auth/request/pending-child-request', '/auth/request/associate-children', '/auth/progress', '/progress','/courses','/reservations'];
 
   intercept(
     req: HttpRequest<any>,
