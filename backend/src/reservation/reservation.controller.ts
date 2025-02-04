@@ -1,8 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { ReservationService } from './reservation.service';
 import { CreateReservationDto } from './dto/create-reservation.dto';
 import { UpdateReservationDto } from './dto/update-reservation.dto';
 import { Reservation } from './entities/reservation.entity';
+import { User } from 'src/decorators/user.decorator';
+import { Role } from 'src/decorators/role.decorator';
+import { JwtAuthGuard } from 'src/user/guards/jwt-auth.guard';
+import { RolesGuard } from 'src/user/guards/role.guard';
+import { Roles } from 'src/enums/user-role.enum';
 
 @Controller('reservations')
 export class ReservationController {
@@ -15,15 +20,17 @@ export class ReservationController {
   }
 
   // READ ALL
-  @Get()
-  async findAll(): Promise<Reservation[]> {
-    return this.reservationService.findAll();
-  }
+  // @Get()
+  // async findAll(): Promise<Reservation[]> {
+  //   return this.reservationService.findAll();
+  // }
 
   // READ ONE
-  @Get(':id')
-  async findOne(@Param('id') id: string): Promise<Reservation> {
-    return this.reservationService.findOne(id);
+  @Get()
+  @Role(Roles.CLIENT)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  async findOne(@User() user: any): Promise<Reservation> {
+    return this.reservationService.findOne(user.id);
   }
 
   // UPDATE
