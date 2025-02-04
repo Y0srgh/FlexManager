@@ -42,7 +42,9 @@ export class FitnessTrackerComponent implements OnInit {
 
   private updateView() {
     const containerWidth = document.querySelector('.charts-grid')?.clientWidth || 700;
-    this.view = [containerWidth - 50, 300];
+    console.log("------------", containerWidth);
+    
+    this.view = [containerWidth - 100, 300];
   }
   
   ngOnInit() {
