@@ -18,20 +18,40 @@ import { ParentService } from './parent.service';
 import { ParentEntity } from './entities/parents.entity';
 import { ParentChildRequestEntity } from './entities/parent-child.entity';
 import { ParentChildRequestService } from './parent-child-request.service';
-dotenv.config()
+import { TrackEntity } from 'src/progress-tracking/track.entity';
+import { ProgressTrackingService } from 'src/progress-tracking/progress-tracking.service';
+dotenv.config();
 
 @Module({
-   imports: [
-    TypeOrmModule.forFeature([UserEntity, CoachEntity, ClientEntity, ManagerEntity, ParentEntity, ParentChildRequestEntity]),
-    PassportModule.register({defaultStrategy: 'jwt-refresh'}),
+  imports: [
+    TypeOrmModule.forFeature([
+      UserEntity,
+      CoachEntity,
+      ClientEntity,
+      ManagerEntity,
+      ParentEntity,
+      ParentChildRequestEntity,
+      TrackEntity,
+      ProgressTrackingService
+    ]),
+    PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
       secret: process.env.SECRET,
       // signOptions: {
       //   expiresIn: 3600,//1 heure
       // },
     }),
-],
+  ],
   controllers: [UserController],
-  providers: [UserService, JwtStrategy,CoachService, ClientService, ManagerService, ParentService, ParentChildRequestService],
+  providers: [
+    UserService,
+    JwtStrategy,
+    CoachService,
+    ClientService,
+    ManagerService,
+    ParentService,
+    ParentChildRequestService,
+    ProgressTrackingService
+  ],
 })
 export class UserModule {}

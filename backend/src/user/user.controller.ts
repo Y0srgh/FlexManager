@@ -31,6 +31,7 @@ import { ParentService } from './parent.service';
 import { CreateParentDto } from './dto/create-parent.dto';
 import { Response, Request } from 'express';
 import { ParentChildRequestService } from './parent-child-request.service';
+import { ProgressTrackingService } from 'src/progress-tracking/progress-tracking.service';
 @Controller('auth')
 export class UserController {
   constructor(
@@ -40,6 +41,7 @@ export class UserController {
     private readonly managerService: ManagerService,
     private readonly parentService: ParentService,
     private readonly parentChildService: ParentChildRequestService,
+    private readonly progressService: ProgressTrackingService
   ) {}
 
   @Post('signup')
@@ -62,6 +64,7 @@ export class UserController {
   // @Post('manager')
   // @UseGuards(JwtAuthGuard)
   // async admin(@User({ roles: [Roles.MANAGER] }) user: UserEntity) {....}
+
 
   @Post('coach')
   @Role(Roles.MANAGER)
@@ -218,5 +221,21 @@ export class UserController {
   // @UseGuards(JwtAuthGuard, RolesGuard)
   async getChildPendingRequestsId(@Param('id') id: string) {
     return this.parentChildService.getChildPendingRequests(id);
+  }
+
+
+
+
+
+
+
+  
+  @Get('progress')
+  @Role(Roles.CLIENT)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  async getUserProgress(@User() user) {
+    console.log(' i am in the controller', user);
+
+    return this.progressService.getProgressHistory(user.id);
   }
 }

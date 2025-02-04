@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Routes, RouterModule } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 import { CourseManagementComponent } from './components/course-management/course-management.component';
 import { CourseFormComponent } from './components/course-form/course-form.component';
@@ -39,6 +42,8 @@ import { SignupParentComponent } from './signup-parent/signup-parent.component';
 import { PendingRequestsComponent } from './pending-requests/pending-requests.component';
 import { ChildAssociationComponent } from './child-association/child-association.component';
 import { ParentChildAssociationComponent } from './parent-child-association/parent-child-association.component';
+import { FitnessTrackerComponent } from './fitness-tracker/fitness-tracker.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 // const routes: Routes = [
 //   { path: '', component: HeroComponent },
@@ -78,6 +83,7 @@ import { ParentChildAssociationComponent } from './parent-child-association/pare
     PendingRequestsComponent,
     ChildAssociationComponent,
     ParentChildAssociationComponent,
+    FitnessTrackerComponent,
   ],
   imports: [
     BrowserModule,
@@ -91,11 +97,20 @@ import { ParentChildAssociationComponent } from './parent-child-association/pare
     MatInputModule,
     AppRoutingModule,
     // RouterModule.forRoot(routes),
-    MatIconModule
+    MatIconModule,
+
+    MatDatepickerModule,
+
+    MatNativeDateModule,
+
+    NgxChartsModule,
+    BrowserAnimationsModule
+
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoggerInterceptor, multi: true },
+    
   ],
   bootstrap: [AppComponent],
 })
