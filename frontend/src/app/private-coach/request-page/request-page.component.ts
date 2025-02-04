@@ -8,17 +8,47 @@ import { PrivateReservation } from '../../models/private-reservation.model';
   styleUrls: ['./request-page.component.css']
 })
 export class RequestPageComponent implements OnInit {
-  coachId: string = '481cffd8-42b7-4036-b28a-37cae55aaf93';
+  coachId: string = '4d29a321-fb1d-44a3-85e6-01d3899ef933'; // ID du coach à filtrer
   reservations: PrivateReservation[] = [];
 
   constructor(private reservationService: PrivateReservationService) { }
 
   ngOnInit(): void {
-    this.reservationService.getReservations().subscribe((data) => {
-      console.log('Toutes les réservations récupérées :', data); 
-      this.reservations = data.filter(reservation => reservation.coachId === this.coachId);
-      console.log('Réservations filtrées :', this.reservations); 
+    // Récupérer toutes les réservations
+    this.reservationService.getReservations().subscribe((data: any[]) => {
+      console.log('Toutes les réservations récupérées :', data);
+
+      // Afficher chaque objet brut reçu
+      data.forEach(reservation => {
+        console.log('Objet brut reçu :', reservation);
+      });
+
+      // Transformer les données
+      this.reservations = data.map(reservation => this.transformReservation(reservation));
+
+      console.log('Réservations après transformation :', this.reservations);
+
+      // Filtrer les réservations en fonction de l'ID du coach
+      this.reservations = this.reservations.filter(reservation => reservation.coachId === this.coachId);
+
+      console.log('Réservations filtrées :', this.reservations);
     });
   }
-  }
 
+  private transformReservation(data: any): PrivateReservation {
+    console.log('Données avant transformation :', data);
+
+    
+    return {
+      id: data.id,
+      coachId: data.coachEntity?.id || undefined,  
+      clientId: data.clientEntity?.id || undefined, 
+      username: data.clientEntity?.username || '',
+      date: data.date,
+      startTime: data.startTime,
+      endTime: data.endTime,
+      imageUrl: data.imageUrl || null,
+      state: data.state
+    };
+  }
+}

@@ -7,6 +7,7 @@ export class PrivateReservation {
   endTime: string;
   imageUrl?: string;  
   state?: string;  
+  username?: string;
 
   constructor(
    
