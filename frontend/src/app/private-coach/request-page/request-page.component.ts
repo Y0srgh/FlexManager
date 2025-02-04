@@ -44,7 +44,7 @@ export class RequestPageComponent implements OnInit {
       id: data.id,
       coachId: data.coachEntity?.id || undefined,  
       clientId: data.clientEntity?.id || undefined, 
-      username: data.clientEntity?.username || '',
+      username: data.clientEntity?.user?.username || '',
       date: data.date,
       startTime: data.startTime,
       endTime: data.endTime,
