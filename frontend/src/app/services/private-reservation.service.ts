@@ -7,7 +7,7 @@ import { PrivateReservation } from '../models/private-reservation.model';
   providedIn: 'root'
 })
 export class PrivateReservationService {
-  private apiUrl = 'http://localhost:3000/reservations/coach'; 
+  private apiUrl = 'http://localhost:3000/reservations'; 
 
   constructor(private http: HttpClient) {}
 
@@ -17,7 +17,7 @@ export class PrivateReservationService {
 
   getReservations(): Observable<PrivateReservation[]> {
     console.log('getReservations()');
-    return this.http.get<PrivateReservation[]>(this.apiUrl);
+    return this.http.get<PrivateReservation[]>('http://localhost:3000/reservations/coach');
   }
   updateState(id: string, state: string): Observable<PrivateReservation> {
     return this.http.patch<PrivateReservation>(`${this.apiUrl}/${id}`, { state });
