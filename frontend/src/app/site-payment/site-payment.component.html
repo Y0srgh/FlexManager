@@ -17,20 +17,14 @@
       <!-- Credit Usage Section -->
       <div class="credit">
           <div class="cr-usage">Credit Usage</div>
-          <p>100% of your monthly credits used</p>
+          <p>{{barvalue}} of your monthly credits used</p>
           <div class="bar">
-              <div class="bar-fill" style="width: 100%"></div>
+              <div class="bar-fill" [style.width.%]="barvalue"></div>
           </div>
       </div>
 
-      <!-- Message for Available Plans -->
-      <div class="main-head">
-        <h1>Choose The Plan That Fits Your Needs</h1>
-      </div>
-
-      <!-- Available Plans Section -->
+      
     <div class="plans">
-        <!-- Free Trial Plan -->
         <div class="box">
           <div class="box-head">Free Trial</div>
           <div class="price">
@@ -38,10 +32,9 @@
             <span>/Month</span>
           </div>
           <p>Perfect for testing our service</p>
-          <button (click)="selectPlan('FreeTrial')">Current Plan</button>
+          <button (click)="selectPlan('FreeTrial')">Downgrade Plan</button>
         </div>
   
-        <!-- Pro Plan -->
         <div class="box">
           <div class="box-head">Pro Plan</div>
           <div class="price">
@@ -49,10 +42,9 @@
             <span>/Month</span>
           </div>
           <p>Ideal for growing companies</p>
-          <button (click)="selectPlan('Pro')">Upgrade Plan</button>
+          <button (click)="selectPlan('Pro')">Current Plan</button>
         </div>
   
-        <!-- Premium Plan -->
         <div class="box">
           <div class="box-head">Premium Plan</div>
           <div class="price">
@@ -64,7 +56,6 @@
         </div>
       </div>
   
-      <!-- Popup -->
 <div class="modal-container" *ngIf="popupVisible">
   <div class="success-card">
     <span class="close-btn" (click)="goHome()">&times;</span>

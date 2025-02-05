@@ -15,8 +15,8 @@ export class SitePaymentComponent implements OnInit {
   UserSession!: JwtResponse | null;
   CurrentSubscription: any;
   user: any = { siteSubscriptions: { subscription_active: true } };
-  daysleft: number = 1;
-  barvalue: number = 25;
+  daysleft!: number;
+  barvalue!: number;
   subscription_active: boolean = false;
   selectedPlan: string = '';
   popupVisible: boolean = false;
@@ -33,41 +33,48 @@ export class SitePaymentComponent implements OnInit {
       });
     }
     this.getCurrentSubscription();
-    
-    console.log('this.CurrentSubscription[0]', this.CurrentSubscription );
+
+    console.log('this.CurrentSubscription[0]', this.CurrentSubscription);
   }
-  
+
   upgradePayment(plan: string) {
     console.log(plan);
     this.sitePaymentService
-    .HandlePayment(plan, 'payment')
-    .subscribe((data: any) => {
-      window.open(data.redirectUrl, '_blank');
-    });
+      .HandlePayment(plan, 'payment')
+      .subscribe((data: any) => {
+        window.open(data.redirectUrl, '_blank');
+      });
   }
   getCurrentSubscription() {
     this.sitePaymentService
-    .getUserCurrentSubscription()
+      .getUserCurrentSubscription()
       .subscribe((subcription: any) => {
         console.log(
           'subscription ---------------------------------------',
           subcription
         );
-        this.CurrentSubscription = subcription[subcription.length-1];
-        this.User_plan = subcription[subcription.length-1].Plan;
-        this.daysleft = this.calculateDaysPassed(subcription[subcription.length-1].updatedAt);
-        // this.barvalue = this.daysleft*0.3;
-        this.subscription_active = subcription[subcription.length-1].isActive
+        this.CurrentSubscription = subcription[subcription.length - 1];
+        this.User_plan = subcription[subcription.length - 1].Plan;
+        this.daysleft = this.calculateDaysPassed(
+          subcription[subcription.length - 1].updatedAt
+        );
+        this.barvalue = ((this.daysleft-30) * 100) / 30 ;
+        console.log('this.', this.barvalue);
+        
+        this.subscription_active = subcription[subcription.length - 1].isActive;
       });
   }
 
-   calculateDaysPassed(date: string): number {
+  calculateDaysPassed(date: string): number {
     const givenDate = new Date(date);
     const today = new Date();
     const differenceInMillis = today.getTime() - givenDate.getTime();
     const daysPassed = Math.floor(differenceInMillis / (1000 * 3600 * 24));
-    return daysPassed;
+    console.log('days passed', daysPassed);
+    
+    return 30 - daysPassed;
   }
+
   sendtoStripeManagement() {
     console.log('Redirecting to Stripe Management...');
     window.location.href =
