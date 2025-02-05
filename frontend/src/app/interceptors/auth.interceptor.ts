@@ -59,6 +59,9 @@ export class AuthInterceptor implements HttpInterceptor {
               localStorage.removeItem('accessToken'); 
               this.router.navigate(['/']);
             }
+            if (error.status === 403) {
+              this.router.navigate(['/home']);
+            }
             console.error('Error in request:', error);
           },
         })
@@ -76,7 +79,7 @@ export class AuthInterceptor implements HttpInterceptor {
             if (error.status === 403) {
               this.router.navigate(['/home']);
             }
-            console.log(error);
+            console.log('error-----------', error);
           },
         })
       );

@@ -1,22 +1,30 @@
 <header class="header">
   <div class="container">
-    <div class="logo">Flexy</div>
-    <nav>
-      <ul class="nav-links">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#stats">Stats</a></li>
-        <li><a href="#why-choose-us">Why Choose Us</a></li>
-        <li><a href="#coach">Coaches</a></li>
-        <li><a href="#nutritionists">Nutritionists</a></li>
-        <li><a href="#pricing">Pricing</a></li>
-        <li><a href="#testimonials">Testimonials</a></li>
-      </ul>
-    </nav>
-    <app-button
-      buttonType="home"
-      [buttonText]="'Join Now'"
-      (buttonClick)="onJoinNowClick()"
-      [link]="link"
-    ></app-button>
+    <div class="navbar-left">
+      <a href="#home"><h3 class="clickable">FlexManager</h3></a>
+    </div>
+    <button class="mobile-nav-toggle" (click)="toggleMenu()">
+      <span class="hamburger"></span>
+    </button>
+    <div class="sub-container">
+        <nav>
+
+        <ul class="nav-links" (click)="toggleMenu()">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#stats">Stats</a></li>
+          <li><a href="#why-choose-us">Why Choose Us</a></li>
+          <li><a href="#coach">Coaches</a></li>
+          <li><a href="#nutritionists">Nutritionists</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+        </ul>
+      </nav>
+      <app-button
+        buttonType="home"
+        [buttonText]="'Join Now'"
+        (buttonClick)="onJoinNowClick()"
+        [link]="link"
+      ></app-button>
+      </div>
   </div>
 </header>
