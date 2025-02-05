@@ -16,10 +16,13 @@ export class SitePaymentComponent implements OnInit {
   user : any = {siteSubscriptions: {subscription_active:true}};
   barvalue: number = 25;
   subscription_active : boolean = false
+  selectedPlan: string = ''
+  popupVisible: boolean = false
   constructor (
     private userService : UserService,
     private sessionService : SessionService,
     private sitePaymentService : SitePaymentService,
+    
   ){}
   ngOnInit(): void {
      this.UserSession =this.sessionService.getUserDetails();
@@ -48,5 +51,17 @@ export class SitePaymentComponent implements OnInit {
   sendtoStripeManagement(){
     console.log('Redirecting to Stripe Management...');
     window.location.href = 'https://billing.stripe.com/p/login/test_7sI4i8e8gbKA7x6fYY';
+  }
+  
+  selectPlan(plan: string): void {
+    this.selectedPlan = plan;
+    this.popupVisible = true;
+  }
+
+  
+  goHome(): void {
+    this.popupVisible = false;
+    // Logique pour rediriger si nécessaire
+    console.log('Returning to the homepage...');
   }
 }
