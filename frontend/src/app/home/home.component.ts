@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { AuthService } from '../shared/auth.service';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -12,74 +12,101 @@ export class HomeComponent {
       title: 'Dashboard',
       icon: 'dashboard',
       route: '/dashboard',
-      roles: ['admin', 'coach', 'client'],
+      roles: ['manager'],
       image: 'assets/dashboard.png',
+    },
+    {
+      title: 'Manage Coaches',
+      icon: 'dashboard',
+      route: '/add-coach',
+      roles: ['manager'],
+      image: 'https://www.ownsport.fr/blog/wp-content/uploads/2018/01/marche-coach-sportif-1024x637.jpg',
+    },
+    {
+      title: 'Requests',
+      icon: 'requests',
+      route: '/requests',
+      roles: ['coach'],
+      image: 'https://www.ownsport.fr/blog/wp-content/uploads/2018/01/marche-coach-sportif-1024x637.jpg',
     },
     {
       title: 'Classes',
       icon: 'class',
       route: '/course',
       image: 'assets/classes.webp',
-      roles: ['admin', 'coach', 'client'],
+      roles: ['manager', 'coach', 'client'],
     },
     {
       title: 'Nutrition',
       icon: 'restaurant',
       route: '/nutrition',
       image: 'assets/nutrition.jpg',
-      roles: ['admin', 'coach'],
+      roles: ['client'],
     },
-
     {
       title: 'Performance',
       icon: 'trending_up',
       route: '/tracker',
       image: 'assets/performance.png',
-      roles: ['admin', 'coach'],
+      roles: ['client'],
     },
     {
       title: 'Private Sessions',
       icon: 'fitness_center',
       route: '/coaches',
       image: 'assets/private.png',
-      roles: ['admin', 'coach'],
+      roles: ['manager', 'coach', 'client'],
     },
-
     {
       title: 'Plannings',
       icon: 'event',
       route: '/calendar',
       image: 'assets/calendar.webp',
-      roles: ['admin', 'coach'],
+      roles: ['client', 'coach'],
     },
     {
       title: 'Subscriptions',
       icon: 'subscriptions',
       route: '/subscriptions',
       image: 'assets/subscriptions.jpg',
-      roles: ['admin', 'coach'],
+      roles: ['client', 'coach', 'manager'],
     },
     {
       title: 'Payments',
       icon: 'credit_card',
       route: '/payments',
       image: 'assets/payment.avif',
-      roles: ['admin', 'coach'],
+      roles: ['manager', 'coach'],
+    },
+    {
+      title: 'Association Requests',
+      icon: 'users',
+      route: '/pending-child-request',
+      image: 'https://www.nautilusplus.com/content/uploads/2018/02/parent-enfant-lowres.jpg',
+      roles: ['client', 'parent'],
+    },
+    {
+      title: 'Associate a Child',
+      icon: 'users',
+      route: '/associate-child',
+      image: 'https://www.pennes-mirabeau.org/images/icagenda/thumbs/themes/ic_large_w900h600q100_gym-parent-enfant.jpg',
+      roles: ['parent'],
     },
     {
       title: 'Contact Us',
       icon: 'contact_mail',
       route: '/contact-us',
       image: 'assets/contact.webp',
-      roles: ['admin', 'coach'],
+      roles: ['client', 'parent', 'coach'],
     },
     {
       title: 'Help & Support',
       icon: 'help',
       route: '/help-support',
       image: 'assets/help.webp',
-      roles: ['admin', 'coach'],
+      roles: ['client', 'parent', 'coach'],
     },
+   
   ];
 
   filteredCards: any[] = [];

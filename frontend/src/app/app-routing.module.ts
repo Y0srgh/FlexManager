@@ -72,7 +72,7 @@ const routes: Routes = [
     path: 'coaches',
     component: CoachListComponent,
     canActivate: [RoleGuard],
-    data: { roles: ['manager'] },
+    data: { roles: ['manager','client'] },
   },
   {
     path: 'requests',
