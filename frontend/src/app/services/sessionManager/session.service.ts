@@ -34,7 +34,6 @@ export class SessionService {
   public getUserDetails(): JwtResponse | null {
     const accessToken = localStorage.getItem(ACCESS_KEY);
 
-    console.log(accessToken)
     if (accessToken) return jwt_decode.jwtDecode(accessToken);
 
     return null;

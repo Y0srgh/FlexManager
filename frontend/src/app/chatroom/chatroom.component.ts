@@ -2,11 +2,12 @@ import { Component ,OnInit,OnDestroy, ElementRef, ViewChild, Input} from '@angul
 import { CommonModule } from '@angular/common';
 
 import { ChatserviceService } from '../services/chatservice/chatservice.service';
-import { Subscription } from 'rxjs';
+import { Subscription, timestamp } from 'rxjs';
 import { ChatMessageDTO } from '../model/messageDTO';
 import { DatePipe } from '@angular/common';
 import { UserService } from '../services/Userservice/user.service';
 import { SessionService } from '../services/sessionManager/session.service';
+import { Message } from '../interfaces/message';
 @Component({
   selector: 'app-chatroom',
   templateUrl: './chatroom.component.html',
@@ -16,88 +17,127 @@ import { SessionService } from '../services/sessionManager/session.service';
 })
 
 export class ChatroomComponent  implements   OnInit, OnDestroy {
-  @Input() senderId : string="0";
-  @Input() recipientId : string="1";   
+  senderId! : string ;
+  recipientId! : string ;   
   currentUserId = "0";  
-  contacts : any[]=[{ id: "0", username: 'sendersssssss1@example.com' },{ id: "1", username: 'sender2@example.com' }]
-  messages = [
-    {
-      sender: { id: "0", username: 'sender1@example.com' },
-      content: 'Hello!',
-      timestamp: new Date()
-    },
-    {
-      sender: { id: "1", username: 'sender2@example.com' },
-      content: 'Hi!',
-      timestamp: new Date()
-    },   {
-      sender: { id: "0", username: 'sender1@example.com' },
-      content: 'ssss!',
-      timestamp: new Date()
-    },{
-      sender: { id: "0", username: 'sender1@example.com' },
-      content: 'ssss!',
-      timestamp: new Date()
-    },
-    {
-      sender: { id: "0", username: 'sendesssssr1@example.com' },
-      content: 'ssss!',
-      timestamp: new Date()
-    },
-  ];
+  contacts! : any[]
+  messages! : any[] 
   content: string = "" ; 
   sender: any ;
   recipient:any={username:"sender1@example.com",id:"0"};
   roomId: string="";
   constructor(
-    // private chatserviceService : ChatserviceService,
-    // private datePipe: DatePipe,
-    // private userService : UserService,
-    // private session: SessionService,
+    private chatserviceService : ChatserviceService,
+    private datePipe: DatePipe,
+    private userService : UserService,
+    private session: SessionService,
   ) {}
 
-  ngOnInit(): void {
-    // this.userService.getUserById(this.senderId).subscribe((sender)=>{
-    //   this.sender=sender
-    // })
-    // this.userService.getUserById(this.recipientId).subscribe((recipient)=>{
-    //   this.recipient=recipient
-    // })
+   ngOnInit(): void {
+    
+    console.log(this.senderId);
+    this.senderId=this.session.getUserDetails()?.id || "";
+    this.userService.getUserById(this.senderId).subscribe((sender)=>{
+      this.sender=sender
+      console.log("sender",this.sender);
+    });
+   this.userService.getAllUsers().subscribe((contact)=>{
+    const contacts =contact.filter((contact : any)=>{
+      if(contact.id!==this.senderId){
+        return contact
+      }
+    });  
+    console.log(contacts);
+    this.contacts=contacts;
+      console.log(contact)
+      this.recipient=this.contacts[0];
+      
+  //     console.log("getting recipeint",this.recipient);
+      this.userService.getUserById(this.recipient.id).subscribe((recipient)=>{
+        this.recipient=recipient
+        this.selectContact(this.recipient.id);
+        console.log(this.recipient.id);
+      })
+    });
+    
+
+    
+
+    
     this.updateTimeAgo()
     // console.log("test");
     // this.joinRoom()
   }
    joinRoom(){
-    // this.roomId =  this.chatserviceService.joinRoom(this.sender.id,this.recipient.id);
-    // this.chatserviceService.receiveMessage((data) => {
-    //   const currentTime = new Date();
-    //   currentTime.setHours(currentTime.getHours() + 1);
-    //   const isoTimeString = currentTime.toISOString();
-    //   const formattedTimestamp = this.datePipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss');
+    this.roomId =  this.chatserviceService.joinRoom(this.sender.id,this.recipient.id);
+    this.chatserviceService.receiveMessage((data) => {
+      console.log("recieved a message",data);
+      const currentTime = new Date();
+      currentTime.setHours(currentTime.getHours() + 1);
+      const isoTimeString = currentTime.toISOString();
+      const formattedTimestamp = this.datePipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss');
 
-    //   const message = {
-    //       sender: this.sender,
-    //       recipient: this.recipient,
-    //       content: data.content,
-    //       chatId: this.roomId,
-    //       timestamp: isoTimeString }
-
-    //   this.messages.push(data);
-    // });
+      const message = {
+          sender: data.senderId,
+          recipient: data.receiverId,
+          content: data.content,
+          chatId: this.roomId,
+          timestamp: isoTimeString }
+        
+      this.messages.push(message);
+      console.log(this.messages);
+    });
   }
   sendMessage(): void {
-    // console.log(this.chatserviceService.sendMessage(this.sender.id,this.recipient.id,this.content))
+    const currentTime = new Date();
+    currentTime.setHours(currentTime.getHours() + 1);
+    const isoTimeString = currentTime.toISOString();
+    const message = {
+      sender:    this.senderId,
+      recipient: this.recipient,
+      content: this.content,
+      chatId: this.roomId,
+      timestamp: isoTimeString }
+      console.log(timestamp);
+    this.chatserviceService.sendMessage(this.senderId,this.recipient.id,this.content)
+   this.messages.push(message)
   }
 
   selectContact(id: string){
+    this.messages=[]
     this.recipientId=id;
-    //this.userService.getUserById(this.recipientId).subscribe((recipient)=>{
-    //   this.recipient=recipient
-    // })
+    this.userService.getUserById(this.recipientId).subscribe((recipient)=>{
+      this.recipient=recipient
+      console.log("test for convo",this.recipient)
+      this.chatserviceService.getConversation(this.senderId,this.recipientId).subscribe((messages)=>{
+        
+        this.messages=this.mapMessage(messages,this.sender,this.recipient);
+        console.log(this.messages);
+        this.joinRoom();
+      })
+    })
+    console.log(this.recipient);
+    
   }
   updateTimeAgo(): void {
     setInterval(() => {
     }, 10000);
+  }
+  mapMessage(messages : any , sender : any ,recipeint : any){
+    return messages.map((message : any)=>{
+      const newmessage={...message};
+      newmessage.chatId=message.id
+      // newmessage.timestamp=new Date(message.createdAt).toISOString();
+      if (newmessage.senderId === sender.id){
+        newmessage.sender=sender;
+        newmessage.recipient=recipeint;
+      }else{
+        newmessage.sender= recipeint;
+        newmessage.recipient=sender;
+      }
+      return newmessage;
+    })
+
   }
   generateAvatarUrl(username: string): string {
     const length = 1;
@@ -108,12 +148,10 @@ export class ChatroomComponent  implements   OnInit, OnDestroy {
     const size = 128;
     return `https://ui-avatars.com/api/?length=${length}&name=${username}&rounded=${rounded}&bold=${bold}&background=%23${background}&color=%23${color}&size=${size}`;
   }
-  isCurrentUser(userid : string ) : boolean{
-    return userid=="0"
+
+  isCurrentUser(senderId: string): boolean {
+    return senderId === this.session.getUserDetails()?.id;
   }
-  // isCurrentUser(senderId: string): boolean {
-  //   return senderId === this.session.getUserDetails()?.id;
-  // }
   ngOnDestroy(): void {
 
   }

@@ -141,8 +141,12 @@ export class UserController {
   createParent(@Body() createParentDto: CreateParentDto) {
     return this.parentService.createParent(createParentDto);
   }
-  @Get("User")
+  @Get("User/:id")
   getUserById(@Param("id") id : string){
     return this.userService.findOne(id);
+  }
+  @Get("User")
+  getAllUsers(){
+    return  this.userService.GetAllUser();
   }
 }

@@ -3,12 +3,16 @@ import { CreateMessengerDto } from './dto/create-messenger.dto';
 import { UpdateMessengerDto } from './dto/update-messenger.dto';
 import { MessengerRepo } from "./messenger.repository"
 import { UserEntity } from 'src/user/entities/user.entity';
-
+import { Messenger } from './entities/messenger.entity';
 @Injectable()
 export class MessengerService {
-  private messengerRepo :MessengerRepo
-  create(createMessengerDto: CreateMessengerDto) : {} {
-    return this.messengerRepo.create(createMessengerDto);
+ constructor(private readonly  messengerRepo :MessengerRepo){
+
+ }
+  
+
+  async create(createMessenger: Partial<Messenger>) : Promise<Messenger> {
+    return await this.messengerRepo.create(createMessenger);
   }
 
   findOne(id: string) {

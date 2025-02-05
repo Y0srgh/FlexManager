@@ -11,12 +11,13 @@ export class UserService {
   private apiUrl = `auth/client`;
   constructor(private http: HttpClient, private baseService: BaseService) { }
 
-  public getUserById(id: string | null ): Observable<any> {
-    return this.http.get<any>(`${environment.BASE_URL}/auth/User?id=${id}`);
+   public getUserById(id: string | null ): Observable<any> {
+    return  this.http.get<any>(`${environment.BASE_URL}/auth/User/${id}`);
   }
-  public getAllUsers(): Observable<any> {
-    return this.http.get<any>(`${environment.BASE_URL}/auth/User/`);
+  public getAllUsers(): Observable<any[]> {
+    return  this.http.get<any>(`${environment.BASE_URL}/auth/User`);
   }
+
   public getClient(id : string ): Observable<Client> {
       const options = {
         withCredentials: true

@@ -57,6 +57,7 @@ import { SignupParentComponent } from './signup-parent/signup-parent.component';
 //   { path: '**', redirectTo: '' }
 // ];
 import { SitePaymentService } from './services/site-payment/site-payment.service';
+import { DatePipe } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -110,13 +111,15 @@ import { SitePaymentService } from './services/site-payment/site-payment.service
     MatInputModule,
     AppRoutingModule,
     // RouterModule.forRoot(routes),
+    DatePipe,
     MatIconModule
     ,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoggerInterceptor, multi: true },
-    SitePaymentService
+    SitePaymentService,
+    DatePipe,
   ],
   bootstrap: [AppComponent],
 })

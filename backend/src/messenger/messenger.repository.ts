@@ -9,8 +9,8 @@ export class MessengerRepo {
       @InjectRepository(Messenger)
       private readonly MessengerRepo: Repository<Messenger>,
     ) {}
-    async create(data: Partial<Messenger>) {
-      return this.MessengerRepo.save(data);
+    async create(data: Partial<Messenger>) : Promise<Messenger> {
+      return await this.MessengerRepo.save(data);
     }
     async findByUserId(userId: string) {
       return this.MessengerRepo.find({
@@ -20,7 +20,7 @@ export class MessengerRepo {
     async findById(msgId: string){
       return this.MessengerRepo.findOne({where : { id : msgId}})
     }
-    async findConversation(senderId: string ,recieverId:string){
+    public async findConversation(senderId: string ,recieverId:string){
         return this.MessengerRepo.find(
             {where : {senderId : senderId, recipientId : recieverId}}
         )

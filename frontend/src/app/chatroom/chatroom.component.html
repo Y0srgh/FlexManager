@@ -20,7 +20,7 @@
              [ngClass]="{'active': contact.id === recipientId}" 
              (click)="selectContact(contact.id)">
           <!-- Remplacer l'image de l'avatar par une icône -->
-          <i class="bi bi-person-circle avatar-icon"></i>
+          <i  class="bi bi-person-circle avatar-icon"></i>
           <span>{{ contact.username }}</span>
         </div>
       </div>
@@ -72,7 +72,7 @@
               <hr>
               <!-- Chat Messages Section -->
               <div class="chat-messages">
-                <div *ngFor="let message of messages" [ngClass]="{'received': !isCurrentUser(message.sender.id), 'sent': isCurrentUser(message.sender.id)}" class="message">
+                <div *ngFor="let message of messages" [ngClass]="{'received': !isCurrentUser(message.recipient.id), 'sent': isCurrentUser(message.sender.id)}" class="message">
                   <p>{{ message.content }}</p>
                   <span class="time">{{ message.timestamp | date: 'shortTime' }}</span>
                 </div>

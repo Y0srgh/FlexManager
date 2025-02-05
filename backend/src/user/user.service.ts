@@ -22,7 +22,9 @@ export class UserService {
 
     private jwtService: JwtService,
   ) {}
-
+  async GetAllUser() : Promise<UserEntity[]>{
+    return await this.userRepository.find();
+  }
   async signUp(data: UserSingUpDto): Promise<UserEntity> {
     console.log('datas ', data);
 
