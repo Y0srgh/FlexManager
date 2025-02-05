@@ -35,10 +35,8 @@ export class SessionService {
     const accessToken = localStorage.getItem(ACCESS_KEY);
 
     if (accessToken) return jwt_decode.jwtDecode(accessToken);
-
     return null;
   }
-
   public isLoggedIn() {
     return sessionStorage.getItem(USER_KEY) != null;
   }
@@ -48,6 +46,5 @@ export class SessionService {
   }
   public disconnectSession(): void {
     // window.sessionStorage.clear();
-
   }
 }

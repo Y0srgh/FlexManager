@@ -37,7 +37,7 @@ import { FailedComponent } from './pages/payment/failed/failed.component';
 import { SitePaymentComponent } from './site-payment/site-payment.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
 
 // Components
 import { AppComponent } from './app.component';
@@ -56,7 +56,6 @@ import { SignupComponent } from './signup/signup.component';
 import { ProgressIndicatorComponent } from './components/progress-indicator/progress-indicator.component';
 import { InputFieldComponent } from './components/input-field/input-field.component';
 import { SigninComponent } from './signin/signin.component';
-import { ClientComponent } from './client/client.component';
 import { CalendarComponent } from './calendar/calendar.component';
 
 import { ClassFormComponent } from './class-management/class-form/class-form.component';
@@ -118,7 +117,6 @@ import { DatePipe } from '@angular/common';
     ProgressIndicatorComponent,
     InputFieldComponent,
     SigninComponent,
-    ClientComponent,
     JoinOptionsComponent,
     SignupParentComponent,
     PendingRequestsComponent,
@@ -170,7 +168,7 @@ import { DatePipe } from '@angular/common';
     MatDialogModule,
     ReactiveFormsModule,
     MatSnackBarModule,
-
+MatIcon,
     MatProgressSpinnerModule,
     MatCheckboxModule
     ,
