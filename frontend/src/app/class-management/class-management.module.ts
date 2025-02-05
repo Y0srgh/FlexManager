@@ -9,10 +9,10 @@ import { CoursePageComponent } from './course-page/course-page.component';
 
 @NgModule({
   declarations: [
-    ClassFormComponent,
-    CourseComponent,
-    CourseDetailsComponent,
-    CoursePageComponent,
+    // ClassFormComponent,
+    // CourseComponent,
+    // CourseDetailsComponent,
+    // CoursePageComponent,
     
   ],
   imports: [
