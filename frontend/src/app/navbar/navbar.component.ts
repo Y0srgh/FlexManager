@@ -11,14 +11,18 @@ export class NavbarComponent {
   constructor(private router: Router) {}
   onNotificationsClick() {
     console.log('Notifications clicked!');
-   
   }
 
   onProfileClick() {
     console.log('Profile clicked!');
-   
   }
+
   navigateToHome() {
     this.router.navigate(['/home']); 
+  }
+
+  signOut(){
+    localStorage.removeItem('accessToken');
+    this.router.navigate(['']);
   }
 }

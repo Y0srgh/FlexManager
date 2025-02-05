@@ -11,26 +11,12 @@ import { Response } from 'express';
 export class RequestLoggingInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const request = context.switchToHttp().getRequest();
-    // console.log('request', request);
-
-    // console.log('Request Details:');
-    // console.log('Method:', request.method);
-    // console.log('URL:', request.url);
-    // console.log('Headers:', request.headers);
-    // console.log('Body:', request.body);
-    // console.log('Query Params:', request.query);
-    // const refreshToken = request.cookies['refreshToken'];
-    // console.log('Refresh Token----------------------------:', refreshToken);
     return next.handle().pipe(
       tap((response) => {
-        // console.log(response);
         console.log('Request handled successfully');
         const req = context.switchToHttp().getRequest<Request>();
         const res = context.switchToHttp().getResponse<Response>();
         console.log('Request Details:', req['accessToken']);
-        
-        // res.set('x-new-access-token', req['accessToken']);
-        // res.setHeader('x-new-access-token', req['accessToken']);
         res.setHeader('access-control-allow-origin', 'http://localhost:4200');
         console.log('response header', res.getHeaders());
         const newAccessToken = req['accessToken'];

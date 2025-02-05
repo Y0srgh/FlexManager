@@ -7,10 +7,12 @@ import {
   HttpResponse,
 } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   private protectedPaths = ['/auth/client', '/auth/request/pending-child-request', '/auth/request/associate-children', '/auth/progress', '/progress','/courses','/reservations'];
+  constructor(private router: Router) {}
 
   intercept(
     req: HttpRequest<any>,
@@ -30,14 +32,13 @@ export class AuthInterceptor implements HttpInterceptor {
           Authorization: `Bearer ${accessToken}`,
           'Content-Type': 'application/json',
         },
-        // withCredentials: true,
       });
 
       return next.handle(cloned).pipe(
         tap({
           next: (event) => {
             if (event instanceof HttpResponse) {
-              console.log('event', event);
+              console.log('event ----- ', event);
               const newAccessToken = event.headers.get('x-new-access-token');
               console.log('-------------------------------', newAccessToken);
 
@@ -45,16 +46,18 @@ export class AuthInterceptor implements HttpInterceptor {
                 console.log('New access token received:', newAccessToken);
                 localStorage.setItem('accessToken', newAccessToken);
               }
-              if (event.status === 401) {
-                console.log('removing access token and must be signed out');
+              if (event.status === 401 ) {
+                localStorage.removeItem('accessToken'); 
+                this.router.navigate(['/']);
                 
-                // localStorage.removeItem('accessToken');
               }
             }
           },
           error: (error) => {
+            if (error.status === 401 && error.error === 'RefreshTokenExpired') {
+              console.log('removing access token and must be signed out');
+            }
             console.error('Error in request:', error);
-            // localStorage.removeItem('accessToken');
           },
         })
       );

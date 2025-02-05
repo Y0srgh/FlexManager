@@ -42,7 +42,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       console.log('Access token expired, checking refresh token');
 
       if (!user.refreshToken) {
-        throw new UnauthorizedException('No refresh token found');
+        throw new UnauthorizedException('InvalidRefreshToken');
       }
 
       try {
@@ -64,8 +64,9 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
         if (refreshPayload.exp < currentTime) {
           console.log('refresh token expired');
+          req['accessToken'] = ''
           
-          throw new UnauthorizedException('Refresh token expired');
+          throw new UnauthorizedException('InvalidRefreshToken');
         }
 
         // If refresh token is valid, generate a new access token
@@ -87,7 +88,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       } catch (error) {
         console.log('refresh token expired 2', error);
 
-        throw new UnauthorizedException('Invalid refresh token');
+        throw new UnauthorizedException('InvalidRefreshToken');
       }
     } else {
       delete user.password;
