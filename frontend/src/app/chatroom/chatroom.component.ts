@@ -78,8 +78,8 @@ export class ChatroomComponent  implements   OnInit, OnDestroy {
       const formattedTimestamp = this.datePipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss');
 
       const message = {
-          sender: data.senderId,
-          recipient: data.receiverId,
+          sender: this.recipient,
+          recipient: this.sender,
           content: data.content,
           chatId: this.roomId,
           timestamp: isoTimeString }
@@ -100,7 +100,7 @@ export class ChatroomComponent  implements   OnInit, OnDestroy {
       timestamp: isoTimeString }
       console.log(timestamp);
     this.chatserviceService.sendMessage(this.senderId,this.recipient.id,this.content)
-   this.messages.push(message)
+  //  this.messages.push(message)
   }
 
   selectContact(id: string){
@@ -108,8 +108,8 @@ export class ChatroomComponent  implements   OnInit, OnDestroy {
     this.recipientId=id;
     this.userService.getUserById(this.recipientId).subscribe((recipient)=>{
       this.recipient=recipient
-      console.log("test for convo",this.recipient)
-      this.chatserviceService.getConversation(this.senderId,this.recipientId).subscribe((messages)=>{
+      console.log("test for convo",this.recipient,this.senderId);
+      this.chatserviceService.getConversation(this.senderId,this.recipient.id).subscribe((messages)=>{
         
         this.messages=this.mapMessage(messages,this.sender,this.recipient);
         console.log(this.messages);
@@ -127,6 +127,7 @@ export class ChatroomComponent  implements   OnInit, OnDestroy {
     return messages.map((message : any)=>{
       const newmessage={...message};
       newmessage.chatId=message.id
+      newmessage.timestamp=message.createAt;
       // newmessage.timestamp=new Date(message.createdAt).toISOString();
       if (newmessage.senderId === sender.id){
         newmessage.sender=sender;
@@ -150,7 +151,7 @@ export class ChatroomComponent  implements   OnInit, OnDestroy {
   }
 
   isCurrentUser(senderId: string): boolean {
-    return senderId === this.session.getUserDetails()?.id;
+    return senderId === this.senderId;
   }
   ngOnDestroy(): void {
 

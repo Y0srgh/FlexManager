@@ -13,6 +13,9 @@ export class Messenger {
     // @JoinColumn()
     // recipient: User;
     @Column()
+    roomId : string;
+    
+    @Column()
     senderId: string;
     @Column()
     recipientId: string;

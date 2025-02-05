@@ -22,10 +22,15 @@ export class MessengerService {
   update(id: string, updateMessengerDto: UpdateMessengerDto) {
     return this.messengerRepo.updateMessage(id,updateMessengerDto);
   }
-  findConversation(senderId: string,recieverId: string){
-    return this.messengerRepo.findConversation(senderId,recieverId);
+  async findConversation(senderId: string,recieverId: string){
+    console.log("test for finding convo ---------",recieverId,senderId);
+    console.log( await this.messengerRepo.findConversation(this.getRoomName(senderId,recieverId)));
+    return this.messengerRepo.findConversation(this.getRoomName(senderId,recieverId));
   }
   remove(id: string) {
     return `This action removes a #${id} messenger`;
+  }
+  private getRoomName(senderId: string, receiverId: string): string {
+    return [senderId, receiverId].sort().join('_'); // Ensure consistent room naming
   }
 }

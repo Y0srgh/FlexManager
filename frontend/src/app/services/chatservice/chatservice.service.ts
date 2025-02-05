@@ -39,8 +39,8 @@ export class ChatserviceService {
   sendMessage(senderId: string, receiverId: string,content: string){
     return this.socket.emit("sendMessage",{senderId,receiverId,content})
   }
-  receiveMessage(callback: (message: { senderId: string; receiverId: string; content: string }) => void) {
-    this.socket.on('newMessage', (data: { senderId: string; receiverId: string; content: string }) => {
+  receiveMessage(callback: (message: { senderId: string; recipientId: string; content: string ,chatId:string,roomName : string,createAt:Date }) => void) {
+    this.socket.on('newMessage', (data: { senderId: string; recipientId: string; content: string,chatId:string,roomName : string,createAt:Date }) => {
       callback(data);
     });
   }

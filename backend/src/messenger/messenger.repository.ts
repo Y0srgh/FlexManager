@@ -20,9 +20,9 @@ export class MessengerRepo {
     async findById(msgId: string){
       return this.MessengerRepo.findOne({where : { id : msgId}})
     }
-    public async findConversation(senderId: string ,recieverId:string){
-        return this.MessengerRepo.find(
-            {where : {senderId : senderId, recipientId : recieverId}}
+    public async findConversation(roomId : string){
+        return await this.MessengerRepo.find(
+            {where : { roomId }}
         )
     }
     async updateMessage(id: string, data: Partial<Messenger>) {

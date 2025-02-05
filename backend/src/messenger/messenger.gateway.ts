@@ -38,9 +38,9 @@ export class MessengerGateway {
     const { senderId, receiverId, content } = createMessengerDto;
     const roomName = this.getRoomName(senderId, receiverId);
     console.log(senderId,receiverId,"------------------------------")
-    const message = await this.messengerRepo.create({senderId : senderId,recipientId : receiverId,content: content});
+    const message = await this.messengerRepo.create({senderId : senderId,recipientId : receiverId,content: content,roomId :roomName});
     console.log(message);
-    this.server.to(roomName).emit('newMessage', {senderId : senderId,recipientId : receiverId,content: content});
+    this.server.to(roomName).emit('newMessage',message);
 
     // console.log(message)
     // return message;
@@ -52,6 +52,7 @@ export class MessengerGateway {
   async getConversation(
     @MessageBody() { senderId, receiverId }: { senderId: string; receiverId: string },
   ) {
+    
     return this.messengerService.findConversation(senderId, receiverId);
   }
   private getRoomName(senderId: string, receiverId: string): string {

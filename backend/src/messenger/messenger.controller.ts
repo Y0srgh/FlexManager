@@ -10,13 +10,15 @@ export class MessengerController {
    * GET /messages/conversation?senderId=xxx&receiverId=yyy
    * Returns the conversation between two users.
    */
-  @Get('conversation/:senderId/:recieverId')
+  @Get('conversation/:senderId/:receiverId')
 //   @UseGuards(JwtAuthGuard)
-  async getConversation(
+   getConversation(
     @Param('senderId') senderId: string,
     @Param('receiverId') receiverId: string,
   ): Promise<Messenger[]> {
-    return await this.messengerService.findConversation(senderId, receiverId);
+    console.log("senderId",senderId);
+    console.log("recveiverId",receiverId);
+    return  this.messengerService.findConversation(senderId, receiverId);
   }
 
 
