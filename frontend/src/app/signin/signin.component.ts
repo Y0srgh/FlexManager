@@ -45,7 +45,7 @@ export class SigninComponent {
           //after 1s
           setTimeout(() => {
             localStorage.setItem('accessToken',response.accessToken);
-            // window.location.href = '/dashboard';
+             window.location.href = '/home';
           }, 1000);
         },
         error: (error) => {

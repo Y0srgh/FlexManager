@@ -8,7 +8,7 @@ import Chart from 'chart.js/auto';
 })
 export class DashboardComponent {
   revenue = {
-    amount: '$4.53K',
+    amount: 'DT 4.53K',
     growth: 2.1,
     month: 'July'
   };
@@ -31,7 +31,7 @@ export class DashboardComponent {
     { month: 'Jul', revenue: 1200, expense: 800 }
   ];
 
-  gymCapacityAnalytics = [60, 65, 70, 75, 80, 85, 90]; // Capacity over months
+  gymCapacityAnalytics = [60, 65, 70, 75, 80, 85, 90]; 
 
   trainerDistribution = {
     "Trainer A": 5,
@@ -51,7 +51,7 @@ export class DashboardComponent {
     "VIP": 1000
   };
 
-  visitFrequency = [50, 60, 70, 80, 90, 100, 110]; // Weekly visit frequency
+  visitFrequency = [50, 60, 70, 80, 90, 100, 110]; 
 
   trainerPerformance = {
     "Trainer A": 150,
@@ -59,7 +59,7 @@ export class DashboardComponent {
     "Trainer C": 100
   };
 
-  memberRetentionRate = [95, 90, 85, 80, 75, 70, 65]; // Retention rate over months
+  memberRetentionRate = [95, 90, 85, 80, 75, 70, 65]; 
 
 
 

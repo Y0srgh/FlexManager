@@ -17,7 +17,7 @@ export class AppComponent {
   showNavbar = true;
   constructor(private router: Router) {
     this.router.events.subscribe(() => {
-      const hiddenRoutes = ['/signup', '/signin' ,'/','/signup/sportsman','/signup/parent']; 
+      const hiddenRoutes = ['/signup', '/signin' ,'/','/signup/sportsman','/signup/parent','/register']; 
       this.showNavbar = !hiddenRoutes.includes(this.router.url);
     });
   }
