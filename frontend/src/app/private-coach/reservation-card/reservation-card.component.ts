@@ -9,8 +9,8 @@ import { PrivateReservation } from '../../models/private-reservation.model';
   styleUrls: ['./reservation-card.component.css']
 })
 export class ReservationCardComponent {
-  @Input() coach!: Coach;  // Le coach reçu depuis le parent
-  @Output() close: EventEmitter<void> = new EventEmitter();  // Permet de fermer le formulaire après la réservation
+  @Input() coach!: Coach;  
+  @Output() close: EventEmitter<void> = new EventEmitter(); 
 
   selectedDate: string = '';
   startTime: string = '';
@@ -19,7 +19,6 @@ export class ReservationCardComponent {
   constructor(private reservationService: PrivateReservationService) {}
 
   isFormValid(): boolean {
-    // Validation du formulaire
     if (!this.selectedDate || !this.startTime || !this.endTime) {
       return false;
     }
@@ -30,22 +29,20 @@ export class ReservationCardComponent {
   }
 
   onBookClick() {
-    // Construction des données de réservation avec les objets complets pour coach et client
     const reservationData = new PrivateReservation(
-      this.coach.id,  // coachId
-      '481cffd8-42b7-4036-b28a-37cae55aaf93',  // clientId (Remplace '1' par l'ID du client connecté)
-      this.selectedDate,  // date
-      this.startTime,  // startTime
-      this.endTime  // endTime
+      this.coach.id,  
+      // '2a702592-b2fe-4d81-a0a6-54a1f5aff196',  
+      this.selectedDate,  
+      this.startTime,  
+      this.endTime  
     );
 
     console.log('Données de réservation :', reservationData);
 
-    // Appel du service pour créer la réservation
     this.reservationService.createReservation(reservationData).subscribe({
       next: (response) => {
         console.log('Réservation créée', response);
-        this.close.emit();  // Ferme le formulaire après la réservation
+        this.close.emit();  
       },
       error: (error) => {
         console.error('Erreur lors de la réservation', error);

@@ -11,6 +11,16 @@ import { Response } from 'express';
 export class RequestLoggingInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const request = context.switchToHttp().getRequest();
+    //  console.log('request', request);
+
+    // console.log('Request Details:');
+    // console.log('Method:', request.method);
+    // console.log('URL:', request.url);
+    // console.log('Headers:', request.headers);
+    // console.log('Body:', request.body);
+    // console.log('Query Params:', request.query);
+    // const refreshToken = request.cookies['refreshToken'];
+    // console.log('Refresh Token----------------------------:', refreshToken);
     return next.handle().pipe(
       tap((response) => {
         console.log('Request handled successfully');

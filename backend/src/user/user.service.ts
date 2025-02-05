@@ -98,6 +98,7 @@ export class UserService {
 }*/
 
   async signIn(credientials: UserSingInDto, response: Response) {
+    console.log(credientials)
     const { email, password } = credientials;
 
     const user = await this.userRepository
