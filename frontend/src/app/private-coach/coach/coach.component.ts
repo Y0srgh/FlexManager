@@ -17,11 +17,11 @@ export class CoachComponent {
     const userRole = this.auth.getCurrentUserRole();
     this.currentRole = userRole!;
   }
-  isClient(): boolean {
-    return this.currentRole === 'client';
-  }
   isCoach(): boolean {
     return this.currentRole === 'coach';
+  }
+  isClient(): boolean {
+    return this.currentRole === 'client';
   }
   isAdmin(): boolean {
     return this.currentRole === 'manager';

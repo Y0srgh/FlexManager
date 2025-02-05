@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, output } from '@angular/core';
 import { Course } from '../../models/course.model';
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from 'src/app/shared/auth.service';
 
 @Component({
   selector: 'app-course-details',
@@ -13,8 +14,19 @@ export class CourseDetailsComponent {
   @Output() close = new EventEmitter<void>();
   @Output() deleted = new EventEmitter<string>();
   @Output() updated = new EventEmitter<Course>();
-
+  
+  constructor(private http: HttpClient, private snackBar: MatSnackBar,private auth: AuthService) {}
   isEditing = false;
+
+  currentRole: string = '';
+  ngOnInit() {
+    const userRole = this.auth.getCurrentUserRole();
+    this.currentRole = userRole!;
+  }
+  
+  isCoach(): boolean {
+    return this.currentRole === 'coach';
+  }
 
   private apiUrl = 'http://localhost:3000/courses';
   editedCourse: Course = {
@@ -33,7 +45,6 @@ export class CourseDetailsComponent {
   };
   
 
-  constructor(private http: HttpClient, private snackBar: MatSnackBar) {}
 
 
   onEdit() {

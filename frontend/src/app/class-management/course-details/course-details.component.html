@@ -43,8 +43,8 @@
 
     <!-- Edit and Delete Buttons -->
     <div class="buttons-container" *ngIf="!isEditing">
-      <button class="edit-btn" (click)="onEdit()">Edit</button>
-      <button class="delete-btn" (click)="onDelete(course.id)">Delete</button>
+      <button *ngIf="isCoach()" class="edit-btn" (click)="onEdit()">Edit</button>
+      <button *ngIf="isCoach()" class="delete-btn" (click)="onDelete(course.id)">Delete</button>
     </div>
   </div>
 
