@@ -178,3 +178,22 @@
   background-color: rgba(90, 42, 86, 1);
   transform: scale(1.05);
 }
+.add {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #6c757d; 
+  color: black;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  position: absolute;
+  right:10px;
+  
+}
+
+
+.add:hover {
+  background-color: #5a636a; 
+}

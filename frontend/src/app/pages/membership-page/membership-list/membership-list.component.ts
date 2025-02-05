@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DetailsModalComponent } from './details-dialog/details-modal/details-modal.component';
 import { MembershipService } from 'src/app/services/membership.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-membership',
@@ -23,7 +24,7 @@ export class MemberShipComponent implements OnInit {
   };
 
   constructor(private memberShipService: MembershipService,
-    private dialog: MatDialog
+    private dialog: MatDialog , private router:Router
   ) {}
 
   ngOnInit(): void {
@@ -47,4 +48,8 @@ export class MemberShipComponent implements OnInit {
       minWidth:'500px'
     });
   }
+  OnclickPay(){
+    this.router.navigate(["/payment"]);
+  }
+
 }

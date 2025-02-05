@@ -11,7 +11,7 @@ import { an } from 'node_modules/@fullcalendar/core/internal-common';
   styleUrl: './site-payment.component.css',
 })
 export class SitePaymentComponent implements OnInit {
-  User_plan: string = '';
+  User_plan: string = 'Free plan';
   UserSession!: JwtResponse | null;
   CurrentSubscription: any;
   user: any = { siteSubscriptions: { subscription_active: true } };
