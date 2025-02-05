@@ -9,7 +9,8 @@ export class Course {
   endTime: string;
   duration: string;
   capacity: number;  
-  
+  daysOfWeek: string[];
+
   constructor(
     id: string,
     title: string,
@@ -20,7 +21,8 @@ export class Course {
     startTime: string,
     endTime: string,
     duration: string,
-    capacity: number 
+    capacity: number,
+    daysOfWeek: string[] = [] 
   ) {
     this.id = id;
     this.title = title;
@@ -32,5 +34,6 @@ export class Course {
     this.endTime = endTime;
     this.duration = duration;
     this.capacity = capacity; 
+    this.daysOfWeek = daysOfWeek;
   }
 }
