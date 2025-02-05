@@ -38,6 +38,8 @@ import { SitePaymentComponent } from './site-payment/site-payment.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+
 
 // Components
 import { AppComponent } from './app.component';
@@ -163,6 +165,7 @@ import { DatePipe } from '@angular/common';
     MatDatepickerModule,
     NgxChartsModule,
     BrowserAnimationsModule,
+    MatSelectModule,
     ToastrModule.forRoot(),
     MatButtonModule,
     MatDialogModule,

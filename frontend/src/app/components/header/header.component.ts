@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class HeaderComponent {
   constructor(private router: Router) {}
   link = "/register";
+
   onJoinNowClick(): void {
     console.log('Join Now button clicked!');
   }

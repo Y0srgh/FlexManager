@@ -12,10 +12,12 @@ export class Course {
   @Column()
   description: string;
 
-@Column({nullable: true })
+  @Column({ nullable: true })
   duration: number;
-  @Column({nullable: true})
-  coachPhoto : string;
+
+  @Column({ nullable: true })
+  coachPhoto: string;
+
   @Column({ type: 'time', nullable: true })
   startTime: string;
 
@@ -27,6 +29,9 @@ export class Course {
 
   @Column({ type: 'int', nullable: true })
   capacity?: number; 
+
+  @Column({ type: 'simple-array', nullable: true })
+  daysOfWeek: string[];
 
   @ManyToOne(() => CoachEntity, (coach) => coach.courses, { onDelete: 'SET NULL' })
   coach: CoachEntity;

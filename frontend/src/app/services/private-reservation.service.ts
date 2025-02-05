@@ -17,7 +17,7 @@ export class PrivateReservationService {
 
   getReservations(): Observable<PrivateReservation[]> {
     console.log('getReservations()');
-    return this.http.get<PrivateReservation[]>('http://localhost:3000/reservations/coach');
+    return this.http.get<PrivateReservation[]>('http://localhost:3000/reservations');
   }
   
   updateState(id: string, state: string): Observable<PrivateReservation> {

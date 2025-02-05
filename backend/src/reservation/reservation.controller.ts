@@ -50,20 +50,27 @@ export class ReservationController {
   //   return this.reservationService.findOne(user.id);
   // }
   @Get()
-  @Role(Roles.CLIENT)
+  @Role(Roles.CLIENT , Roles.COACH)
   @UseGuards(JwtAuthGuard, RolesGuard)
   async findClientReservations(@User() user: any): Promise<Reservation[]> {
+    if (user.role === Roles.CLIENT) {
     console.log(this.reservationService.findByClientId(user.id));
     return this.reservationService.findByClientId(user.id);
-  }
-
-  @Get('/coach')
-  @Role(Roles.COACH)
-  @UseGuards(JwtAuthGuard, RolesGuard)
-  async findCoachReservations(@User() user: any): Promise<Reservation[]> {
+  
+  }else if (user.role === Roles.COACH) {
     console.log(this.reservationService.findByCoachId(user.id));
     return this.reservationService.findByCoachId(user.id);
+
   }
+  }
+
+  // @Get('/coach')
+  // @Role(Roles.COACH)
+  // @UseGuards(JwtAuthGuard, RolesGuard)
+  // async findCoachReservations(@User() user: any): Promise<Reservation[]> {
+  //   console.log(this.reservationService.findByCoachId(user.id));
+  //   return this.reservationService.findByCoachId(user.id);
+  // }
 
   // UPDATE
   @Patch(':id')
