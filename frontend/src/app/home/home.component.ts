@@ -1,18 +1,24 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { RoleGuard } from '../shared/role.guard';
+import { AuthService } from '../shared/auth.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-  cards = [
-    { title: 'Dashboard', icon: 'dashboard', route: '/dashboard', image: 'assets/dashboard.png' }, 
+ 
+
+  
+  
+  cards: { title: string; icon: string; route: string; image: string}[] = [
+    { title: 'Dashboard', icon: 'dashboard', route: '/dashboard', image: 'assets/dashboard.png'},
     { title: 'Classes', icon: 'class', route: '/course', image: 'assets/classes.webp' }, 
     { title: 'Nutrition', icon: 'restaurant', route: '/nutrition', image: 'assets/nutrition.jpg' }, 
 
     { title: 'Performance', icon: 'trending_up', route: '/performance', image: 'assets/performance.png' },
-    { title: 'Private Sessions', icon: 'fitness_center', route: '/coaches', image: 'assets/private.png' }, 
+    { title: 'Coaches', icon: 'fitness_center', route: '/coaches', image: 'assets/private.png'}, 
 
 
     { title: 'Plannings', icon: 'event', route: '/calendar', image: 'assets/calendar.webp' },
@@ -24,5 +30,6 @@ export class HomeComponent {
 
   ];
 
-}
- 
+  }
+
+

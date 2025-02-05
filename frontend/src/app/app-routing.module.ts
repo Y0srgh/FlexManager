@@ -22,6 +22,7 @@ import { SignupParentComponent } from './signup-parent/signup-parent.component';
 import { PendingRequestsComponent } from './pending-requests/pending-requests.component';
 import { ParentChildAssociationComponent } from './parent-child-association/parent-child-association.component';
 import { FitnessTrackerComponent } from './fitness-tracker/fitness-tracker.component';
+import { RoleGuard } from './shared/role.guard';
 
 const routes: Routes = [
   { path: '', component: LayoutComponent },
@@ -38,7 +39,7 @@ const routes: Routes = [
   { path: 'course', component: CoursePageComponent },
   { path: 'coaches', component: CoachListComponent },
   { path: 'requests', component: RequestPageComponent },
-  { path: 'home', component: HomeComponent }, 
+  { path: 'home', component: HomeComponent  }, 
   { path: 'dashboard', component: DashboardComponent }, 
   { path: 'calendar', component: CalendarComponent }, 
 ];

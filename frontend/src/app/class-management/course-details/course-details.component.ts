@@ -24,6 +24,7 @@ export class CourseDetailsComponent {
     coachName: '',
     coachPhoto: '',
     duration: '',
+
     description: '',
     startTime: '',
     endTime: '',
