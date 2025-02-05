@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  private protectedPaths = ['/auth/client', '/auth/request/pending-child-request', '/auth/request/associate-children', '/auth/progress', '/progress','/courses','/reservations'];
+  private protectedPaths = ['/auth/client', '/auth/request/pending-child-request', '/auth/request/associate-children', '/auth/progress', '/progress','/courses','/reservations','/auth/coach'];
   constructor(private router: Router) {}
 
   intercept(

@@ -90,6 +90,10 @@ import { CourseManagementComponent } from './components/course-management/course
 import { CourseFormComponent } from './components/course-form/course-form.component';
 import { ProgressFormDialogComponent } from './progress-form-dialog/progress-form-dialog.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { AddCoachComponent } from './add-coach/add-coach.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -131,6 +135,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     RequestPageComponent,
     ProgressFormDialogComponent,
     NotFoundComponent,
+    AddCoachComponent,
   ],
   imports: [
     BrowserModule,
@@ -152,20 +157,17 @@ import { NotFoundComponent } from './not-found/not-found.component';
     AppRoutingModule,
     // RouterModule.forRoot(routes),
     MatIconModule,
-
     MatDatepickerModule,
-
-
     NgxChartsModule,
     BrowserAnimationsModule,
-
-    MatIconModule,
     ToastrModule.forRoot(), 
-
     MatButtonModule,
-
     MatDialogModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSnackBarModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
+    MatCheckboxModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

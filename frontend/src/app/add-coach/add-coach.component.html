@@ -1,0 +1,75 @@
+<div class="add-coach-container">
+    <mat-card class="animate-card">
+      <mat-card-header>
+        <mat-card-title>Add New Coach</mat-card-title>
+      </mat-card-header>
+  
+      <mat-card-content>
+        <form [formGroup]="coachForm" (ngSubmit)="onSubmit()" class="coach-form">
+          <mat-form-field appearance="outline">
+            <mat-label>Username</mat-label>
+            <input matInput formControlName="username" placeholder="Enter username">
+            <mat-error *ngIf="coachForm.get('username')?.invalid && coachForm.get('username')?.touched">
+              {{ getErrorMessage('username') }}
+            </mat-error>
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" placeholder="Enter email" type="email">
+            <mat-error *ngIf="coachForm.get('email')?.invalid && coachForm.get('email')?.touched">
+              {{ getErrorMessage('email') }}
+            </mat-error>
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+            <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
+              <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error *ngIf="coachForm.get('password')?.invalid && coachForm.get('password')?.touched">
+              {{ getErrorMessage('password') }}
+            </mat-error>
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline">
+            <mat-label>Phone</mat-label>
+            <input matInput formControlName="phone" placeholder="Enter phone number">
+            <mat-error *ngIf="coachForm.get('phone')?.invalid && coachForm.get('phone')?.touched">
+              {{ getErrorMessage('phone') }}
+            </mat-error>
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline">
+            <mat-label>Expertise</mat-label>
+            <input matInput formControlName="expertise" placeholder="Enter expertise">
+            <mat-error *ngIf="coachForm.get('expertise')?.invalid && coachForm.get('expertise')?.touched">
+              {{ getErrorMessage('expertise') }}
+            </mat-error>
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline">
+            <mat-label>Certifications</mat-label>
+            <input matInput formControlName="certifications" placeholder="Enter certifications">
+            <mat-error *ngIf="coachForm.get('certifications')?.invalid && coachForm.get('certifications')?.touched">
+              {{ getErrorMessage('certifications') }}
+            </mat-error>
+          </mat-form-field>
+  
+          <mat-checkbox formControlName="isPrivate" color="primary">
+            Private Coach
+          </mat-checkbox>
+  
+          <div class="form-actions">
+            <button mat-button type="button" routerLink="/coaches">Cancel</button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="coachForm.invalid || isSubmitting">
+              <mat-spinner diameter="20" *ngIf="isSubmitting"></mat-spinner>
+              <span *ngIf="!isSubmitting">Add Coach</span>
+            </button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  

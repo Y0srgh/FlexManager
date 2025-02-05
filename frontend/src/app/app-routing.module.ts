@@ -23,6 +23,7 @@ import { PendingRequestsComponent } from './pending-requests/pending-requests.co
 import { ParentChildAssociationComponent } from './parent-child-association/parent-child-association.component';
 import { FitnessTrackerComponent } from './fitness-tracker/fitness-tracker.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { AddCoachComponent } from './add-coach/add-coach.component';
 
 const routes: Routes = [
   { path: '', component: LayoutComponent },
@@ -42,6 +43,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent }, 
   { path: 'dashboard', component: DashboardComponent }, 
   { path: 'calendar', component: CalendarComponent }, 
+  { path: 'add-coach', component: AddCoachComponent }, 
 
 
   { path: '404', component: NotFoundComponent },
