@@ -1,44 +1,47 @@
+
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Subscription } from './entities/subscription.entity';
 import { CreateSubscriptionDto } from './dto/create-subscription.dto';
 import { UpdateSubscriptionDto } from './dto/update-subscription.dto';
-import { BaseService } from 'src/base/base.service';
 
 @Injectable()
-export class SubscriptionsService extends BaseService<Subscription> {
+export class SubscriptionsService {
   constructor(
     @InjectRepository(Subscription)
+    
     private subscriptionRepository: Repository<Subscription>,
-  ) {
-    super(subscriptionRepository);  
-  }
+  ) {}
 
-  
+  // Création d'une nouvelle souscription
   async create(createSubscriptionDto: CreateSubscriptionDto): Promise<Subscription> {
-    return super.create(createSubscriptionDto);
+    const subscription = this.subscriptionRepository.create(createSubscriptionDto);  // Crée une instance de Subscription
+    return this.subscriptionRepository.save(subscription);  // Sauvegarde dans la base de données
   }
 
   // Récupérer toutes les souscriptions
   async findAll(): Promise<Subscription[]> {
-    return super.findAll();
+    return this.subscriptionRepository.find();
   }
 
   // Récupérer une souscription par ID
-async findOne(id: string): Promise<Subscription> {
-  return super.findOne(id);  // Pass the id as a string
-}
+  async findOne(id: number): Promise<Subscription> {
+    return this.subscriptionRepository.findOne({ where: { id } });
+  }
 
-// Mettre à jour une souscription existante
-async update(id: string, updateSubscriptionDto: UpdateSubscriptionDto): Promise<Subscription> {
-  return super.update(id, updateSubscriptionDto);  // Pass the id as a string
-}
-
-
+  // Mettre à jour une souscription existante
+  async update(id: number, updateSubscriptionDto: UpdateSubscriptionDto): Promise<Subscription> {
+    const subscription = await this.findOne(id);
+    if (subscription) {
+      Object.assign(subscription, updateSubscriptionDto);  // Met à jour les propriétés de l'entité
+      return this.subscriptionRepository.save(subscription);  // Sauvegarde les modifications
+    }
+    throw new Error('Subscription not found');
+  }
 
   // Supprimer une souscription
   async remove(id: number): Promise<void> {
-    return super.delete(id.toString());  
+    await this.subscriptionRepository.delete(id);
   }
 }

@@ -1,3 +1,4 @@
+// src/subscription/subscription.controller.ts
 
 import { Controller, Get, Post, Body, Param, Put, Delete } from '@nestjs/common';
 import { SubscriptionsService } from './subscription.service';
@@ -20,21 +21,20 @@ export class SubscriptionsController {
   }
 
   @Get(':id')
-findOne(@Param('id') id: string): Promise<Subscription> {
-  return this.subscriptionsService.findOne(id); 
-}
+  findOne(@Param('id') id: string): Promise<Subscription> {
+    return this.subscriptionsService.findOne(Number(id));
+  }
 
-@Put(':id')
-update(
-  @Param('id') id: string,
-  @Body() updateSubscriptionDto: UpdateSubscriptionDto,
-): Promise<Subscription> {
-  return this.subscriptionsService.update(id, updateSubscriptionDto); 
-}
+  @Put(':id')
+  update(
+    @Param('id') id: string,
+    @Body() updateSubscriptionDto: UpdateSubscriptionDto,
+  ): Promise<Subscription> {
+    return this.subscriptionsService.update(Number(id), updateSubscriptionDto);
+  }
 
-@Delete(':id')
-remove(@Param('id') id: string): Promise<void> {
-  return this.subscriptionsService.remove(Number(id));  
-}
-
+  @Delete(':id')
+  remove(@Param('id') id: string): Promise<void> {
+    return this.subscriptionsService.remove(Number(id));
+  }
 }
