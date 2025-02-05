@@ -26,12 +26,27 @@ export class ReservationController {
   // }
 
   // READ ONE
+  // @Get()
+  // @Role(Roles.CLIENT)
+  // @UseGuards(JwtAuthGuard, RolesGuard)
+  // async findOne(@User() user: any): Promise<Reservation> {
+  //   return this.reservationService.findOne(user.id);
+  // }
   @Get()
-  @Role(Roles.CLIENT)
-  @UseGuards(JwtAuthGuard, RolesGuard)
-  async findOne(@User() user: any): Promise<Reservation> {
-    return this.reservationService.findOne(user.id);
-  }
+@Role(Roles.CLIENT) 
+@UseGuards(JwtAuthGuard, RolesGuard)
+async findClientReservations(@User() user: any): Promise<Reservation[]> {
+  console.log(this.reservationService.findByClientId(user.id));
+  return this.reservationService.findByClientId(user.id);
+}
+@Get('/coach')
+@Role(Roles.COACH) 
+@UseGuards(JwtAuthGuard, RolesGuard)
+async findCoachReservations(@User() user: any): Promise<Reservation[]> {
+  console.log(this.reservationService.findByCoachId(user.id));
+  return this.reservationService.findByCoachId(user.id);
+}
+
 
   // UPDATE
   @Patch(':id')

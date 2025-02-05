@@ -89,4 +89,19 @@ export class ReservationService {
     const reservation = await this.findOne(id);
     await this.reservationRepository.remove(reservation);
   }
+  async findByClientId(clientId: string): Promise<Reservation[]> {
+    return this.reservationRepository.find({
+      where: { clientEntity: { id: clientId } }, 
+      relations: ['clientEntity'], 
+    });
+  }
+  async findByCoachId(coachId: string): Promise<Reservation[]> {
+    return this.reservationRepository.find({
+      where: { coachEntity: { id: coachId } }, 
+      relations: ['coachEntity'], 
+    });
+  }
+  
+  
+  
 }
