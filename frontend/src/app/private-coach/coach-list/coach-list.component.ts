@@ -22,6 +22,7 @@ export class CoachListComponent implements OnInit {
     this.coachService.getCoaches().subscribe(
       (data) => {
         this.coaches = data;
+        
       },
       (error) => {
         console.error('Erreur lors de la récupération des coachs:', error);

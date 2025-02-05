@@ -40,7 +40,7 @@ import { Course } from '../models/course.model';
   providedIn: 'root'
 })
 export class CourseService {
-  private apiUrl = 'http://localhost:4000/courses'; 
+  private apiUrl = 'http://localhost:3000/courses'; 
 
   constructor(private http: HttpClient) {}
 

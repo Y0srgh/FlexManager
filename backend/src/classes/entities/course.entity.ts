@@ -15,7 +15,7 @@ export class Course {
 @Column({nullable: true })
   duration: number;
   @Column({nullable: true})
-coachPhoto : string;
+  coachPhoto : string;
   @Column({ type: 'time', nullable: true })
   startTime: string;
 

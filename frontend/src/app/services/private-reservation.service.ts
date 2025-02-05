@@ -17,8 +17,9 @@ export class PrivateReservationService {
 
   getReservations(): Observable<PrivateReservation[]> {
     console.log('getReservations()');
-    return this.http.get<PrivateReservation[]>(this.apiUrl);
+    return this.http.get<PrivateReservation[]>('http://localhost:3000/reservations/coach');
   }
+  
   updateState(id: string, state: string): Observable<PrivateReservation> {
     return this.http.patch<PrivateReservation>(`${this.apiUrl}/${id}`, { state });
   }

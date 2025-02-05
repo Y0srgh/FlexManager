@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+} from '@nestjs/common';
 import { ReservationService } from './reservation.service';
 import { CreateReservationDto } from './dto/create-reservation.dto';
 import { UpdateReservationDto } from './dto/update-reservation.dto';
@@ -14,9 +23,17 @@ export class ReservationController {
   constructor(private readonly reservationService: ReservationService) {}
 
   // CREATE
+  // @Post()
+  // async create(@Body() dto: CreateReservationDto): Promise<Reservation> {
+  //   return this.reservationService.create(dto);
+  // }
+
   @Post()
-  async create(@Body() dto: CreateReservationDto): Promise<Reservation> {
-    return this.reservationService.create(dto);
+  @Role(Roles.CLIENT)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  async create(@User() user, @Body() dto: CreateReservationDto) {
+    console.log('body : ', user);
+    return this.reservationService.create(dto, user.id);
   }
 
   // READ ALL
@@ -26,21 +43,43 @@ export class ReservationController {
   // }
 
   // READ ONE
+  // @Get()
+  // @Role(Roles.CLIENT)
+  // @UseGuards(JwtAuthGuard, RolesGuard)
+  // async findOne(@User() user: any): Promise<Reservation> {
+  //   return this.reservationService.findOne(user.id);
+  // }
   @Get()
   @Role(Roles.CLIENT)
   @UseGuards(JwtAuthGuard, RolesGuard)
-  async findOne(@User() user: any): Promise<Reservation> {
-    return this.reservationService.findOne(user.id);
+  async findClientReservations(@User() user: any): Promise<Reservation[]> {
+    console.log(this.reservationService.findByClientId(user.id));
+    return this.reservationService.findByClientId(user.id);
+  }
+
+  @Get('/coach')
+  @Role(Roles.COACH)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  async findCoachReservations(@User() user: any): Promise<Reservation[]> {
+    console.log(this.reservationService.findByCoachId(user.id));
+    return this.reservationService.findByCoachId(user.id);
   }
 
   // UPDATE
   @Patch(':id')
-  async update(@Param('id') id: string, @Body() dto: UpdateReservationDto): Promise<Reservation> {
+  @Role(Roles.COACH)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  async update(
+    @Param('id') id: string,
+    @Body() dto: UpdateReservationDto,
+  ): Promise<Reservation> {
     return this.reservationService.update(id, dto);
   }
 
   // DELETE
   @Delete(':id')
+  @Role(Roles.COACH, Roles.MANAGER)
+  @UseGuards(JwtAuthGuard, RolesGuard)
   async remove(@Param('id') id: string): Promise<void> {
     return this.reservationService.remove(id);
   }

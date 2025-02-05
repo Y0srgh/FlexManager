@@ -22,5 +22,6 @@ export class CreateReservationDto {
   coachId: string;
 
   @IsUUID()
+  @IsOptional()
   clientId: string;
 }
