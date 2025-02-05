@@ -48,7 +48,8 @@
   mat-card-title {
     font-size: 2rem;
     font-weight: 700;
-    color: #00ff88;
+    color: #ffaa00;
+    color: #ffaa00;
     text-transform: uppercase;
     letter-spacing: 2px;
     text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
@@ -90,7 +91,7 @@
   }
   
   .mat-mdc-form-field:hover .mat-mdc-outlined-input .mdc-notched-outline {
-    border-color: #00ff88 !important;
+    border-color: #ffaa00 !important;
   }
   
   .mat-mdc-input-element {
@@ -112,10 +113,10 @@
   
   .mat-mdc-checkbox.mat-accent {
     --mdc-checkbox-selected-checkmark-color: #000;
-    --mdc-checkbox-selected-focus-icon-color: #00ff88;
-    --mdc-checkbox-selected-hover-icon-color: #00ff88;
-    --mdc-checkbox-selected-icon-color: #00ff88;
-    --mdc-checkbox-selected-pressed-icon-color: #00ff88;
+    --mdc-checkbox-selected-focus-icon-color: #ffaa00;
+    --mdc-checkbox-selected-hover-icon-color: #ffaa00;
+    --mdc-checkbox-selected-icon-color: #ffaa00;
+    --mdc-checkbox-selected-pressed-icon-color: #ffaa00;
   }
   
   .form-actions {
@@ -130,7 +131,8 @@
   }
   
   button[mat-raised-button] {
-    background: linear-gradient(45deg, #00ff88, #00cc6a);
+    background: linear-gradient(45deg, #ffaa00, #00cc6a);
+    background: linear-gradient(45deg, #ffaa00, #cc5800);
     color: #000 !important;
     font-weight: 700;
     letter-spacing: 1px;
@@ -149,8 +151,8 @@
   }
   
   button[mat-button] {
-    color: #00ff88;
-    border: 1px solid #00ff88;
+    color: #ffaa00;
+    border: 1px solid #ffaa00;
     transition: all 0.3s ease;
     cursor: pointer;
 
@@ -167,7 +169,7 @@
   }
   
   mat-icon {
-    color: #00ff88 !important;
+    color: #ffaa00 !important;
   }
   
   @media (max-width: 768px) {
