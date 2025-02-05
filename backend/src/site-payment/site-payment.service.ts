@@ -23,11 +23,12 @@ export class SitePaymentService {
     userId : string,
     customerId: any,
     priceId: string,
+    payment : 'payment' | 'subscription',
   ): Promise<Stripe.Response<Stripe.Checkout.Session> | undefined> {
     try {
-      console.log("price ID ----------------------", priceId);
       return this.stripe.checkout.sessions.create({
-        success_url: 'https://localhost:4200/success',
+        success_url: 'http://localhost:4200/success',
+        cancel_url : 'http://localhost:4200/failed',
         customer: customerId,
         line_items: [
           {
@@ -35,9 +36,11 @@ export class SitePaymentService {
             quantity: 1,
           },
         ],
-        mode: 'subscription',
+        mode: payment,
       metadata : {
-        userId : userId
+        userId : userId,
+        paymentMode : payment,
+        priceId : priceId,
       }
       }
     );
@@ -45,10 +48,11 @@ export class SitePaymentService {
       console.error('Error from stripe:', error);
     }
   }
+  async getpaymentIntent(priceid: string){
+    return await this.stripe.prices.retrieve(priceid);
+
+  }
   checkCurrentSubscription(user : any , customerId : string) {
-
-
-    // Check if the subscription exists for the given userId or customerId
     const subscription = this.subscriptionRepo.findByUserId(user
     );
 

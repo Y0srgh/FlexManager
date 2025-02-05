@@ -14,7 +14,7 @@ import { ClientEntity } from './client.entity';
 import { ManagerEntity } from './manager.entity';
 import { ParentEntity } from './parents.entity';
 import { siteSubscriptions } from 'src/site-payment/entities/site-payment.entity';
-
+import { OneTimePayment } from 'src/site-payment/entities/One-time-Payment.entity';
 @Entity('users')
 export class UserEntity extends TimestampEntity {
   @PrimaryGeneratedColumn('uuid')
@@ -71,6 +71,10 @@ export class UserEntity extends TimestampEntity {
   })
   siteSubscription : siteSubscriptions[];
 
+  @OneToMany(()=> OneTimePayment,(oneTimePayment) => oneTimePayment.user,{
+      nullable:false,
+    })
+  oneTimePayment : OneTimePayment[];
   
  
 

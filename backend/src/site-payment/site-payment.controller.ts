@@ -3,26 +3,27 @@ import { SitePaymentService } from './site-payment.service';
 import { CreateSitePaymentDto } from './dto/create-site-payment.dto';
 import { UpdateSitePaymentDto } from './dto/update-site-payment.dto';
 import { JwtAuthGuard } from 'src/user/guards/jwt-auth.guard';
+import { PriceId } from 'src/enums/price-id.enum';
 
 @Controller('site-payment')
 export class SitePaymentController {
   constructor(private readonly sitePaymentService: SitePaymentService) {}
-  @Post('create-subscription')
+  @Post('SiteSubscription')
   @UseGuards(JwtAuthGuard)
-  async createSubscriptionSession(@Request() req, @Body() priceId : any ) {
-    // try {
-      // console.log('Raw Body:', req.rawBody.toString());
-    console.log("username test")
-      console.log(req.user.username);
-    const customer = await this.sitePaymentService.createCustomer(req.user.email,req.user.username);
+  async createSubscriptionSession(@Request() req, @Body() plan : any ) {
 
-    const subscription = await this.sitePaymentService.createSubscriptionSession(req.user.id,customer.id,priceId.priceId);
+    console.log("username test")
+    console.log(req.user.username);
+    const customer = await this.sitePaymentService.createCustomer(req.user.email,req.user.username);
+    const subscription = await this.sitePaymentService.createSubscriptionSession(req.user.id,customer.id,plan.priceId,plan.paymentMode);
     console.log(subscription);
-    //   return { success: true, subscription };
-    // } catch (error) {
-    //   throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
-    // }
+
     return {'redirectUrl':subscription.url.toString()};
+  }
+  @Get("price/:priceId")
+  // @UseGuards(JwtAuthGuard)
+  async getPaymentIntent(@Param('id') priceId: string){
+    return await this.sitePaymentService.getpaymentIntent(priceId);
   }
 }
 

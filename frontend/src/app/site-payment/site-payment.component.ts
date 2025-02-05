@@ -40,7 +40,7 @@ export class SitePaymentComponent implements OnInit {
 
   upgradePayment(plan : string){
     console.log(plan);
-     this.sitePaymentService.HandlePayment(plan).subscribe((data : any)=>{
+     this.sitePaymentService.HandlePayment(plan,"payment").subscribe((data : any)=>{
       window.open(data.redirectUrl,"_blank");
     }); 
     }

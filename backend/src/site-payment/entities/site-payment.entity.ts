@@ -1,6 +1,6 @@
 import { UserEntity } from 'src/user/entities/user.entity';
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn ,OneToOne, JoinColumn, ManyToOne } from 'typeorm';
-
+import { TimestampEntity } from 'src/Generics/timestamp.entities';
 @Entity('siteSubscriptions')
 export class siteSubscriptions {
   @PrimaryGeneratedColumn('uuid')
