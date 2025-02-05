@@ -8,12 +8,12 @@ import { PriceId } from 'src/enums/price-id.enum';
 @Controller('site-payment')
 export class SitePaymentController {
   constructor(private readonly sitePaymentService: SitePaymentService) {}
-  @Post('SiteSubscription')
+  @Post('site-payment')
   @UseGuards(JwtAuthGuard)
   async createSubscriptionSession(@Request() req, @Body() plan : any ) {
 
     console.log("username test")
-    console.log(req.user.username);
+    console.log(req.user.username,plan);
     const customer = await this.sitePaymentService.createCustomer(req.user.email,req.user.username);
     const subscription = await this.sitePaymentService.createSubscriptionSession(req.user.id,customer.id,plan.priceId,plan.paymentMode);
     console.log(subscription);
@@ -21,9 +21,14 @@ export class SitePaymentController {
     return {'redirectUrl':subscription.url.toString()};
   }
   @Get("price/:priceId")
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   async getPaymentIntent(@Param('id') priceId: string){
     return await this.sitePaymentService.getpaymentIntent(priceId);
+  }
+  @Get("UserSubscription")
+  @UseGuards(JwtAuthGuard)
+  async getSiteSubscription(@Request() req){
+    return await this.sitePaymentService.getSiteSubscription(req.user);
   }
 }
 

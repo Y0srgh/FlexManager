@@ -226,6 +226,14 @@ body {
   background: rgba(255, 255, 255, 0.3);
   transform: scale(1.1);
 }
+.message.sent {
+  display: flex;
+  justify-content: flex-end; /* Moves content to the right */
+  text-align: right;
+  margin-left: auto; /* Pushes the message to the right */
+  max-width: 60%;
+  align-self: flex-end;
+}
 
 /* Responsive Design */
 @media (max-width: 768px) {

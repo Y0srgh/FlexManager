@@ -15,10 +15,12 @@ export class SiteSubscriptionRepository {
     return this.siteSubscriptionRepo.save(data);
   }
 
-  findByUserId(id: string) {
-    return this.siteSubscriptionRepo.findOne({ where: { user : { id } } });
+  findByUserId(id: string) : Promise<siteSubscriptions[]> {
+    return this.siteSubscriptionRepo.find({ where: { user : { id } } });
   }
-
+  findBySubscriptionId(stripeSubscriptionId : string) : Promise<siteSubscriptions>{
+    return this.siteSubscriptionRepo.findOne({where : { stripeSubscriptionId }})
+  }
   updateSubscription(id: string, data: Partial<siteSubscriptions>) {
     return this.siteSubscriptionRepo.update(id, data);
   }

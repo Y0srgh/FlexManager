@@ -3,6 +3,7 @@ import { UserService } from '../services/Userservice/user.service';
 import { SessionService } from '../services/sessionManager/session.service';
 import { SitePaymentService } from '../services/site-payment/site-payment.service';
 import JwtResponse from '../model/JwtResponse';
+import { an } from 'node_modules/@fullcalendar/core/internal-common';
 
 @Component({
   selector: 'app-site-payment',
@@ -12,6 +13,7 @@ import JwtResponse from '../model/JwtResponse';
 export class SitePaymentComponent implements OnInit {
   User_plan : string ="PRO";
   UserSession! : JwtResponse | null;
+  CurrentSubscription :any;
   daysleft : number =1;
   user : any = {siteSubscriptions: {subscription_active:true}};
   barvalue: number = 25;
@@ -31,14 +33,7 @@ export class SitePaymentComponent implements OnInit {
         this.user=User
       })
      }
-     if (this.user.siteSubscription){
-      this.subscription_active=this.user.siteSubscription.isActive;
-     }
-
-    console.log(this.user);
-    this.User_plan=this.user.siteSubscriptions.plan || "FREETRIAL";
-    this.daysleft=this.sitePaymentService.getDaysSinceSubscription(this.user.siteSubscriptions || 0);
-    this.barvalue=Math.floor(100*this.daysleft/30)
+     this.getCurrentSubscription()
   }
 
   upgradePayment(plan : string){
@@ -47,15 +42,25 @@ export class SitePaymentComponent implements OnInit {
       window.open(data.redirectUrl,"_blank");
     }); 
     }
-
+    getCurrentSubscription(){
+      this.sitePaymentService.getUserCurrentSubscription().subscribe((subcription : any)=>{
+        console.log("subscription" , subcription);
+        this.CurrentSubscription=subcription
+      })
+    }
   sendtoStripeManagement(){
+    
     console.log('Redirecting to Stripe Management...');
     window.location.href = 'https://billing.stripe.com/p/login/test_7sI4i8e8gbKA7x6fYY';
   }
   
   selectPlan(plan: string): void {
+
     this.selectedPlan = plan;
-    this.popupVisible = true;
+    this.sitePaymentService.HandlePayment(plan,"subscription").subscribe((data : any)=>{
+      window.open(data.redirectUrl,"_blank");
+    });
+    // this.popupVisible = true;
   }
 
   

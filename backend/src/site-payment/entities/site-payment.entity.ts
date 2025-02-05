@@ -15,6 +15,7 @@ export class siteSubscriptions {
   priceId: string;
   @Column({default : "FREETRIAL"})
   Plan: string;
+  
 
   @Column({ default: false })
   isActive: boolean;

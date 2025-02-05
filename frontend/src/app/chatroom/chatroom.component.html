@@ -74,7 +74,7 @@
               <div class="chat-messages">
                 <div *ngFor="let message of messages" [ngClass]="{'received': !isCurrentUser(message.recipient.id), 'sent': isCurrentUser(message.sender.id)}" class="message">
                   <p>{{ message.content }}</p>
-                  <span class="time">{{ message.timestamp | date: 'shortTime' }}</span>
+                  <p class="time">{{ message.createdAt | date:'shortTime'  }}</p>
                 </div>
               </div>
               <!-- Chat Input Section -->
