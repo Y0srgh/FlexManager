@@ -15,4 +15,16 @@ export class PrivateSession {
 
   @ManyToOne(() => CoachEntity, (coach) => coach.id, { onDelete: 'CASCADE' })
   coach: CoachEntity;
+
+  @Column({ type: 'timestamp', nullable: true })
+  startTime?: Date;
+
+  @Column({ type: 'timestamp', nullable: true })
+  endTime?: Date;
+
+  @Column({ type: 'int', nullable: true })
+  duration?: number; // duration in minutes
+
+  @Column({ type: 'date', nullable: true })
+  date?: Date;
 }

@@ -34,13 +34,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Course } from './models/course.model';
+import { Course } from '../models/course.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CourseService {
-  private apiUrl = 'http://localhost:3000/api/courses'; 
+  private apiUrl = 'http://localhost:4000/courses'; 
 
   constructor(private http: HttpClient) {}
 
@@ -53,7 +53,7 @@ export class CourseService {
   }
 
   updateCourse(course: Course): Observable<Course> {
-    return this.http.put<Course>(`${this.apiUrl}/${course.id}`, course);
+    return this.http.patch<Course>(`${this.apiUrl}/${course.id}`, course);
   }
 
   deleteCourse(id: number): Observable<void> {

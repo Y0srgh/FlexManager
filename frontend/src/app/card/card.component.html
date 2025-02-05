@@ -1,0 +1,20 @@
+<!-- <div class="card" (click)="onCardClick()">
+  <div class="card-image">
+    <img [src]="image" alt="{{ title }} image" />
+  </div>
+    <div class="card-icon">
+      <mat-icon>{{ icon }}</mat-icon>
+    </div>
+    <div class="card-title">
+      {{ title }}
+    </div>
+  </div>
+   -->
+   <div class="card-container" (click)="onCardClick()">
+    <img [src]="image" alt="{{ title }}" class="card-image" />
+    <div class="card-overlay"></div>
+    <div class="card-text">
+      <p>{{ title }}</p>
+    </div>
+  </div>
+  

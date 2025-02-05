@@ -1,0 +1,10 @@
+<div class="coach-container">
+  <div class="coach-item">
+    <img [src]="coach.image" alt="{{ coach.name }}" class="coach-img" />
+    <div class="coach-info">
+      <h3>{{ coach.name }}</h3>
+      <p>{{ coach.specialty }}</p>
+    </div>
+    <button class="select-btn" (click)="selectCoach()">Select</button>
+  </div>
+</div>

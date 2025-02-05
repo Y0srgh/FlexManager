@@ -1,0 +1,32 @@
+<div class="course-container">
+  <div class="course-photo">
+    <!-- <img src="assets/yoga.jpg" alt="Coach Photo" 
+class="coach-photo" /> -->
+<img [src]="course ? course.coachPhoto : 'assets/default-photo.jpg'" 
+     alt="Coach Photo" 
+     class="coach-photo" />
+
+
+    <p class="coach-name">{{ course?.coachName }}</p> 
+  </div>
+  <div class="course-details">
+    <h2 class="course-name">{{ course?.title }}</h2>
+    <div class="course-description-container">
+      <p class="course-description">{{ course?.description }}</p> 
+    </div>
+
+    <button class="view-details-btn" (click)="onViewDetails()">View Details</button>
+  </div>
+</div>
+
+
+<div *ngIf="showDetails" class="app-course-details-backdrop" (click)="toggleDetails()"></div>
+
+<app-course-details 
+  *ngIf="showDetails" 
+  [course]="course" 
+  (close)="toggleDetails()" 
+  class="app-course-details-popup"
+  (deleted)="onCourseDeleted($event)"
+  (updated)="onCourseUpdated($event)">
+</app-course-details>

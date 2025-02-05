@@ -1,0 +1,187 @@
+.add-coach-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(45deg, #1a1a1a, #2d2d2d);
+    background: url("/assets/background1.jpg") no-repeat center center/cover;
+    padding: 0rem;
+    position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.297);
+    z-index: 1;
+  }
+  }
+  
+  .animate-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    max-width: 600px;
+    transform: translateY(20px);
+    opacity: 0;
+    animation: slideUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+  }
+  
+  @keyframes slideUp {
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  mat-card-header {
+    justify-content: center;
+    padding: 2rem 0 1rem;
+  }
+  
+  mat-card-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ffaa00;
+    color: #ffaa00;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+  }
+  mat-card-content{
+    max-height: 400px;
+    overflow: auto;
+  }
+
+  mat-card-content::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .coach-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1rem 2rem;
+   
+  }
+  
+  mat-form-field {
+    width: 100%;
+  }
+  
+  .mat-mdc-text-field-wrapper {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-radius: 8px !important;
+  }
+  
+  .mat-mdc-form-field-focus-overlay {
+    background: transparent !important;
+  }
+  
+  .mat-mdc-outlined-input:not(.mdc-text-field--disabled) .mdc-notched-outline__leading,
+  .mat-mdc-outlined-input:not(.mdc-text-field--disabled) .mdc-notched-outline__notch,
+  .mat-mdc-outlined-input:not(.mdc-text-field--disabled) .mdc-notched-outline__trailing {
+    border-color: rgba(255, 255, 255, 0.3) !important;
+  }
+  
+  .mat-mdc-form-field:hover .mat-mdc-outlined-input .mdc-notched-outline {
+    border-color: #ffaa00 !important;
+  }
+  
+  .mat-mdc-input-element {
+    color: #fff !important;
+  }
+  
+  mat-label {
+    color: rgba(255, 255, 255, 0.7) !important;
+  }
+  
+  mat-error {
+    color: #ff4d4d !important;
+    font-weight: 500;
+  }
+  
+  .mat-mdc-checkbox .mdc-checkbox__background {
+    border-color: rgba(255, 255, 255, 0.7) !important;
+  }
+  
+  .mat-mdc-checkbox.mat-accent {
+    --mdc-checkbox-selected-checkmark-color: #000;
+    --mdc-checkbox-selected-focus-icon-color: #ffaa00;
+    --mdc-checkbox-selected-hover-icon-color: #ffaa00;
+    --mdc-checkbox-selected-icon-color: #ffaa00;
+    --mdc-checkbox-selected-pressed-icon-color: #ffaa00;
+  }
+  
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  button{
+    cursor: pointer;
+  }
+  
+  button[mat-raised-button] {
+    background: linear-gradient(45deg, #ffaa00, #00cc6a);
+    background: linear-gradient(45deg, #ffaa00, #cc5800);
+    color: #000 !important;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 0.5rem 2rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+
+  }
+  
+  button[mat-raised-button]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 255, 136, 0.4);
+    cursor: pointer;
+
+  }
+  
+  button[mat-button] {
+    color: #ffaa00;
+    border: 1px solid #ffaa00;
+    transition: all 0.3s ease;
+    cursor: pointer;
+
+  }
+  
+  button[mat-button]:hover {
+    background: rgba(0, 255, 136, 0.1);
+    cursor: pointer;
+
+  }
+  
+  mat-spinner {
+    margin: 0 auto;
+  }
+  
+  mat-icon {
+    color: #ffaa00 !important;
+  }
+  
+  @media (max-width: 768px) {
+    .add-coach-container {
+      padding: 1rem;
+    }
+    
+    .coach-form {
+      padding: 1rem;
+    }
+    
+    mat-card-title {
+      font-size: 1.5rem;
+    }
+  }

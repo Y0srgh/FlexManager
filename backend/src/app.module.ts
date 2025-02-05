@@ -13,12 +13,13 @@ dotenv.config();
 import { CourseModule } from './classes/strategy/courses.module';
 import { CommonModule } from './common/common.module';
 import { BaseService } from './base/base.service';
+import { ReservationModule } from './reservation/reservation.module';
 import { PrivateSessionModule } from './private-session/private-session.module';
 import { MessengerModule } from './messenger/messenger.module';
 import { SitePaymentModule } from './site-payment/site-payment.module';
 import configs from './site-payment/config';
 
-
+import { ClientService } from './user/client.service';
 @Module({
   imports: [CourseModule ,  
     ConfigModule.forRoot({
@@ -38,7 +39,8 @@ import configs from './site-payment/config';
     MessengerModule,
     UserModule,
     CommonModule,
-    PrivateSessionModule
+    ReservationModule,
+    PrivateSessionModule,
   ],
   controllers: [AppController],
   providers: [AppService],

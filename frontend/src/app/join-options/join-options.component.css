@@ -5,7 +5,7 @@
   justify-content: center;
   gap: 2.5rem;
   padding: 3rem 2rem;
-  background: url("/background8.png") no-repeat center center/cover;
+  background: url("/assets/background8.png") no-repeat center center/cover;
   min-height: 100vh;
   position: relative;
 

@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class NutritionistsComponent {
   nutritionists = [
-    { name: 'Mike Tyson', image: 'nutritionnist1.png', delay: 0 },
-    { name: 'Ronda Rousey', image: 'nutritionnist2.png', delay: 300 }
+    { name: 'Mike Tyson', image: '/assets/nutritionnist1.png', delay: 0 },
+    { name: 'Ronda Rousey', image: '/assets/nutritionnist2.png', delay: 300 }
   ];
 }

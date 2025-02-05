@@ -1,0 +1,63 @@
+<div class="reservation-card">
+  <h2 class="title text-center">Personal Training</h2>
+
+  
+  <div class="coach-section">
+    <div class="coach-card">
+      <img [src]="coach.image" alt="Coach Image" class="coach-image" />
+      <div class="coach-info">
+        <h4>{{ coach.name }}</h4>
+        <p>{{ coach.specialty }}</p>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="date-section">
+    <div class="form-group">
+      <label for="date-picker">Select Date</label>
+      <input
+        id="date-picker"
+        type="date"
+        [(ngModel)]="selectedDate"
+        class="date-time-picker"
+        aria-label="Select Date"
+      />
+    </div>
+    
+    
+    <div class="form-group">
+      <label for="start-time-picker">Select Start Time</label>
+      <input
+        id="start-time-picker"
+        type="time"
+        [(ngModel)]="startTime"
+        class="date-time-picker"
+        aria-label="Select Start Time"
+      />
+    </div>
+
+    
+    <div class="form-group">
+      <label for="end-time-picker">Select End Time</label>
+      <input
+        id="end-time-picker"
+        type="time"
+        [(ngModel)]="endTime"
+        class="date-time-picker"
+        aria-label="Select End Time"
+      />
+    </div>
+  </div>
+
+  
+  <div class="text-center">
+    <button
+      class="book-btn"
+      [disabled]="!isFormValid()"
+       (click)="onBookClick()"
+    >
+      Book
+    </button>
+  </div>
+</div>

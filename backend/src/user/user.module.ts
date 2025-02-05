@@ -16,20 +16,40 @@ import { ManagerService } from './manager.service';
 import { ManagerEntity } from './entities/manager.entity';
 import { ParentService } from './parent.service';
 import { ParentEntity } from './entities/parents.entity';
-dotenv.config()
+import { ParentChildRequestEntity } from './entities/parent-child.entity';
+import { ParentChildRequestService } from './parent-child-request.service';
+import { TrackEntity } from './entities/track.entity';
+dotenv.config();
 
 @Module({
-   imports: [
-    TypeOrmModule.forFeature([UserEntity, CoachEntity, ClientEntity, ManagerEntity, ParentEntity]),
-    PassportModule.register({defaultStrategy: 'jwt-refresh'}),
+  imports: [
+    TypeOrmModule.forFeature([
+      UserEntity,
+      CoachEntity,
+      ClientEntity,
+      ManagerEntity,
+      ParentEntity,
+      ParentChildRequestEntity,
+      TrackEntity,
+    ]),
+    PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
       secret: process.env.SECRET,
       // signOptions: {
       //   expiresIn: 3600,//1 heure
       // },
     }),
-],
+  ],
   controllers: [UserController],
-  providers: [UserService, JwtStrategy,CoachService, ClientService, ManagerService, ParentService],
+  providers: [
+    UserService,
+    JwtStrategy,
+    CoachService,
+    ClientService,
+    ManagerService,
+    ParentService,
+    ParentChildRequestService,
+  ],
+  exports: [UserService, ClientService],
 })
 export class UserModule {}

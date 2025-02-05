@@ -1,0 +1,32 @@
+<div class="signup-container">
+  <div class="singup-card">
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+        <app-child-association
+          *ngIf="linkChildren === true"
+          [associatedAccounts]="associatedAccounts"
+          [children]="children"
+          [asFormGroup]="asFormGroup"
+          (submitForm)="onSubmit()"
+        ></app-child-association>
+        <div *ngIf="linkChildren === false" class="form-step thank-you">
+            <div class="success-animation">
+              <i class="fas fa-check-circle"></i>
+            </div>
+            <h2 class="form-title">Request has been sent successfully!</h2>
+            <p class="success-message">
+              Please note that this is not an instant action, but each request must be approved by the engaged child.
+            </p>
+            <p class="welcome-message">Thank you for your trust!</p>
+            <div class="btn">
+              <app-button
+                type="button"
+                (click)="exit()"
+                buttonText="Continue your journey"
+                buttonType="primary"
+                icon="fa-arrow-right"
+              ></app-button>
+            </div>
+          </div>
+        </form>
+    </div>
+</div>

@@ -71,13 +71,6 @@
       >
         <div class="step-header">
           <a (click)="skipChildLinking()" class="skip-a"> Skip for Now </a>
-          <!-- <app-button
-            type="button"
-            (click)="skipChildLinking()"
-            buttonText="Skip for Now"
-            buttonType="secondary"
-            class="skip-button"
-          ></app-button> -->
           <h2 class="form-title">
             Want to associate your children's account to yours ?
           </h2>
@@ -130,36 +123,11 @@
           </div>
         </div>
 
-        <div *ngIf="linkChildren === true" class="form-step">
+        <!-- <div *ngIf="linkChildren === true" class="form-step">
           <h2 class="form-title">Keep an eye on your child</h2>
           <p class="form-subtitle">
             Fill in the respective emails of your children.
           </p>
-          <!-- <div class="form-grid">
-            <app-input-field
-              [basicDetails]="associatedAccounts"
-              label="Children Number"
-              iconClass="fa-user"
-              controlName="associatedAccountsCount"
-              type="text"
-            >
-            </app-input-field>
-            <div
-              *ngFor="
-                let i of [].constructor(
-                  associatedAccounts.get('associatedAccountsCount')?.value
-                )
-              "
-            >
-              <app-input-field
-                [basicDetails]="basicDetails"
-                label="Email"
-                iconClass="fa-envelope"
-                controlName="email"
-                type="email"
-              ></app-input-field>
-            </div>
-          </div> -->
           <div class="form-grid">
             <app-input-field
               [basicDetails]="associatedAccounts"
@@ -196,7 +164,14 @@
               ></app-button>
             </div>
           </div>
-        </div>
+        </div> -->
+        <app-child-association
+          *ngIf="linkChildren === true"
+          [associatedAccounts]="associatedAccounts"
+          [children]="children"
+          [asFormGroup]="asFormGroup"
+          (submitForm)="onSubmit()"
+        ></app-child-association>
       </div>
     </form>
   </div>

@@ -20,7 +20,7 @@
   
   .feature-item i {
     font-size: 2rem;
-    color: #f9a825;
+    color: var(--color-2);
     margin-bottom: 1rem;
   }
   

@@ -1,0 +1,53 @@
+<div class="course-details-container" *ngIf="course">
+  <div class="coach-info">
+    <img [src]="course.coachPhoto" alt="Coach Photo" class="coach-photo">
+    <h2 class="coach-name">{{ course.coachName }}</h2>
+  </div>
+
+  <div class="course-info">
+    <!-- Edit Form -->
+    <form *ngIf="isEditing" (ngSubmit)="onUpdateCourse()">
+      <label>Title:</label>
+      <input type="text" [(ngModel)]="editedCourse.title" name="title" required>
+
+      <label>Description:</label>
+      <textarea [(ngModel)]="editedCourse.description" name="description" required></textarea>
+
+      <label>Start Time:</label>
+      <input type="time" [(ngModel)]="editedCourse.startTime" name="startTime" required>
+
+      <label>End Time:</label>
+      <input type="time" [(ngModel)]="editedCourse.endTime" name="endTime" required>
+
+      <label>Capacity:</label>
+      <input type="number" [(ngModel)]="editedCourse.capacity" name="capacity" required>
+
+      <div class="buttons-container">
+        <button type="submit" class="save-btn">Save</button>
+        <button type="button" class="cancel-btn" (click)="isEditing = false">Cancel</button>
+      </div>
+    </form>
+
+    <!-- Display Course Details -->
+    <div *ngIf="!isEditing">
+      <h3 class="course-name">{{ course.title }}</h3>
+      <p class="course-description">{{ course.description }}</p>
+      <p *ngIf="course.startTime && course.endTime">
+        <strong>Time:</strong> {{ course.startTime }} - {{ course.endTime }}
+      </p>
+      <p *ngIf="!course.startTime || !course.endTime">
+        <strong>Time:</strong> Not specified
+      </p>
+      <p><strong>Capacity:</strong> {{ course.capacity }}</p>
+    </div>
+
+    <!-- Edit and Delete Buttons -->
+    <div class="buttons-container" *ngIf="!isEditing">
+      <button class="edit-btn" (click)="onEdit()">Edit</button>
+      <button class="delete-btn" (click)="onDelete(course.id)">Delete</button>
+    </div>
+  </div>
+
+  <!-- Close Button -->
+  <button class="close-btn" (click)="closePopup()">×</button>
+</div>

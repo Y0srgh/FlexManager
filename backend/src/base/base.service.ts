@@ -1,11 +1,8 @@
 import { DeepPartial, Repository } from 'typeorm';
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { UserService } from 'src/user/user.service';
-import { PasswordService } from 'src/common/utils/password.service';
 import { UserSingUpDto } from 'src/user/dto/user-sign-up.dto';
 
 
-@Injectable()
 export class BaseService<T> {
   constructor(
     private readonly repository: Repository<T>,
@@ -14,6 +11,8 @@ export class BaseService<T> {
   ) {}
 
   async create(data: Partial<T>): Promise<T> {
+    console.log('---------------- daata ---------', data);
+    
     const entity = this.repository.create(data as DeepPartial<T>);
     return this.repository.save(entity);
   }
