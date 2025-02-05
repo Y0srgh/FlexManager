@@ -10,11 +10,11 @@ import { RequestPageComponent } from './request-page/request-page.component';
 
 @NgModule({
   declarations: [
-    CoachComponent,
-    CoachListComponent,
-    RequestCardComponent,
-    ReservationCardComponent,
-    RequestPageComponent
+    // CoachComponent,
+    // CoachListComponent,
+    // RequestCardComponent,
+    // ReservationCardComponent,
+    // RequestPageComponent
   ],
   imports: [
     CommonModule

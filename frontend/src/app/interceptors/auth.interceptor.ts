@@ -54,8 +54,10 @@ export class AuthInterceptor implements HttpInterceptor {
             }
           },
           error: (error) => {
-            if (error.status === 401 && error.error === 'RefreshTokenExpired') {
+            if (error.status === 401) {
               console.log('removing access token and must be signed out');
+              localStorage.removeItem('accessToken'); 
+              this.router.navigate(['/']);
             }
             console.error('Error in request:', error);
           },
@@ -68,6 +70,12 @@ export class AuthInterceptor implements HttpInterceptor {
             console.log('response', response);
           },
           error: (error) => {
+            if (error.status === 401) {
+              this.router.navigate(['/']);
+            }
+            if (error.status === 403) {
+              this.router.navigate(['/home']);
+            }
             console.log(error);
           },
         })
