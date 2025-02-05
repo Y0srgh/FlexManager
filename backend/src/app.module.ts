@@ -15,7 +15,6 @@ import { BaseService } from './base/base.service';
 import { ReservationModule } from './reservation/reservation.module';
 import { PrivateSessionModule } from './private-session/private-session.module';
 import { ClientService } from './user/client.service';
-
 @Module({
   imports: [CourseModule ,  
     ConfigModule.forRoot(), 

@@ -11,7 +11,7 @@ export class HomeComponent {
     { title: 'Classes', icon: 'class', route: '/course', image: 'assets/classes.webp' }, 
     { title: 'Nutrition', icon: 'restaurant', route: '/nutrition', image: 'assets/nutrition.jpg' }, 
 
-    { title: 'Performance', icon: 'trending_up', route: '/performance', image: 'assets/performance.png' },
+    { title: 'Performance', icon: 'trending_up', route: '/tracker', image: 'assets/performance.png' },
     { title: 'Private Sessions', icon: 'fitness_center', route: '/coaches', image: 'assets/private.png' }, 
 
 
