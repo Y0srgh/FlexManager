@@ -18,16 +18,14 @@ export class ReservationService {
     private readonly clientRepository: Repository<ClientEntity>,
   ) {}
 
-  // CREATE
-  async create(dto: CreateReservationDto): Promise<Reservation> {
+  async create(dto: CreateReservationDto, clientId) {
     const coachEntity = await this.coachRepository.findOne({ where: { id: dto.coachId } });
     if (!coachEntity) throw new NotFoundException('Coach not found');
     if (!coachEntity.isPrivate) throw new Error('Coach is not private');
   
-    const clientEntity = await this.clientRepository.findOne({ where: { id: dto.clientId } });
+    const clientEntity = await this.clientRepository.findOne({ where: { id: clientId } });
     if (!clientEntity) throw new NotFoundException('Client not found');
   
-    // Create a new reservation instance
     const reservation = this.reservationRepository.create({
       date: dto.date,
       startTime: dto.startTime,
@@ -35,20 +33,18 @@ export class ReservationService {
       duration: dto.duration,
     });
   
-    // Manually assign relations
     reservation.coachEntity = coachEntity;
     reservation.clientEntity = clientEntity;
   
-    // Save the reservation
-    return this.reservationRepository.save(reservation);
+    const newReservation = await this.reservationRepository.save(reservation);
+    const toReturn = {coach : newReservation.coachEntity.user.email, client : newReservation.clientEntity.user.email}
+    return toReturn;
   }
   
-  // READ ALL
   async findAll(): Promise<Reservation[]> {
     return this.reservationRepository.find({ relations: ['coachEntity', 'clientEntity'] });
   }
 
-  // READ ONE
   async findOne(id: string): Promise<Reservation> {
     const reservation = await this.reservationRepository.findOne({
       where: { id },
@@ -62,7 +58,6 @@ export class ReservationService {
     return reservation;
   }
 
-  // UPDATE
   async update(id: string, dto: UpdateReservationDto): Promise<Reservation> {
     const reservation = await this.findOne(id);
 
@@ -73,11 +68,11 @@ export class ReservationService {
       reservation.coachEntity = coachEntity;
     }
 
-    if (dto.clientId) {
-      const clientEntity = await this.clientRepository.findOne({ where: { id: dto.clientId } });
-      if (!clientEntity) throw new NotFoundException('Client not found');
-      reservation.clientEntity = clientEntity;
-    }
+    // if (dto.clientId) {
+    //   const clientEntity = await this.clientRepository.findOne({ where: { id: dto.clientId } });
+    //   if (!clientEntity) throw new NotFoundException('Client not found');
+    //   reservation.clientEntity = clientEntity;
+    // }
 
     Object.assign(reservation, dto);
 
