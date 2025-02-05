@@ -56,6 +56,7 @@ export class ReservationController {
     console.log(this.reservationService.findByClientId(user.id));
     return this.reservationService.findByClientId(user.id);
   }
+
   @Get('/coach')
   @Role(Roles.COACH)
   @UseGuards(JwtAuthGuard, RolesGuard)
@@ -66,6 +67,8 @@ export class ReservationController {
 
   // UPDATE
   @Patch(':id')
+  @Role(Roles.COACH)
+  @UseGuards(JwtAuthGuard, RolesGuard)
   async update(
     @Param('id') id: string,
     @Body() dto: UpdateReservationDto,
@@ -75,6 +78,8 @@ export class ReservationController {
 
   // DELETE
   @Delete(':id')
+  @Role(Roles.COACH, Roles.MANAGER)
+  @UseGuards(JwtAuthGuard, RolesGuard)
   async remove(@Param('id') id: string): Promise<void> {
     return this.reservationService.remove(id);
   }
