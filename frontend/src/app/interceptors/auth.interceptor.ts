@@ -11,7 +11,17 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  private protectedPaths = ['/auth/client',"/site-payment/create-subscription", '/auth/request/pending-child-request', '/auth/request/associate-children', '/auth/progress', '/progress','/courses','/reservations','/auth/coach'];
+  private protectedPaths = [
+    '/auth/client',
+    '/auth/request/associate-children',
+    '/auth/progress',
+    '/progress',
+    '/courses',
+    '/reservations',
+    '/auth/coach',
+    '/site-payment/site-payment',
+    '/site-payment/UserSubscription',
+  ];
   constructor(private router: Router) {}
 
   intercept(
@@ -46,18 +56,17 @@ export class AuthInterceptor implements HttpInterceptor {
                 console.log('New access token received:', newAccessToken);
                 localStorage.setItem('accessToken', newAccessToken);
               }
-              if (event.status === 401 ) {
-                localStorage.removeItem('accessToken'); 
-                this.router.navigate(['/']);
-                
+              if (event.status === 401) {
+                // localStorage.removeItem('accessToken');
+                // this.router.navigate(['/']);
               }
             }
           },
           error: (error) => {
             if (error.status === 401) {
               console.log('removing access token and must be signed out');
-              localStorage.removeItem('accessToken'); 
-              this.router.navigate(['/']);
+              // localStorage.removeItem('accessToken');
+              // this.router.navigate(['/']);
             }
             if (error.status === 403) {
               this.router.navigate(['/home']);
@@ -74,7 +83,7 @@ export class AuthInterceptor implements HttpInterceptor {
           },
           error: (error) => {
             if (error.status === 401) {
-              this.router.navigate(['/']);
+              // this.router.navigate(['/']);
             }
             if (error.status === 403) {
               this.router.navigate(['/home']);

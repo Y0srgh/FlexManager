@@ -15,8 +15,6 @@ export class SitePaymentWebhookService {
     private userService : UserService,
     private siteSubscriptionRepository :SiteSubscriptionRepository,
     private oneTimePaymentRepo : OneTimePaymentRepo,
-
-
 ) {}
 
   @StripeWebhookHandler('customer.subscription.updated')

@@ -83,8 +83,8 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-    canActivate: [RoleGuard],
-    data: { roles: ['manager', 'coach', 'client', 'parent'] },
+    // canActivate: [RoleGuard],
+    // data: { roles: ['manager', 'coach', 'client', 'parent'] },
   },
   {
     path: 'dashboard',

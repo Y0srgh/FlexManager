@@ -10,7 +10,7 @@
       <div class="for-border">
           <div class="plan">
               <div class="cr-text">Current Plan</div>
-              <div class="btn">Free Trial</div>
+              <div class="btn">{{User_plan}}</div>
           </div>
       </div>
 
@@ -38,7 +38,7 @@
             <span>/Month</span>
           </div>
           <p>Perfect for testing our service</p>
-          <button (click)="selectPlan('Free Trial')">Current Plan</button>
+          <button (click)="selectPlan('FreeTrial')">Current Plan</button>
         </div>
   
         <!-- Pro Plan -->
@@ -49,7 +49,7 @@
             <span>/Month</span>
           </div>
           <p>Ideal for growing companies</p>
-          <button (click)="selectPlan('Pro Plan')">Upgrade Plan</button>
+          <button (click)="selectPlan('Pro')">Upgrade Plan</button>
         </div>
   
         <!-- Premium Plan -->
@@ -60,7 +60,7 @@
             <span>/Month</span>
           </div>
           <p>For advanced features and support</p>
-          <button (click)="selectPlan('Premium Plan')">Upgrade Plan</button>
+          <button (click)="selectPlan('Premium')">Upgrade Plan</button>
         </div>
       </div>
   

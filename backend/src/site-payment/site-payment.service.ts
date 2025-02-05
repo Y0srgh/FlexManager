@@ -5,6 +5,7 @@ import { SiteSubscriptionRepository } from './site-payment.repository';
 import { CreateSitePaymentDto } from './dto/create-site-payment.dto';
 import { CheckSubscriptionDto } from './dto/CheckSubsccription.dto';
 import { InjectStripeClient } from '@golevelup/nestjs-stripe';
+import { siteSubscriptions } from './entities/site-payment.entity';
 @Injectable()
 export class SitePaymentService {
 
@@ -52,8 +53,8 @@ export class SitePaymentService {
     return await this.stripe.prices.retrieve(priceid);
 
   }
-  checkCurrentSubscription(user : any , customerId : string) {
-    const subscription = this.subscriptionRepo.findByUserId(user
+  checkCurrentSubscription(subscriptionId : string) {
+    const subscription = this.subscriptionRepo.findBySubscriptionId(subscriptionId
     );
 
     if (!subscription) {
@@ -65,9 +66,9 @@ export class SitePaymentService {
     };
   }
 
-  async cancelSubscription(user : any , customerId : string) {
-    const subscription = await this.subscriptionRepo.findByUserId(user.id);
-
+  async cancelSubscription(subscriptionId : string) {
+    const subscription : siteSubscriptions = await this.subscriptionRepo.findBySubscriptionId(subscriptionId
+    );
     if (!subscription) {
       return { message: 'No subscription found to cancel.' };
     }
@@ -88,5 +89,11 @@ export class SitePaymentService {
     } catch (error) {
       return { message: 'Error canceling subscription in Stripe.', error: error.message };
     }
+  }
+  async getSiteSubscription( user : any){
+    const CurrentSubscription=["FREETRIAl","PRO","PREMIUM"];
+    const subscriptions : siteSubscriptions[] = (await this.subscriptionRepo.findByUserId(user.id)).filter((subscription)=> CurrentSubscription.includes(subscription.Plan));
+    return subscriptions;
+
   }
 }

@@ -31,9 +31,9 @@ async function bootstrap() {
   });
 
   // app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
-  //   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200'); 
-  //   res.setHeader('Access-Control-Allow-Credentials', 'true');
-  //   res.setHeader('Access-Control-Expose-Headers', 'x-new-access-token');
+  //   res?.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200'); 
+  //   res?.setHeader('Access-Control-Allow-Credentials', 'true');
+  //   res?.setHeader('Access-Control-Expose-Headers', 'x-new-access-token');
   //   res.removeHeader('Vary'); 
   //   next();
   // });

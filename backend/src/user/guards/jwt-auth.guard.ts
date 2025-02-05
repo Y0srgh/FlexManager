@@ -22,7 +22,7 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
     // If a new access token exists, set it in the response header
     if (req['accessToken']) {
       console.log("Sent the new access token ---------------------------------", req['accessToken']);
-      res.setHeader('x-new-access-token', req['accessToken']);
+      res?.setHeader('x-new-access-token', req['accessToken']);
     }else{
         res.removeHeader('x-new-access-token');
     }

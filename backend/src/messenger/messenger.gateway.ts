@@ -8,7 +8,7 @@ import { MessengerRepo } from './messenger.repository';
 
 @WebSocketGateway({
   cors: {
-    origin: '*',
+    origin: 'http://localhost:4200',
   },
 })
 export class MessengerGateway {
@@ -42,8 +42,8 @@ export class MessengerGateway {
     console.log(message);
     this.server.to(roomName).emit('newMessage',message);
 
-    // console.log(message)
-    // return message;
+    console.log(message)
+    return message;
     }catch( error){
       console.error(error);
     }
