@@ -1,5 +1,4 @@
-import { IsString, IsInt, IsOptional, IsDateString, IsArray } from 'class-validator';
-import { time } from 'console';
+import { IsString, IsInt, IsOptional, IsDateString, IsArray, IsArray } from 'class-validator';
 
 export class CreateCourseDto {
   @IsString()
@@ -17,11 +16,9 @@ export class CreateCourseDto {
   duration: number;
 
   @IsOptional()
- 
   startTime?: string;
 
   @IsOptional()
-
   endTime?: string;
 
   @IsOptional()
@@ -33,8 +30,8 @@ export class CreateCourseDto {
   capacity?: number;
 
   @IsOptional()
- 
   coachId?: string;  
+
   @IsOptional()
   @IsArray()
   @IsString({ each: true })
