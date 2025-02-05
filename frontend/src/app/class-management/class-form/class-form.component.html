@@ -11,21 +11,29 @@
         <label for="description">Description</label>
         <textarea id="description" formControlName="description" placeholder="Enter description"></textarea>
       </div>
+
       <div class="form-group">
-        <label for="capacity"> Capacity</label>
+        <label for="capacity">Capacity</label>
         <input id="capacity" type="number" formControlName="capacity" placeholder="Enter capacity" />
       </div>
 
+     
       <div class="form-group">
-        <label for="date">Date</label>
-        <div class="custom-date-input">
-          <input id="date" matInput [matDatepicker]="picker" formControlName="date" placeholder="Pick a date" />
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker panelClass="custom-datepicker"></mat-datepicker>
-
+        <label for="daysOfWeek">Days of Week</label>
+        <div class="dropdown">
+          <button type="button" class="dropdown-toggle" (click)="toggleDropdown()">
+            {{ selectedDays.length ? selectedDays.join(', ') : 'Select Days' }}
+          </button>
+          <ul *ngIf="isDropdownOpen" class="dropdown-menu">
+            <li *ngFor="let day of daysOfWeek">
+              {{ day }}
+              <input type="checkbox" [value]="day" (change)="toggleDaySelection(day)" [checked]="selectedDays.includes(day)">
+            </li>
+            
+          </ul>
         </div>
-        <small *ngIf="courseForm.get('date')?.touched && courseForm.get('date')?.hasError('matDatepicker')" style="color: red;">
-          Invalid date format.
+        <small *ngIf="courseForm.get('daysOfWeek')?.touched && courseForm.get('daysOfWeek')?.hasError('required')" style="color: red;">
+          You must select at least one day.
         </small>
       </div>
 
@@ -41,6 +49,7 @@
           End time must be later than start time.
         </small>
       </div>
+
 
       <div class="button-container">
         <button type="submit" class="custom-button save-button" [disabled]="!isFormValid">Save</button>
