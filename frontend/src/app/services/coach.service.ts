@@ -28,4 +28,11 @@ export class CoachService {
       )
     );
   }
+
+  removeCoach(coachId: string): Observable<any> {
+    const url = `${this.apiUrl}/${coachId}`;
+    return this.http.delete(url).pipe(
+      tap(() => console.log('Coach supprimé avec succès'))
+    );
+  }
 }

@@ -23,7 +23,7 @@ export class Reservation {
   state: string;
 
   // Relation to CoachEntity
-  @ManyToOne(() => CoachEntity, (coach) => coach.reservations, { eager: true })
+  @ManyToOne(() => CoachEntity, (coach) => coach.reservations, { eager: true, cascade: true})
   coachEntity: CoachEntity;
 
   // Relation to ClientEntity

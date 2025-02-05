@@ -28,7 +28,8 @@ export class CourseDetailsComponent {
     description: '',
     startTime: '',
     endTime: '',
-    capacity: 0
+    capacity: 0,
+    daysOfWeek: [],
   };
   
 

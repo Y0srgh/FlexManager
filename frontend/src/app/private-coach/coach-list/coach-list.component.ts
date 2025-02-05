@@ -30,15 +30,42 @@ export class CoachListComponent implements OnInit {
     );
   }
 
-  selectCoach(coachId: string) {
-    const selectedCoach = this.coaches.find(coach => coach.id === coachId);
-    if (selectedCoach) {
-      this.selectedCoach = selectedCoach;
-      this.isModalOpen = true;
-    } else {
-      this.selectedCoach = null;
+  // selectCoach(coachId: string) {
+  //   const selectedCoach = this.coaches.find(coach => coach.id === coachId);
+  //   if (selectedCoach) {
+  //     this.selectedCoach = selectedCoach;
+  //     this.isModalOpen = true;
+  //   } else {
+  //     this.selectedCoach = null;
+  //   }
+  // }
+
+  selectCoach({ coachId, action }: { coachId: string; action: string }) {
+    console.log(coachId, '-------------', action);
+    if (action === 'select') {
+      
+      const selectedCoach = this.coaches.find(coach => coach.id === coachId);
+      if (selectedCoach) {
+        this.selectedCoach = selectedCoach;
+        this.isModalOpen = true;
+      } else {
+        this.selectedCoach = null;
+      }
+    }
+    else if (action === 'remove') {
+      this.coachService.removeCoach(coachId).subscribe(
+        () => {
+          console.log('Coach supprimé avec succès');
+          this.fetchCoaches();
+        },
+        (error: any) => {
+          console.error('Erreur lors de la suppression du coach:', error);
+        }
+      );
+      // this.coaches = this.coaches.filter(coach => coach.id !== coachId);
     }
   }
+
 
   closeModal() {
     this.isModalOpen = false;

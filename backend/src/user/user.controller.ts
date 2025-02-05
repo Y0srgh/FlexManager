@@ -42,7 +42,6 @@ export class UserController {
     private readonly managerService: ManagerService,
     private readonly parentService: ParentService,
     private readonly parentChildService: ParentChildRequestService,
-    
   ) {}
 
   @Post('signup')
@@ -90,10 +89,12 @@ export class UserController {
   //   return this.userService.update(id, updateCoachDto);
   // }
 
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.userService.remove(id);
-  // }
+  @Delete('coach/:id')
+  @Role(Roles.MANAGER)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  remove(@Param('id') id: string) {
+    return this.coachService.delete(id);
+  }
 
   //---------client
   // @Role(Roles.MANAGER)
@@ -244,12 +245,12 @@ export class UserController {
 
     return this.clientService.updateProgressHistory(user.id, trackBody);
   }
-  @Get("User/:id")
-  getUserById(@Param("id") id : string){
+  @Get('User/:id')
+  getUserById(@Param('id') id: string) {
     return this.userService.findOne(id);
   }
-  @Get("User")
-  getAllUsers(){
-    return  this.userService.GetAllUser();
+  @Get('User')
+  getAllUsers() {
+    return this.userService.GetAllUser();
   }
 }

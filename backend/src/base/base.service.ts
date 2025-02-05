@@ -82,6 +82,8 @@ export class BaseService<T> {
 
   async delete(id: string): Promise<void> {
     const entity = await this.findOne(id);
-    await this.repository.remove(entity);
+    if (entity) {
+      await this.repository.softDelete(id);
+    }
   }
 }

@@ -36,6 +36,7 @@ export class CoachEntity extends TimestampEntity {
   })
   @JoinColumn()
   user: UserEntity;
+
   @OneToMany(() => Reservation, (reservation) => reservation.coachEntity)
   reservations: Reservation[];
 }

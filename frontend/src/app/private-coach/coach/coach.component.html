@@ -5,6 +5,7 @@
       <h3>{{ coach.name }}</h3>
       <p>{{ coach.specialty }}</p>
     </div>
-    <button class="select-btn" (click)="selectCoach()">Reserve a private session</button>
+    <button *ngIf="isClient()" class="select-btn" (click)="selectCoach()">Reserve a private session</button>
+    <button *ngIf="isAdmin()" class="select-btn" (click)="removeCoach()">Remove</button>
   </div>
 </div>
