@@ -30,6 +30,8 @@ import { CardComponent } from './card/card.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+
 
 // Components
 import { AppComponent } from './app.component';
@@ -157,6 +159,7 @@ import { CourseFormComponent } from './components/course-form/course-form.compon
 
     NgxChartsModule,
     BrowserAnimationsModule,
+    MatSelectModule,
 
     MatIconModule,
     ToastrModule.forRoot(),

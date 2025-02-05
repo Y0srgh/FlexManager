@@ -2,9 +2,8 @@ import { Component, Output, EventEmitter, OnInit, OnDestroy } from '@angular/cor
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { OverlayContainer } from '@angular/cdk/overlay';
+import { MatSnackBar } from '@angular/material/snack-bar'; // N'oubliez pas d'importer MatSnackBar
 import { Course } from '../../models/course.model';
-
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-class-form',
@@ -13,32 +12,30 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ClassFormComponent implements OnInit, OnDestroy {
   @Output() closeModal = new EventEmitter<void>();
-  @Output() courseAdded = new EventEmitter<any>()
-  courseForm: FormGroup;
+  @Output() courseAdded = new EventEmitter<any>();
 
-  constructor(
-    private fb: FormBuilder,
-    private http: HttpClient,
-    private overlayContainer: OverlayContainer,
-    private snackBar: MatSnackBar
-  ) {
-    this.courseForm = this.fb.group(
-      {
-        title: ['', Validators.required],
-        description: ['', Validators.required],
-        date: [null, [Validators.required, this.dateValidator.bind(this)]], 
-        capacity: ['', Validators.required] ,
-        startTime: [null, Validators.required],
-        endTime: [null, Validators.required],
-      },
-      {
-        validators: this.timeValidator.bind(this)
-      }
-    );
+  courseForm: FormGroup;
+  isDropdownOpen = false;
+  selectedDays: string[] = [];
+  daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+  constructor(private fb: FormBuilder,
+              private http: HttpClient,
+              private overlayContainer: OverlayContainer,
+              private snackBar: MatSnackBar) {
+    this.courseForm = this.fb.group({
+      title: ['', Validators.required],
+      description: ['', Validators.required],
+      daysOfWeek: [[], Validators.required],
+      capacity: ['', Validators.required],
+      startTime: [null, Validators.required],
+      endTime: [null, Validators.required],
+    }, {
+      validators: this.timeValidator.bind(this)
+    });
   }
 
   ngOnInit(): void {
-  
     const formContainer = document.querySelector('.form-container');
     if (formContainer) {
       this.overlayContainer.getContainerElement().classList.add('form-container');
@@ -46,22 +43,24 @@ export class ClassFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-  
     this.overlayContainer.getContainerElement().classList.remove('form-container');
   }
 
-  dateValidator(control: any) {
-    const date = control.value;
-    console.log('Date:', date);
-    if (date) {
-      const isValid = !isNaN(Date.parse(date));
-      if (!isValid) {
-        return { matDatepicker: true }; 
-      }
-    }
-    return null;
+  toggleDropdown(): void {
+    this.isDropdownOpen = !this.isDropdownOpen;
   }
 
+  toggleDaySelection(day: string): void {
+    const index = this.selectedDays.indexOf(day);
+    if (index === -1) {
+      this.selectedDays.push(day);
+    } else {
+      this.selectedDays.splice(index, 1);
+    }
+    this.courseForm.patchValue({ daysOfWeek: this.selectedDays });
+  }
+
+  // Correction du nom de la méthode de validation
   timeValidator(group: FormGroup) {
     const startTime = group.get('startTime')?.value;
     const endTime = group.get('endTime')?.value;
@@ -86,10 +85,10 @@ export class ClassFormComponent implements OnInit, OnDestroy {
   onSubmit() {
     if (this.courseForm.valid) {
       const courseData = this.courseForm.value;
+      console.log('Data to be sent:', courseData);
 
       this.http.post('http://localhost:3000/courses', courseData).subscribe(
         (response) => {
-
           console.log('Course submitted successfully:', response);
           this.snackBar.open('Class added successfully!', 'close', {
             duration: 3000, 
@@ -109,12 +108,11 @@ export class ClassFormComponent implements OnInit, OnDestroy {
             horizontalPosition: 'right',  
             panelClass: 'custom-snackbar',
           });
-        
         }
       );
     }
   }
-
+    
   onCancel() {
     this.courseForm.reset();
   }

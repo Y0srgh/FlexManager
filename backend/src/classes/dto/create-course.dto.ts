@@ -1,4 +1,4 @@
-import { IsString, IsInt, IsOptional, IsDateString } from 'class-validator';
+import { IsString, IsInt, IsOptional, IsDateString, IsArray } from 'class-validator';
 import { time } from 'console';
 
 export class CreateCourseDto {
@@ -35,4 +35,8 @@ export class CreateCourseDto {
   @IsOptional()
  
   coachId?: string;  
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  daysOfWeek?: string[];
 }
