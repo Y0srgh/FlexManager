@@ -12,7 +12,7 @@ export class Messenger {
     // @ManyToOne(() => User)
     // @JoinColumn()
     // recipient: User;
-    @Column()
+    @Column({nullable: true})
     roomId : string;
     
     @Column()
