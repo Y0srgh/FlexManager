@@ -11,6 +11,6 @@ export class FailedComponent {
   constructor(private router: Router) {}
 
   retryPayment(): void {
-    this.router.navigate(['/payment']); // Redirection vers la page de paiement
+    this.router.navigate(['/payment']); 
   }
 }

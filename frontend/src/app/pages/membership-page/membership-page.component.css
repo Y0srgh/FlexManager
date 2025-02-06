@@ -1,10 +1,10 @@
-/* Assurer que body et html prennent toute la hauteur de la fenêtre */
+
 html, body {
   height: 100%;
   margin: 0;
 }
 
-/* Conteneur principal */
+
 .app-container {
   background-image: url('https://images.pexels.com/photos/1552252/pexels-photo-1552252.jpeg?cs=srgb&dl=pexels-leonardho-1552252.jpg&fm=jpg');
   background-size: cover;
@@ -17,24 +17,24 @@ html, body {
   justify-content: flex-start;
   padding: 0;
   margin: 0;
-  height: 100%; /* Assure que le conteneur prend toute la hauteur */
+  height: 100%; 
 }
 
-/* Conteneur des cartes */
+
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* Adaptatif */
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); 
   gap: 30px;
   width: 90%;
   max-width: 1200px;
   margin-top: 20px;
 }
 
-/* Style des cartes */
+
 .course-container {
-  background: rgba(255, 255, 255, 0.15); /* Transparence plus subtile */
+  background: rgba(255, 255, 255, 0.15);
   border-radius: 20px;
-  backdrop-filter: blur(10px); /* Effet de flou */
+  backdrop-filter: blur(10px); 
   padding: 20px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   min-width: 400px;
@@ -49,7 +49,7 @@ html, body {
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
 }
 
-/* Image des cartes */
+
 .course-image {
   width: 70px;
   height: 70px;
@@ -58,21 +58,20 @@ html, body {
   margin-right: 15px;
 }
 
-/* Titre des cartes */
+
 .course-title {
   font-size: 1.3rem;
   font-weight: bold;
   color: #000;
 }
 
-/* Description des cartes */
 .course-description {
   font-size: 1rem;
   color: #000;
   opacity: 0.8;
 }
 
-/* Bouton View Details */
+
 .view-details-btn {
   padding: 8px 16px;
   font-size: 1rem;
@@ -88,7 +87,6 @@ html, body {
   background-color: #3a1d36;
 }
 
-/* Responsive : une seule colonne sur mobile */
 @media screen and (max-width: 768px) {
   .grid-container {
     grid-template-columns: 1fr;

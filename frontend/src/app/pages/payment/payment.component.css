@@ -10,7 +10,7 @@
   display: flex;
   flex-direction: column;
 }
-/* Main Container Styles */
+
 .payment-wrapper {
   min-height: 100vh;
   padding: 2rem;
@@ -22,14 +22,14 @@
   margin: 0 auto;
   display: flex;
   gap: 2rem;
-  background: rgba(255, 255, 255, 0.15); /* Transparence plus subtile */
-  backdrop-filter: blur(5px); /* Flou moins intense */
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(5px); 
   border-radius: 16px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
 
-/* Left Section - Payment Form */
+
 .payment-form-section {
   flex: 1;
   padding: 2rem;
@@ -89,12 +89,12 @@
   box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
 }
 
-/* Right Section - Summary */
+
 .payment-summary {
   width: 380px;
-  background: rgba(255, 255, 255, 0.15); /* Transparence plus subtile */
+  background: rgba(255, 255, 255, 0.15); 
   padding: 2rem;
-  backdrop-filter: blur(5px); /* Flou moins intense */
+  backdrop-filter: blur(5px); 
   border-left: 1px solid #e5e7eb;
 }
 
@@ -104,7 +104,7 @@
   margin-bottom: 1.5rem;
 }
 
-/* Plan Options */
+
 .plan-options {
   display: flex;
   flex-direction: column;
@@ -113,9 +113,9 @@
 }
 
 .plan-option {
-  background: rgba(255, 255, 255, 0.15); /* Transparence plus subtile */
+  background: rgba(255, 255, 255, 0.15); 
   
-  backdrop-filter: blur(5px); /* Flou moins intense */
+  backdrop-filter: blur(5px); 
   border-radius: 12px;
   overflow: hidden;
 }
@@ -162,7 +162,7 @@
   margin-top: 0.5rem;
 }
 
-/* Total Section */
+
 .total-section {
   display: flex;
   justify-content: space-between;
@@ -177,16 +177,15 @@
   color: #1a1f36;
 }
 
-/* Security Notice */
 .security-notice {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   margin-top: 1.5rem;
   padding: 1rem;
-  background: rgba(255, 255, 255, 0.15); /* Transparence plus subtile */
+  background: rgba(255, 255, 255, 0.15); 
   border-radius: 8px;
-  backdrop-filter: blur(5px); /* Flou moins intense */
+  backdrop-filter: blur(5px);
 }
 
 .security-icon {
@@ -198,7 +197,6 @@
   font-size: 0.9rem;
 }
 
-/* Buttons */
 .form-actions {
   display: flex;
   gap: 1rem;
@@ -234,7 +232,7 @@
   background-color: #f8fafc;
 }
 
-/* Success Popup */
+
 .popup-overlay {
   position: fixed;
   top: 0;
@@ -270,7 +268,7 @@
   margin: 0 auto 1rem;
 }
 
-/* Responsive Design */
+
 @media (max-width: 968px) {
   .payment-container {
     flex-direction: column;

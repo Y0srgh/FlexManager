@@ -1,4 +1,4 @@
-/* Fond avec image et effet fixe */
+
 .app-container {
     background-image: url('https://images.pexels.com/photos/1552252/pexels-photo-1552252.jpeg?cs=srgb&dl=pexels-leonardho-1552252.jpg&fm=jpg');
     background-size: cover;
@@ -12,10 +12,9 @@
     height: 100vh;
 }
 
-/* Style de la carte d'échec */
 .failed-card {
-    background: rgba(255, 255, 255, 0.2); /* Semi-transparent */
-    backdrop-filter: blur(10px); /* Effet de flou */
+    background: rgba(255, 255, 255, 0.2); 
+    backdrop-filter: blur(10px); 
     padding: 30px;
     border-radius: 12px;
     text-align: center;
@@ -26,11 +25,11 @@
     align-items: center;
 }
 
-/* Icône d'échec */
+
 .failed-icon {
     width: 60px;
     height: 60px;
-    background-color: #ffffff; /* Même couleur que le succès */
+    background-color: #ffffff; 
     color: white;
     font-size: 32px;
     font-weight: bold;
@@ -41,9 +40,9 @@
     margin-bottom: 15px;
 }
 
-/* Style du bouton */
+
 .btn-primary {
-    background-color: #5F2B4F; /* Même couleur que le succès */
+    background-color: #5F2B4F; 
     color: white;
     border: none;
     padding: 10px 20px;
@@ -55,5 +54,5 @@
 }
 
 .btn-primary:hover {
-    background-color: #421A3F; /* Même couleur que le succès */
+    background-color: #421A3F; 
 }

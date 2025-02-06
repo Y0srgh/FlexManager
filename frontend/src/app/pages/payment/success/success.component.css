@@ -1,4 +1,4 @@
-/* Fond avec image et effet fixe */
+
 .app-container {
     background-image: url('https://images.pexels.com/photos/1552252/pexels-photo-1552252.jpeg?cs=srgb&dl=pexels-leonardho-1552252.jpg&fm=jpg');
     background-size: cover;
@@ -12,10 +12,10 @@
     height: 100vh;
 }
 
-/* Style de la carte de succès */
+
 .success-card {
-    background: rgba(255, 255, 255, 0.2); /* Semi-transparent */
-    backdrop-filter: blur(10px); /* Effet de flou */
+    background: rgba(255, 255, 255, 0.2); 
+    backdrop-filter: blur(10px); 
     padding: 30px;
     border-radius: 12px;
     text-align: center;
@@ -26,7 +26,7 @@
     align-items: center;
 }
 
-/* Icône de succès */
+
 .success-icon {
     width: 60px;
     height: 60px;
@@ -41,7 +41,6 @@
     margin-bottom: 15px;
 }
 
-/* Style du bouton */
 .btn-primary {
     background-color: #5F2B4F;
     color: white;
