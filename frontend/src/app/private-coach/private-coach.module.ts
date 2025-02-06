@@ -10,11 +10,7 @@ import { ReservationCardComponent } from './reservation-card/reservation-card.co
 
 @NgModule({
   declarations: [
-    // CoachComponent,
-    // CoachListComponent,
-    // RequestCardComponent,
-    // ReservationCardComponent,
-    // RequestPageComponent
+    
   ],
   imports: [
     CommonModule

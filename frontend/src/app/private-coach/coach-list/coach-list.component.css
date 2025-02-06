@@ -4,7 +4,7 @@
     flex-wrap: wrap; 
     gap: 20px; 
     justify-content: flex-start; 
-    /* margin: 20px 0; */
+    
     background-image: url('https://images.pexels.com/photos/1552252/pexels-photo-1552252.jpeg?cs=srgb&dl=pexels-leonardho-1552252.jpg&fm=jpg');
     background-size: cover; 
     background-position: center; 
@@ -53,7 +53,7 @@
     z-index: 1000; 
     padding: 10px; 
     background-color: rgba(255, 255, 255, 0.8); 
-    border-radius: 50%; /* Forme arrondie */
+    border-radius: 50%; 
     transition: color 0.3s ease, background-color 0.3s ease; 
   }
   
