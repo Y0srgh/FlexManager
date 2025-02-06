@@ -65,7 +65,7 @@ textarea {
   background: rgba(255, 255, 255, 0.9);
   color: #333;
   transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-  margin-bottom: 20px; /* Added spacing between form fields */
+  margin-bottom: 20px; 
 }
 
 input:hover,
@@ -135,7 +135,7 @@ button:hover {
 .buttons-container {
   display: flex;
   justify-content: space-between;
-  margin-top: 30px; /* Increased spacing between form fields and buttons */
+  margin-top: 30px; 
 }
 
 .edit-btn {
