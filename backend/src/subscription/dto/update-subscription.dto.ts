@@ -1,4 +1,4 @@
-// src/subscription/dto/update-subscription.dto.ts
+
 
 import { IsString, IsNotEmpty, IsInt, IsArray } from 'class-validator';
 

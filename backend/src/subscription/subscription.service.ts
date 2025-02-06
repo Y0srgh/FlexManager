@@ -20,24 +20,22 @@ export class SubscriptionsService extends BaseService<Subscription> {
     return super.create(createSubscriptionDto);
   }
 
-  // Récupérer toutes les souscriptions
   async findAll(): Promise<Subscription[]> {
     return super.findAll();
   }
 
-  // Récupérer une souscription par ID
+
 async findOne(id: string): Promise<Subscription> {
-  return super.findOne(id);  // Pass the id as a string
-}
+  return super.findOne(id);  
 
-// Mettre à jour une souscription existante
+
 async update(id: string, updateSubscriptionDto: UpdateSubscriptionDto): Promise<Subscription> {
-  return super.update(id, updateSubscriptionDto);  // Pass the id as a string
+  return super.update(id, updateSubscriptionDto);  
 }
 
 
 
-  // Supprimer une souscription
+
   async remove(id: number): Promise<void> {
     return super.delete(id.toString());  
   }
