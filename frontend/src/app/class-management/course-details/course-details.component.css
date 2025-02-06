@@ -185,3 +185,7 @@ button:hover {
   animation: neon 8s infinite linear;
   z-index: -1;
 }
+.course-name{
+  font-weight: bold ;
+  font-size: large;
+}

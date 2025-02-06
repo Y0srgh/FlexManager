@@ -27,7 +27,7 @@
 .sidebar {
   width: 280px;
   background: #262626;
-  border-right: 2px solid #e74c3c;  /* Vibrant red accent */
+  border-right: 2px solid #f1affb;  /* Vibrant red accent */
   display: flex;
   flex-direction: column;
 }
@@ -56,7 +56,7 @@
   align-items: center;
   padding: 20px;
   background: #333333;
-  border-bottom: 2px solid #e74c3c;
+  border-bottom: 2px solid #d38ffc;
   color: #fff;
 }
 
@@ -65,7 +65,7 @@
   height: 60px;
   border-radius: 50%;
   margin-right: 15px;
-  border: 3px solid #e74c3c;
+  border: 3px solid #d38ffc;
 }
 
 .user-profile .username {
@@ -90,7 +90,7 @@
 
 .contact-list li:hover,
 .contact-list li.active {
-  background: #e74c3c;
+  background: #d38ffc;
   color: #fff;
 }
 
@@ -99,7 +99,7 @@
   height: 50px;
   border-radius: 50%;
   margin-right: 15px;
-  border: 2px solid #e74c3c;
+  border: 2px solid #d38ffc;
 }
 
 .contact-list li .contact-name {
@@ -117,7 +117,7 @@
 .chat-header {
   padding: 20px;
   background: #262626;
-  border-bottom: 2px solid #e74c3c;
+  border-bottom: 2px solid #d38ffc;
   display: flex;
   align-items: center;
   color: #fff;
@@ -128,7 +128,7 @@
   height: 55px;
   border-radius: 50%;
   margin-right: 15px;
-  border: 2px solid #e74c3c;
+  border: 2px solid #d38ffc;
 }
 
 .chat-header .contact-name {
@@ -158,7 +158,7 @@
 }
 
 .message.sent {
-  background: #e74c3c;  
+  background: #d38ffc;  
   color: #fff;
   margin-left: auto;
   border-bottom-right-radius: 5px;
@@ -186,7 +186,7 @@
 .chat-input {
   padding: 15px 20px;
   background: #262626;
-  border-top: 2px solid #e74c3c;
+  border-top: 2px solid #d38ffc;
   display: flex;
   align-items: center;
 }
@@ -202,7 +202,7 @@
 
 .chat-input button {
   margin-left: 15px;
-  background: #e74c3c;
+  background: #d38ffc;
   border: none;
   color: #fff;
   padding: 10px 20px;

@@ -15,7 +15,7 @@ export class SuccessComponent {
   constructor(private router: Router) {}
 
   goHome(): void {
-    this.router.navigate(['/']); 
+    this.router.navigate(['/home']); 
   }
 
   closeSuccessPopup(): void {

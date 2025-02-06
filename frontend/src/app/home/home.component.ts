@@ -67,16 +67,16 @@ export class HomeComponent {
     {
       title: 'Subscriptions',
       icon: 'subscriptions',
-      route: '/subscriptions',
+      route: '/subscription',
       image: 'assets/subscriptions.jpg',
       roles: ['client', 'coach', 'manager'],
     },
     {
       title: 'Payments',
       icon: 'credit_card',
-      route: '/payments',
+      route: '/manage-subscription',
       image: 'assets/payment.avif',
-      roles: ['manager', 'coach'],
+      roles: ['client'],
     },
     {
       title: 'Association Requests',
@@ -93,9 +93,9 @@ export class HomeComponent {
       roles: ['parent'],
     },
     {
-      title: 'Contact Us',
+      title: 'Chat with us',
       icon: 'contact_mail',
-      route: '/contact-us',
+      route: '/chat',
       image: 'assets/contact.webp',
       roles: ['client', 'parent', 'coach'],
     },

@@ -56,10 +56,14 @@ h1 {
 }
 
 .charts-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 2fr));
   gap: 2rem;
   margin-top: 2rem;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .chart-card {

@@ -41,7 +41,7 @@ const routes: Routes = [
     path: 'subscription',
     component: MembershipPageComponent,
     canActivate: [RoleGuard],
-    data: { roles: ['client'] },
+    data: { roles: ['client', 'manager'] },
   },
   { path: 'payment', component: PaymentComponent },
   { path: 'success', component: SuccessComponent },
@@ -72,7 +72,7 @@ const routes: Routes = [
     path: 'coaches',
     component: CoachListComponent,
     canActivate: [RoleGuard],
-    data: { roles: ['manager','client'] },
+    data: { roles: ['manager','client','coach'] },
   },
   {
     path: 'requests',

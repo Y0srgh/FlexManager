@@ -20,7 +20,7 @@ export class AppComponent {
   showNavbar = true;
   constructor(private router: Router) {
     this.router.events.subscribe((event) => {
-      const hiddenRoutes = ['/','/#home','/#coach','/#pricing','/#testimonials','/#why-choose-us','/#stats','/#nutritionists','/signup', '/signin' ,'/register','/signup/sportsman','/signup/parent']; 
+      const hiddenRoutes = ['/','/#home','/#coach','/#pricing','/#testimonials','/#why-choose-us','/#stats','/#nutritionists','/signup', '/signin' ,'/register','/signup/sportsman','/signup/parent','/404']; 
       this.showNavbar = !hiddenRoutes.includes(this.router.url);
       const currentRoute = this.router.url.split('?')[0];
 console.log("current route", currentRoute);

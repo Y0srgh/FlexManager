@@ -16,7 +16,6 @@ export class SignupComponent implements OnInit {
   currentStep = 1;
   submitted = false;
 
-  router: Router = Inject(Router);
 
 
   goals = [
@@ -32,7 +31,8 @@ export class SignupComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private baseService: BaseService,
-    private signupService: SignupService
+    private signupService: SignupService,
+    private router: Router
   ) {}
 
   ngOnInit() {

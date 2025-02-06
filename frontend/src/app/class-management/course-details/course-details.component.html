@@ -21,6 +21,7 @@
 
       <label>Capacity:</label>
       <input type="number" [(ngModel)]="editedCourse.capacity" name="capacity" required>
+      
 
       <div class="buttons-container">
         <button type="submit" class="save-btn">Save</button>
@@ -39,6 +40,8 @@
         <strong>Time:</strong> Not specified
       </p>
       <p><strong>Capacity:</strong> {{ course.capacity }}</p>
+      <p><strong>Days of the week:</strong> {{ course.daysOfWeek }}</p>
+
     </div>
 
     <!-- Edit and Delete Buttons -->
