@@ -1,7 +1,7 @@
 export class PrivateReservation {
   id?: string;  
   coachId: string;  
-  // clientId: string;  
+ 
   date: string;
   startTime: string;
   endTime: string;
@@ -12,7 +12,7 @@ export class PrivateReservation {
   constructor(
    
     coachId: string,  
-    // clientId: string,  
+   
     date: string, 
     startTime: string, 
     endTime: string,
@@ -20,7 +20,7 @@ export class PrivateReservation {
   ) {
   
     this.coachId = coachId;
-    // this.clientId = clientId;
+  
     this.date = date;
     this.startTime = startTime;
     this.endTime = endTime;

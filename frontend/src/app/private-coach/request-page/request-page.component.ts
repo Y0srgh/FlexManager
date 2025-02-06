@@ -8,18 +8,15 @@ import { PrivateReservation } from '../../models/private-reservation.model';
   styleUrls: ['./request-page.component.css']
 })
 export class RequestPageComponent implements OnInit {
-  // coachId: string = '4d29a321-fb1d-44a3-85e6-01d3899ef933'; // ID du coach à filtrer
   reservations: PrivateReservation[] = [];
 
   constructor(private reservationService: PrivateReservationService) { }
   onReservationUpdated(updatedReservationId: string) {
-    // Filtrer la réservation mise à jour pour la supprimer de la liste affichée
     this.reservations = this.reservations.filter(reservation => reservation.id !== updatedReservationId);
   }
   
 
   ngOnInit(): void {
-    // Récupérer toutes les réservations
     this.reservationService.getReservations().subscribe((data: any[]) => {
       console.log('Toutes les réservations récupérées :', data);
 
@@ -44,7 +41,6 @@ export class RequestPageComponent implements OnInit {
 
     return {
       id: data.id,
-      // coachId: data.coachEntity?.id || undefined,  
       username: data.clientEntity?.user?.username || '',
       date: data.date,
       startTime: data.startTime,

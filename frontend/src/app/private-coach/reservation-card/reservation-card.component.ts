@@ -39,13 +39,13 @@ export class ReservationCardComponent {
   onBookClick() {
     const reservationData = new PrivateReservation(
       this.coach.id,
-      // '2a702592-b2fe-4d81-a0a6-54a1f5aff196',
+   
       this.selectedDate,
       this.startTime,
       this.endTime
     );
 
-    // console.log('Données de réservation :', reservationData);
+
 
     this.reservationService.createReservation(reservationData).subscribe({
       next: (response) => {

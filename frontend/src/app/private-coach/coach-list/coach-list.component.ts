@@ -30,15 +30,7 @@ export class CoachListComponent implements OnInit {
     );
   }
 
-  // selectCoach(coachId: string) {
-  //   const selectedCoach = this.coaches.find(coach => coach.id === coachId);
-  //   if (selectedCoach) {
-  //     this.selectedCoach = selectedCoach;
-  //     this.isModalOpen = true;
-  //   } else {
-  //     this.selectedCoach = null;
-  //   }
-  // }
+  
 
   selectCoach({ coachId, action }: { coachId: string; action: string }) {
     console.log(coachId, '-------------', action);
@@ -62,7 +54,7 @@ export class CoachListComponent implements OnInit {
           console.error('Erreur lors de la suppression du coach:', error);
         }
       );
-      // this.coaches = this.coaches.filter(coach => coach.id !== coachId);
+  
     }
   }
 

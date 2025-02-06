@@ -5,7 +5,7 @@
   </div>
 
   <div class="course-info">
-    <!-- Edit Form -->
+   
     <form *ngIf="isEditing" (ngSubmit)="onUpdateCourse()">
       <label>Title:</label>
       <input type="text" [(ngModel)]="editedCourse.title" name="title" required>
@@ -29,7 +29,7 @@
       </div>
     </form>
 
-    <!-- Display Course Details -->
+   
     <div *ngIf="!isEditing">
       <h3 class="course-name">{{ course.title }}</h3>
       <p class="course-description">{{ course.description }}</p>
@@ -44,13 +44,13 @@
 
     </div>
 
-    <!-- Edit and Delete Buttons -->
+   
     <div class="buttons-container" *ngIf="!isEditing">
       <button *ngIf="isCoach()" class="edit-btn" (click)="onEdit()">Edit</button>
       <button *ngIf="isCoach()" class="delete-btn" (click)="onDelete(course.id)">Delete</button>
     </div>
   </div>
 
-  <!-- Close Button -->
+
   <button class="close-btn" (click)="closePopup()">×</button>
 </div>
