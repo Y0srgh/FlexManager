@@ -1,6 +1,6 @@
 import { Component, Input,Output, EventEmitter } from '@angular/core';
 import { PrivateReservation } from '../../models/private-reservation.model';
-import { PrivateReservationService } from '../../services/private-reservation.service'; // Importation du service
+import { PrivateReservationService } from '../../services/private-reservation.service'; 
 
 
 @Component({
