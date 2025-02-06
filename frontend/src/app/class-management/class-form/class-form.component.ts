@@ -2,7 +2,7 @@ import { Component, Output, EventEmitter, OnInit, OnDestroy } from '@angular/cor
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { MatSnackBar } from '@angular/material/snack-bar'; // N'oubliez pas d'importer MatSnackBar
+import { MatSnackBar } from '@angular/material/snack-bar'; 
 import { Course } from '../../models/course.model';
 
 @Component({
@@ -60,7 +60,7 @@ export class ClassFormComponent implements OnInit, OnDestroy {
     this.courseForm.patchValue({ daysOfWeek: this.selectedDays });
   }
 
-  // Correction du nom de la méthode de validation
+
   timeValidator(group: FormGroup) {
     const startTime = group.get('startTime')?.value;
     const endTime = group.get('endTime')?.value;
