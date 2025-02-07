@@ -1,8 +1,8 @@
-// src/subscription/entities/subscription.entity.ts
+
 
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
-@Entity('subscriptions') // Assurez-vous que le nom de la table est bien 'subscriptions'
+@Entity('subscriptions') 
 export class Subscription {
   @PrimaryGeneratedColumn()
   id: number;
