@@ -27,6 +27,12 @@ export class CourseDetailsComponent {
   isCoach(): boolean {
     return this.currentRole === 'coach';
   }
+  isManager(): boolean {
+    return this.currentRole === 'manager';
+  }
+  isClient(): boolean {
+    return this.currentRole === 'client';
+  }
 
   private apiUrl = 'http://localhost:3000/courses';
   editedCourse: Course = {
@@ -89,6 +95,39 @@ export class CourseDetailsComponent {
           });
         }
       );
+  }
+
+  onReserve(){
+    if (!this.course) return;
+    this.isEditing = false; 
+
+    const updatedCourseData = { 
+      capacity: this.course.capacity - 1 ,
+    };
+  
+    this.http.patch<Course>(`${this.apiUrl}/${this.course.id}`, updatedCourseData)
+      .subscribe(
+        (updatedCourse) => {
+          this.course = updatedCourse; 
+          this.updated.emit(updatedCourse);  
+          this.snackBar.open('Reservation added successfully!', 'Close', {
+            duration: 3000,
+            verticalPosition: 'top',
+            horizontalPosition: 'right',
+            panelClass: 'custom-snackbar',
+          });
+        },
+        (error) => {
+          console.error('Error updating course:', error);
+          this.snackBar.open('Error reserving course!', 'Close', {
+            duration: 3000,
+            verticalPosition: 'top',
+            horizontalPosition: 'right',
+            panelClass: 'custom-snackbar',
+          });
+        }
+      );
+
   }
   
 

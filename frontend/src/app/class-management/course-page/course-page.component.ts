@@ -25,6 +25,9 @@ export class CoursePageComponent implements OnInit {
   isCoach(): boolean {
     return this.currentRole === 'coach';
   }
+  isManager(): boolean {
+    return this.currentRole === 'manager';
+  }
   
   fetchCourses() {
     this.courseService.getCourses().subscribe(

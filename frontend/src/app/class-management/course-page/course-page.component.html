@@ -1,6 +1,6 @@
 <div class="app-container">
   <div class="add-class-btn-container">
-    <button *ngIf="isCoach()" (click)="openModal()" class="add-class-btn">+ Add Class</button>
+    <button *ngIf="isCoach() || isManager()" (click)="openModal()" class="add-class-btn">+ Add Class</button>
   </div>
 
   <div class="modal" *ngIf="showModal">

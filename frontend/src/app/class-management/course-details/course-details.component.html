@@ -46,8 +46,9 @@
 
    
     <div class="buttons-container" *ngIf="!isEditing">
-      <button *ngIf="isCoach()" class="edit-btn" (click)="onEdit()">Edit</button>
-      <button *ngIf="isCoach()" class="delete-btn" (click)="onDelete(course.id)">Delete</button>
+      <button *ngIf="isClient()" class="edit-btn" (click)="onReserve()">Reserve</button>
+      <button *ngIf="isCoach() || isManager()" class="edit-btn" (click)="onEdit()">Edit</button>
+      <button *ngIf="isCoach() || isManager()" class="delete-btn" (click)="onDelete(course.id)">Delete</button>
     </div>
   </div>
 
