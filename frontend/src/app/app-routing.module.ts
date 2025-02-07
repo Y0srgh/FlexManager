@@ -42,7 +42,7 @@ const routes: Routes = [
     path: 'what-we-offer',
     component: MembershipPageComponent,
     canActivate: [RoleGuard],
-    data: { roles: ['client', 'manager'] },
+    data: { roles: ['client', 'manager', 'coach'] },
   },
   {
     path: 'payment',

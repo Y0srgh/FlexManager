@@ -69,7 +69,7 @@ export class HomeComponent {
       icon: 'subscriptions',
       route: '/subscription',
       image: 'assets/subscriptions.jpg',
-      roles: ['client', 'coach', 'manager'],
+      roles: ['client', 'manager', 'coach'],
     },
     {
       title: 'Payments',

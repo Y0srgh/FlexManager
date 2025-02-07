@@ -21,8 +21,8 @@ export class AuthInterceptor implements HttpInterceptor {
     '/auth/coach',
     '/site-payment/site-payment',
     '/site-payment/UserSubscription',
-       '/auth/request/pending-child-request',
-      "/site-payment/price/"
+    '/auth/request/pending-child-request',
+    '/site-payment/price/',
   ];
   constructor(private router: Router) {}
 
@@ -71,6 +71,7 @@ export class AuthInterceptor implements HttpInterceptor {
               // this.router.navigate(['/']);
             }
             if (error.status === 403) {
+              
               this.router.navigate(['/home']);
             }
             console.error('Error in request:', error);
@@ -89,6 +90,7 @@ export class AuthInterceptor implements HttpInterceptor {
             }
             if (error.status === 403) {
               this.router.navigate(['/home']);
+              
             }
             console.log('error-----------', error);
           },
