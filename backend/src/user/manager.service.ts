@@ -6,6 +6,7 @@ import { BaseService } from 'src/base/base.service';
 import { CreateManagerDto } from './dto/create-manager.dto';
 import { PasswordService } from 'src/common/utils/password.service';
 import { UserService } from './user.service';
+import { EmailService } from 'src/common/utils/email.service';
 
 @Injectable()
 export class ManagerService extends BaseService<ManagerEntity> {
@@ -16,8 +17,10 @@ export class ManagerService extends BaseService<ManagerEntity> {
     protected passwordService: PasswordService,
 
     protected userService: UserService,
+        protected emailService: EmailService,
+    
   ) {
-    super(managerRepository, userService, passwordService);
+    super(managerRepository, userService, passwordService, emailService);
   }
 
   async createManager(createManagerDto: CreateManagerDto): Promise<ManagerEntity> {

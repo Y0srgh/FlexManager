@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, ValidateIf } from "class-validator";
+import { IsEmail, IsNotEmpty, IsString, ValidateIf } from "class-validator";
 
 export class UserSingInDto{
 
@@ -6,7 +6,7 @@ export class UserSingInDto{
     username:string;
 
     @ValidateIf((o) => !o.username)
-    @IsEmail( {}, {message: "Please enter a valid cred"})
+    @IsString({message: "Please enter a valid cred"})
     email:string;
 
     @IsNotEmpty()

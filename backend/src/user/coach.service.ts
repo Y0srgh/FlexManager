@@ -6,6 +6,7 @@ import { BaseService } from 'src/base/base.service';
 import { CreateCoachDto } from './dto/create-coach.dto';
 import { PasswordService } from 'src/common/utils/password.service';
 import { UserService } from './user.service';
+import { EmailService } from 'src/common/utils/email.service';
 
 @Injectable()
 export class CoachService extends BaseService<CoachEntity> {
@@ -16,21 +17,25 @@ export class CoachService extends BaseService<CoachEntity> {
     protected passwordService: PasswordService,
 
     protected userService: UserService,
+
+        protected emailService: EmailService,
+    
   ) {
-    super(coachRepository, userService, passwordService);
+    super(coachRepository, userService, passwordService, emailService);
   }
 //add first name last name
   async createCoach(createCoachDto: CreateCoachDto): Promise<CoachEntity> {
-    return this.createWithUser(
+    const createdCoach =  this.createWithUser(
       createCoachDto,
       (user) => ({
         expertise: createCoachDto.expertise,
         certifications: createCoachDto.certifications,
         isPrivate: createCoachDto.isPrivate,
         courses: [],
-      
       }),
     );
+
+    return createdCoach
   }
 
   

@@ -139,4 +139,13 @@ export class EmailService {
       statusMessage,
     );
   }
+
+
+  async sendAddCoachEmail(
+    coachEmail: string,
+    password: string
+  ): Promise<void> {
+    const message = `Hello ${coachEmail}, <br> You have been registered as an active coach in our system. <br> Password : ${password}`;
+    await this.sendEmail(coachEmail, 'Welcome coach !', message);
+  }
 }

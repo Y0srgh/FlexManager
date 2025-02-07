@@ -29,15 +29,15 @@ export class AddCoachComponent implements OnInit {
     this.coachForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
-      role: ['coach'], // Set as default
-      password: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(6),
-          Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,}$'),
-        ],
-      ],
+      role: ['coach'],
+      // password: [
+      //   '',
+      //   [
+      //     Validators.required,
+      //     Validators.minLength(6),
+      //     Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,}$'),
+      //   ],
+      // ],
       phone: ['', [Validators.required, Validators.pattern('^[0-9]{8}$')]],
       expertise: ['', Validators.required],
       certifications: ['', Validators.required],
@@ -91,14 +91,14 @@ export class AddCoachComponent implements OnInit {
     if (control?.hasError('minlength')) {
       return `Minimum length is ${control.errors?.['minlength'].requiredLength} characters`;
     }
-    if (control?.hasError('pattern')) {
-      if (controlName === 'password') {
-        return 'Password must contain at least one uppercase letter, one lowercase letter, one number and one special character';
-      }
-      if (controlName === 'phone') {
-        return 'Phone number must contain at least 8 digits';
-      }
-    }
+    // if (control?.hasError('pattern')) {
+    //   if (controlName === 'password') {
+    //     return 'Password must contain at least one uppercase letter, one lowercase letter, one number and one special character';
+    //   }
+    //   if (controlName === 'phone') {
+    //     return 'Phone number must contain at least 8 digits';
+    //   }
+    // }
     return '';
   }
 }

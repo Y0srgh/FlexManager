@@ -32,9 +32,9 @@ export class ParentService extends BaseService<ParentEntity> {
 
     protected passwordService: PasswordService,
 
-    private readonly emailService: EmailService,
+    protected emailService: EmailService,
   ) {
-    super(parentRepository, userService, passwordService);
+    super(parentRepository, userService, passwordService, emailService);
   }
 
   async createParent(createParentDto: CreateParentDto) {

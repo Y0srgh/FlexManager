@@ -18,9 +18,9 @@ export class ParentChildRequestService extends BaseService<ParentChildRequestEnt
 
     protected userService: UserService,
 
-    private readonly emailService: EmailService,
+    protected emailService: EmailService,
   ) {
-    super(parentChildRepository, userService, passwordService);
+    super(parentChildRepository, userService, passwordService, emailService);
   }
 
   async updateRequestStatus(

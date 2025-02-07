@@ -7,6 +7,7 @@ import { CreateClientDto } from './dto/create-client.dto';
 import { PasswordService } from 'src/common/utils/password.service';
 import { UserService } from './user.service';
 import { TrackEntity } from './entities/track.entity';
+import { EmailService } from 'src/common/utils/email.service';
 
 @Injectable()
 export class ClientService extends BaseService<ClientEntity> {
@@ -21,8 +22,9 @@ export class ClientService extends BaseService<ClientEntity> {
 
     protected userService: UserService,
 
+    protected emailService: EmailService,
   ) {
-    super(clientRepository, userService, passwordService);
+    super(clientRepository, userService, passwordService, emailService);
   }
 
   async getProgressHistory(userId: string) {
@@ -42,35 +44,41 @@ export class ClientService extends BaseService<ClientEntity> {
 
   async updateProgressHistory(userId: string, trackBody: any) {
     const client = await this.findOne(userId);
-    console.log("trackBody", trackBody.caloriesBurned);
-    
+    console.log('trackBody', trackBody.caloriesBurned);
+
     const oldProgress = await this.trackRepository.findOne({
       where: { client: { id: client.id } },
       relations: ['client'],
       order: { createdAt: 'DESC' },
     });
-    
 
-
-    console.log("oldProgress----------------------------",oldProgress);
-    
-  
+    console.log('oldProgress----------------------------', oldProgress);
 
     const progress = new TrackEntity();
-    console.log("initial progress", progress);
-    
+    console.log('initial progress', progress);
+
     progress.client = client;
-    progress.weight = trackBody.weight!==undefined? trackBody.weight : (oldProgress?.weight || null);
-    progress.muscleRate = trackBody.muscleRate!==undefined? trackBody.muscleRate :(oldProgress?.muscleRate || null);
-    progress.caloriesBurned = trackBody.caloriesBurned!==undefined? trackBody.caloriesBurned :(oldProgress?.caloriesBurned || null);
-    progress.fatRate = trackBody.fatRate!==undefined? trackBody.fatRate :(oldProgress?.fatRate || null);
-    console.log("progress------------------------", progress);
+    progress.weight =
+      trackBody.weight !== undefined
+        ? trackBody.weight
+        : oldProgress?.weight || null;
+    progress.muscleRate =
+      trackBody.muscleRate !== undefined
+        ? trackBody.muscleRate
+        : oldProgress?.muscleRate || null;
+    progress.caloriesBurned =
+      trackBody.caloriesBurned !== undefined
+        ? trackBody.caloriesBurned
+        : oldProgress?.caloriesBurned || null;
+    progress.fatRate =
+      trackBody.fatRate !== undefined
+        ? trackBody.fatRate
+        : oldProgress?.fatRate || null;
+    console.log('progress------------------------', progress);
     await this.trackRepository.save(progress);
     return progress;
   }
 
-  
-  
   async createClient(createClientDto: CreateClientDto): Promise<ClientEntity> {
     const client = await this.createWithUser(createClientDto, () => ({
       physicalDetails: createClientDto.physicalDetails,
@@ -92,6 +100,6 @@ export class ClientService extends BaseService<ClientEntity> {
       console.log(error);
     }
 
-    return client;
+    return client as ClientEntity;
   }
 }
