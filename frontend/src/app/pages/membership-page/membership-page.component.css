@@ -5,12 +5,12 @@ html, body {
 }
 
 
-.app-container {
-  background-image: url('https://images.pexels.com/photos/1552252/pexels-photo-1552252.jpeg?cs=srgb&dl=pexels-leonardho-1552252.jpg&fm=jpg');
+.app-container{
+  /* background-image: url('https://images.pexels.com/photos/1552252/pexels-photo-1552252.jpeg?cs=srgb&dl=pexels-leonardho-1552252.jpg&fm=jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-attachment: fixed; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -101,4 +101,103 @@ html, body {
   .course-image {
     margin-bottom: 10px;
   }
+}
+
+
+/*here*/
+
+.app-container {
+  background-image: url('https://images.pexels.com/photos/1552252/pexels-photo-1552252.jpeg?cs=srgb&dl=pexels-leonardho-1552252.jpg&fm=jpg');
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+  background-attachment: fixed; 
+  margin: 0;
+  padding: 0;
+  height: 1000vh; 
+  display: flex;
+  flex-direction: column;
+  
+}
+.add-class-btn-container {
+  margin-top: 30px; 
+  margin-bottom: 5px; 
+  margin-right: 20px;
+  text-align: right; 
+}
+
+
+.add-class-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #6c757d; 
+  color: black;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.add-class-btn:hover {
+  background-color: #5a636a; 
+}
+
+
+.course-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px; 
+  margin-top: 10px; 
+}
+
+
+.course-list-coach {
+  margin-top: 20px;
+}
+
+
+.course-container {
+  box-sizing: border-box;
+  padding: 0;
+  background-color: transparent;
+  box-shadow: none;
+  border: none;
+}
+
+
+@media (max-width: 768px) {
+  .course-list {
+    grid-template-columns: 1fr; 
+  }
+}
+ 
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 0px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 100%;
+}
+
+
+.close-btn {
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
 }

@@ -51,7 +51,7 @@ export class HomeComponent {
       roles: ['client'],
     },
     {
-      title: 'Private Sessions',
+      title: 'Coaches',
       icon: 'fitness_center',
       route: '/coaches',
       image: 'assets/private.png',

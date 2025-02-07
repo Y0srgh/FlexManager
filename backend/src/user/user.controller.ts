@@ -245,6 +245,15 @@ export class UserController {
 
     return this.clientService.updateProgressHistory(user.id, trackBody);
   }
+
+  @Get('User-eu/:email/:username')
+  getUserByEmailAndUsername(
+    @Param('email') email: string,
+    @Param('username') username: string,
+  ) {
+    return this.userService.findOneByEmailUsername(email, username);
+  }
+
   @Get('User/:id')
   getUserById(@Param('id') id: string) {
     return this.userService.findOne(id);

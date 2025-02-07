@@ -16,6 +16,7 @@ import { UserService } from '../services/Userservice/user.service';
 import { SessionService } from '../services/sessionManager/session.service';
 import { Message } from '../interfaces/message';
 import { an } from 'node_modules/@fullcalendar/core/internal-common';
+import { AuthService } from '../shared/auth.service';
 @Component({
   selector: 'app-chatroom',
   templateUrl: './chatroom.component.html',
@@ -31,18 +32,24 @@ export class ChatroomComponent implements OnInit, OnDestroy {
   sender: any;
   recipient: any;
   roomId: string = '';
+  user :any
   constructor(
     private chatserviceService: ChatserviceService,
     private datePipe: DatePipe,
     private userService: UserService,
-    private session: SessionService
+    private session: SessionService,
+    private authService: AuthService
+
   ) {}
 
   ngOnInit(): void {
-    this.senderId = this.session.getUserDetails()?.id || '';
+
+    // this.senderId = this.session.getUserDetails()?.id || '';
+    this.user = this.authService.getCurrentUserId()
     console.log('senderId---------', this.senderId);
 
-    this.userService.getUserById(this.senderId).subscribe((sender) => {
+    this.userService.getUserByEmailAndUsername(this.user.email, this.user.username).subscribe((sender) => {
+      this.senderId = sender.id
       this.sender = sender;
       console.log('sender', this.sender);
     });
@@ -72,7 +79,6 @@ export class ChatroomComponent implements OnInit, OnDestroy {
   messageSubscription!: any;
 
   joinRoom() {
-    // Unsubscribe previous subscription if it exists.
     if (this.messageSubscription) {
       this.messageSubscription.unsubscribe();
     }
@@ -86,17 +92,15 @@ export class ChatroomComponent implements OnInit, OnDestroy {
         console.log('received a message', data);
         const message: any = { ...data };
 
-        // (Note: Check if sender/recipient assignment is correct for your use case.)
         if (message.senderId === this.sender.id) {
 
-          message.sender = this.sender; // Adjust if needed
-          message.recipient = this.recipient; // Correct any typos like 'recipeint'
+          message.sender = this.sender; 
+          message.recipient = this.recipient; 
         } else {
-          message.sender = this.recipient; // Adjust if needed
-          message.recipient = this.sender; // Correct any typos like 'recipeint'
+          message.sender = this.recipient; 
+          message.recipient = this.sender; 
         }
 
-        // Optional: Check for duplicates before adding
         if (!this.messages.find((m) => m.id === message.id)) {
           this.messages.push(message);
         }

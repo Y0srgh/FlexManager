@@ -26,6 +26,13 @@ export class AuthService {
     return decoded?.role || decoded?.realm_access?.roles?.[0] || null;
   }
 
+  getCurrentUserId(): any | null {
+    const token = this.getToken();
+    if (!token) return null;
+    const decoded = this.decodeToken(token);
+    return { email: decoded?.email, username: decoded?.username };
+  }
+
   isAuthenticated(): boolean {
     return !!this.getToken();
   }

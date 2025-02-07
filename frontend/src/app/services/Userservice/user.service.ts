@@ -14,6 +14,13 @@ export class UserService {
    public getUserById(id: string | null ): Observable<any> {
     return  this.http.get<any>(`${environment.BASE_URL}/auth/User/${id}`);
   }
+
+   public getUserByEmailAndUsername(email: string | null , username:string | null): Observable<any> {
+    return  this.http.get<any>(`${environment.BASE_URL}/auth/User-eu/${email}/${username}`);
+  }
+
+
+
   public getAllUsers(): Observable<any[]> {
     return  this.http.get<any>(`${environment.BASE_URL}/auth/User`);
   }
