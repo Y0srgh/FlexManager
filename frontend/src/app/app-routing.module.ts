@@ -36,6 +36,7 @@ const routes: Routes = [
   { path: 'signup/parent', component: SignupParentComponent },
   { path: 'signin', component: SigninComponent },
   { path: '', component: LayoutComponent },
+  { path: 'register', component: JoinOptionsComponent },
 
   {
     path: 'subscription',
@@ -43,12 +44,37 @@ const routes: Routes = [
     canActivate: [RoleGuard],
     data: { roles: ['client', 'manager'] },
   },
-  { path: 'payment', component: PaymentComponent },
-  { path: 'success', component: SuccessComponent },
-  { path: 'failed', component: FailedComponent },
-  { path: 'chat', component: ChatroomComponent },
-  { path: 'manage-subscription', component: SitePaymentComponent },
-  { path: 'register', component: JoinOptionsComponent },
+  {
+    path: 'payment',
+    component: PaymentComponent,
+    canActivate: [RoleGuard],
+    data: { roles: ['manager', 'coach', 'client', 'parent'] },
+  },
+
+  {
+    path: 'success',
+    component: SuccessComponent,
+    canActivate: [RoleGuard],
+    data: { roles: ['manager', 'coach', 'client', 'parent'] },
+  },
+  {
+    path: 'failed',
+    component: FailedComponent,
+    canActivate: [RoleGuard],
+    data: { roles: ['manager', 'coach', 'client', 'parent'] },
+  },
+  {
+    path: 'chat',
+    component: ChatroomComponent,
+    canActivate: [RoleGuard],
+    data: { roles: ['manager', 'coach', 'client', 'parent'] },
+  },
+  {
+    path: 'manage-subscription',
+    component: SitePaymentComponent,
+    canActivate: [RoleGuard],
+    data: { roles: ['manager', 'coach', 'client', 'parent'] },
+  },
   {
     path: 'tracker',
     component: FitnessTrackerComponent,
@@ -72,7 +98,7 @@ const routes: Routes = [
     path: 'coaches',
     component: CoachListComponent,
     canActivate: [RoleGuard],
-    data: { roles: ['manager','client','coach'] },
+    data: { roles: ['manager', 'client', 'coach'] },
   },
   {
     path: 'requests',
@@ -83,8 +109,8 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-    // canActivate: [RoleGuard],
-    // data: { roles: ['manager', 'coach', 'client', 'parent'] },
+    canActivate: [RoleGuard],
+    data: { roles: ['manager', 'coach', 'client', 'parent'] },
   },
   {
     path: 'dashboard',
@@ -105,7 +131,12 @@ const routes: Routes = [
     data: { roles: ['manager'] },
   },
 
-  { path: '404', component: NotFoundComponent },
+  {
+    path: '404',
+    component: NotFoundComponent,
+    canActivate: [RoleGuard],
+    data: { roles: ['coach', 'client', 'parent', 'manager'] },
+  },
   { path: '**', redirectTo: '404' },
 ];
 
