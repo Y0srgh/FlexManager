@@ -43,10 +43,10 @@ export class SitePaymentComponent implements OnInit {
     }); 
     }
     getCurrentSubscription(){
-      this.sitePaymentService.getUserCurrentSubscription().subscribe((subcription : any)=>{
-        console.log("subscription" , subcription);
-        this.CurrentSubscription=subcription
-      })
+      // this.sitePaymentService.getUserCurrentSubscription().subscribe((subcription : any)=>{
+      //   console.log("subscription" , subcription);
+      //   this.CurrentSubscription=subcription
+      // })
     }
   sendtoStripeManagement(){
     

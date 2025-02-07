@@ -79,6 +79,7 @@ export class ChatroomComponent  implements   OnInit, OnDestroy {
       console.log(this.messages);
     });
   }
+  
   sendMessage(): void {
     this.chatserviceService.sendMessage(this.senderId,this.recipient.id,this.content)
 
