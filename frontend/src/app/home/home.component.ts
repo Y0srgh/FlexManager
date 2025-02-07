@@ -65,7 +65,7 @@ export class HomeComponent {
       roles: ['client', 'coach'],
     },
     {
-      title: 'Subscriptions',
+      title: 'What we offer',
       icon: 'subscriptions',
       route: '/subscription',
       image: 'assets/subscriptions.jpg',

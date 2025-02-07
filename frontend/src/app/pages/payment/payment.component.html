@@ -12,14 +12,14 @@
           <div class="form-group">
             <label for="paymentType">Payment Type</label>
             <select id="paymentType" formControlName="paymentType" (change)="onPaymentTypeChange($event)">
-              <option value="course">Course</option>
+              <option value="course">Private Session</option>
               <option value="subscription">Subscription</option>
               <!-- <option value="Private Session">Private Session</option> -->
             </select>
           </div>
 
-          <div class="form-group" *ngIf="showItemSelection && paymentType == 'course' ">
-            <label for="itemList">Select {{ paymentType }}</label>
+          <div class="form-group" *ngIf="showItemSelection && paymentType == 'course'">
+            <label for="itemList">Select the session's type</label>
             <select id="itemList" [(ngModel)]="selectedItem" [ngModelOptions]="{standalone: true}" (change)="OncourseSelect()">
               <option *ngFor="let item of availableItems" [value]="item.key">
                 {{ item.name }} - {{ getPrice(item.key) }}DT
@@ -29,7 +29,7 @@
         </section>
 
         <div class="form-actions">
-          <button type="button" class="btn-secondary" (click)="resetForm()">Cancel</button>
+          <button *ngIf="paymentType !== ''" type="button" class="btn-secondary" (click)="resetForm()">Cancel</button>
           <button (click)="handlePayment()"  class="btn-primary">Pay Now</button>
         </div>
       </div>
@@ -41,7 +41,7 @@
           <button class="btn-primary" (click)="showErrorPopup = false">Close</button>
         </div>
       </div>
-      <div *ngIf="paymentType === 'subscription' || paymentType === 'Private Session'" class="payment-summary">
+      <div *ngIf="paymentType === 'subscription'" class="payment-summary">
         <div class="summary-content">
           <h3>Order Summary</h3>
           <div class="plan-options">
@@ -62,6 +62,27 @@
           </div>
         </div>
       </div>
+      <!-- <div *ngIf="paymentType === 'subscription' || paymentType === 'Private Session'" class="payment-summary">
+        <div class="summary-content">
+          <h3>Order Summary</h3>
+          <div class="plan-options">
+            <div class="plan-option" *ngFor="let plan of plans">
+              <label [class.selected]="selectedPlan === plan.type">
+                <input type="radio" [value]="plan.type" formControlName="planType" (change)="onPlanChange(plan)">
+                <span class="plan-details">
+                  <span class="plan-name">{{ plan.name }}</span>
+                  <span class="plan-key" > {{ getPrice(plan.key) }}DT</span>
+                  <span class="plan-badge" *ngIf="plan.discount">Save {{ plan.discount }}%</span>
+                </span>
+              </label>
+            </div>
+          </div>
+          <div class="security-notice">
+            <span class="security-icon">🔒</span>
+            <p>Secure payment guaranteed. All transactions are protected.</p>
+          </div>
+        </div>
+      </div> -->
     </div>
 
     

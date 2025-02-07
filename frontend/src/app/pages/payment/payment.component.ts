@@ -31,7 +31,7 @@ export class PaymentComponent implements OnInit {
 
   plans: Plan[] = [
     { type: 'monthly', name: 'Monthly Plan',key : "ONEMONTHMEMBERSHIP"},
-    { type: 'annual', name: 'Annual Plan', discount: 15,key : "ONEYEARMEMBERSHIP" },
+    { type: 'annual', name: 'Annual Plan', discount: 25,key : "ONEYEARMEMBERSHIP" },
     { type: 'quarterly', name: 'Quarterly Plan', discount: 10,key :"ONEQUARTER" }
   ];
 
@@ -58,8 +58,8 @@ export class PaymentComponent implements OnInit {
 
   private loadAvailableItems(): void {
     this.availableItems = [
-      { id: 1, name: 'Basic Course', price: 100,"key" :"BASICCOURSE" },
-      { id: 2, name: 'Premium Course', price: 200,"key":"PREMIUMCOURSE" }
+      { id: 1, name: 'Simple Session (1H)', price: 100,"key" :"BASICCOURSE" },
+      { id: 2, name: 'Premium Course (3H)', price: 200,"key":"PREMIUMCOURSE" }
     ];
   }
   LoadPrices(){
@@ -86,7 +86,7 @@ export class PaymentComponent implements OnInit {
       this.selectedPlan="ONEMONTHMEMBERSHIP"
     };
     this.sitePaymentService.HandlePayment(this.selectedPlan,this.planMode).subscribe((data : any)=>{
-      window.open(data.redirectUrl,"__blank")
+      window.open(data.redirectUrl,"_self")
     });
     
   }
@@ -105,6 +105,7 @@ export class PaymentComponent implements OnInit {
     this.paymentForm.reset({ paymentType: '', planType: 'monthly' });
     this.selectedItem = '';
     // this.selectedPlan = '';
+    this.paymentType=""
   }
 
   private processPayment(paymentDetails: any): Promise<void> {
