@@ -37,9 +37,9 @@ const routes: Routes = [
   { path: 'signin', component: SigninComponent },
   { path: '', component: LayoutComponent },
   { path: 'register', component: JoinOptionsComponent },
-
+  { path: "subscription", redirectTo: 'what-we-offer' },
   {
-    path: 'subscription',
+    path: 'what-we-offer',
     component: MembershipPageComponent,
     canActivate: [RoleGuard],
     data: { roles: ['client', 'manager'] },
