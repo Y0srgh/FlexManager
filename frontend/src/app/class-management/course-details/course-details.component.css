@@ -39,6 +39,15 @@
   margin-top: 10px;
 }
 
+.course-info{
+  max-height: 50vh;
+  overflow: auto;
+}
+
+.course-info::-webkit-scrollbar {
+  display: none;
+}
+
 .course-info form {
   display: flex;
   flex-direction: column;
