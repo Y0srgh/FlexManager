@@ -22,7 +22,7 @@ export class SitePaymentController {
   }
   @Get("price/:priceId")
   @UseGuards(JwtAuthGuard)
-  async getPaymentIntent(@Param('id') priceId: string){
+  async getPaymentIntent(@Param('priceId') priceId: string){
     return await this.sitePaymentService.getpaymentIntent(priceId);
   }
   @Get("site-payment/UserSubscription")

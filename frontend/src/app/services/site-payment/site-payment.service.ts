@@ -33,6 +33,6 @@ export class SitePaymentService  {
   }
 
   public getRealPrice(priceId : string):  Observable<any>{
-    return this.http.get<any>(`${environment.BASE_URL}/${this.apiUrl}/site-payment/price?priceId=${priceId}`);
+    return this.http.get<any>(`${environment.BASE_URL}/${this.apiUrl}/price/${priceId}`);
   }
 }
