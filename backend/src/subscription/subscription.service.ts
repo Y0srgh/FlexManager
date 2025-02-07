@@ -12,11 +12,12 @@ export class SubscriptionsService extends BaseService<Subscription> {
     @InjectRepository(Subscription)
     private subscriptionRepository: Repository<Subscription>,
   ) {
-    super(subscriptionRepository);  
+    super(subscriptionRepository);
   }
 
-  
-  async create(createSubscriptionDto: CreateSubscriptionDto): Promise<Subscription> {
+  async create(
+    createSubscriptionDto: CreateSubscriptionDto,
+  ): Promise<Subscription> {
     return super.create(createSubscriptionDto);
   }
 
@@ -24,19 +25,17 @@ export class SubscriptionsService extends BaseService<Subscription> {
     return super.findAll();
   }
 
-
-async findOne(id: string): Promise<Subscription> {
-  return super.findOne(id);  
-
-
-async update(id: string, updateSubscriptionDto: UpdateSubscriptionDto): Promise<Subscription> {
-  return super.update(id, updateSubscriptionDto);  
-}
-
-
-
+  async findOne(id: string): Promise<Subscription> {
+    return super.findOne(id);
+  }
+  async update(
+    id: string,
+    updateSubscriptionDto: UpdateSubscriptionDto,
+  ): Promise<Subscription> {
+    return super.update(id, updateSubscriptionDto);
+  }
 
   async remove(id: number): Promise<void> {
-    return super.delete(id.toString());  
+    return super.delete(id.toString());
   }
 }

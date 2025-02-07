@@ -22,6 +22,7 @@ export class AuthInterceptor implements HttpInterceptor {
     '/site-payment/site-payment',
     '/site-payment/UserSubscription',
        '/auth/request/pending-child-request',
+      "/site-payment/price/"
   ];
   constructor(private router: Router) {}
 
