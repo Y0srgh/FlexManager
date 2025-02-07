@@ -43,7 +43,7 @@ export class UserEntity extends TimestampEntity {
 
   @OneToOne(() => CoachEntity, (coach) => coach.user, {
     nullable: true,
-    cascade: true,
+    // cascade: true,
   })
   coach: CoachEntity;
 
@@ -55,13 +55,13 @@ export class UserEntity extends TimestampEntity {
 
   @OneToOne(() => ManagerEntity, (manager) => manager.user, {
     nullable: true,
-    cascade: true,
+    // cascade: true,
   })
   manager: ManagerEntity;
 
   @OneToOne(() => ParentEntity, (parent) => parent.user, {
     nullable: true,
-    cascade: true,
+    // cascade: true,
   })
   @JoinColumn()
   parent: ParentEntity;

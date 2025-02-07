@@ -13,9 +13,9 @@ export class ManagerEntity extends TimestampEntity {
   @Column({ default: true })
   financialManagementAccess: boolean;
 
-   @OneToOne(() => UserEntity, (user) => user.coach, {
-      eager: true,
-    })
-    @JoinColumn()
-    user: UserEntity;
+  @OneToOne(() => UserEntity, (user) => user.manager, {
+    eager: true,onDelete: 'CASCADE', onUpdate: 'CASCADE', cascade: true,
+  })
+  @JoinColumn()
+  user: UserEntity;
 }

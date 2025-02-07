@@ -50,6 +50,9 @@ export class ClientEntity extends TimestampEntity {
   })
   @JoinColumn()
   user: UserEntity;
-  @OneToMany(() => Reservation, (reservation) => reservation.clientEntity)
+
+  @OneToMany(() => Reservation, (reservation) => reservation.clientEntity, {
+   
+  })
   reservations: Reservation[];
 }

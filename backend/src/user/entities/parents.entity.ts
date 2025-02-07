@@ -18,8 +18,9 @@ export class ParentEntity extends TimestampEntity {
 
   @OneToOne(() => UserEntity, (user) => user.parent, {
     eager: true,
+    onDelete: 'CASCADE', onUpdate: 'CASCADE', 
+    cascade: true
   })
-  @JoinColumn()
   user: UserEntity;
   
   // @OneToMany(() => ClientEntity, (client) => client.parentAccount)

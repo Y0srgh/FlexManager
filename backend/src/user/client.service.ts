@@ -88,7 +88,7 @@ export class ClientService extends BaseService<ClientEntity> {
     }));
 
     try {
-      const progressTracking = await this.trackRepository.create({
+      const progressTracking = this.trackRepository.create({
         client,
         weight: client.physicalDetails.weight,
       });
@@ -96,6 +96,7 @@ export class ClientService extends BaseService<ClientEntity> {
         '---------------------------progressTracking',
         progressTracking,
       );
+      await this.trackRepository.save(progressTracking)
     } catch (error) {
       console.log(error);
     }

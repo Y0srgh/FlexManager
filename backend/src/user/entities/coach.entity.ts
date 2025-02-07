@@ -32,11 +32,11 @@ export class CoachEntity extends TimestampEntity {
   courses: Course[];
 
   @OneToOne(() => UserEntity, (user) => user.coach, {
-    eager: true,
+    eager: true, onDelete: 'CASCADE', onUpdate: 'CASCADE', cascade: true,
   })
   @JoinColumn()
   user: UserEntity;
 
-  @OneToMany(() => Reservation, (reservation) => reservation.coachEntity)
+  @OneToMany(() => Reservation, (reservation) => reservation.coachEntity, {cascade: true})
   reservations: Reservation[];
 }
